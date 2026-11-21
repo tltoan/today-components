@@ -401,3 +401,13 @@ Checks for the review refinements: changed JavaScript parsed; all 46 manifest en
 These source files are reusable; no native app or backend was changed. See LOADERS.md and PARTY-AVATARS.md.
 
 Checks for this addition: eight changed/new JavaScript files pass syntax checks; 50 manifest entries resolve their source paths, dependency IDs and source anchors. The supplied loader reference is byte-identical (SHA-256 `9298fd8424dc08a93748e05f04e06e2b6b6e7cc64bf29f76d660c28ac5c07859`). Loader geometry is finite across sampled phases and continuous at the loop seam. Desktop and 390-point browser checks covered pause/resume/replay, half speed, reduced-motion time-zero still and offscreen suspension. Party checks covered reordered stable gradients, missing/failed/loaded profile photos, four-member full state, joining, standalone stack/lead and 390/375-point layouts. Both recap flows render selected plan A. A fresh main-library preview reported no console errors. New native files type-check against macOS 14 and iOS 17 simulator SDKs; a native palette probe produced the same four fixture indices as JS. Native app runtime, WidgetKit and actual sharing services are not verified by these source checks.
+
+## Profile and nudges · November 21
+
+Profile A/B/C proposals are in `profile.html`, with reusable `components/profile.js` / `.css`, shared gradient avatars, grouped settings rows, notification/quiet-hour drafts and separate account confirmations. No account or backend integration. See PROFILE.md.
+
+`nudges.html` compares Message card, Avatar pulse and Compact action. `components/party-nudge.*` now owns the nudge element; the host supplies available/sending/sent/error/blocked states. Confirmation motion is once-only and reduced-motion aware. No actual notification. See NUDGES.md.
+
+One plan card and Weekly view are the primary selected previews; older layouts stay behind shared comparison disclosures. Plan schedule labels use “Schedule:”.
+
+Validation for this addition: changed JavaScript syntax, source/asset paths, desktop rendering, 390 px Profile and 375 px nudge previews without horizontal overflow, name-save propagation, notification denied state, quiet-hour disclosure/save, account confirmation routing, keyboard message selection, send failure/retry, blocked state, reduced motion, and main-library mounting. No native simulator or backend verification is implied.

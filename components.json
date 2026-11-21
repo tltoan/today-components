@@ -1663,47 +1663,39 @@
     },
     {
       "id": "party-nudge",
-      "name": "Gentle party nudge",
-      "preview": "habit-parties.html",
+      "name": "Party nudges \u2014 three UI and motion directions",
+      "preview": "nudges.html",
       "sourcePage": "source.html#party-nudge",
       "browserSource": [
-        "components/habit-party.js",
-        "components/habit-party.css",
-        "HABIT-PARTIES.md"
+        "components/party-nudge.js",
+        "components/party-nudge.css",
+        "NUDGES.md"
       ],
       "swiftSource": [],
       "dependencies": [
-        "controls",
-        "artwork",
-        "avatar-stack",
-        "lead-avatar",
         "profile-avatar"
       ],
-      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "status": "Controlled browser proposals. No notifications sent; host owns eligibility and confirmations.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-party-nudge",
-        "styles": [
-          "components/controls.css",
-          "components/artwork.css",
-          "components/habit-party.css",
-          "components/party-avatars.css"
-        ],
         "scripts": [
-          "components/icons.js",
-          "components/controls.js",
-          "components/artwork.js",
           "components/party-avatars.js",
-          "components/habit-party.js"
+          "components/party-nudge.js"
         ],
-        "markup": "<today-party-nudge></today-party-nudge>",
+        "styles": [
+          "components/party-avatars.css",
+          "components/party-nudge.css"
+        ],
+        "markup": "<today-party-nudge variant=\"card\"></today-party-nudge>",
         "events": [
-          "party-request"
+          "party-request",
+          "nudge-confirmed"
         ],
-        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "usage": "Set model {id,name,person,window,state}; variants card/pulse/compact. Host confirms sending/sent/error and availability. See NUDGES.md.",
         "demoOnly": [
-          "habit-party-study.js",
-          "habit-party-study.css"
+          "nudge-study.js",
+          "nudge-study.css"
         ]
       }
     },
@@ -2080,6 +2072,92 @@
       "nativeIntegration": {
         "minimumOS": "iOS 17 / macOS 14",
         "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
+      }
+    },
+    {
+      "id": "profile",
+      "name": "Profile \u2014 three layouts",
+      "preview": "profile.html",
+      "sourcePage": "source.html#profile",
+      "browserSource": [
+        "components/profile.js",
+        "components/profile.css",
+        "PROFILE.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "profile-avatar",
+        "controls"
+      ],
+      "status": "Interactive browser proposal; no native app, account or backend integration. Sample states only.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-profile",
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/party-avatars.js",
+          "components/profile.js"
+        ],
+        "styles": [
+          "foundations/motion.css",
+          "components/controls.css",
+          "components/party-avatars.css",
+          "components/profile.css"
+        ],
+        "markup": "<today-profile variant=\"a\"></today-profile>",
+        "events": [
+          "profile-request"
+        ],
+        "usage": "See PROFILE.md for copied model, request events, scope boundaries and fixtures.",
+        "demoOnly": [
+          "profile-study.js",
+          "profile-study.css"
+        ]
+      }
+    },
+    {
+      "id": "settings-row",
+      "name": "Grouped settings row",
+      "preview": "profile.html",
+      "sourcePage": "source.html#settings-row",
+      "browserSource": [
+        "components/profile.js",
+        "components/profile.css",
+        "PROFILE.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "profile-avatar",
+        "controls"
+      ],
+      "status": "Interactive browser proposal; no native app, account or backend integration. Sample states only.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-settings-row",
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/party-avatars.js",
+          "components/profile.js"
+        ],
+        "styles": [
+          "foundations/motion.css",
+          "components/controls.css",
+          "components/party-avatars.css",
+          "components/profile.css"
+        ],
+        "markup": "<today-settings-row action=\"privacy\" label=\"Privacy\"></today-settings-row>",
+        "events": [
+          "settings-open"
+        ],
+        "usage": "See PROFILE.md for copied model, request events, scope boundaries and fixtures.",
+        "demoOnly": [
+          "profile-study.js",
+          "profile-study.css"
+        ]
       }
     }
   ],

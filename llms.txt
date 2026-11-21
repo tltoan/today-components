@@ -86,3 +86,6 @@ Today SwiftUI wrapper: https://tltoan.github.io/today-components/native/TodayLiq
 Independent profile, overlapping-stack and lead avatars: https://tltoan.github.io/today-components/PARTY-AVATARS.md
 Native avatar source: https://tltoan.github.io/today-components/native/TodayPartyAvatars.swift
 Latest selections: max party 4 including you; overlapping avatars; Book cover invite; recap One plan card A. Loader circle/globe stays selected; liquid orbit is an alternative.
+
+- Profile proposals and settings rows: profile.html, PROFILE.md, components/profile.js, components/profile.css.
+- Party nudge UI/motion variations: nudges.html, NUDGES.md, components/party-nudge.js, components/party-nudge.css. These are controlled browser prototypes, not native account/notification integrations.

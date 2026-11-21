@@ -74,3 +74,5 @@ Party maximum: **four people including you**. The main three-person fixture stay
 - Independent `today-avatar-stack` and `today-lead-avatar`, plus `today-profile-avatar`, live in `components/party-avatars.*`. Matching SwiftUI is `native/TodayPartyAvatars.swift`. Read [PARTY-AVATARS.md](PARTY-AVATARS.md). Keep stable member IDs consistent across check-ins and entries.
 - The lead example is inside a 158 × 158 compact specimen. It does not claim native WidgetKit validation. Do not cross the outside edge in a widget.
 - Book cover is selected and the only live invite. Avatars overlap the inner cover's lower-right rim; the plan and sharing terms remain below. Personal note / orbit sources are historical only.
+
+Nudges now live in components/party-nudge.js and components/party-nudge.css; load them independently before the study. See NUDGES.md and nudges.html for three motion/placement proposals. No notifications are sent.

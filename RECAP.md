@@ -50,3 +50,5 @@ Source for the reusable selection control: `components/continuation-choice.js` a
 ## Selected plan layout
 
 One plan card (A) is selected and now the default at the Plan stage in both recap flows. The two narrative flows remain available. Edit by section and Schedule first are retained in the comparison area only. No continuation choice is preselected in the actual recap flow.
+
+November 21 follow-up: One plan card is the main selected example. Previous B/C plan layouts are under a shared comparison disclosure. Use “Schedule:” as the plan field label. Narrative A/B flows stay available.

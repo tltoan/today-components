@@ -124,3 +124,7 @@ Use `today-artwork` and the original files in assets/artwork, with dimensions/ha
 
 - Liquid orbit alternative: include `native/reference/LiquidOrbitLoader.swift` and `native/TodayLiquidOrbitLoader.swift`; use `TodayLiquidOrbitLoader`. The original is unchanged.
 - Party avatars: `native/TodayPartyAvatars.swift` supplies `TodayProfileAvatar`, `TodayAvatarStack` and `TodayLeadAvatar`. The same member ID always selects the same gradient across SwiftUI and browser; photos override it. Read `PARTY-AVATARS.md` for the model contract and placement.
+
+## Profile and nudge proposals
+
+Use the `profile`, `settings-row`, and updated `party-nudge` manifest entries. See PROFILE.md and NUDGES.md for dependencies and host events. New party nudge loading requires `components/party-nudge.js` separately from `habit-party.js`. Do not copy gallery timers or mocked account confirmations into production.
