@@ -27,7 +27,7 @@
   <script src="components/page-counter.js?v=standalone-library-2" defer></script>
   <script src="components/staggered-bar-chart.js?v=standalone-library-2" defer></script>
   <script src="component-studies.js?v=standalone-library-2" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=library-header-removed" defer></script>
 </head>
 <body>
 <a class="skip-intro" href="#library">Skip animation to component library</a>
@@ -39,14 +39,8 @@
   <symbol id="replay" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 .6 6M4 4v6h6"/></symbol>
   <symbol id="moon" viewBox="0 0 24 24"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.6 8.6 0 1 0 20.5 14Z"/></symbol>
 </svg>
-<main id="library">
-  <header class="page-header">
-    <div class="identity"><h1>today.</h1><p>Component library</p><a class="nav-jump" href="#landing">New components <span aria-hidden="true">↘</span></a></div>
-    <div class="toolbar">
-      <label class="motion-preference"><input type="checkbox" id="reduce-motion"><span class="small-toggle" aria-hidden="true"></span>Less motion</label>
-      <button class="replay-button" id="play-demo"><svg><use href="#replay"/></svg><span>Replay motion</span></button>
-    </div>
-  </header>
+<main id="library" tabindex="-1">
+  <h1 class="sr-only">Today component library</h1>
 
   <div class="component-board" data-ui>
     <section class="tile schedule-tile" aria-labelledby="schedule-heading">

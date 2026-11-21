@@ -1,7 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
-const reduce = $('#reduce-motion');
 const media = matchMedia('(prefers-reduced-motion: reduce)');
+let motionReduced = media.matches;
 const repeat = $('#repeat');
 const fields = $('#repeat-fields');
 const trigger = $('#schedule-trigger');
@@ -9,7 +9,6 @@ const menu = $('#schedule-options');
 const track = $('#slide-track');
 const handle = $('#slide-handle');
 const alternative = $('#log-alternative');
-const play = $('#play-demo');
 const logo = $('#today-logo');
 const agendaViewport = $('.agenda-viewport');
 const repeatDisclosure=new TodayUI.Disclosure(fields,{open:true});
@@ -25,32 +24,20 @@ let menuOpen = false;
 let preset = 'custom';
 let agendaIndex = 0;
 let logged = {plants:true,stretch:false,meditate:false};
-let demoTimers = [];
-let demoActive = false;
 let drag = null;
 let slideProgress = 0;
 
 function animate(element, frames, duration = 230) {
-  if (reduce.checked) return null;
+  if (motionReduced) return null;
   return element.animate(frames,{duration,easing:'cubic-bezier(.22,.76,.28,1)'});
 }
 
-function stopDemo() {
-  demoTimers.forEach(clearTimeout);
-  demoTimers = [];
-  demoActive = false;
-  play.querySelector('span').textContent = 'Replay motion';
-  play.setAttribute('aria-label','Replay component motion demo');
-  if (!logged.stretch && !drag) setSlide(0);
-}
-
 function setReduced(value) {
-  reduce.checked = value;
+  motionReduced = value;
   document.documentElement.toggleAttribute('data-reduced',value);
   logo.setAttribute('reduced-motion',String(value));
   updateLogoControls();
   if(value) {
-    stopDemo();
     document.getAnimations().forEach(animation => animation.cancel());
     cancelDrag();
     finishAgendaDrag(true);
@@ -108,7 +95,7 @@ $$('.preset-menu button').forEach(button=>button.addEventListener('click',()=>{
 document.addEventListener('keydown',event=>{
   if(event.key==='Escape') {
     if(menuOpen){setMenu(false);trigger.focus();}
-    cancelDrag();finishAgendaDrag(true);stopDemo();
+    cancelDrag();finishAgendaDrag(true);
   }
 });
 document.addEventListener('click',event=>{
@@ -163,7 +150,6 @@ function cancelDrag(reset=true) {
 
 handle.addEventListener('pointerdown',event=>{
   if(event.button!==0||!event.isPrimary||logged.stretch)return;
-  stopDemo();
   const travel = track.clientWidth-58;
   drag = {pointer:event.pointerId,start:event.clientX-slideProgress*travel,travel};
   handle.setPointerCapture(event.pointerId);
@@ -220,69 +206,27 @@ function fitAgenda() {
 }
 function finishAgendaDrag(){agendaScroller?.cancelDrag();}
 agendaScroller=new TodayUI.SnapScroller(agendaViewport,{
-  selector:'.agenda-entry',onSelect:syncAgendaSelection,onInteract:stopDemo,reducedMotion:()=>reduce.checked
+  selector:'.agenda-entry',onSelect:syncAgendaSelection,reducedMotion:()=>motionReduced
 });
 const agendaNavigationIndex=()=>agendaScroller.frame?agendaScroller.targetIndex:agendaIndex;
 $('#previous-day').addEventListener('click',()=>chooseAgenda(agendaNavigationIndex()-1));
 $('#next-day').addEventListener('click',()=>chooseAgenda(agendaNavigationIndex()+1));
 $$('[data-agenda]').forEach(button=>button.addEventListener('click',()=>chooseAgenda(Number(button.dataset.agenda))));
 
-function resetStudy() {
-  cancelDrag();
-  finishAgendaDrag(true);
-  setMenu(false);
-  repeating=true;selected=new Set([0,2,4]);custom=new Set(selected);preset='custom';
-  logged={plants:true,stretch:false,meditate:false};agendaIndex=0;
-  updateSchedule();renderLogs();renderAgenda();
-}
-function replayDemo() {
-  if(demoActive){stopDemo();return;}
-  stopDemo();resetStudy();
-  replayLogo();
-  if(reduce.checked) {
-    $('#log-status').textContent='Demo reset. Motion is reduced; try the controls directly.';
-    return;
-  }
-  demoActive=true;
-  play.querySelector('span').textContent='Stop motion';
-  play.setAttribute('aria-label','Stop component motion demo');
-  const later=(ms,action)=>demoTimers.push(setTimeout(()=>{if(demoActive)action();},ms));
-  later(500,()=>{repeating=false;updateSchedule();});
-  later(1400,()=>{repeating=true;updateSchedule();});
-  later(2150,()=>chooseDay(5));
-  later(2650,()=>chooseDay(5));
-  later(2900,()=>setSlide(.48));
-  later(3550,()=>setSlide(1));
-  later(3940,()=>toggleLog('stretch',true));
-  later(4300,()=>chooseAgenda(1));
-  later(5100,()=>chooseAgenda(2));
-  later(5800,()=>toggleLog('meditate',true));
-  later(6500,()=>stopDemo());
-}
-
-// Any direct interaction takes over immediately from the demonstration.
-document.addEventListener('pointerdown',event=>{
-  if(!play.contains(event.target))stopDemo();
-},true);
-document.addEventListener('keydown',event=>{
-  if(['Tab','Enter',' ','ArrowLeft','ArrowRight','Escape'].includes(event.key)&&!play.contains(event.target))stopDemo();
-},true);
-play.addEventListener('click',replayDemo);
-reduce.addEventListener('change',()=>{document.documentElement.setAttribute('data-motion-override','');setReduced(reduce.checked);});
 media.addEventListener('change',event=>{document.documentElement.removeAttribute('data-motion-override');setReduced(event.matches);});
-window.addEventListener('blur',()=>{cancelDrag();finishAgendaDrag(true);stopDemo();});
+window.addEventListener('blur',()=>{cancelDrag();finishAgendaDrag(true);});
 window.addEventListener('resize',()=>{cancelDrag();finishAgendaDrag(true);fitAgenda();});
-document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelDrag();finishAgendaDrag(true);stopDemo();}});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelDrag();finishAgendaDrag(true);}});
 
 setReduced(media.matches);
 updateSchedule();renderLogs();renderAgenda();
 document.fonts.ready.then(fitAgenda);
-if(!reduce.checked)$$('.tile .stage>div').forEach((element,index)=>{
+if(!motionReduced)$$('.tile .stage>div').forEach((element,index)=>{
   element.animate([{opacity:0,transform:'translateY(7px)'},{opacity:1,transform:'translateY(0)'}],{duration:360,delay:index*70,easing:'cubic-bezier(.22,.76,.28,1)',fill:'backwards'});
 });
 
 function updateLogoControls(){
-  const reduced=reduce.checked;
+  const reduced=motionReduced;
   $('#logo-pause').disabled=reduced||logo.finished;
   $('#logo-pause').textContent=logo.isPlaying?'Pause':'Resume';
   $('#logo-status').textContent=reduced?'Less motion · Completed logo':logo.finished?'Complete · Replay anytime':!logo.isPlaying?'Paused':logo.loops?'2.1 seconds · Looping':'2.1 seconds · Plays once';

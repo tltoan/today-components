@@ -237,3 +237,10 @@ Verified this opening revision at desktop (1600 × 900) and mobile (390 × 844):
 The user requested less space between the opening and library, with matching backgrounds. The opening now uses 244 px on desktop and 200 px on mobile instead of filling the viewport. Its wordmark keeps a readable scale while the unused phone canvas is cropped. The gradient settles into the same black background used beneath the library, and the library has no extra top padding. This supersedes the previous full-viewport opening measurements.
 
 Verified the compact opening at 1600 × 900 and 390 × 844: the library begins at 244 px and 200 px respectively, body and hero use the same black background, and neither viewport has horizontal overflow. The keyboard skip link and reduced-motion control remain usable, the opening reaches its completed state, and the browser reported no warnings or errors. The updated JavaScript passes `node --check`; the native sources are unchanged.
+
+
+### Header removal — November 20, 2026
+
+Removed the repeated Today / Component library header, New components link, and global Less motion / Replay motion controls. The cards now follow the compact opening directly. A visually hidden page heading and keyboard skip link preserve navigation. The library follows the operating-system reduced-motion preference, including changes during the session; per-component replay controls remain within their specimens. The unused global demonstration sequence was removed from `app.js`. This supersedes the earlier global replay and manual motion-toggle descriptions.
+
+Verified after header removal: schedule preset selection, keyboard logging, and next-day navigation still work with no browser errors. At 390 × 844, the cards begin at 200 px with no horizontal overflow. A temporary local fixture simulated the device reduced-motion media query: the opening settled immediately, disclosures had 0 s transitions, and agenda navigation completed without animated settling. The fixture was removed; no device settings were changed. `node --check app.js` passes.
