@@ -1664,7 +1664,7 @@
     },
     {
       "id": "party-nudge",
-      "name": "Party nudges \u2014 three UI and motion directions",
+      "name": "Party nudges \u2014 button and slider comparisons",
       "preview": "nudges.html",
       "sourcePage": "source.html#party-nudge",
       "browserSource": [
@@ -1694,12 +1694,12 @@
           "components/target-feedback.css",
           "components/party-nudge.css"
         ],
-        "markup": "<today-party-nudge variant=\"card\"></today-party-nudge>",
+        "markup": "<today-party-nudge variant=\"pulse\" interaction=\"button\"></today-party-nudge>",
         "events": [
           "party-request",
           "nudge-confirmed"
         ],
-        "usage": "Set model {id,name,person,window,state}; variants card/pulse/compact use slide-to-send. Immediately latches sending before party-request. Host confirms sent/error and eligibility; confirmed success uses Gradient Rise. See NUDGES.md.",
+        "usage": "Set model {id,name,person,window,state}; layouts card/pulse/compact accept interaction=\"button\" or \"slide\" (default), set before mounting. Both latch sending before party-request. Host confirms sent/error and eligibility; confirmed success uses Gradient Rise. See NUDGES.md.",
         "demoOnly": [
           "nudge-study.js",
           "nudge-study.css"
@@ -1724,7 +1724,7 @@
         "lead-avatar",
         "profile-avatar"
       ],
-      "status": "Selected Book cover invite with overlapping profiles. Up to four people including you. Controlled browser proposal, no actual membership service.",
+      "status": "Selected Book cover (b), plus Shared cover (d) and Reading circle (e) alternatives. Up to four people including you. Controlled browser proposal, no actual membership service.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-party-invite",
@@ -1745,7 +1745,7 @@
         "events": [
           "party-request"
         ],
-        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "usage": "Assign confirmed .model; host handles requests. Variants: b selected Book cover (default), d Shared cover, e Reading circle. All share plan/join/full states. See HABIT-PARTIES.md.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"

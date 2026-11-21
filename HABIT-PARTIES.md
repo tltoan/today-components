@@ -51,7 +51,7 @@ Load the ordered dependencies from `components.json`. All six elements are in `c
 | `today-party-checkin` | `memberID`, `name`, `initials`, optional `profilePhotoURL`, `time`, `amount`, `note`, `reactions`, `reacted`, optional `photoURL`, `photoAlt` | `react`; text, sample attachment, like on/off with a single 620 ms heart settle; 360 ms removal |
 | `today-party-composer` | `members`, `amount`, `state`, `message`, optional photo | `photo` (includes File), `remove-photo`, `share` (photo only), `retry-sync`; shared, photo-draft, uploading, photo-saved, photo-error and sync-error |
 | `today-party-nudge` | `name`, `window`, `state` | `nudge-reading`, `nudge-encourage`; available, muted, window, limit, sending, sent, error |
-| `today-party-invite` | `members`, `plan:'pages'|'minutes'`, `state`, `message` | `plan` with `value`, `join`, `decline`; invite, joining, joined, full. `variant="b"` (default): selected Book cover; a/c retained historical sources |
+| `today-party-invite` | `members`, `plan:'pages'|'minutes'`, `state`, `message` | `plan` with `value`, `join`, `decline`; invite, joining, joined, full. `variant="b"` (default): selected Book cover; d Shared cover and e Reading circle are new alternatives; a/c retained historical sources |
 | `today-party-settings` | `allowed`, `window`, `message` | `nudges` with `allowed`, `leave`; local switch and leave confirmation in gallery |
 
 All requests include `{action,id}`. Models are copied when assigned. Names, text and image attributes are escaped. The sample photo renderer accepts only local blob/data-image previews; a production host needs an authenticated media URL policy. `samplePhoto:true` renders Today’s existing book illustration explicitly labeled **Sample attachment**; it is not presented as a real member’s photograph.
@@ -73,6 +73,6 @@ Party maximum: **four people including you**. The main three-person fixture stay
 - Home/detail: selected overlapping stack on the upper-right rim, with stable varied gradients for absent/failed photos.
 - Independent `today-avatar-stack` and `today-lead-avatar`, plus `today-profile-avatar`, live in `components/party-avatars.*`. Matching SwiftUI is `native/TodayPartyAvatars.swift`. Read [PARTY-AVATARS.md](PARTY-AVATARS.md). Keep stable member IDs consistent across check-ins and entries.
 - The lead example is inside a 158 × 158 compact specimen. It does not claim native WidgetKit validation. Do not cross the outside edge in a widget.
-- Book cover is selected and the only live invite. Avatars overlap the inner cover's lower-right rim; the plan and sharing terms remain below. Personal note / orbit sources are historical only.
+- Book cover (b) remains selected. Two new live comparisons are Shared cover (d), with layered surfaces and overlapping book/profile elements, and Reading circle (e), showing all four party places. All three share the same plan choices, sharing scope, capacity and join/full states. Personal note / orbit sources are historical only.
 
-Nudges now live in components/party-nudge.js and components/party-nudge.css; load them independently before the study. See NUDGES.md and nudges.html for three motion/placement proposals. No notifications are sent.
+Nudges now live in components/party-nudge.js and components/party-nudge.css; load them independently before the study. See NUDGES.md and nudges.html for three placement proposals, each comparing `interaction="button"` with `interaction="slide"` and the same confirmed Gradient Rise. No notifications are sent.

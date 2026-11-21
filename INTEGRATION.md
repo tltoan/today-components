@@ -130,3 +130,5 @@ Use `today-artwork` and the original files in assets/artwork, with dimensions/ha
 Use the `profile`, `settings-row`, and updated `party-nudge` manifest entries. See PROFILE.md and NUDGES.md for dependencies and host events. New party nudge loading requires `components/party-nudge.js` separately from `habit-party.js`. Do not copy gallery timers or mocked account confirmations into production.
 
 Profile defaults to the selected C expandable groups with B’s identity panel and no Haptics setting. Party nudges require the shared slide-to-log and target-feedback sources in addition to avatars; see the updated manifest. `mode="send"` emits a request rather than a log change. Confirmed sends alone play Gradient Rise.
+
+Nudge layouts accept `interaction="button"` or `interaction="slide"` (default), set before mounting. Both emit the same party-request and nudge-confirmed events; only host-confirmed success animates. Invite variants b/d/e share the same model, with b still selected.

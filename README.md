@@ -395,7 +395,7 @@ Checks for the review refinements: changed JavaScript parsed; all 46 manifest en
 | --- | --- | --- |
 | [Liquid orbit loader](liquid-orbit-loader.html) | `components/liquid-orbit-motion.js`, `components/liquid-orbit-loader.js/css`; `native/reference/LiquidOrbitLoader.swift` + `native/TodayLiquidOrbitLoader.swift` | Additional proposal: supplied eight-bead one-second motion, Today gradient, play/pause/replay/speed, reduced still, background/offscreen suspension. Existing loader remains selected. |
 | [Profile, overlapping stack and lead avatar](habit-parties.html#party-avatar-components) | `components/party-avatars.js/css`, `native/TodayPartyAvatars.swift` | Selected stack; independent compact lead. Up to four people, stable varied gradients, photo loading/failure fallback. |
-| Book cover invite | `components/habit-party.js/css` | Selected live invite, overlapping profiles, open/joining/joined/full. |
+| Book cover invite | `components/habit-party.js/css` | Selected Book cover plus new Shared cover and Reading circle comparisons; open/joining/joined/full. |
 | Recap plan A | `components/recap.js/css` | Selected One plan card default in both recap flows. |
 
 These source files are reusable; no native app or backend was changed. See LOADERS.md and PARTY-AVATARS.md.
@@ -406,10 +406,18 @@ Checks for this addition: eight changed/new JavaScript files pass syntax checks;
 
 The selected C expandable groups with B’s identity card is in `profile.html`; earlier A/B layouts remain behind a comparison disclosure. The Haptics preference is removed. It comes with reusable `components/profile.js` / `.css`, shared gradient avatars, grouped settings rows, notification/quiet-hour drafts and separate account confirmations. No account or backend integration. See PROFILE.md.
 
-`nudges.html` compares Message card, Avatar pulse and Compact action. `components/party-nudge.*` now owns the nudge element; the host supplies available/sending/sent/error/blocked states. All three nudge actions reuse slide-to-send, with Gradient Rise only on confirmed success and a retreat on reset. Confirmation motion is once-only and reduced-motion aware. No actual notification. See NUDGES.md.
+`nudges.html` compares Message card, Avatar pulse and Compact action. `components/party-nudge.*` now owns the nudge element; the host supplies available/sending/sent/error/blocked states. All three nudge layouts compare send buttons beside slide-to-send, with Gradient Rise only on confirmed success and a retreat on reset. Confirmation motion is once-only and reduced-motion aware. No actual notification. See NUDGES.md.
 
 One plan card and Weekly view are the primary selected previews; older layouts stay behind shared comparison disclosures. Plan schedule labels use “Schedule:”.
 
 Validation for this addition: changed JavaScript syntax, source/asset paths, desktop rendering, 390 px Profile and 375 px nudge previews without horizontal overflow, name-save propagation, notification denied state, quiet-hour disclosure/save, account confirmation routing, keyboard message selection, send failure/retry, blocked state, reduced motion, and main-library mounting. No native simulator or backend verification is implied.
 
 November 21 slider/profile refinement checks: changed JavaScript passes syntax checks and all 52 manifest entries resolve. Browser checks covered partial drag cancellation, full slide pending/sent, tap send failure and keyboard retry, blocked nudges, reduced-motion still confirmation, gradient retreat on reset, existing log/Undo behavior, selected profile identity editing, expandable groups, mobile Account navigation, and removal of Haptics from all three layouts. Profile at 390 × 844 and nudges at 375 × 844 had no horizontal overflow. Main library mounted five nudge sliders and the selected C profile without console errors. Native haptics, account operations and real notification delivery remain outside this browser prototype.
+
+## Invitation and nudge comparisons · November 21
+
+Book cover remains selected; two new invitations are available alongside it: Shared cover uses layered surfaces with overlapping artwork and avatars, while Reading circle shows the four party places. Both reuse the same confirmed join states, personal plan options and automatic sharing scope.
+
+Nudges now compare a send button and slider side by side in each of the three layouts. Set `interaction="button"` or `interaction="slide"` on `today-party-nudge`. Both share confirmed Gradient Rise, a check response, failure/retry and availability states. These are browser prototypes, with no actual notifications or membership changes.
+
+Comparison checks: six paired nudge demos and three invitation variants mount in the library with no console errors. Verified button keyboard send, pending/sent, failure/retry, blocked eligibility and reduced-motion confirmation; slider confirmed feedback; both new invite joins, selected plan persistence, reset and four-person full state. Invitation previews at 390 × 844 and nudges at 375 × 844 have no horizontal overflow.

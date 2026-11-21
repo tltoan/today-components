@@ -88,4 +88,6 @@ Native avatar source: https://tltoan.github.io/today-components/native/TodayPart
 Latest selections: max party 4 including you; overlapping avatars; Book cover invite; recap One plan card A. Loader circle/globe stays selected; liquid orbit is an alternative.
 
 - Selected Profile (C groups + B identity card; no Haptics setting) and settings rows: profile.html, PROFILE.md, components/profile.js, components/profile.css.
-- Party nudge sliders with confirmed Gradient Rise: nudges.html, NUDGES.md, components/party-nudge.js, components/party-nudge.css. These are controlled browser prototypes, not native account/notification integrations.
+- Party nudge button/slider comparisons with confirmed Gradient Rise: nudges.html, NUDGES.md, components/party-nudge.js, components/party-nudge.css. These are controlled browser prototypes, not native account/notification integrations.
+
+- Invitation comparisons: selected Book cover (b), new Shared cover (d) and Reading circle (e), in habit-parties.html#party-invites. All use the same controlled join and capacity model; see HABIT-PARTIES.md.
