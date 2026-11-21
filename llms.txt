@@ -91,3 +91,8 @@ Latest selections: max party 4 including you; overlapping avatars; Book cover in
 - Party nudge button/slider comparisons with confirmed Gradient Rise: nudges.html, NUDGES.md, components/party-nudge.js, components/party-nudge.css. These are controlled browser prototypes, not native account/notification integrations.
 
 - Invitation comparisons: selected Book cover (b), new Shared cover (d) and Reading circle (e), in habit-parties.html#party-invites. All use the same controlled join and capacity model; see HABIT-PARTIES.md.
+
+- Habit detail A/B/C: habit-detail.html, HABIT-DETAIL.md, components/habit-detail.js, components/habit-detail.css. New today-habit-entry and today-habit-plan-editor. Controlled browser proposals; local fixture host in habit-detail-study.js. No per-habit streak.
+- Onboarding now uses seven setup positions: tracking, target (skip for check-off), schedule, Day Ruler trial length, start date, optional Soft Wheels reminder, review. 21-day editable default. Details in ONBOARDING.md. Landing/Features unchanged.
+
+Habit detail selection: Grouped cards (B). Independent history (day summaries / journal / chart), weekly schedule and reminder card sources are in `components/habit-detail-pieces.js`, with shared `components/habit-detail.css`; see `HABIT-DETAIL.md` and `components.json`. Browser prototypes only. History initially shows the past three days, with expansion. Onboarding now includes Day Ruler trial length and optional Soft Wheels reminders within seven creation positions.

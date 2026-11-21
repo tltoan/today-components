@@ -15,16 +15,19 @@ The source is [Figma section 322:484](https://www.figma.com/design/Xf03CH47k7G0g
 | Describe | 121:12443 | A + B |
 | Privacy | 121:12612 | A + B |
 | Introduction | 121:12622 | A + B |
-| Tracking method | 369:1651 | A + B, step 1 of 4 |
-| Target | 369:1700 | A + B, step 2 of 4 |
-| Schedule | 369:1802 | A + B, step 3 of 4 |
-| Review | 369:2087 | A + B, step 4 of 4 |
+| Tracking method | 369:1651 | A + B, step 1 of 7 |
+| Target | 369:1700 | A + B, step 2 of 7 |
+| Schedule | 369:1802 | A + B, step 3 of 7 |
+| Trial length | User selection, Nov 21 | Day Ruler + custom input, step 4 of 7 |
+| Start date | Existing Today/Tomorrow choice | Separate step 5 of 7 |
+| Reminders | User selection, Nov 21 | Optional Soft Wheels, step 6 of 7 |
+| Review | 369:2087 | A + B, step 7 of 7 |
 | Saved | 369:2340 | A + B |
 | Home | 169:2471 | A + B |
 
 Flow: Landing → Features → Describe → Privacy → Introduction → Tracking → Target → Schedule → Review → Saved → Home. Check-off skips Target. There is no Skip for now route; the user removed onboarding skipping on November 21. Back and Review plan preserve the local draft. At least one scheduled day remains selected. The Home + stays disconnected from the habit editor, as requested earlier.
 
-**This approved sequence says two weeks.** Preserve that content in these comparisons. The newer picker library's 21-day default and seven-step creation examples are separate references. This study does not insert trial-length or reminder steps into the approved four-step setup. Resolve that product-version difference explicitly before app integration.
+**November 21 update:** the user explicitly selected Day Ruler and Soft Wheels and requested both in first-time creation. The sequence is now Tracking → Target → Schedule → Trial length → Start date → Reminders → Review. Duration starts at 21 days and is editable; reminder is optional and starts off. Check-off skips Target. Landing and Features remain unchanged. Introduction copy now describes a chosen trial duration, and the two-week schedule illustration is only an example/preview.
 
 ## Reuse and events
 
@@ -91,3 +94,7 @@ The Describe screen has no Skip for now control or skip-to-Home handler. Closing
 Preset selection now keeps weekday buttons and all 14 calendar cells mounted. The shared pill's existing 440 ms handoff leads a 340–420 ms weekday fill and 360–440 ms calendar fill, with a small 16 ms weekday stagger; the second calendar week follows by 28 ms. Changes can reverse without recreating the grid. The frequency settles over 280 ms. Reduced motion removes these transitions.
 
 `schedule-selection {days, preset, source}` emits once per accepted user selection (`source` is `preset` or `weekday`, custom days use a null preset). A native host can map it to one selection haptic, not one haptic per calendar cell. Optional browser vibration is 6 ms where supported; iPhone haptics are not claimed from the browser preview.
+
+## Selected duration and reminder cycle
+
+Draft fields `trialDays`, `reminderEnabled`, and `reminderTime` persist across selected layouts and back navigation. Review shows the chosen duration, resulting check-in date and confirmed reminder. Trial length never changes weekdays. The day ruler commits an explicit tap/key target before Continue, even if its scroll has not yet settled. The reminder uses `today-time-picker variant="wheel"`; Continue is disabled while an enabled reminder is being edited. Only Use this time commits a wheel edit; Cancel keeps the last confirmed time, and off retains it. The app owns requesting notification permission. This browser does not schedule notifications. The previous Review plan shortcuts were removed from early setup so the new creation steps are encountered in order.

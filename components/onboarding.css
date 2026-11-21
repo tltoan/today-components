@@ -46,3 +46,6 @@ today-onboarding-screen{display:block;width:100%;max-width:390px;min-width:0;mar
 .ob-schedule-panel .ob-calendar-day.is-planned:before{opacity:1;transform:scale(1)}
 html[data-reduced] .ob-schedule-panel .ob-calendar-day,html[data-reduced] .ob-schedule-panel .ob-calendar-day:before{transition:none}
 @media(prefers-reduced-motion:reduce){html:not([data-motion-override]) .ob-schedule-panel .ob-calendar-day,html:not([data-motion-override]) .ob-schedule-panel .ob-calendar-day:before{transition:none}}
+
+/* Selected creation cycle: duration and optional reminder remain separate steps. */
+.ob-reminder-toggle{display:flex;align-items:center;justify-content:space-between;min-height:56px;margin:8px 0 24px}.ob-reminder-note{font-size:13px;color:#bcb7c9;line-height:1.5;margin:22px 0}.ob-phone today-trial-picker{margin:12px 0 24px}.ob-phone .ob-reminder-panel today-time-picker{display:block;padding-top:12px}.ob-phone[data-page=trial] .ob-footer,.ob-phone[data-page=reminders] .ob-footer{margin-top:28px}

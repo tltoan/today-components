@@ -421,3 +421,12 @@ Book cover remains selected; two new invitations are available alongside it: Sha
 Nudges now compare a send button and slider side by side in each of the three layouts. Set `interaction="button"` or `interaction="slide"` on `today-party-nudge`. Both share confirmed Gradient Rise, a check response, failure/retry and availability states. These are browser prototypes, with no actual notifications or membership changes.
 
 Comparison checks: six paired nudge demos and three invitation variants mount in the library with no console errors. Verified button keyboard send, pending/sent, failure/retry, blocked eligibility and reduced-motion confirmation; slider confirmed feedback; both new invite joins, selected plan persistence, reset and four-person full state. Invitation previews at 390 × 844 and nudges at 375 × 844 have no horizontal overflow.
+
+### Habit detail and creation cycle · November 21
+
+- [Habit detail](habit-detail.html): three 390 × 844 compositions (Illustrated overview, Grouped cards, Activity journal), using shared logging, calendar, chart, party and plan controls. Sources: `components/habit-detail.*`, fixture `habit-detail-study.*`, contract [HABIT-DETAIL.md](HABIT-DETAIL.md). New reusable entry row and compact plan editor are included. States: trial, routine, paused, ended, archive/delete confirmation, correction, save failure, timer and optional party. Browser proposals; native app unchanged.
+- Onboarding now includes the selected Day Ruler and optional Soft Wheels. Seven setup positions including Start; check-off skips Target. Chosen duration/time carry into review. Landing/Features unchanged. See [ONBOARDING.md](ONBOARDING.md).
+
+Habit detail selection: Grouped cards (B). Independent history (day summaries / journal / chart), weekly schedule and reminder card sources are in `components/habit-detail-pieces.js`, with shared `components/habit-detail.css`; see `HABIT-DETAIL.md` and `components.json`. Browser prototypes only. History initially shows the past three days, with expansion. Onboarding now includes Day Ruler trial length and optional Soft Wheels reminders within seven creation positions.
+
+Current detail/onboarding checks: desktop and phone widths, keyboard tracking selection, reduced-motion history collapse, saved log/correction, timer completion, schedule/reminder editing and failed-save preservation. See HABIT-DETAIL.md for scope.

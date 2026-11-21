@@ -132,3 +132,9 @@ Use the `profile`, `settings-row`, and updated `party-nudge` manifest entries. S
 Profile defaults to the selected C expandable groups with B’s identity panel and no Haptics setting. Party nudges require the shared slide-to-log and target-feedback sources in addition to avatars; see the updated manifest. `mode="send"` emits a request rather than a log change. Confirmed sends alone play Gradient Rise.
 
 Nudge layouts accept `interaction="button"` or `interaction="slide"` (default), set before mounting. Both emit the same party-request and nudge-confirmed events; only host-confirmed success animates. Invite variants b/d/e share the same model, with b still selected.
+
+## Habit detail compositions
+
+Use `today-habit-detail`, `today-habit-entry` and `today-habit-plan-editor` from `components/habit-detail.js` / `.css`. Read [HABIT-DETAIL.md](HABIT-DETAIL.md), load dependencies in `components.json`, then assign confirmed models and handle `habit-detail-request`. The gallery host is local-only. No per-habit streak, no production backend, timer recovery or notification delivery. First-time creation now consumes selected Day Ruler duration and Soft Wheels optional reminders; do not restore the superseded four-step onboarding cycle.
+
+Habit detail selection: Grouped cards (B). Independent history (day summaries / journal / chart), weekly schedule and reminder card sources are in `components/habit-detail-pieces.js`, with shared `components/habit-detail.css`; see `HABIT-DETAIL.md` and `components.json`. Browser prototypes only. History initially shows the past three days, with expansion. Onboarding now includes Day Ruler trial length and optional Soft Wheels reminders within seven creation positions.

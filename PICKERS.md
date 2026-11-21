@@ -48,3 +48,7 @@ The AM/PM wrapper now composes `today-segmented-control` from controls.js. The s
 The ruler's numeric readout is centered independently of its “days” suffix. Selected weekly marks (7, 14, 21…) keep their existing 28 px height without the extra 20% selection lift; ordinary marks retain their subtle lift. Weekly emphasis is preserved without crowding the selection capsule.
 
 Soft-wheel labels now grow continuously to 130% at the center, using scroll position rather than waiting for selection to settle. Row spacing stays 44 px. The selection-band lines fade at both ends. The same treatment applies inside the reminder picker and the independent editor.
+
+## Latest selection · November 21
+
+Soft Wheels (`variant="wheel"`) is now the selected time picker, including first-time onboarding and habit detail. Day Ruler + custom entry remains the trial-length choice. Inline clock and week cards remain reusable alternatives. Onboarding duration starts at 21 days; reminders are optional. `today-picker-wheel.commit()` resolves an explicit live tap/key destination before continuing, while free scrolling commits the current position.

@@ -37,7 +37,7 @@
     mark(){const i=this.values.indexOf(this._value);this.scroller.querySelectorAll('[role=option]').forEach((el,n)=>el.setAttribute('aria-selected',n===i));this.scroller.setAttribute('aria-activedescendant',this.scroller.children[i]?.id||'');}
     position(smooth){const i=this.values.indexOf(this._value);if(i<0)return;this.scroller.scrollTo({[this.axis==='x'?'left':'top']:i*44,behavior:smooth&&!reduced()?'smooth':'instant'});this.updateFocus();}
     choose(index){if(this.live){this._targetIndex=index;this._userDriven=true;this.scroller.scrollTo({[this.axis==='x'?'left':'top']:index*44,behavior:reduced()?'instant':'smooth'});this.readPosition();return;}this._programmatic=true;this._value=this.values[index];this.mark();this.position(true);event(this,'change',{value:this._value});}
-    commit(){if(!this._programmatic)this.settle();}
+    commit(){if(this.live&&this._targetIndex!=null){this._value=this.values[this._targetIndex];this._targetIndex=null;this._userDriven=false;this.mark();this.position(false);event(this,'change',{value:this._value});}else if(!this._programmatic)this.settle();}
     readPosition(){const index=clamp(Math.round((this.axis==='x'?this.scroller.scrollLeft:this.scroller.scrollTop)/44),0,this.values.length-1);const value=this.values[index];if(value!==this._value){this._value=value;this.mark();event(this,'change',{value});}}
     settle(){if(!this.isConnected||this._drag)return;this._programmatic=false;this.readPosition();this._userDriven=false;this._targetIndex=null;}
     disconnectedCallback(){clearTimeout(this._timer);this._abort?.abort();this._resize?.disconnect();}
@@ -113,7 +113,7 @@
       const hero='<div class="pk-trial-value"><output></output><span>days</span></div><p class="pk-duration-equivalent"></p>';
       const custom='<today-trial-days-input'+attrs+'></today-trial-days-input>';
       this.innerHTML=variant==='compact'?'<div class="pk-default-label">Suggested starting point</div>'+hero+'<p class="pk-soft-copy">A little time to find your rhythm.</p>'+press('Change length','variant="quiet" data-expand')+'<div class="pk-length-panel"><div><div class="pk-expanded-inner">'+cards+custom+'</div></div></div>':(variant==='cards'?hero+cards:'<today-day-ruler'+attrs+(this.hasAttribute('haptics')?' haptics':'')+'></today-day-ruler>')+press('Enter a custom length','variant="quiet" data-expand')+'<div class="pk-length-panel"><div>'+custom+'</div></div>';
-      this.innerHTML+='<div class="pk-trial-summary"><span class="pk-summary-mark" aria-hidden="true"></span><p><strong>Then pause and reflect.</strong><span>Your chosen days stay the same.</span></p></div>';
+      this.innerHTML+='<div class="pk-trial-summary"><span class="pk-summary-mark" aria-hidden="true"></span><p><strong>After the trial, you’ll reflect on the habit and see what works.</strong></p></div>';
       this._disclosure=new TodayUI.Disclosure(this.querySelector('.pk-length-panel'),{trigger:this.querySelector('[data-expand] button')});
       this.addEventListener('today-activate',e=>{if(e.target.matches('[data-expand]')){this._disclosure.toggle();if(this._disclosure.open)this.querySelector('today-trial-days-input').value=this.value;}});
       this.addEventListener('keydown',e=>{if(e.key==='Escape')this._disclosure.setOpen(false);});
