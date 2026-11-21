@@ -1,0 +1,22 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="280" height="204" viewBox="0 0 280 204" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Meditation cushion">
+<path id="Vector" d="M62 130C57 160 97 178 140 178C183 178 224 159 219 129L211 106H70L62 130Z" fill="url(#paint0_linear_0_4)" stroke="#D4C4EB" stroke-opacity="0.42"/>
+<path id="Vector_2" d="M140 150C183.078 150 218 132.539 218 111C218 89.4609 183.078 72 140 72C96.9218 72 62 89.4609 62 111C62 132.539 96.9218 150 140 150Z" fill="url(#paint1_linear_0_4)" stroke="#ECE2F8" stroke-opacity="0.52"/>
+<path id="Vector_3" d="M201 110C201 124.912 173.689 137 140 137C106.311 137 79 124.912 79 110C79 95.0883 106.311 83 140 83C173.689 83 201 95.0883 201 110Z" stroke="#F1E4FA" stroke-opacity="0.25"/>
+<path id="Vector_4" d="M73 137C77 147 83.3333 154.333 92 159M102 148C106 158 111.333 164.667 118 168M140 151V171M178 147C174 157 168.333 164 161 168M204 135C200 145 194 152.667 186 158" stroke-linecap="round" stroke="#D5C4EA" stroke-opacity="0.23"/>
+<path id="Vector_5" d="M140 112.5C142.761 112.5 145 111.381 145 110C145 108.619 142.761 107.5 140 107.5C137.239 107.5 135 108.619 135 110C135 111.381 137.239 112.5 140 112.5Z" fill="#77718F"/>
+<path id="Vector_6" d="M127 40C135.667 34.6667 144.333 34.6667 153 40M114 52C131.333 42.6667 148.667 42.6667 166 52" stroke-linecap="round" stroke="#CFC1E6" stroke-opacity="0.38"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="61.5758" y1="106" x2="103.378" y2="213.812" gradientUnits="userSpaceOnUse">
+<stop stop-color="#AAA1BB"/>
+<stop offset="0.49" stop-color="#655E7A"/>
+<stop offset="1" stop-color="#363046"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_4" x1="62" y1="72" x2="102.068" y2="178.849" gradientUnits="userSpaceOnUse">
+<stop stop-color="#EEE7F6"/>
+<stop offset="0.49" stop-color="#A29AB7"/>
+<stop offset="1" stop-color="#67617F"/>
+</linearGradient>
+</defs>
+</svg>

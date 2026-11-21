@@ -105,6 +105,12 @@ Preserve the 16-point Home Screen insets and 44-point actions when translating t
 
 Read CONTROLS.md, then load components/controls.css, components/icons.js and components/controls.js. Use today-icon, today-button, today-switch or today-stepper directly. The asset manifest records every SVG path and source hash, and controls.html demonstrates their states. No gallery script is needed for reuse. The host handles today-activate/change events and owns navigation and persistence.
 
-## Trial and reminder picker proposals
+## Trial and reminder pickers
 
-Read [PICKERS.md](PICKERS.md) before reusing `today-trial-picker` or `today-time-picker`. Load `foundations/disclosure.js`, `components/icons.js`, `components/controls.js`, then `components/pickers.js`; load controls/pickers CSS with shared motion CSS last. The source guide lists required fonts/assets and all attributes/events. Do not import `picker-study.*` into the product: it supplies comparison fixtures and simulated Continue actions. Only time confirmation emits a committed value; the host owns actual saving, notification permissions and delivery. No variation has been selected as the standard yet.
+Read [PICKERS.md](PICKERS.md) before reusing `today-trial-picker` or `today-time-picker`. Load `foundations/disclosure.js`, `components/icons.js`, `components/controls.js`, then `components/pickers.js`; load controls/pickers CSS with shared motion CSS last. The source guide lists required fonts/assets and all attributes/events. Do not import `picker-study.*` into the product: it supplies comparison fixtures and simulated Continue actions. Only time confirmation emits a committed value; the host owns actual saving, notification permissions and delivery. Day ruler + custom day input is selected. Week cards, inline clock, soft wheels and the standalone AM/PM pill are also retained. Use the individual tags in PICKERS.md when the full setup context is not needed.
+
+## Composed onboarding, artwork and slide action
+
+`ONBOARDING.md` maps nine paired layouts to the approved source frames and records the two-week/four-step flow. Load its manifest dependencies; omit onboarding-study.js from production because it is only the comparison controller. Landing and Features remain shared baselines. No new backend or native integration is implied.
+
+Use `today-artwork` and the original files in assets/artwork, with dimensions/hashes in the asset manifest. Read ARTWORK.md for decorative versus labelled use. `today-slide-log` is now independent; read SLIDE-TO-LOG.md and import components/slide-to-log.js/css, not app.js.

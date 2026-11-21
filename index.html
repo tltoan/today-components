@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0b0a0e">
   <title>Today — Components in motion</title>
-  <link rel="stylesheet" href="style.css?v=widgets-2">
+  <link rel="stylesheet" href="style.css?v=onboarding-1">
   <link rel="stylesheet" href="foundations/motion.css">
   <link rel="stylesheet" href="components/dropdown.css">
   <link rel="stylesheet" href="components/bottom-nav.css?v=balanced-cradle-6">
@@ -24,10 +24,12 @@
   <script src="components/welcome-intro.js?v=welcome-3" defer></script>
   <script src="welcome-study.js?v=welcome-4" defer></script>
   <script src="components/plan-button.js?v=standalone-library-2" defer></script>
-  <script src="components/page-counter.js?v=standalone-library-2" defer></script>
+  <script src="components/page-counter.js?v=caption-1" defer></script>
   <script src="components/staggered-bar-chart.js?v=standalone-library-2" defer></script>
   <script src="component-studies.js?v=standalone-library-2" defer></script>
-  <script src="app.js?v=library-header-removed" defer></script>
+  <link rel="stylesheet" href="components/slide-to-log.css?v=slide-1">
+<script src="components/slide-to-log.js?v=slide-1" defer></script>
+<script src="app.js?v=slide-1" defer></script>
 <link rel="stylesheet" href="components/step-progress.css?v=widget-refinement-1">
 <link rel="stylesheet" href="components/habit-widget.css?v=reading-clean-1">
 <link rel="stylesheet" href="components/habit-insights.css?v=widget-refinement-1">
@@ -47,15 +49,23 @@
 <script src="components/loader-motion.js?v=loader-1" defer></script>
 <script src="components/loader.js?v=loader-1" defer></script>
 <script src="loader-study.js?v=loader-2" defer></script>
-<link rel="stylesheet" href="components/controls.css?v=controls-1">
+<link rel="stylesheet" href="components/controls.css?v=segments-1">
 <link rel="stylesheet" href="controls-study.css?v=controls-1">
 <script src="components/icons.js?v=controls-1" defer></script>
-<script src="components/controls.js?v=controls-1" defer></script>
-<script src="controls-study.js?v=controls-2" defer></script>
-<link rel="stylesheet" href="components/pickers.css?v=pickers-1">
-<link rel="stylesheet" href="picker-study.css?v=pickers-1">
-<script src="components/pickers.js?v=pickers-1" defer></script>
-<script src="picker-study.js?v=pickers-1" defer></script>
+<script src="components/controls.js?v=segments-1" defer></script>
+<script src="controls-study.js?v=segments-1" defer></script>
+<link rel="stylesheet" href="components/pickers.css?v=pickers-3">
+<link rel="stylesheet" href="picker-study.css?v=pickers-2">
+<script src="components/pickers.js?v=pickers-3" defer></script>
+<script src="picker-study.js?v=pickers-3" defer></script>
+<link rel="stylesheet" href="components/artwork.css?v=artwork-1">
+<link rel="stylesheet" href="components/onboarding.css?v=onboarding-2">
+<link rel="stylesheet" href="onboarding-study.css?v=onboarding-2">
+<script src="components/artwork.js?v=artwork-1" defer></script>
+<script src="artwork-study.js?v=artwork-1" defer></script>
+<script src="components/plan-readiness.js" defer></script>
+<script src="components/onboarding.js?v=onboarding-2" defer></script>
+<script src="onboarding-study.js?v=onboarding-2" defer></script>
 </head>
 <body>
 <a class="skip-intro" href="#library">Skip animation to component library</a>
@@ -104,13 +114,8 @@
         <div class="logging-component">
           <div class="artwork-wrap"><img src="assets/StretchMat.svg" alt="" class="stretch-art" width="120" height="100"></div>
           <h3>Evening stretch</h3><p class="logging-caption" id="logging-caption">Make a little room for yourself.</p>
-          <div class="slide-track" id="slide-track">
-            <div class="slide-reveal" aria-hidden="true"><span></span></div>
-            <span class="slide-label" aria-hidden="true">Slide to log</span><span class="slide-success" aria-hidden="true">Logged for today</span>
-            <button class="slide-handle" id="slide-handle" aria-label="Log evening stretch" aria-describedby="slide-instructions"><svg><use href="#arrows"/></svg></button>
-          </div>
-          <p class="sr-only" id="slide-instructions">Drag to the end and release, or press Enter or Space to log.</p>
-          <button class="quiet-action" id="log-alternative">Or tap to log</button>
+          <today-slide-log id="stretch-log" label="evening stretch"></today-slide-log>
+          <a class="component-source" href="slide-to-log.html">Open component ↗</a>
           <span class="sr-only" id="log-status" aria-live="polite"></span>
         </div>
       </div>
@@ -162,7 +167,8 @@
       </div>
     </section>
   </div>
-  <section class="library-component" id="landing" aria-labelledby="landing-heading" data-ui>
+  <section class="library-component" id="onboarding" aria-labelledby="onboarding-heading" data-ui><div class="library-component-heading"><div><h2 id="onboarding-heading">Onboarding</h2><p>Your selected flow, with both layouts to compare.</p></div><div class="component-heading-links"><a href="onboarding.html">Open collection ↗</a><a href="source.html#onboarding">Code ↗</a></div></div><div data-component="onboarding"></div></section>
+<section class="library-component" id="landing" aria-labelledby="landing-heading" data-ui>
     <div class="library-component-heading"><div><h2 id="landing-heading">Welcome landing</h2><p>The opening signature and gradient.</p></div><div class="component-heading-links"><a href="source.html#landing" aria-label="Code for landing">Code ↗</a></div></div>
     <div data-component="landing"></div>
   </section>
@@ -175,11 +181,12 @@
 <div data-component="step-progress"></div>
 </section>
 <section class="library-component" id="trial-pickers" aria-labelledby="trial-pickers-heading" data-ui>
-<div class="library-component-heading"><div><h2 id="trial-pickers-heading">Trial length</h2><p>Three ways to give a plan some time.</p></div><div class="component-heading-links"><a href="pickers.html#trial-pickers">Open collection ↗</a><a href="source.html#trial-pickers">Code ↗</a></div></div>
+<div class="library-component-heading"><div><h2 id="trial-pickers-heading">Trial length</h2><p>Day ruler, custom entry, and week cards.</p></div><div class="component-heading-links"><a href="pickers.html#trial-pickers">Open collection ↗</a><a href="source.html#trial-pickers">Code ↗</a></div></div>
 <div data-component="trial-pickers"></div></section>
 <section class="library-component" id="time-pickers" aria-labelledby="time-pickers-heading" data-ui>
-<div class="library-component-heading"><div><h2 id="time-pickers-heading">Reminder time</h2><p>A time that fits your day.</p></div><div class="component-heading-links"><a href="pickers.html#time-pickers">Open collection ↗</a><a href="source.html#time-pickers">Code ↗</a></div></div>
+<div class="library-component-heading"><div><h2 id="time-pickers-heading">Reminder time</h2><p>Inline entry and soft wheels, made for touch.</p></div><div class="component-heading-links"><a href="pickers.html#time-pickers">Open collection ↗</a><a href="source.html#time-pickers">Code ↗</a></div></div>
 <div data-component="time-pickers"></div></section>
+<section class="library-component" id="picker-pieces" aria-labelledby="picker-pieces-heading" data-ui><div class="library-component-heading"><div><h2 id="picker-pieces-heading">Picker pieces</h2><p>The small controls, ready to use on their own.</p></div></div><div data-component="picker-pieces"></div></section>
 <section class="library-component" id="controls" aria-labelledby="controls-heading" data-ui>
 <div class="library-component-heading"><div><h2 id="controls-heading">Icons & controls</h2><p>The small pieces of Today.</p></div><div class="component-heading-links"><a href="controls.html">Open collection ↗</a><a href="source.html#controls">Code ↗</a></div></div>
 <div data-component="controls"></div>
@@ -209,6 +216,7 @@
     <div class="nav-studies" id="nav-studies"></div>
     <p class="navigation-note">Chosen navigation shape · Animated selection · Independent + control</p>
   </section>
+<section class="library-component" id="artwork" aria-labelledby="artwork-heading" data-ui><div class="library-component-heading"><div><h2 id="artwork-heading">Artwork</h2><p>The original Today illustrations.</p></div><div class="component-heading-links"><a href="artwork.html">Open collection ↗</a><a href="source.html#artwork">Code ↗</a></div></div><div data-component="artwork"></div></section>
   <footer><span>Interactive study · Example data · <a href="source.html">Source & agent guide ↗</a></span><a href="https://www.cosmos.so/e/1503723395" target="_blank" rel="noreferrer">Inspired by Monotree <span aria-hidden="true">↗</span></a></footer>
 </main>
 </body>

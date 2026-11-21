@@ -96,5 +96,23 @@
     }
     stop(){clearTimeout(this._timer);if(this._active)delete this._active.dataset.pressed;this._active=null;}
   }
-  for(const [name,component] of [['today-button',TodayButton],['today-switch',TodaySwitch],['today-stepper',TodayStepper]])if(!customElements.get(name))customElements.define(name,component);
+  class TodaySegmentedControl extends HTMLElement {
+    static observedAttributes=['value','disabled','label'];
+    connectedCallback(){
+      if(!this._options){
+        this._options=[...this.querySelectorAll('option')].map(o=>({value:o.value,label:o.textContent}));
+        this.group=make('div','tc-segments');this.group.setAttribute('role','group');
+        const highlight=make('span','tc-segments__highlight');highlight.setAttribute('aria-hidden','true');this.group.append(highlight);
+        this._options.forEach(option=>{const b=make('button','',option.label);b.type='button';b.dataset.value=option.value;b.addEventListener('click',()=>this.select(option.value));this.group.append(b);});
+        this.group.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key)||this.hasAttribute('disabled')||!this._options.length)return;e.preventDefault();let i=this._options.findIndex(o=>o.value===this.value);i=e.key==='Home'?0:e.key==='End'?this._options.length-1:(i+(e.key==='ArrowLeft'?-1:1)+this._options.length)%this._options.length;this.select(this._options[i].value);this.group.querySelectorAll('button')[i]?.focus();});
+        this.replaceChildren(this.group);
+      }
+      this.update();
+    }
+    get value(){return this.getAttribute('value')||'';}set value(value){this.setAttribute('value',value);}
+    select(value){if(this.hasAttribute('disabled')||value===this.value||!this._options.some(o=>o.value===value))return;this.value=value;this.dispatchEvent(new CustomEvent('change',{bubbles:true,detail:{value}}));}
+    attributeChangedCallback(){if(this.group)this.update();}
+    update(){const index=this._options.findIndex(o=>o.value===this.value);this.group.setAttribute('aria-label',this.getAttribute('label')||'Choose an option');this.group.style.setProperty('--tc-segment-count',Math.max(1,this._options.length));this.group.style.setProperty('--tc-segment-index',Math.max(0,index));this.group.toggleAttribute('data-empty',index<0);this.group.querySelectorAll('button').forEach((b,i)=>{b.disabled=this.hasAttribute('disabled');b.setAttribute('aria-pressed',String(i===index));});}
+  }
+  for(const [name,component] of [['today-button',TodayButton],['today-switch',TodaySwitch],['today-stepper',TodayStepper],['today-segmented-control',TodaySegmentedControl]])if(!customElements.get(name))customElements.define(name,component);
 })();

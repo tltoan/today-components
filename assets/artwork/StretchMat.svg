@@ -1,0 +1,30 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="357" height="220" viewBox="0 0 357 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Rolled exercise mat">
+<path id="Vector" d="M53.9651 159.119L222.779 56.7296C232.926 51.195 243.535 51.195 254.605 56.7296L318.256 95.4717C324.713 99.1614 324.713 103.774 318.256 109.308L146.674 210.314C140.217 214.004 133.76 214.004 127.302 210.314L55.3488 168.805C50.7364 166.038 50.2752 162.809 53.9651 159.119Z" fill="#111018"/>
+<path id="Vector_2" d="M58.1163 152.201L226.93 51.195C235.233 46.5828 243.996 46.5828 253.221 51.195L315.488 88.5535C321.946 92.2432 321.946 96.3941 315.488 101.006L145.291 202.013C138.833 205.702 131.915 205.702 124.535 202.013L59.5 164.654C53.0426 160.964 52.5814 156.813 58.1163 152.201Z" fill="url(#paint0_linear_0_4)" stroke="#AAA5BB" stroke-opacity="0.42"/>
+<g id="Vector_3">
+<path d="M106.547 161.887L261.523 70.566ZM127.302 172.956L282.279 83.0189ZM149.442 181.258L303.035 91.3208Z" fill="black"/>
+<path d="M106.547 161.887L261.523 70.566M127.302 172.956L282.279 83.0189M149.442 181.258L303.035 91.3208" stroke="#D6CBEB" stroke-opacity="0.2"/>
+</g>
+<path id="Vector_4" d="M49.814 125.912L215.86 27.673C225.547 22.1384 238 29.0566 243.535 38.7421C249.07 49.8113 247.686 62.2641 238 67.7987L70.5698 167.421L49.814 125.912Z" fill="url(#paint1_linear_0_4)" stroke="#AAA5BB" stroke-opacity="0.5"/>
+<path id="Vector_5" d="M53.9651 125.912C44.2791 127.296 41.5116 138.365 47.0465 150.818C52.5814 163.27 62.2674 170.189 70.5698 166.038C78.8721 161.887 78.8721 150.818 73.3372 139.748C67.8023 130.063 60.8837 124.528 53.9651 125.912Z" fill="#514C65" stroke="#C6BDD9" stroke-opacity="0.7"/>
+<path id="Vector_6" d="M58.1163 134.214C52.5814 134.214 51.1977 141.132 53.9651 146.667C56.7326 152.201 62.2674 156.352 66.4186 153.585C69.186 152.201 69.186 148.05 66.4186 143.899C65.0349 141.132 62.2674 139.748 60.8837 141.132" stroke-linecap="round" stroke="#CBC1DD" stroke-opacity="0.64"/>
+<g id="Vector_7">
+<path d="M63.6512 121.761L221.395 29.0566Z" fill="black"/>
+<path d="M63.6512 121.761L221.395 29.0566" stroke-linecap="round" stroke="#EBE3F4" stroke-opacity="0.48"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="54.2844" y1="47.7359" x2="191.778" y2="280.663" gradientUnits="userSpaceOnUse">
+<stop stop-color="#A5A3BB"/>
+<stop offset="0.47" stop-color="#636077"/>
+<stop offset="1" stop-color="#32303F"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_4" x1="49.814" y1="25.705" x2="49.814" y2="167.421" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DAD4E0"/>
+<stop offset="0.29" stop-color="#9A94AD"/>
+<stop offset="0.7" stop-color="#605B73"/>
+<stop offset="1" stop-color="#373446"/>
+</linearGradient>
+</defs>
+</svg>

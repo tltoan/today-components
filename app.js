@@ -6,9 +6,7 @@ const repeat = $('#repeat');
 const fields = $('#repeat-fields');
 const trigger = $('#schedule-trigger');
 const menu = $('#schedule-options');
-const track = $('#slide-track');
-const handle = $('#slide-handle');
-const alternative = $('#log-alternative');
+const slide = $('#stretch-log');
 const logo = $('#today-logo');
 const agendaViewport = $('.agenda-viewport');
 const repeatDisclosure=new TodayUI.Disclosure(fields,{open:true});
@@ -24,8 +22,6 @@ let menuOpen = false;
 let preset = 'custom';
 let agendaIndex = 0;
 let logged = {plants:true,stretch:false,meditate:false};
-let drag = null;
-let slideProgress = 0;
 
 function animate(element, frames, duration = 230) {
   if (motionReduced) return null;
@@ -102,11 +98,6 @@ document.addEventListener('click',event=>{
   if(menuOpen&&!$('.schedule-card').contains(event.target))setMenu(false);
 });
 
-function setSlide(progress) {
-  slideProgress = Math.min(1,Math.max(0,progress));
-  track.style.setProperty('--progress',slideProgress);
-}
-
 function renderLogs(changed) {
   const count = Object.values(logged).filter(Boolean).length;
   const amount = $('#reported-count');
@@ -123,13 +114,8 @@ function renderLogs(changed) {
     row.querySelector('.activity-status').textContent = logged[name]?'Logged':'Log';
   });
   $('#progress-note').textContent = count===3?'You made a little time for all three.':count===0?'Start with one small thing.':'A little more room for you.';
-  track.classList.toggle('logged',logged.stretch);
-  handle.disabled = logged.stretch;
-  handle.querySelector('use').setAttribute('href',logged.stretch?'#check':'#arrows');
-  alternative.textContent = logged.stretch?'Undo log':'Or tap to log';
-  alternative.setAttribute('aria-label',logged.stretch?'Undo evening stretch log':'Log evening stretch without sliding');
+  slide.logged=logged.stretch;
   $('#logging-caption').textContent = logged.stretch?'A moment for you, recorded.':'Make a little room for yourself.';
-  if(!drag) setSlide(logged.stretch?1:0);
   if(changed) $('#log-status').textContent = habitNames[changed]+(logged[changed]?' logged.':' log undone.');
 }
 
@@ -139,42 +125,8 @@ function toggleLog(habit, value) {
   renderLogs(habit);
 }
 
-function cancelDrag(reset=true) {
-  if(!drag)return;
-  const pointer = drag.pointer;
-  drag=null;
-  track.classList.remove('dragging');
-  if(handle.hasPointerCapture(pointer))handle.releasePointerCapture(pointer);
-  if(reset)setSlide(logged.stretch?1:0);
-}
-
-handle.addEventListener('pointerdown',event=>{
-  if(event.button!==0||!event.isPrimary||logged.stretch)return;
-  const travel = track.clientWidth-58;
-  drag = {pointer:event.pointerId,start:event.clientX-slideProgress*travel,travel};
-  handle.setPointerCapture(event.pointerId);
-  track.classList.add('dragging');
-});
-handle.addEventListener('pointermove',event=>{
-  if(!drag||event.pointerId!==drag.pointer)return;
-  const rect = track.getBoundingClientRect();
-  if(event.clientY<rect.top-44||event.clientY>rect.bottom+44){cancelDrag();return;}
-  setSlide((event.clientX-drag.start)/drag.travel);
-});
-handle.addEventListener('pointerup',event=>{
-  if(!drag||event.pointerId!==drag.pointer)return;
-  const rect=track.getBoundingClientRect();
-  if(event.clientY<rect.top-44||event.clientY>rect.bottom+44){cancelDrag();return;}
-  setSlide((event.clientX-drag.start)/drag.travel);
-  const complete = slideProgress>=1;
-  cancelDrag(false);
-  if(complete)toggleLog('stretch',true); else setSlide(0);
-});
-handle.addEventListener('pointercancel',()=>cancelDrag());
-handle.addEventListener('lostpointercapture',()=>cancelDrag());
-// Keyboard and assistive activation is the non-drag action on the handle.
-handle.addEventListener('click',event=>{if(event.detail===0&&!logged.stretch)toggleLog('stretch',true);});
-alternative.addEventListener('click',()=>toggleLog('stretch'));
+function cancelDrag(){slide.cancelDrag();}
+slide.addEventListener('change',event=>toggleLog('stretch',event.detail.logged));
 $$('.activity-row').forEach(row=>row.addEventListener('click',()=>toggleLog(row.dataset.habit)));
 
 const agendaDays = [

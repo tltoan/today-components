@@ -115,18 +115,36 @@
     {
       "id": "slide-to-log",
       "name": "Slide to log",
-      "preview": "index.html",
+      "preview": "slide-to-log.html",
       "browserSource": [
-        "app.js",
-        "style.css"
+        "components/slide-to-log.js",
+        "components/slide-to-log.css",
+        "SLIDE-TO-LOG.md"
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Browser specimen; linked with checklist example state.",
+      "status": "Independent browser custom element; original library card consumes the same control.",
       "sourcePage": "source.html#slide-to-log",
       "browserIntegration": {
-        "kind": "specimen",
-        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import."
+        "kind": "custom-element",
+        "tag": "today-slide-log",
+        "styles": [
+          "components/slide-to-log.css"
+        ],
+        "scripts": [
+          "components/slide-to-log.js"
+        ],
+        "assets": [
+          "assets/TestTheFuture-Regular.otf"
+        ],
+        "markup": "<today-slide-log label=\"evening stretch\"></today-slide-log>",
+        "events": [
+          "change: event.detail.logged"
+        ],
+        "usage": "Drag/release or tap/keyboard to log; Undo, disabled and cancellation. Host owns save/rollback. See SLIDE-TO-LOG.md.",
+        "demoOnly": [
+          "slide-study.js"
+        ]
       }
     },
     {
@@ -301,7 +319,8 @@
         ],
         "demoOnly": [
           "component-studies.js"
-        ]
+        ],
+        "usage": " Optional hide-caption omits the visible mark caption; marks keep their accessible description."
       }
     },
     {
@@ -818,7 +837,7 @@
     },
     {
       "id": "trial-pickers",
-      "name": "Trial length picker proposals",
+      "name": "Trial length picker",
       "preview": "pickers.html#trial-pickers",
       "sourcePage": "source.html#trial-pickers",
       "browserSource": [
@@ -832,7 +851,7 @@
         "controls",
         "icons"
       ],
-      "status": "Three interactive browser proposals; no direction selected or native integration.",
+      "status": "Selected/retained reusable browser components; no native app integration.",
       "figmaNodes": [
         "299:6535",
         "299:6537",
@@ -857,7 +876,7 @@
           "assets/TestTheFuture-Medium.otf",
           "assets/icons/Pencil.svg"
         ],
-        "markup": "<today-trial-picker variant=\"cards\" value=\"21\"></today-trial-picker>",
+        "markup": "<today-trial-picker variant=\"ruler\" value=\"21\"></today-trial-picker>",
         "usage": "Read PICKERS.md for context, variants, bounds, draft/confirmation and host responsibilities.",
         "events": [
           "change: event.detail.days"
@@ -870,7 +889,7 @@
     },
     {
       "id": "time-pickers",
-      "name": "Reminder time picker proposals",
+      "name": "Reminder time picker",
       "preview": "pickers.html#time-pickers",
       "sourcePage": "source.html#time-pickers",
       "browserSource": [
@@ -884,7 +903,7 @@
         "controls",
         "icons"
       ],
-      "status": "Three interactive browser proposals; no direction selected or native integration.",
+      "status": "Selected/retained reusable browser components; no native app integration.",
       "figmaNodes": [
         "529:5326",
         "529:5200",
@@ -918,6 +937,324 @@
           "picker-study.js",
           "picker-study.css"
         ]
+      }
+    },
+    {
+      "id": "day-ruler",
+      "name": "Day ruler",
+      "preview": "pickers.html#picker-pieces",
+      "sourcePage": "source.html#day-ruler",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "disclosure"
+      ],
+      "status": "Retained reusable browser component, November 21, 2026.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-day-ruler",
+        "styles": [
+          "components/controls.css",
+          "components/pickers.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "markup": "<today-day-ruler value=\"21\"></today-day-ruler>",
+        "events": [
+          "change",
+          "ruler-tick: {days, major}"
+        ],
+        "usage": "See PICKERS.md for value/bounds, disabled, event and native haptic limitations."
+      }
+    },
+    {
+      "id": "trial-days-input",
+      "name": "Trial length in days",
+      "preview": "pickers.html#picker-pieces",
+      "sourcePage": "source.html#trial-days-input",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "disclosure"
+      ],
+      "status": "Retained reusable browser component, November 21, 2026.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-trial-days-input",
+        "styles": [
+          "components/controls.css",
+          "components/pickers.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "markup": "<today-trial-days-input value=\"21\"></today-trial-days-input>",
+        "events": [
+          "change"
+        ],
+        "usage": "See PICKERS.md for value/bounds, disabled, event and native haptic limitations."
+      }
+    },
+    {
+      "id": "week-cards",
+      "name": "Week cards",
+      "preview": "pickers.html#picker-pieces",
+      "sourcePage": "source.html#week-cards",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "disclosure"
+      ],
+      "status": "Retained reusable browser component, November 21, 2026.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-week-cards",
+        "styles": [
+          "components/controls.css",
+          "components/pickers.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "markup": "<today-week-cards value=\"21\"></today-week-cards>",
+        "events": [
+          "change"
+        ],
+        "usage": "See PICKERS.md for value/bounds, disabled, event and native haptic limitations."
+      }
+    },
+    {
+      "id": "period-pill",
+      "name": "AM/PM pill",
+      "preview": "pickers.html#picker-pieces",
+      "sourcePage": "source.html#period-pill",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "disclosure",
+        "segmented-control"
+      ],
+      "status": "Retained reusable browser component, November 21, 2026.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-period-pill",
+        "styles": [
+          "components/controls.css",
+          "components/pickers.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "markup": "<today-period-pill value=\"PM\"></today-period-pill>",
+        "events": [
+          "change"
+        ],
+        "usage": "See PICKERS.md for value/bounds, disabled, event and native haptic limitations."
+      }
+    },
+    {
+      "id": "artwork",
+      "name": "Today artwork",
+      "preview": "artwork.html",
+      "sourcePage": "source.html#artwork",
+      "browserSource": [
+        "components/artwork.js",
+        "components/artwork.css",
+        "assets/artwork/manifest.json",
+        "ARTWORK.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Original app assets, 19 matching Figma exports plus 2 app assets for label-only Figma specimens.",
+      "figmaNodes": [
+        "321:646",
+        "321:564"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-artwork",
+        "styles": [
+          "components/artwork.css"
+        ],
+        "scripts": [
+          "components/artwork.js"
+        ],
+        "assets": [
+          "assets/artwork/OpenBook.svg",
+          "assets/artwork/PrivacyLock.svg",
+          "assets/artwork/FirstHabitSteps.svg",
+          "assets/artwork/StretchMat.svg",
+          "assets/artwork/FlossCase.svg",
+          "assets/artwork/Workout.svg",
+          "assets/artwork/Walking.svg",
+          "assets/artwork/MakeBed.svg",
+          "assets/artwork/WaterPlants.svg",
+          "assets/artwork/Vitamins.svg",
+          "assets/artwork/Meditation.svg",
+          "assets/artwork/FeaturePlan.svg",
+          "assets/artwork/FeatureSchedule.svg",
+          "assets/artwork/FeatureLog.svg",
+          "assets/artwork/FeatureHistory.svg",
+          "assets/artwork/FeatureCustom.svg",
+          "assets/artwork/FeatureFitness.svg",
+          "assets/artwork/FeatureTracking.svg",
+          "assets/artwork/FeatureReview.svg",
+          "assets/artwork/WaterDroplet.svg",
+          "assets/artwork/Fishing.png"
+        ],
+        "markup": "<today-artwork name=\"open-book\"></today-artwork>",
+        "usage": "Original geometry preserved; decorative by default, optional accessible label. See ARTWORK.md.",
+        "demoOnly": [
+          "artwork-study.js"
+        ]
+      }
+    },
+    {
+      "id": "onboarding",
+      "name": "Onboarding comparisons",
+      "preview": "onboarding.html",
+      "sourcePage": "source.html#onboarding",
+      "browserSource": [
+        "components/onboarding.js",
+        "components/onboarding.css",
+        "onboarding-study.js",
+        "onboarding-study.css",
+        "ONBOARDING.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "artwork",
+        "step-progress",
+        "plan-button",
+        "page-counter",
+        "navigation",
+        "landing",
+        "segmented-control"
+      ],
+      "status": "Selected hybrid flow from November 21 review; A/B comparisons retained. Landing and Features shared unchanged. Browser only.",
+      "figmaNodes": [
+        "322:484",
+        "121:11953",
+        "121:12443",
+        "121:12612",
+        "121:12622",
+        "369:1651",
+        "369:1700",
+        "369:1802",
+        "369:2087",
+        "369:2340",
+        "169:2471"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-onboarding-screen",
+        "styles": [
+          "components/controls.css",
+          "components/step-progress.css",
+          "components/plan-button.css",
+          "components/page-counter.css",
+          "components/bottom-nav.css",
+          "components/welcome-intro.css",
+          "components/artwork.css",
+          "components/onboarding.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/step-progress.js",
+          "components/plan-button.js",
+          "components/plan-readiness.js",
+          "components/page-counter.js",
+          "components/cradle-fluid.js",
+          "components/bottom-nav.js",
+          "today-logo.js",
+          "components/welcome-intro.js",
+          "components/artwork.js",
+          "components/onboarding.js"
+        ],
+        "markup": "<today-onboarding-screen screen=\"review\" variant=\"a\"></today-onboarding-screen>",
+        "events": [
+          "draftchange",
+          "navigate",
+          "preview-action"
+        ],
+        "usage": "Read ONBOARDING.md. Selected flow follows the per-screen choices; Compare A/B remains available. Approved four-step/two-week reading fixture, no backend or persistence.",
+        "demoOnly": [
+          "onboarding-study.js",
+          "onboarding-study.css"
+        ]
+      }
+    },
+    {
+      "id": "segmented-control",
+      "name": "Segmented pill selection",
+      "preview": "controls.html",
+      "sourcePage": "source.html#segmented-control",
+      "browserSource": [
+        "components/controls.js",
+        "components/controls.css",
+        "CONTROLS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser control derived from the approved AM/PM pill; used by schedule presets and AM/PM.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-segmented-control",
+        "styles": [
+          "components/controls.css"
+        ],
+        "scripts": [
+          "components/controls.js"
+        ],
+        "markup": "<today-segmented-control label=\"Schedule presets\" value=\"weekdays\"><option value=\"daily\">Every day</option><option value=\"weekdays\">Weekdays</option><option value=\"weekends\">Weekends</option></today-segmented-control>",
+        "events": [
+          "change: event.detail.value"
+        ],
+        "usage": "Two or more equal options; value, disabled, optional no selection, arrow keys, Home/End. Read CONTROLS.md."
       }
     }
   ],

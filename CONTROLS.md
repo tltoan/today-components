@@ -105,3 +105,17 @@ Default button surfaces reuse the app's neutral Save log gradient, graphite and 
 - Existing library: approved dropdown, plan-button, nav, counter and widget behaviors.
 
 This is a self-contained browser implementation of these controls. Native originals remain in the app project and are not advertised as an independently importable SwiftUI package here.
+
+## Segmented selection
+
+The approved AM/PM pattern is now a generic two-or-more-option component, also used for the three schedule presets. `today-period-pill` composes this same implementation.
+
+```html
+<today-segmented-control label="Schedule presets" value="weekdays">
+  <option value="daily">Every day</option>
+  <option value="weekdays">Weekdays</option>
+  <option value="weekends">Weekends</option>
+</today-segmented-control>
+```
+
+Read/write `.value` or the `value` attribute. User selection emits `change` with `{value}`; programmatic changes do not. Options are configured before mounting. `disabled` disables all targets. Empty/unknown value shows no selected option, useful when individual weekdays form a custom schedule. Arrow keys, Home and End move selection and focus. The shared inset highlight moves over 440 ms; reduced motion settles immediately. Buttons remain at least 44 px high. Fit labels within the available width rather than shrinking touch targets; this schedule bar and its weekday row share the same width.

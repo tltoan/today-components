@@ -1,0 +1,22 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="280" height="204" viewBox="0 0 280 204" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Stone kettlebell">
+<path id="Vector" d="M88 116C81 94 65 62 78 39C91 17 116 15 140 15C168 15 192 20 202 42C212 66 197 93 190 116L168 108C174 88 184 70 179 55C173 40 109 38 101 55C95 70 108 91 113 108L88 116Z" fill-rule="evenodd" clip-rule="evenodd" fill="url(#paint0_linear_0_4)"/>
+<path id="Vector_2" d="M84 49C90.6667 31.6667 110 23 142 23C167.333 22.3333 184.667 29 194 43" stroke-width="2" stroke="#EBE3F4" stroke-opacity="0.32"/>
+<path id="Vector_3" d="M140 83C176 83 202 115 202 149C202 171 187 188 168 194C154 198 126 198 112 194C89 187 78 170 78 148C78 113 105 83 140 83Z" fill="url(#paint1_radial_0_4)"/>
+<path id="Vector_4" opacity="0.57" d="M141 171C154.807 171 166 160.703 166 148C166 135.297 154.807 125 141 125C127.193 125 116 135.297 116 148C116 160.703 127.193 171 141 171Z" fill="#514C65"/>
+<path id="Vector_5" d="M108 185C128.667 194.333 150 194 172 184" stroke="#32303F" stroke-opacity="0.58"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="81.0002" y1="21.06" x2="155.797" y2="136.159" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DAD4E0"/>
+<stop offset="0.48" stop-color="#9A94AD"/>
+<stop offset="1" stop-color="#373446"/>
+</linearGradient>
+<radialGradient id="paint1_radial_0_4" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(122.64 106.94) scale(100.44 92.34)">
+<stop stop-color="#DAD4E0"/>
+<stop offset="0.51" stop-color="#A5A3BB"/>
+<stop offset="0.84" stop-color="#605B73"/>
+<stop offset="1" stop-color="#32303F"/>
+</radialGradient>
+</defs>
+</svg>

@@ -29,7 +29,7 @@ This is the working Today component library. This README and AGENTS.md contain t
 | Selection dropdown | `components/dropdown.js`, `components/dropdown.css` | Reusable browser component; used by logo speed. Keyboard, focus return, outside dismissal, and reduced motion supported. |
 | Reading schedule | `index.html`, `app.js`, `style.css` | Browser specimen consuming shared disclosure motion. Its layout/fixture is separate from the approved motion rule. |
 | Vertical agenda | `components/snap-scroller.js` | Reusable browser controller. One day per scroll/swipe, with smooth snapping as requested November 20. Native implementation pending. |
-| Slide to log | `app.js`, `style.css` | Browser specimen based on the existing native control; not yet extracted as a standalone component. |
+| Slide to log | `components/slide-to-log.js`, `components/slide-to-log.css`, `SLIDE-TO-LOG.md` | Independent browser component and focused preview; drag, tap, keyboard, Undo, disabled and cancellation. Original library card uses the same element. |
 | Daily checklist | `app.js`, `style.css` | Browser specimen; shares sample state with slide-to-log. |
 | Today logo | `today-logo.js`, `native/TodayLogoAnimation.swift` | Reusable browser component plus unchanged user-supplied SwiftUI source. |
 | Welcome landing | `components/welcome-intro.js`, `components/welcome-intro.css`, `native/TodayWelcomeIntro.swift`, `native/TodayIntro.swift` | Motion-only opening on `index.html`, with the library immediately below; `landing.html` redirects there. A library specimen provides replay controls. Original wrapper and matching local dependency preserved unchanged; native app integration pending. |
@@ -38,10 +38,14 @@ This is the working Today component library. This README and AGENTS.md contain t
 | Page counter | `components/page-counter.js`, `components/page-counter.css`, `native/AnimatedPageCounter.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `page-counter.html` preview; tap/hold, limits, rolling digits, sequential fill and labeled overflow. Native app integration pending. |
 | Staggered bar chart | `components/staggered-bar-chart.js`, `components/staggered-bar-chart.css`, `native/StaggeredBarChart.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `bar-chart.html` preview; replay, stagger pacing, recorded zero and missing-log examples. Native app integration pending. |
 | App icons | `components/icons.js`, `assets/icons/manifest.json` | Ten Figma icons plus two original counter SVGs, exact source hashes and native dimensions. Browser reusable. |
-| Buttons & small controls | `components/controls.js`, `components/controls.css`, `CONTROLS.md` | Twelve button variants, switches, isolated +/− and bounded hold stepper. Interactive browser collection and documented APIs. |
-| Trial length picker | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Three browser proposals: week cards, day ruler, quiet default. Presets/custom entry, snap, bounds and reduced motion. 21-day default; alternatives remain proposals. |
-| Reminder time picker | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Three browser proposals: inline clock, wheels, dial. Confirm/cancel, exact minutes, AM/PM and retained time when off. No native integration. |
+| Buttons & small controls | `components/controls.js`, `components/controls.css`, `CONTROLS.md` | Twelve button variants, switches, segmented selections, isolated +/− and bounded hold stepper. Interactive browser collection and documented APIs. |
+| Trial length picker | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Day ruler selected; standalone ruler, custom input and week cards. Live count, seventh-day marks, native haptic event. 21-day fixture default. |
+| Reminder time picker | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Inline clock and soft wheels retained; standalone AM/PM pill. Phone field navigation, draft/confirm/cancel and retained time when off. No native integration. |
 | New habit entry (retained source) | `components/habit-editor.js`, `components/habit-editor.css` | Earlier Figma `121:12444` entry implementation retained. Latest user request disconnects it from +; no longer mounted in the library. Generation/setup integration pending. |
+
+| Onboarding | `components/onboarding.js`, `components/onboarding.css`, `ONBOARDING.md` | Nine screens × two comparisons, plus the selected hybrid flow; existing landing and approved Features shared unchanged. Reuses component primitives, local drafts and approved four-step/two-week flow. Browser only. |
+| Artwork | `components/artwork.js`, `components/artwork.css`, `assets/artwork/manifest.json` | 21 original assets, intrinsic geometry and source hashes; standalone renderer and downloads. |
+| Picker pieces | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Reusable day ruler, custom day input, week cards and AM/PM pill. Existing switch remains in controls. |
 
 ## Shared dropdown contract
 
@@ -76,7 +80,7 @@ Read/write `.value` and listen for the bubbling `change` event. `placement="top"
 
 - Source context: Today app design specification, version 2, November 20, 2026. Relevant component decisions and implementation status are recorded here and in AGENTS.md.
 - Reused roles: Test The Future Regular/Medium, graphite surfaces, neutral selection gradient, 20 px plan-field radius, 12 px weekday selection radius, the 265 × 58 slider with a 46 px handle, native slider color stops, and supplied StretchMat, WaterPlants, and Meditation artwork.
-- The slider derives from the author’s existing native `SlideToLog` and motion study. Its complete browser implementation is in `app.js` and `style.css`; those earlier app files are not dependencies of this repository.
+- The slider derives from the author’s existing native `SlideToLog` and motion study. Its independent browser implementation is in `components/slide-to-log.js` and `components/slide-to-log.css`; the original gallery connects its state in `app.js`.
 - Fixture: synthetic November 20–23, 2026 plans and activity. Reading defaults to Sun/Tue/Thu, 10 pages, a 21-day trial. The three Friday check-off habits start with Water plants logged. Agenda cards are independent sample plans. No production/user data is loaded.
 - Proposed departures: this presentation board, compact schedule repeat switch, agenda carousel, and interactive daily checklist. Checkmarks are action control states, not replacements for the established activity-calendar marks. The count describes habits with a reported log, not target attainment, a streak, or a finalization of the day. Dropdown motion is now explicitly approved; these other layouts remain browser studies, and the native app has not been changed.
 - The existing local preview has Regular/Medium font files. The showcase wordmark uses Medium; this is not the native Bold main-tab header.
@@ -322,6 +326,16 @@ Verified original SVG files and rendered native-size geometry, desktop/390-point
 
 Standalone reuse check: loaded only controls.css, icons.js and controls.js in a temporary minimal page. At 375 points, the 1,000,000 maximum and a long button label fit without overflow; the increase action disabled correctly. The temporary fixture was removed after verification.
 
-## Picker proposals
+## Selected pickers and onboarding comparisons
 
-[Compare trial and time pickers](pickers.html). See [PICKERS.md](PICKERS.md) for the Figma context, APIs, motion, dependencies and the desktop/mobile/keyboard/reduced-motion checks performed on November 21, 2026. These alternatives have not been selected as product standards.
+Day ruler + custom entry is selected; week cards, inline clock, soft wheels, AM/PM pill and switch remain reusable pieces. See [PICKERS.md](PICKERS.md). Historical quiet-default and dial sources remain available but are not live alternatives.
+
+[Onboarding comparisons](onboarding.html) contains two layouts for nine approved screens, plus the existing landing and unchanged Features composition. Both directions use the same approved content and components. Selected flow follows the user’s per-screen choices; Compare A/B keeps the alternatives available. The four-step/two-week flow is deliberately separate from the newer seven-step/21-day picker fixture. See [ONBOARDING.md](ONBOARDING.md) for source nodes, events and prototype boundaries.
+
+[Artwork](artwork.html) provides 21 original assets and download links. [Slide to log](slide-to-log.html) now has a focused standalone preview and an independent component.
+
+## November 21 validation
+
+The selected onboarding flow and A/B comparisons were exercised in the browser at desktop and inside a 390 × 844 viewport. Checked: tracking choice, check-off skipping Target, B-to-A draft continuity, target edits, schedule presets/custom weekdays, first-session/check-in dates, Saved → Home, Skip → empty Home, keyboard selection and reduced-motion presentation. All selected layouts have no horizontal overflow. Native keyboard, VoiceOver and haptics remain device integration checks.
+
+Standalone checks covered ruler endpoints and live value changes, invalid/custom day input, inline time draft versus confirmation, cancellation, the shared AM/PM pill, slide keyboard/tap/Undo/disabled states, main-card/checklist synchronization, and all 21 artwork images loading within their stages. JavaScript syntax, local source/asset paths, manifest dependencies, source anchors and original artwork hashes were checked. No native app files were changed.

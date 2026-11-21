@@ -8,7 +8,7 @@
     return bezier((low+high)/2,.8,1);
   };
   class TodayPageCounter extends HTMLElement {
-    static observedAttributes=['amount','maximum','mark-count'];
+    static observedAttributes=['amount','maximum','mark-count','hide-caption'];
     get maximum(){return Math.max(0,number(this.getAttribute('maximum')??20,20));}
     get capacity(){return Math.max(1,number(this.getAttribute('mark-count')??20,20));}
     get amount(){return clamp(number(this.getAttribute('amount')??10,10),0,this.maximum);}
@@ -49,6 +49,7 @@
     step(direction){const previous=this.amount;this.amount=previous+direction;if(this.amount!==previous){this.dispatchEvent(new CustomEvent('change',{bubbles:true,detail:{amount:this.amount}}));if(!this.hold)this.querySelector('.page-counter-status').textContent=`${this.amount} pages`;}return direction>0?this.amount<this.maximum:this.amount>0;}
     update(immediate=false){
       const value=this.amount,previous=this.previousAmount;
+      this.querySelector('.page-counter-caption').hidden=this.hasAttribute('hide-caption');
       this.buttons[0].disabled=value===0;this.buttons[1].disabled=value===this.maximum;
       if(this.hold?.button.disabled)this.stopHold();
       this.digits.setAttribute('aria-label',`${value} pages`);

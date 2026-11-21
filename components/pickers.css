@@ -1,9 +1,9 @@
 /* Proposal components. Shared controls.css supplies Today fonts and semantic colors. */
-today-trial-picker,today-time-picker{display:block;min-width:0;color:var(--today-control-text);font:400 14px/1.45 Future,-apple-system,sans-serif;--pk-accent:var(--today-control-accent);--pk-muted:var(--today-control-secondary);--pk-surface:#19171d;--pk-line:#ffffff12;--pk-ease:cubic-bezier(.22,.76,.28,1)}
-today-trial-picker *,today-time-picker *{box-sizing:border-box}
-:is(today-trial-picker,today-time-picker) button{font-family:inherit;cursor:pointer;touch-action:manipulation}
-:is(today-trial-picker,today-time-picker) button:focus-visible,:is(today-trial-picker,today-time-picker) input:focus-visible,.pk-wheel-scroll:focus-visible,.pk-dial:focus-visible{outline:2px solid var(--pk-accent);outline-offset:4px}
-:is(today-trial-picker,today-time-picker) button:active{scale:1}
+today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill{display:block;min-width:0;color:var(--today-control-text);font:400 14px/1.45 Future,-apple-system,sans-serif;--pk-accent:var(--today-control-accent);--pk-muted:var(--today-control-secondary);--pk-surface:#19171d;--pk-line:#ffffff12;--pk-ease:cubic-bezier(.22,.76,.28,1)}
+:is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) *{box-sizing:border-box}
+:is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) button{font-family:inherit;cursor:pointer;touch-action:manipulation}
+:is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) button:focus-visible,:is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) input:focus-visible,.pk-wheel-scroll:focus-visible,.pk-dial:focus-visible{outline:2px solid var(--pk-accent);outline-offset:4px}
+:is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) button:active{scale:1}
 .pk-trial-value{display:flex;align-items:baseline;justify-content:center;gap:10px;margin:8px 0 0}
 .pk-trial-value output{font-size:64px;font-weight:500;line-height:1.25;letter-spacing:-.05em;font-variant-numeric:tabular-nums;display:block;padding:0 4px}
 .pk-trial-value>span{font-size:18px;color:var(--pk-muted)}
@@ -39,7 +39,7 @@ today-picker-wheel{display:block;min-width:0;--pk-accent:var(--today-control-acc
 today-picker-wheel[data-axis=x] .pk-wheel-scroll{height:112px;overflow-x:auto;overflow-y:hidden;display:flex;scroll-snap-type:x mandatory;padding:0 calc(50% - 22px);mask-image:linear-gradient(90deg,transparent,#000 25%,#000 75%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 25%,#000 75%,transparent)}
 today-picker-wheel[data-axis=x] .pk-wheel-option{height:102px;flex:0 0 44px;flex-direction:column;font-size:16px;gap:17px}
 today-picker-wheel[data-axis=x] .pk-wheel-option:before{content:"";width:1px;height:20px;background:#625b6a}
-today-picker-wheel[data-axis=x] .pk-wheel-option:nth-child(7n):before{height:28px;margin-top:-8px;background:#b7abca}
+today-picker-wheel[data-axis=x] .pk-wheel-option[data-major]:before{height:28px;margin-top:-8px;background:#b7abca}
 today-picker-wheel[data-axis=x] .pk-wheel-option[aria-selected=true]:before{background:var(--pk-accent)}
 .pk-soft-copy{text-align:center;font-size:13px;color:var(--pk-muted);margin:0 0 8px}
 .pk-expanded-inner{padding:16px 0 2px}
@@ -58,10 +58,6 @@ today-picker-wheel[data-axis=x] .pk-wheel-option[aria-selected=true]:before{back
 .pk-clock-fields input::-webkit-inner-spin-button,.pk-clock-fields input::-webkit-outer-spin-button{appearance:none;margin:0}
 .pk-clock-fields input:focus{background:#bdaed912}
 .pk-clock-fields>b{font-size:36px;color:#8b8296;font-weight:400;align-self:flex-start;margin-top:12px}
-.pk-period{display:flex;position:relative;isolation:isolate;width:152px;background:#ffffff06;border:1px solid var(--pk-line);border-radius:25px;padding:4px;margin:18px auto 22px}
-.pk-period>span{position:absolute;z-index:-1;left:4px;top:4px;bottom:4px;width:calc(50% - 4px);background:var(--today-control-graphite);border:1px solid #bdaed933;border-radius:21px;transform:translateX(calc(var(--pk-period,1)*100%));transition:transform 440ms var(--pk-ease)}
-.pk-period button{flex:1;min-height:44px;background:transparent;border:0;border-radius:22px;color:var(--pk-muted);font-size:13px}
-.pk-period button[aria-pressed=true]{color:var(--today-control-text)}
 .pk-time-wheels{position:relative;display:grid;grid-template-columns:1fr 1fr .85fr;gap:8px;isolation:isolate;margin-bottom:22px}
 .pk-wheel-title{display:block;text-align:center;font-size:11px;color:var(--pk-muted);margin:0 0 8px;height:16px}
 .pk-wheel-band{z-index:-1;position:absolute;left:0;right:0;top:112px;height:44px;border-top:1px solid #bdaed930;border-bottom:1px solid #bdaed930;background:linear-gradient(90deg,transparent,#bdaed912,transparent)}
@@ -78,9 +74,8 @@ today-picker-wheel[data-axis=x] .pk-wheel-option[aria-selected=true]:before{back
 .pk-dial-center{position:absolute;left:calc(50% - 3px);top:calc(50% - 3px);width:6px;height:6px;border-radius:50%;background:var(--pk-accent)}
 .pk-dial-nudge{display:flex;gap:4px;align-items:center;justify-content:space-between;margin:0 0 15px}
 .pk-dial-nudge>span{font-size:11px;color:var(--pk-muted);text-align:center}
-today-time-picker[data-variant=dial] .pk-period{margin:16px auto 8px}
-html[data-reduced] :is(today-trial-picker,today-time-picker) *,html[data-reduced] today-picker-wheel *{transition:none!important;scroll-behavior:auto!important}
-@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) :is(today-trial-picker,today-time-picker) *,html:not([data-motion-override]) today-picker-wheel *{transition:none!important;scroll-behavior:auto!important}}
+html[data-reduced] :is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) *,html[data-reduced] today-picker-wheel *{transition:none!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) :is(today-trial-picker,today-time-picker,today-day-ruler,today-trial-days-input,today-week-cards,today-period-pill) *,html:not([data-motion-override]) today-picker-wheel *{transition:none!important;scroll-behavior:auto!important}}
 .pk-default-label{text-align:center;color:var(--pk-accent);font-size:12px;margin:24px 0 18px}
 today-trial-picker[data-variant=compact]{padding-top:0}
 today-trial-picker[data-variant=compact] .pk-trial-value output{font-size:80px}
@@ -89,3 +84,20 @@ today-trial-picker[data-variant=compact] .pk-soft-copy{margin:22px 0 12px}
 .pk-wheel-scroll.pk-wheel-dragging{scroll-snap-type:none!important;cursor:grabbing}
 
 .pk-dial[data-dragging] .pk-dial-hand{transition:none}
+
+.pk-field-navigation{display:flex;align-items:center;gap:8px;margin-top:12px}
+.pk-field-navigation button{min-height:44px;min-width:64px;border:1px solid transparent;border-radius:13px;background:transparent;color:var(--pk-muted);font:400 13px/1 Future,sans-serif;padding:0 14px}
+.pk-field-navigation [aria-pressed=true]{color:var(--today-control-text);border-color:#bdaed930;background:#bdaed90d}
+.pk-field-navigation [data-done]{margin-left:auto;color:var(--pk-accent);background:#bdaed90b}
+.pk-input-hint{font-size:12px;line-height:1.5;color:var(--pk-muted);text-align:center;margin:12px 0 0}
+.pk-clock-fields label:focus-within>span{color:var(--pk-accent)}
+:is(today-day-ruler,today-week-cards,today-period-pill)[disabled]{opacity:.45}
+today-trial-days-input .pk-custom{padding-top:0}
+.pk-length-panel today-trial-days-input{padding-top:18px}
+
+today-day-ruler>.pk-trial-value{margin-bottom:28px}
+today-picker-wheel[data-axis=x] .pk-wheel-option:before{transform-origin:bottom;transition:transform 160ms var(--pk-ease),background 160ms}
+today-picker-wheel[data-axis=x] .pk-wheel-option[aria-selected=true]:before{transform:scaleY(1.2)}
+html[data-reduced] today-picker-wheel[data-axis=x] .pk-wheel-option:before{transform:none}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) today-picker-wheel[data-axis=x] .pk-wheel-option:before{transform:none}}
+today-period-pill{width:152px;max-width:100%;margin:18px auto 22px}today-time-picker[data-variant=dial] today-period-pill{margin:16px auto 8px}

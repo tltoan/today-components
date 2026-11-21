@@ -1,0 +1,30 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="280" height="204" viewBox="0 0 280 204" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Sculptural watering can">
+<path id="Vector" d="M122 60C148 32 182 25 207 44C234 65 232 94 212 122L202 115C218 93 217 72 203 59L173 95L122 60Z" fill="url(#paint0_linear_0_4)" stroke="#C6BDD9" stroke-opacity="0.35"/>
+<path id="Vector_2" d="M145 152L43 137L38 148L162 174L145 152Z" fill="url(#paint1_linear_0_4)"/>
+<path id="Vector_3" d="M107 47C111 43.6667 114.667 43.6667 118 47L218 130C221.333 132.667 221.333 136.333 218 141L189 176C186.333 179.333 183 179.667 179 177L76 92C71.3333 88 71 84 75 80L107 47Z" fill="url(#paint2_linear_0_4)"/>
+<path id="Vector_4" d="M76 82C71 88 77 94 84 93L115 57C119 51 113 45 108 48L76 82Z" fill="#514C65"/>
+<g id="Vector_5">
+<path d="M83 80L110 51Z" fill="black"/>
+<path d="M83 80L110 51" stroke-width="2" stroke-linecap="round" stroke="#EBE3F4" stroke-opacity="0.57"/>
+</g>
+<path id="Vector_6" d="M190 171L216 139" stroke-linecap="round" stroke="#AAA5BB" stroke-opacity="0.56"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="128.309" y1="38.6491" x2="196.391" y2="133.507" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DAD4E0"/>
+<stop offset="0.48" stop-color="#9A94AD"/>
+<stop offset="1" stop-color="#373446"/>
+</linearGradient>
+<linearGradient id="paint1_linear_0_4" x1="45.44" y1="139.22" x2="59.7469" y2="195.558" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DAD4E0"/>
+<stop offset="0.48" stop-color="#9A94AD"/>
+<stop offset="1" stop-color="#373446"/>
+</linearGradient>
+<linearGradient id="paint2_linear_0_4" x1="98.9192" y1="56.585" x2="187.307" y2="187.193" gradientUnits="userSpaceOnUse">
+<stop stop-color="#DAD4E0"/>
+<stop offset="0.48" stop-color="#A5A3BB"/>
+<stop offset="1" stop-color="#636077"/>
+</linearGradient>
+</defs>
+</svg>

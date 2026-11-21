@@ -1,7 +1,7 @@
 .pk-collection-intro{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:32px}
 .pk-collection-intro>p{max-width:540px;font-size:15px;line-height:1.6;color:#babac4}
 .pk-collection-intro>span{font-size:11px;white-space:nowrap;color:#a995bf;padding-top:5px}
-.pk-studies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.pk-studies{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start}
 .pk-study{min-width:0}
 .pk-study-title{display:flex;gap:12px;align-items:baseline;margin:0 4px 18px}
 .pk-study-title>span{font-size:12px;color:#bdaed9}.pk-study-title h3{font-size:18px;letter-spacing:-.02em;font-weight:500}
@@ -24,3 +24,13 @@
 @media(max-width:640px){.pk-studies{grid-template-columns:1fr;gap:36px}.pk-context{padding:24px 20px 18px;min-height:610px;max-width:390px;width:100%;margin:auto}.pk-study-title,.pk-study-note{max-width:390px;margin-inline:auto}.pk-study-title{margin-bottom:16px}.pk-context-heading h4{margin:0;font-size:27px}.pk-collection-intro>p{font-size:14px}.pk-study-note{margin-top:16px;padding-inline:4px}[data-component=time-pickers] .pk-context{min-height:0}.pk-context-footer{padding-top:28px}.pk-collection-intro{margin-bottom:28px}.pk-study-scope{margin-top:24px}}
 
 .picker-only main{width:min(1160px,calc(100% - 40px))}.picker-only .library-component+.library-component{margin-top:72px}
+
+.pk-studies{max-width:840px;margin-inline:auto}
+.pk-pieces-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.pk-piece{border:1px solid #ffffff0d;border-radius:26px;background:#09090b;padding:26px;min-width:0}
+.pk-piece-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pk-piece-heading h3{font-size:18px;margin:0;font-weight:500}.pk-piece-heading a{font-size:12px;color:#c9bbd9;white-space:nowrap}
+.pk-piece-stage{min-height:190px;display:flex;flex-direction:column;justify-content:center;padding-block:24px}
+.pk-piece-stage today-period-pill{align-self:center}.pk-piece-stage .pk-reminder-toggle{margin:0}
+.pk-piece>p{font-size:13px;color:#babac4;line-height:1.6;margin:0}.pk-piece-feedback{display:block;min-height:24px;margin-top:12px;font-size:12px;color:#bdaed9}
+@media(max-width:640px){.pk-pieces-grid{grid-template-columns:1fr}.pk-piece{padding:22px}}
