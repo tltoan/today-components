@@ -28,7 +28,7 @@
       this.preference.addEventListener('change',this.clockChanged);document.addEventListener('visibilitychange',this.clockChanged);
       this.motionObserver.observe(document.documentElement,{attributes:true,attributeFilter:['data-reduced','data-motion-override']});
       this.intersection=new IntersectionObserver(entries=>{this.visible=entries[0].isIntersecting;this.syncClock();},{threshold:.05});this.intersection.observe(this);
-      this.resize=new ResizeObserver(()=>{const bounds=this.getBoundingClientRect();this.scene.style.setProperty('--welcome-fit',Math.min(bounds.width/390,bounds.height/844));});this.resize.observe(this);
+      this.resize=new ResizeObserver(()=>{const bounds=this.getBoundingClientRect();this.scene.style.setProperty('--welcome-fit',Math.min(bounds.width/390,bounds.height/844));this.scene.style.setProperty('--welcome-opening-fit',Math.min(1.15,bounds.width/390));});this.resize.observe(this);
       this.syncClock();
     }
     get isPlaying(){return this.getAttribute('playing')!=='false';}

@@ -230,3 +230,10 @@ The published library starts with the Today drawing animation, “what will you 
 The public repository and GitHub Pages host all browser and SwiftUI source. `source.html` lists direct file links, `components.json` maps each component to its code, and `llms.txt` gives agents a compact starting point. No sign-in is required to read or clone the public code.
 
 Verified this opening revision at desktop (1600 × 900) and mobile (390 × 844): the hero fills one viewport, the library follows immediately, no horizontal overflow occurs, the keyboard skip link reaches the library, reduced motion produces the settled opening, and the old landing URL redirects correctly. The source index lists 13 components and fits mobile width. All local HTML/manifest paths resolve, all 17 JavaScript files pass syntax checks, and the browser reported no warnings or errors. No native source was changed.
+
+
+### Compact opening refinement — November 20, 2026
+
+The user requested less space between the opening and library, with matching backgrounds. The opening now uses 244 px on desktop and 200 px on mobile instead of filling the viewport. Its wordmark keeps a readable scale while the unused phone canvas is cropped. The gradient settles into the same black background used beneath the library, and the library has no extra top padding. This supersedes the previous full-viewport opening measurements.
+
+Verified the compact opening at 1600 × 900 and 390 × 844: the library begins at 244 px and 200 px respectively, body and hero use the same black background, and neither viewport has horizontal overflow. The keyboard skip link and reduced-motion control remain usable, the opening reaches its completed state, and the browser reported no warnings or errors. The updated JavaScript passes `node --check`; the native sources are unchanged.
