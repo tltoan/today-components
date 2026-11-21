@@ -360,3 +360,17 @@ November 21 follow-up checks: changed JavaScript parsed with `node --check`; man
 [Individual cards and comparisons](habit-cards.html) also appear under [Streaks](index.html#streak-cards). [API contract](HABIT-CARDS.md). Home now says `1/6 logged` and `Logged`; Fishing is removed from the active artwork catalog, with original bytes archived. Focused-page headers center the title and toolbar and remove the source-link top offset. [Habit parties](HABIT-PARTIES.md) is a proposed component/state map, not an implemented feature.
 
 Validation for this batch: changed JavaScript parsed; all 37 manifest entries and source anchors resolved, and 20 active artwork hashes matched. Browser checks at desktop and a verified 390 × 844 iframe covered hero/compact layout, keyboard logging, partial count, one target-crossing event, continued logging above target without another event, failed-save preservation, future-day actions hidden, six-card scrolling above the nav, and reduced-motion still paint. The focused card preview reported no console errors. Native haptics and app integration were not tested.
+
+
+## November 21 — parties, recap and Habits comparisons
+
+| Collection | Preview | Reusable source and guide | Status / states |
+| --- | --- | --- | --- |
+| Private habit parties | [Home, detail and six pieces](habit-parties.html) | `components/habit-party.js`, `.css`, [HABIT-PARTIES.md](HABIT-PARTIES.md) | Controlled browser proposals: entry, invite/own plan/full, optional photo, shared check-in/reaction, share failure/retry, nudge availability and preferences |
+| Trial recap A/B | [Compare the flows](recap.html) | `components/recap.js`, `.css`, [RECAP.md](RECAP.md) | Fixed-fixture drafts: mixed/light/no logs, reflection, explicit trial/routine, editable confirmation, close/resume. Current palette; no AI or amber |
+| Habits A/B/C | [Compare layouts](habits-layouts.html) | `components/habits-layout.js`, `.css`, [HABITS-LAYOUTS.md](HABITS-LAYOUTS.md) | Illustrated list, artwork gallery and quiet index; same active/routine/ended/paused/archive fixtures |
+| Gradient Rise | [Try add and undo](habit-cards.html#target-feedback) | `components/target-feedback.*`, [HABIT-CARDS.md](HABIT-CARDS.md) | Selected direction only. 900 ms rise, 640 ms retreat below target, interrupted reversal and reduced-motion still state |
+
+The new collections also appear in the main library. Their direct source and dependency mappings are in `components.json` and `source.html`. Party components expose requests; the gallery supplies local responses. Recap and Habits remain design drafts with fictional November dates, not generic production data renderers. No native app, backend or notification integration is claimed.
+
+Checks for this addition: changed JavaScript passed `node --check`; all 45 manifest entries, dependency IDs and local source links resolved. Browser checks covered desktop and 390 × 844 layouts, keyboard recap choices, unselected continuation gating, editable 28-day confirmation and invalid targets, no-log wording and close/resume, paused/archive entry and focus restoration, private logging, optional sharing failure/retry, minutes-based joining, nudge window/sent states, Home undo, above-target undo and below-target retreat, and reduced-motion completion paint. Native VoiceOver, actual iPhone haptics, persistence and notifications are not implemented or verified by these browser checks.

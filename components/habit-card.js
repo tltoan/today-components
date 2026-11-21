@@ -8,10 +8,10 @@
       this._connected=true;
       this.setAttribute('role','article');
       this.classList.add('ho-habit');
-      this.innerHTML='<today-target-feedback></today-target-feedback><div class="ho-habit-top"><div class="ho-habit-title"><h4></h4><p></p></div><span class="ho-card-art"></span></div><div class="ho-habit-bottom"><div class="ho-habit-result"><strong></strong><span></span></div><today-button variant="secondary"></today-button></div><p class="ho-error" role="alert" hidden></p>';
+      this.innerHTML='<today-target-feedback></today-target-feedback><div class="ho-habit-top"><div class="ho-habit-title"><h4></h4><p></p></div><span class="ho-card-art"></span></div><div class="ho-habit-bottom"><div class="ho-habit-result"><strong></strong><span></span></div><today-button variant="secondary"></today-button></div><div class="ho-party-slot" hidden></div><p class="ho-error" role="alert" hidden></p>';
       this._abort=new AbortController();
       this.addEventListener('today-activate', e=>{
-        if(!e.target.closest('today-button') || this._model?.pending || this._model?.future)return;
+        if(!e.target.matches('.ho-habit-bottom > today-button') || this._model?.pending || this._model?.future)return;
         this.dispatchEvent(new CustomEvent('logrequest',{bubbles:true,detail:{id:this._model.id,date:this._model.date}}));
       },{signal:this._abort.signal});
       this.render(null);
@@ -44,15 +44,19 @@
       action.setAttribute('accessible-label',h.pending?`Saving ${h.name}`:h.kind==='check'?`${label} ${h.name}`:`Add ${h.increment} ${h.unit} to ${h.name}`);
       action.toggleAttribute('disabled',!!h.pending);
       if(!h.pending&&this._restoreFocus){if(!h.future&&(document.activeElement===document.body||action.contains(document.activeElement)))action.querySelector('button')?.focus({preventScroll:true});this._restoreFocus=false;}
+      const party=this.querySelector('.ho-party-slot');party.hidden=!h.party;
+      if(h.party){let entry=party.querySelector('today-party-entry');if(!entry){entry=document.createElement('today-party-entry');entry.setAttribute('compact','');party.append(entry);}entry.model=h.party;}else party.replaceChildren();
       const error=this.querySelector('.ho-error');error.textContent=h.error||'';error.hidden=!h.error;
       const feedback=this.querySelector('today-target-feedback');
       const variant=['bloom','wash','halo'].includes(h.feedback)?h.feedback:'wash';
       if(feedback.getAttribute('variant')!==variant)feedback.setAttribute('variant',variant);
-      if(feedback.hasAttribute('met')!==reached)feedback.toggleAttribute('met',reached);
+
       // Initial data, changing dates/targets, pending and failed saves never celebrate.
       const crossed=same&&h.current===true&&!h.pending&&!h.error&&old.target===h.target&&old.kind===h.kind&&!met(old)&&reached;
+      const uncrossed=same&&h.current===true&&!h.pending&&!h.error&&old.target===h.target&&old.kind===h.kind&&met(old)&&!reached;
+      if(feedback.hasAttribute('met')!==reached)feedback.setMet(reached,{animate:crossed||uncrossed});
+      if(uncrossed)this.dispatchEvent(new CustomEvent('target-reverted',{bubbles:true,detail:{id:h.id,date:h.date}}));
       if(crossed){
-        feedback.celebrate();
         this.dispatchEvent(new CustomEvent('target-reached',{bubbles:true,detail:{id:h.id,date:h.date,variant,haptic:'success'}}));
       } else if(same&&old.amount!==h.amount&&!reduced()){
         this.querySelector('.ho-habit-result').animate([{opacity:.35,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:320,easing:'cubic-bezier(.22,.8,.24,1)'});

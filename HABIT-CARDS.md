@@ -27,13 +27,13 @@ card.addEventListener('target-reached', ({detail}) => nativeHaptics.success());
 
 The callbacks are integration examples, not included backends. `logrequest` never changes the amount; the host sets pending and supplies a new confirmed model or an error with the unchanged confirmed amount. `kind` supports amount, check and limit. Null means no log; zero remains explicit. Check-off requests Log/Undo. Future dates have no logging action. More quantitative logs remain available after reaching the target.
 
-A target crossing requires the same habit/date, unchanged kind/target, `current:true`, no pending/error, and a confirmed amount going from below target to at/above. Initial rendering, changing dates, changing a target, failed saves, upper-limit goals and further logs above target do not celebrate. Undo removes the completed paint. A subsequent genuine crossing can celebrate again. Water retains the existing spring fill.
+A target crossing requires the same habit/date, unchanged kind/target, `current:true`, no pending/error, and a confirmed amount going from below target to at/above. Initial rendering, changing dates, changing a target, failed saves, upper-limit goals and further logs above target do not celebrate. A confirmed undo below target retreats the completed paint over 640 ms, from its current animated frame; undo that remains at or above target keeps the tint. A subsequent genuine crossing can celebrate again. Water retains the existing spring fill.
 
 `target-reached` bubbles once per crossing with `{id,date,variant,haptic:'success'}`. The native host can map it to one success haptic after its save acknowledgement. The browser provides visual feedback; this is not verified iPhone haptics or a native integration. Do not award streak credit from this event.
 
 ## Selected completion direction
 
-The user selected **Gradient Rise** (`wash`) on November 21 and requested a stronger fill. It is the default for cards and Home: blue, lavender and peach rise over 900 ms and settle at 72% of the paint layer's own opacity. Colors already contain alpha. Soft Bloom and Quiet Halo remain comparison alternatives.
+The user selected **Gradient Rise** (`wash`) on November 21 and requested a stronger fill. It is the default for cards and Home: blue, lavender and peach rise over 900 ms and settle at 72% of the paint layer's own opacity. Colors already contain alpha. Soft Bloom and Quiet Halo are removed from live comparisons; their old source paths remain historical only.
 
 `today-target-feedback` can be reused as the first child of any positioned, isolated card. It is decorative, does not intercept touches, and inherits the card radius. Content belongs above it at z-index 1.
 
@@ -41,7 +41,7 @@ The user selected **Gradient Rise** (`wash`) on November 21 and requested a stro
 <today-target-feedback variant="wash" met></today-target-feedback>
 ```
 
-Set/remove `met` for the persistent state. Call `celebrate()` only after a confirmed transition; it is never called merely by setting an attribute. It cancels prior playback before starting. Reduced motion shows the settled paint immediately and changing the preference cancels in-flight movement. Text still says Target met; color is not the only signal.
+Call `setMet(true|false, {animate:true})` for an interruptible rise or retreat. Set/remove `met` directly for an immediate persistent state. Call `celebrate()` only after a confirmed transition; it is never called merely by setting an attribute. It cancels prior playback before starting. Reduced motion shows the settled paint immediately and changing the preference cancels in-flight movement. Text still says Target met; color is not the only signal.
 
 ## Overall streak
 
@@ -53,4 +53,12 @@ This is a host-supplied Today-wide logging streak using the selected Warm Ember 
 
 ## Gallery and implementation status
 
-Both layouts are available independently in habit-cards.html and in the library's Streak section. The three background studies are also below Home. All save interactions are local fixtures. No native app files, backend, streak engine, media sharing or notifications were changed.
+Both layouts are available independently in habit-cards.html and in the library's Streak section. The selected Gradient Rise specimen is also below Home, with add, undo, reset and replay controls. All save interactions are local fixtures. No native app files, backend, streak engine, media sharing or notifications were changed.
+
+## Optional party entry and reverse event
+
+Assign `model.party = {id, members, title, summary}` to compose `today-party-entry` beneath the card action. Load its optional dependencies from the `party-entry` manifest item. Omit the field to hide it. A party click emits `party-request`, never `logrequest`; the private card remains independently usable.
+
+`target-reverted` bubbles `{id,date}` once when a confirmed same-target/current-day update drops below target. It does not request a success haptic. Both directions capture the painted frame before cancelling active movement, so quick undo/re-log is continuous. Reduced motion goes directly to the correct final paint.
+
+Home’s **Undo last log** is an external gallery control for exercising this contract; it is not a new button added to every production card. Failed demo saves are not added to undo history.

@@ -6,3 +6,5 @@ today-habit-card[layout=hero]{padding:24px}today-habit-card[layout=hero] .ho-hab
 .ho-habit>div,.ho-habit>.ho-error{position:relative;z-index:1}.ho-habit *{box-sizing:border-box}.ho-habit [hidden]{display:none!important}.ho-habit-title{min-width:0}.ho-habit button:focus-visible{outline:2px solid #bcb0d7;outline-offset:3px}today-habit-card[layout=hero] .ho-water-art{height:150px}today-habit-card[layout=hero] .ho-water-art .tw-water{transform:scale(1.8)}
 
 .ho-habit:has(today-target-feedback[met]) .ho-habit-title>p,.ho-habit:has(today-target-feedback[met]) .ho-habit-result span{color:#eeeaf3}
+
+.ho-party-slot{margin-top:16px;border-top:1px solid #ffffff12;padding-top:8px}

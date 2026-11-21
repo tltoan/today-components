@@ -3,3 +3,7 @@
 @media(max-width:680px){.hc-grid,.tf-studies{grid-template-columns:1fr}.hc-example,.tf-study{padding:20px}.hc-heading{flex-direction:column;gap:12px;margin-top:48px}.tf-study{display:block}.tf-study today-habit-card{margin:0 0 20px}.tf-study .hc-status{margin-top:20px}.hc-example today-habit-card[layout=hero]{padding:20px}.hc-example .ho-habit-top{gap:16px}.hc-example .ho-habit h4{font-size:19px}}
 
 .hc-grid{align-items:start}
+
+/* The chosen response, one clear specimen. */
+.tf-studies{grid-template-columns:1fr}.tf-study{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:32px;align-items:center;padding:28px}.tf-study .hc-label{grid-column:1/-1}.tf-study today-habit-card{grid-row:2/5;max-width:390px;margin:0}.tf-study>p{margin:0 0 16px}.tf-study .hc-status{margin-top:16px}
+@media(max-width:680px){.tf-study{display:block;padding:20px}.tf-study today-habit-card{margin-bottom:24px}}

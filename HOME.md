@@ -50,3 +50,6 @@ The card result settles over 320 ms after a confirmed amount change. Date change
 ## Completion and streak placement
 
 Home accepts `feedback:"wash"` (selected default), `"bloom"` or `"halo"` and optional `streak:{days:6}`. The global logging-streak badge sits beside Your day; it does not belong to any individual habit. This is a placement proposal. `target-reached` bubbles from the card only on a confirmed current-day crossing; see [HABIT-CARDS.md](HABIT-CARDS.md). Stronger Gradient Rise plays once, then leaves a settled tint. The static six-day gallery fixture does not calculate or grant streak credit.
+
+
+November 21 refinement: only selected Gradient Rise remains in the live gallery. The external **Undo last log** review control restores the previous confirmed log list, with a retreat only if the resulting amount falls below target. Failed saves do not enter undo history. Party composition is demonstrated separately in habit-parties.html via the card’s optional party model; the base Home fixture remains personal.

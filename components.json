@@ -1443,12 +1443,17 @@
         "markup": "<today-habit-card layout=\"compact\"></today-habit-card>",
         "events": [
           "logrequest",
-          "target-reached"
+          "target-reached",
+          "target-reverted",
+          "party-request (when optional party model is supplied)"
         ],
         "usage": "Assign .model with confirmed amount and current/date flags; host owns saving. See HABIT-CARDS.md.",
         "demoOnly": [
           "habit-card-study.js",
           "habit-card-study.css"
+        ],
+        "optionalDependencies": [
+          "party-entry"
         ]
       }
     },
@@ -1464,7 +1469,7 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Reusable browser component. Gradient Rise selected; streak placement is a proposal.",
+      "status": "Selected Gradient Rise; historical alternatives removed from live gallery. Reverse animation on confirmed undo below target.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-target-feedback",
@@ -1477,7 +1482,7 @@
         "assets": [],
         "markup": "<today-target-feedback variant=\"wash\" met></today-target-feedback>",
         "events": [],
-        "usage": "Selected Gradient Rise; position inside a card, set met, call celebrate only for a confirmed crossing. See HABIT-CARDS.md.",
+        "usage": "setMet(met, {animate:true}) gives an interruptible rise or retreat; immediate met attributes for static state. Host owns confirmed crossing. See HABIT-CARDS.md.",
         "demoOnly": [
           "habit-card-study.js",
           "habit-card-study.css"
@@ -1515,6 +1520,348 @@
         "demoOnly": [
           "habit-card-study.js",
           "habit-card-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-entry",
+      "name": "Party entry row",
+      "preview": "habit-parties.html",
+      "sourcePage": "source.html#party-entry",
+      "browserSource": [
+        "components/habit-party.js",
+        "components/habit-party.css",
+        "HABIT-PARTIES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork"
+      ],
+      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-entry",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-party.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/habit-party.js"
+        ],
+        "markup": "<today-party-entry></today-party-entry>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-checkin",
+      "name": "Shared party check-in",
+      "preview": "habit-parties.html",
+      "sourcePage": "source.html#party-checkin",
+      "browserSource": [
+        "components/habit-party.js",
+        "components/habit-party.css",
+        "HABIT-PARTIES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork"
+      ],
+      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-checkin",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-party.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/habit-party.js"
+        ],
+        "markup": "<today-party-checkin></today-party-checkin>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-composer",
+      "name": "Optional post-log sharing",
+      "preview": "habit-parties.html",
+      "sourcePage": "source.html#party-composer",
+      "browserSource": [
+        "components/habit-party.js",
+        "components/habit-party.css",
+        "HABIT-PARTIES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork"
+      ],
+      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-composer",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-party.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/habit-party.js"
+        ],
+        "markup": "<today-party-composer></today-party-composer>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-nudge",
+      "name": "Gentle party nudge",
+      "preview": "habit-parties.html",
+      "sourcePage": "source.html#party-nudge",
+      "browserSource": [
+        "components/habit-party.js",
+        "components/habit-party.css",
+        "HABIT-PARTIES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork"
+      ],
+      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-nudge",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-party.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/habit-party.js"
+        ],
+        "markup": "<today-party-nudge></today-party-nudge>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-invite",
+      "name": "Party invite and own plan",
+      "preview": "habit-parties.html",
+      "sourcePage": "source.html#party-invite",
+      "browserSource": [
+        "components/habit-party.js",
+        "components/habit-party.css",
+        "HABIT-PARTIES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork"
+      ],
+      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-invite",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-party.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/habit-party.js"
+        ],
+        "markup": "<today-party-invite></today-party-invite>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-settings",
+      "name": "Party preferences",
+      "preview": "habit-parties.html",
+      "sourcePage": "source.html#party-settings",
+      "browserSource": [
+        "components/habit-party.js",
+        "components/habit-party.css",
+        "HABIT-PARTIES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork"
+      ],
+      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-settings",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-party.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/habit-party.js"
+        ],
+        "markup": "<today-party-settings></today-party-settings>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "recap",
+      "name": "Trial recap A/B drafts",
+      "preview": "recap.html",
+      "sourcePage": "source.html#recap",
+      "browserSource": [
+        "components/recap.js",
+        "components/recap.css",
+        "RECAP.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork",
+        "step-progress",
+        "bar-chart",
+        "onboarding-gradient"
+      ],
+      "status": "Interactive layout/flow proposal with fixed fixtures; not production data or native integration.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-recap",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/step-progress.css",
+          "components/staggered-bar-chart.css",
+          "components/onboarding-gradient.css",
+          "components/recap.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/step-progress.js",
+          "components/staggered-bar-chart.js",
+          "components/onboarding-gradient.js",
+          "components/recap.js"
+        ],
+        "markup": "<today-recap variant=\"a\"></today-recap>",
+        "events": [
+          "recap-confirm"
+        ],
+        "usage": "See RECAP.md for PRD context, scope and fixture boundaries.",
+        "demoOnly": [
+          "recap-study.js",
+          "recap-study.css"
+        ]
+      }
+    },
+    {
+      "id": "habits-layouts",
+      "name": "Habits tab \u2014 three layouts",
+      "preview": "habits-layouts.html",
+      "sourcePage": "source.html#habits-layouts",
+      "browserSource": [
+        "components/habits-layout.js",
+        "components/habits-layout.css",
+        "HABITS-LAYOUTS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork",
+        "navigation",
+        "disclosure"
+      ],
+      "status": "Interactive layout/flow proposal with fixed fixtures; not production data or native integration.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-habits-layout",
+        "styles": [
+          "foundations/motion.css",
+          "components/controls.css",
+          "components/artwork.css",
+          "components/bottom-nav.css",
+          "components/habits-layout.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/cradle-fluid.js",
+          "components/bottom-nav.js",
+          "components/habits-layout.js"
+        ],
+        "markup": "<today-habits-layout variant=\"a\"></today-habits-layout>",
+        "events": [],
+        "usage": "See HABITS-LAYOUTS.md for PRD context, scope and fixture boundaries.",
+        "demoOnly": [
+          "habits-study.js",
+          "habits-study.css"
         ]
       }
     }

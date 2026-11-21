@@ -63,3 +63,10 @@ Browser previews use synthetic data and keep state in the page session. Native f
 ## Home cards and completion
 - [Habit cards](https://tltoan.github.io/today-components/HABIT-CARDS.md): reusable today-habit-card, today-target-feedback and today-streak-badge. Gradient Rise is selected; Home/streak composition uses a private overall logging streak. Read components.json for ordered dependencies.
 - [Habit parties proposal](https://tltoan.github.io/today-components/HABIT-PARTIES.md): component/state map only, not implemented sharing or an approved PRD.
+
+
+## New design drafts — November 21
+- [Habits tab A/B/C](https://tltoan.github.io/today-components/habits-layouts.html): three layouts, same lifecycle fixtures; guide HABITS-LAYOUTS.md; source components/habits-layout.js and .css.
+- [Trial recap A/B](https://tltoan.github.io/today-components/recap.html): current palette, PRD reflection/explicit continuation; guide RECAP.md; source components/recap.js and .css. Fixed sample data, no AI or automatic continuation.
+- [Private habit parties](https://tltoan.github.io/today-components/habit-parties.html): six controlled UI pieces plus Home/detail compositions; guide HABIT-PARTIES.md; source components/habit-party.js and .css. No real invites, nudges or uploads.
+- Gradient Rise is the only live completion direction. setMet(value,{animate:true}) reverses on confirmed undo below target; see HABIT-CARDS.md. Main Home preview includes an external Undo last log control.
