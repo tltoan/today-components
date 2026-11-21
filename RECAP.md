@@ -9,7 +9,7 @@ These are interactive browser proposals, not native app integration or productio
 Source reviewed: Figma `Xf03CH47k7G0graqTZ4zis`, node `298:2078`, “Today review · Two-week recap.” Its seven-screen sequence contains totals, an activity timeline, reflection, an AI suggestion and a next-plan screen. The user explicitly called it outdated and authorized a redesign. Today PRD Draft 0.4 (November 19, 2026), §9, governs the new proposals: 21-day default, visual evidence followed by reflection, no AI advice, and explicit continuation.
 
 - **A — A little story:** opening total → activity and dated outcomes → reflection → next step → plan confirmation. No-log trials go directly to reflection.
-- **B — The whole picture:** summary and calendar together → reflection → next step → confirmation. Detailed activity is optional. Reflection uses a compact two-column choice surface; continuation choices share a grouped surface.
+- **B — The whole picture:** summary and calendar together → reflection → next step → confirmation. Detailed activity is optional. Reflection uses a compact two-column choice surface; continuation choices use two cards.
 - Recommendation: B for repeated reviews. A offers more room for the first trial’s close.
 
 Ended trials remain ended, with history intact, until the user reflects, chooses a new trial or routine, and confirms its plan. Closing retains the unfinished draft in this preview. Other habits continue normally. Neither reflection nor continuation is preselected. “Not sure yet” is a valid reflection. Notes are optional and private, including for party habits.
@@ -37,3 +37,11 @@ Load the ordered dependencies in `components.json` under `recap`. Mount `<today-
 - Body content scrolls within the phone; the next action stays visible. Keyboard buttons and inputs use native semantics. Reduced motion skips entry movement and uses the existing gradient’s still behavior.
 
 The gallery controller is `recap-study.js`; its layout styles are `recap-study.css`. These are not required when consuming the draft component itself.
+
+## November 21 choice and plan refinements
+
+The original continuation and plan form designs were rejected. `today-continuation-choice` now provides three independent layouts: `cards` (full-width radio choices), `split` (two cards), and `rail` (a sliding pill). `value` is empty initially; valid values are `trial` or `routine`. It emits `change {value}`, supports arrows/Home/End and never activates a plan. Copy is “Choose a length. Review at the end.” and “Keep your schedule, without trial reviews.” The extra confirmation warning was removed; the explicit confirmation requirement remains.
+
+`today-recap` accepts `plan-layout="a|b|c"`: One plan card, Edit by section, Schedule first. A is the default for flow A and B for flow B. All use the shared amount stepper, weekday controls and date/length draft. B uses the approved 600 ms disclosure for each Edit section. C shows the calendar week containing the selected start date plus the next week; this is a schedule preview, not historical activity. The standalone plan comparison seeds an explicitly labeled example trial/reflection, with a gallery switch to compare routine plans. Normal recap traversal remains unselected and gated.
+
+Source for the reusable selection control: `components/continuation-choice.js` and `.css`. Plan layouts remain part of the recap draft component. No new color theme is introduced.

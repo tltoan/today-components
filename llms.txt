@@ -70,3 +70,11 @@ Browser previews use synthetic data and keep state in the page session. Native f
 - [Trial recap A/B](https://tltoan.github.io/today-components/recap.html): current palette, PRD reflection/explicit continuation; guide RECAP.md; source components/recap.js and .css. Fixed sample data, no AI or automatic continuation.
 - [Private habit parties](https://tltoan.github.io/today-components/habit-parties.html): six controlled UI pieces plus Home/detail compositions; guide HABIT-PARTIES.md; source components/habit-party.js and .css. No real invites, nudges or uploads.
 - Gradient Rise is the only live completion direction. setMet(value,{animate:true}) reverses on confirmed undo below target; see HABIT-CARDS.md. Main Home preview includes an external Undo last log control.
+
+## November 21 follow-up
+- Party logs share automatically after joining; photos optional. Invite scope, upper-right avatar placements and three invite compositions: https://tltoan.github.io/today-components/HABIT-PARTIES.md
+- Trial/routine choice (cards/split/rail): https://tltoan.github.io/today-components/components/continuation-choice.js and https://tltoan.github.io/today-components/components/continuation-choice.css
+- Recap plan-layout a/b/c: https://tltoan.github.io/today-components/RECAP.md
+- Rejected first Habits layouts replaced by Plan cards, Habit shelf and Weekly view: https://tltoan.github.io/today-components/HABITS-LAYOUTS.md
+
+Habits: Weekly view (variant c) is selected/default. Cradle navigation floats over content without a black backing; A/B remain comparisons.

@@ -9,19 +9,19 @@ Design proposal from the November 21 discussion. Browser mockups are now availab
 | Party entry row | Habit detail below the personal plan: up to three avatars, “Read together”, latest shared check-in, chevron. Reuse the navigation row and artwork. | Not shared / invite pending / two people / full at three / no shared check-ins / recent activity / muted. |
 | Invite and join sheet | Habit name/artwork, two invitation slots, short sharing-scope summary, Join / Not now. Reuse buttons, disclosure and selected plan cards. | Sending / sent / retry / expired or revoked invite / party full / already joined / own-plan confirmation. |
 | Your plan within a party | Reuse tracking, target and schedule controls. “Same habit. Your own pace.” Each person can track a different unit. | Existing habit linked / new personal plan / schedule changed / paused / trial ended. Personal settings do not alter friends’ plans. |
-| Shared check-in card | Name, timestamp, self-contained entry such as “Read 5 pages”, optional image and small reaction row. Keep the personal Target met gradient on the owner's private card. | Text only / photo / partial amount / target reached / explicit none shared by choice / edited / removed / loading / retry. No rankings or a group completion bar. |
-| Post-log share/photo composer | After a successful private log: optional “Share a check-in” and “Add a photo”, with recipient avatars. The log is already saved. | Skip sharing / private only / preview / uploading / shared / failed upload / retry / remove photo. A photo failure cannot undo the log. |
+| Shared check-in card | Name, timestamp, self-contained entry such as “Read 5 pages”, optional image and small reaction row. Keep the personal Target met gradient on the owner's private card. | Text only / photo / partial amount / target reached / explicit none / edited / removed / loading / retry. No rankings or a group completion bar. |
+| Post-log share/photo composer | After a saved group-habit log: the log is shared automatically. “Add a photo” attaches optional media to that shared log. | Shared log / photo draft / uploading / photo saved / failed upload / retry / remove photo. A photo failure cannot undo the log. |
 | Reaction and nudge controls | A quiet reaction chip on a check-in; preset messages in a nudge sheet. Reuse buttons, pill selection and time controls. | Available / sending / sent / failed / muted / outside reminder window / daily limit reached. Do not show whether someone ignored a nudge. |
 | Party settings | Members, sharing scope, nudge permission/window, leave party. Reuse switches and disclosure rows. | Enabled / muted / permission denied / member left / remove member / leave confirmation. Historical photo/log visibility after leaving needs a product decision. |
 
 ## Changes to current components
 
-- **Home habit card:** optional compact avatar row linking to that habit's party. Keep logging primary. Do not add a feed, group score or friends’ statuses to every card. The overall logging streak remains private and outside this row.
+- **Home habit card:** optional avatar row or upper-right border placement linking to that habit's party. Keep logging primary. Do not add a feed, group score or friends’ statuses to every card. The overall logging streak remains private and outside this row.
 - **Habit detail:** add the party entry row and a compact preview of recent shared check-ins. Tapping opens the party's photos, logs and reactions. Preserve the owner's target, history and corrections.
-- **Log success:** save privately first; sharing is a separate, clearly addressed action. Partial activity deserves the same opportunity for encouragement. Show who will see the post before confirming.
+- **Log success:** joining authorizes automatic sharing of new logs for that habit. State this before Join. Photos remain an optional attachment. A failed share stays pending for retry; it must not masquerade as a private-only choice.
 - **Saved/logged states:** separate “Logged”, “Shared with your party” and “Photo upload failed”. They represent different operations.
 - **Notifications:** add controls for party nudges separately from personal reminders. Proposed cap is one incoming nudge per habit per recipient per day across both friends, not one per sender. The host must enforce this and use the recipient's window/timezone.
-- **Privacy:** share only the selected habit and explicitly shared entries/photos. Do not expose other habits, private notes, overall streak, or past logs automatically. No photo is required for a valid log.
+- **Privacy:** share new logs of the selected party habit automatically; attach photos only when chosen. Do not expose other habits, private notes, overall streak, or past logs automatically. No photo is required for a valid log.
 
 ## Motion
 
@@ -39,7 +39,7 @@ Mock up three connected situations before polishing every empty state:
 2. Log a partial amount, optionally attach a photo, and receive one reaction. Include a failed photo upload while the log remains saved.
 3. Send a gentle nudge; show what the sender sees when nudges are muted, outside the window or already used for that day.
 
-Open product decisions: whether ordinary logs share automatically after joining or only by explicit action (recommend explicit sharing for the first version); who can invite/remove members; invite expiry; previous-post visibility after leaving; delete/export behavior; whether outside-window nudges queue or stay unavailable (recommend unavailable with a clear next window, avoiding surprise delivery). These are proposals, not silently assumed rules.
+Open product decisions: who can invite/remove members; invite expiry; previous-post visibility after leaving; delete/export behavior; whether outside-window nudges queue or stay unavailable (recommend unavailable with a clear next window, avoiding surprise delivery). These are proposals, not silently assumed rules.
 
 ## Implemented browser pieces
 
@@ -47,19 +47,20 @@ Load the ordered dependencies from `components.json`. All six elements are in `c
 
 | Element | Model fields | Requests / demonstrated states |
 | --- | --- | --- |
-| `today-party-entry` | `id`, `members:[{name,initials,self}]`, `title`, `summary`; optional `compact` attribute | `open`; recent check-in and empty copy |
-| `today-party-checkin` | `name`, `initials`, `time`, `amount`, `note`, `reactions`, `reacted`, optional `photoURL`, `photoAlt` | `react`; text, sample attachment, encouragement on/off |
-| `today-party-composer` | `members`, `amount`, `state`, `message`, optional photo | `photo` (includes File), `remove-photo`, `share`, `private`, `new-log`; draft, sharing, shared, error and retry |
+| `today-party-entry` | `id`, `members:[{name,initials,self}]`, `title`, `summary`, `placement: inline|stack|capsule|lead`; optional `compact` attribute | `open`; recent check-in and empty copy |
+| `today-party-checkin` | `name`, `initials`, `time`, `amount`, `note`, `reactions`, `reacted`, optional `photoURL`, `photoAlt` | `react`; text, sample attachment, like on/off with a single 620 ms heart settle; 360 ms removal |
+| `today-party-composer` | `members`, `amount`, `state`, `message`, optional photo | `photo` (includes File), `remove-photo`, `share` (photo only), `retry-sync`; shared, photo-draft, uploading, photo-saved, photo-error and sync-error |
 | `today-party-nudge` | `name`, `window`, `state` | `nudge-reading`, `nudge-encourage`; available, muted, window, limit, sending, sent, error |
-| `today-party-invite` | `members`, `plan:'pages'|'minutes'`, `state`, `message` | `plan` with `value`, `join`, `decline`; invite, joining, joined, full |
+| `today-party-invite` | `members`, `plan:'pages'|'minutes'`, `state`, `message` | `plan` with `value`, `join`, `decline`; invite, joining, joined, full. `variant="a|b|c"`: Personal note, Book cover, Three places |
 | `today-party-settings` | `allowed`, `window`, `message` | `nudges` with `allowed`, `leave`; local switch and leave confirmation in gallery |
 
 All requests include `{action,id}`. Models are copied when assigned. Names, text and image attributes are escaped. The sample photo renderer accepts only local blob/data-image previews; a production host needs an authenticated media URL policy. `samplePhoto:true` renders Today’s existing book illustration explicitly labeled **Sample attachment**; it is not presented as a real member’s photograph.
 
-`today-habit-card` accepts optional `party:{id,members,title,summary}` and composes the compact party entry below its own logging action. Load the party files before using that option. Only reading belongs to the party in the Home sample; water and stretch remain private. The overall Today streak stays outside cards and never enters the feed.
+`today-habit-card` accepts optional `party:{id,members,title,summary,placement}`. Omit placement for the compact entry below the log action; use stack/capsule/lead for an upper-right rim overlay. Load the party files before using that option. Only reading belongs to the party in the Home sample; water and stretch remain private. The overall Today streak stays outside cards and never enters the feed.
 
-`habit-party-study.js` supplies fictional people, private-save acknowledgements, invite transitions and sharing responses. The private reading amount is shared between Home and detail. Saving a private partial log opens the optional composer. Undo changes private progress, including the Gradient Rise retreat, without silently removing a separately shared check-in. Joining with 15 minutes does not change the other members’ 10-page and 5-page plans.
+`habit-party-study.js` supplies fictional people, save/share acknowledgements and invite transitions. Group reading logs appear in the feed automatically after the simulated save. The photo composer starts from “Shared with Maya & Sam”; it never offers Keep it private. Undo removes that log from both the personal total and the shared feed, and removes its attached image from the rendered feed. This is a local proposal for correction propagation, not a claim of server delivery. Joining with 15 minutes keeps the other members’ plans unchanged.
 
-Photo selection is local only, limited to images below 8 MB by the demo controller; no upload occurs. The failure example retains the draft and confirmed private log. The caller can retry. Photos remain optional. The gallery demonstrates local recipient availability and a one-nudge sent state; production must enforce the per-recipient cap across both friends and timezone/window checks on the server.
+The November 21 follow-up explicitly supersedes the earlier optional sharing proposal. Do not restore a per-log private choice for a party habit. Existing history is not retroactively shared by these mockups. Other habits, personal notes and Today’s overall streak remain private.
+Photo selection is local only, limited to images below 8 MB by the demo controller; no upload occurs. The failure example retains the draft and confirmed shared log. The caller can retry. Photos remain optional. The gallery demonstrates local recipient availability and a one-nudge sent state; production must enforce the per-recipient cap across both friends and timezone/window checks on the server.
 
 The state map above includes unimplemented future states such as invite expiry, revoked access and post-removal policy. Do not infer those features from the specimens. Membership authorization, photo deletion/retention, moderation, invite management, delivery and persistence still require product decisions and implementation.

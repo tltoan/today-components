@@ -1525,7 +1525,7 @@
     },
     {
       "id": "party-entry",
-      "name": "Party entry row",
+      "name": "Party entry and avatar overlays",
       "preview": "habit-parties.html",
       "sourcePage": "source.html#party-entry",
       "browserSource": [
@@ -1607,7 +1607,7 @@
     },
     {
       "id": "party-composer",
-      "name": "Optional post-log sharing",
+      "name": "Photo attachment after a shared log",
       "preview": "habit-parties.html",
       "sourcePage": "source.html#party-composer",
       "browserSource": [
@@ -1689,7 +1689,7 @@
     },
     {
       "id": "party-invite",
-      "name": "Party invite and own plan",
+      "name": "Party invites \u2014 three variations",
       "preview": "habit-parties.html",
       "sourcePage": "source.html#party-invite",
       "browserSource": [
@@ -1785,13 +1785,17 @@
         "artwork",
         "step-progress",
         "bar-chart",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "disclosure",
+        "continuation-choice"
       ],
       "status": "Interactive layout/flow proposal with fixed fixtures; not production data or native integration.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-recap",
         "styles": [
+          "foundations/motion.css",
+          "components/continuation-choice.css",
           "components/controls.css",
           "components/artwork.css",
           "components/step-progress.css",
@@ -1800,6 +1804,8 @@
           "components/recap.css"
         ],
         "scripts": [
+          "foundations/disclosure.js",
+          "components/continuation-choice.js",
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
@@ -1821,7 +1827,7 @@
     },
     {
       "id": "habits-layouts",
-      "name": "Habits tab \u2014 three layouts",
+      "name": "Habits tab \u2014 Weekly view selected",
       "preview": "habits-layouts.html",
       "sourcePage": "source.html#habits-layouts",
       "browserSource": [
@@ -1833,10 +1839,9 @@
       "dependencies": [
         "controls",
         "artwork",
-        "navigation",
-        "disclosure"
+        "navigation"
       ],
-      "status": "Interactive layout/flow proposal with fixed fixtures; not production data or native integration.",
+      "status": "Weekly view (C) selected/default; Plan cards and Habit shelf retained for comparison. Fixed PRD fixtures; browser draft only.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-habits-layout",
@@ -1848,7 +1853,6 @@
           "components/habits-layout.css"
         ],
         "scripts": [
-          "foundations/disclosure.js",
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
@@ -1856,12 +1860,45 @@
           "components/bottom-nav.js",
           "components/habits-layout.js"
         ],
-        "markup": "<today-habits-layout variant=\"a\"></today-habits-layout>",
+        "markup": "<today-habits-layout variant=\"c\"></today-habits-layout>",
         "events": [],
-        "usage": "See HABITS-LAYOUTS.md for PRD context, scope and fixture boundaries.",
+        "usage": "Weekly view is default. Transparent floating cradle and bottom scroll clearance. See HABITS-LAYOUTS.md for PRD context, scope and fixtures.",
         "demoOnly": [
           "habits-study.js",
           "habits-study.css"
+        ]
+      }
+    },
+    {
+      "id": "continuation-choice",
+      "name": "Trial or routine choice \u2014 three layouts",
+      "preview": "recap.html#continuation-choices",
+      "sourcePage": "source.html#continuation-choice",
+      "browserSource": [
+        "components/continuation-choice.js",
+        "components/continuation-choice.css",
+        "RECAP.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser control; explicit unselected initial state, keyboard radio semantics and reduced motion. No persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-continuation-choice",
+        "styles": [
+          "components/continuation-choice.css"
+        ],
+        "scripts": [
+          "components/continuation-choice.js"
+        ],
+        "markup": "<today-continuation-choice variant=\"cards\"></today-continuation-choice>",
+        "events": [
+          "change"
+        ],
+        "usage": "Variants cards/split/rail. Read/set value: empty, trial or routine. change detail {value}. Confirmation belongs to the host.",
+        "demoOnly": [
+          "recap-study.js",
+          "recap-study.css"
         ]
       }
     }

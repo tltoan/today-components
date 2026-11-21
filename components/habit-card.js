@@ -44,7 +44,7 @@
       action.setAttribute('accessible-label',h.pending?`Saving ${h.name}`:h.kind==='check'?`${label} ${h.name}`:`Add ${h.increment} ${h.unit} to ${h.name}`);
       action.toggleAttribute('disabled',!!h.pending);
       if(!h.pending&&this._restoreFocus){if(!h.future&&(document.activeElement===document.body||action.contains(document.activeElement)))action.querySelector('button')?.focus({preventScroll:true});this._restoreFocus=false;}
-      const party=this.querySelector('.ho-party-slot');party.hidden=!h.party;
+      const party=this.querySelector('.ho-party-slot');party.hidden=!h.party;this.dataset.partyPlacement=h.party?.placement||'inline';
       if(h.party){let entry=party.querySelector('today-party-entry');if(!entry){entry=document.createElement('today-party-entry');entry.setAttribute('compact','');party.append(entry);}entry.model=h.party;}else party.replaceChildren();
       const error=this.querySelector('.ho-error');error.textContent=h.error||'';error.hidden=!h.error;
       const feedback=this.querySelector('today-target-feedback');

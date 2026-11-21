@@ -8,3 +8,5 @@ today-habit-card[layout=hero]{padding:24px}today-habit-card[layout=hero] .ho-hab
 .ho-habit:has(today-target-feedback[met]) .ho-habit-title>p,.ho-habit:has(today-target-feedback[met]) .ho-habit-result span{color:#eeeaf3}
 
 .ho-party-slot{margin-top:16px;border-top:1px solid #ffffff12;padding-top:8px}
+/* Optional party entry overlaps the upper rim, away from the log action. */
+today-habit-card:is([data-party-placement=stack],[data-party-placement=capsule],[data-party-placement=lead]){margin-top:24px;padding-top:30px}today-habit-card:is([data-party-placement=stack],[data-party-placement=capsule],[data-party-placement=lead])>.ho-party-slot{position:absolute;top:-24px;right:16px;z-index:3;border:0;margin:0;padding:0}.ho-party-slot today-party-entry{display:block}
