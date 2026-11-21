@@ -387,3 +387,17 @@ Historical checks for the first addition (optional per-log sharing was subsequen
 The choice and plan copy was simplified. The existing Today palette is unchanged. No native app code is modified.
 
 Checks for the review refinements: changed JavaScript parsed; all 46 manifest entries, dependency IDs and source paths resolved. Desktop and 390 × 844 browser checks covered the selected Weekly view, transparent floating navigation, last-card keyboard clearance, archive/Back restoration, automatic shared check-ins and undo, optional photo failure/retry, minutes-based joining and full-party states, reversible reactions, keyboard radio choices, editable plan summaries, date changes and invalid-duration gating. Phone content was also checked at 375 px. Reduced-motion checks covered reactions and continuation choices. A fresh main-library load reported no console errors. These checks do not validate native iPhone behavior or actual sharing/upload services.
+
+
+## Liquid orbit and selected party pieces · November 21
+
+| Component | Source | Status / states |
+| --- | --- | --- |
+| [Liquid orbit loader](liquid-orbit-loader.html) | `components/liquid-orbit-motion.js`, `components/liquid-orbit-loader.js/css`; `native/reference/LiquidOrbitLoader.swift` + `native/TodayLiquidOrbitLoader.swift` | Additional proposal: supplied eight-bead one-second motion, Today gradient, play/pause/replay/speed, reduced still, background/offscreen suspension. Existing loader remains selected. |
+| [Profile, overlapping stack and lead avatar](habit-parties.html#party-avatar-components) | `components/party-avatars.js/css`, `native/TodayPartyAvatars.swift` | Selected stack; independent compact lead. Up to four people, stable varied gradients, photo loading/failure fallback. |
+| Book cover invite | `components/habit-party.js/css` | Selected live invite, overlapping profiles, open/joining/joined/full. |
+| Recap plan A | `components/recap.js/css` | Selected One plan card default in both recap flows. |
+
+These source files are reusable; no native app or backend was changed. See LOADERS.md and PARTY-AVATARS.md.
+
+Checks for this addition: eight changed/new JavaScript files pass syntax checks; 50 manifest entries resolve their source paths, dependency IDs and source anchors. The supplied loader reference is byte-identical (SHA-256 `9298fd8424dc08a93748e05f04e06e2b6b6e7cc64bf29f76d660c28ac5c07859`). Loader geometry is finite across sampled phases and continuous at the loop seam. Desktop and 390-point browser checks covered pause/resume/replay, half speed, reduced-motion time-zero still and offscreen suspension. Party checks covered reordered stable gradients, missing/failed/loaded profile photos, four-member full state, joining, standalone stack/lead and 390/375-point layouts. Both recap flows render selected plan A. A fresh main-library preview reported no console errors. New native files type-check against macOS 14 and iOS 17 simulator SDKs; a native palette probe produced the same four fixture indices as JS. Native app runtime, WidgetKit and actual sharing services are not verified by these source checks.

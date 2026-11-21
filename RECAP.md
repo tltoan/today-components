@@ -45,3 +45,8 @@ The original continuation and plan form designs were rejected. `today-continuati
 `today-recap` accepts `plan-layout="a|b|c"`: One plan card, Edit by section, Schedule first. A is the default for flow A and B for flow B. All use the shared amount stepper, weekday controls and date/length draft. B uses the approved 600 ms disclosure for each Edit section. C shows the calendar week containing the selected start date plus the next week; this is a schedule preview, not historical activity. The standalone plan comparison seeds an explicitly labeled example trial/reflection, with a gallery switch to compare routine plans. Normal recap traversal remains unselected and gated.
 
 Source for the reusable selection control: `components/continuation-choice.js` and `.css`. Plan layouts remain part of the recap draft component. No new color theme is introduced.
+
+
+## Selected plan layout
+
+One plan card (A) is selected and now the default at the Plan stage in both recap flows. The two narrative flows remain available. Edit by section and Schedule first are retained in the comparison area only. No continuation choice is preselected in the actual recap flow.

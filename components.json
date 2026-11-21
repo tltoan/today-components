@@ -1536,7 +1536,10 @@
       "swiftSource": [],
       "dependencies": [
         "controls",
-        "artwork"
+        "artwork",
+        "avatar-stack",
+        "lead-avatar",
+        "profile-avatar"
       ],
       "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
       "browserIntegration": {
@@ -1545,12 +1548,14 @@
         "styles": [
           "components/controls.css",
           "components/artwork.css",
-          "components/habit-party.css"
+          "components/habit-party.css",
+          "components/party-avatars.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
+          "components/party-avatars.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-entry></today-party-entry>",
@@ -1577,7 +1582,10 @@
       "swiftSource": [],
       "dependencies": [
         "controls",
-        "artwork"
+        "artwork",
+        "avatar-stack",
+        "lead-avatar",
+        "profile-avatar"
       ],
       "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
       "browserIntegration": {
@@ -1586,12 +1594,14 @@
         "styles": [
           "components/controls.css",
           "components/artwork.css",
-          "components/habit-party.css"
+          "components/habit-party.css",
+          "components/party-avatars.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
+          "components/party-avatars.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-checkin></today-party-checkin>",
@@ -1618,7 +1628,10 @@
       "swiftSource": [],
       "dependencies": [
         "controls",
-        "artwork"
+        "artwork",
+        "avatar-stack",
+        "lead-avatar",
+        "profile-avatar"
       ],
       "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
       "browserIntegration": {
@@ -1627,12 +1640,14 @@
         "styles": [
           "components/controls.css",
           "components/artwork.css",
-          "components/habit-party.css"
+          "components/habit-party.css",
+          "components/party-avatars.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
+          "components/party-avatars.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-composer></today-party-composer>",
@@ -1659,7 +1674,10 @@
       "swiftSource": [],
       "dependencies": [
         "controls",
-        "artwork"
+        "artwork",
+        "avatar-stack",
+        "lead-avatar",
+        "profile-avatar"
       ],
       "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
       "browserIntegration": {
@@ -1668,12 +1686,14 @@
         "styles": [
           "components/controls.css",
           "components/artwork.css",
-          "components/habit-party.css"
+          "components/habit-party.css",
+          "components/party-avatars.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
+          "components/party-avatars.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-nudge></today-party-nudge>",
@@ -1700,21 +1720,26 @@
       "swiftSource": [],
       "dependencies": [
         "controls",
-        "artwork"
+        "artwork",
+        "avatar-stack",
+        "lead-avatar",
+        "profile-avatar"
       ],
-      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
+      "status": "Selected Book cover invite with overlapping profiles. Up to four people including you. Controlled browser proposal, no actual membership service.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-party-invite",
         "styles": [
           "components/controls.css",
           "components/artwork.css",
-          "components/habit-party.css"
+          "components/habit-party.css",
+          "components/party-avatars.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
+          "components/party-avatars.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-invite></today-party-invite>",
@@ -1741,7 +1766,10 @@
       "swiftSource": [],
       "dependencies": [
         "controls",
-        "artwork"
+        "artwork",
+        "avatar-stack",
+        "lead-avatar",
+        "profile-avatar"
       ],
       "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
       "browserIntegration": {
@@ -1750,12 +1778,14 @@
         "styles": [
           "components/controls.css",
           "components/artwork.css",
-          "components/habit-party.css"
+          "components/habit-party.css",
+          "components/party-avatars.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
+          "components/party-avatars.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-settings></today-party-settings>",
@@ -1818,7 +1848,7 @@
         "events": [
           "recap-confirm"
         ],
-        "usage": "See RECAP.md for PRD context, scope and fixture boundaries.",
+        "usage": "Both recap flows use selected One plan card (A) by default. Other plan-layout values b/c are retained comparisons. See RECAP.md for PRD context.",
         "demoOnly": [
           "recap-study.js",
           "recap-study.css"
@@ -1900,6 +1930,156 @@
           "recap-study.js",
           "recap-study.css"
         ]
+      }
+    },
+    {
+      "id": "liquid-orbit-loader",
+      "name": "Liquid orbit loader \u2014 alternative",
+      "preview": "liquid-orbit-loader.html",
+      "sourcePage": "source.html#liquid-orbit-loader",
+      "browserSource": [
+        "components/liquid-orbit-motion.js",
+        "components/liquid-orbit-loader.js",
+        "components/liquid-orbit-loader.css",
+        "liquid-orbit-study.js"
+      ],
+      "swiftSource": [
+        "native/reference/LiquidOrbitLoader.swift",
+        "native/TodayLiquidOrbitLoader.swift"
+      ],
+      "referenceSource": [
+        "native/reference/LiquidOrbitLoader.swift"
+      ],
+      "dependencies": [],
+      "status": "Alternative proposal. Supplied one-second eight-bead motion with Today gradient. Existing circle/globe remains selected. Standalone source, not native app integration.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-liquid-orbit-loader",
+        "styles": [
+          "components/liquid-orbit-loader.css"
+        ],
+        "scripts": [
+          "components/liquid-orbit-motion.js",
+          "components/liquid-orbit-loader.js"
+        ],
+        "assets": [],
+        "markup": "<today-liquid-orbit-loader label=\"Loading\"></today-liquid-orbit-loader>",
+        "usage": "Mount during pending work; remove at completion. Transparent 740:700 aspect. Methods play(), pause(), replay(); speed 0.1\u20134 (default 1); paused and label attributes. Pauses preserve elapsed time; offscreen/background suspends. Reduced motion shows supplied time-zero pose. No percentage progress. WebGL contour with Canvas fallback.",
+        "demoOnly": [
+          "liquid-orbit-study.js"
+        ]
+      },
+      "nativeIntegration": {
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "Include both swiftSource files. TodayLiquidOrbitLoader().frame(width:180,height:170). isAnimating, speed, replayToken, label. The original LiquidOrbitLoader remains byte-identical. Reduced motion and app lifecycle handled by supplied implementation."
+      }
+    },
+    {
+      "id": "profile-avatar",
+      "name": "Gradient profile avatar",
+      "preview": "habit-parties.html#party-avatar-components",
+      "sourcePage": "source.html#profile-avatar",
+      "browserSource": [
+        "components/party-avatars.js",
+        "components/party-avatars.css"
+      ],
+      "swiftSource": [
+        "native/TodayPartyAvatars.swift"
+      ],
+      "dependencies": [],
+      "status": "Selected reusable browser and SwiftUI pieces. Maximum four including you; no native app integration.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-profile-avatar",
+        "styles": [
+          "components/party-avatars.css"
+        ],
+        "scripts": [
+          "components/party-avatars.js"
+        ],
+        "assets": [],
+        "markup": "<today-profile-avatar></today-profile-avatar>",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      },
+      "nativeIntegration": {
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
+      }
+    },
+    {
+      "id": "avatar-stack",
+      "name": "Overlapping party avatars",
+      "preview": "habit-parties.html#party-avatar-components",
+      "sourcePage": "source.html#avatar-stack",
+      "browserSource": [
+        "components/party-avatars.js",
+        "components/party-avatars.css"
+      ],
+      "swiftSource": [
+        "native/TodayPartyAvatars.swift"
+      ],
+      "dependencies": [],
+      "status": "Selected reusable browser and SwiftUI pieces. Maximum four including you; no native app integration.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-avatar-stack",
+        "styles": [
+          "components/party-avatars.css"
+        ],
+        "scripts": [
+          "components/party-avatars.js"
+        ],
+        "assets": [],
+        "markup": "<today-avatar-stack></today-avatar-stack>",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      },
+      "nativeIntegration": {
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
+      }
+    },
+    {
+      "id": "lead-avatar",
+      "name": "Lead avatar and member count",
+      "preview": "habit-parties.html#party-avatar-components",
+      "sourcePage": "source.html#lead-avatar",
+      "browserSource": [
+        "components/party-avatars.js",
+        "components/party-avatars.css"
+      ],
+      "swiftSource": [
+        "native/TodayPartyAvatars.swift"
+      ],
+      "dependencies": [],
+      "status": "Selected reusable browser and SwiftUI pieces. Maximum four including you; no native app integration.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-lead-avatar",
+        "styles": [
+          "components/party-avatars.css"
+        ],
+        "scripts": [
+          "components/party-avatars.js"
+        ],
+        "assets": [],
+        "markup": "<today-lead-avatar></today-lead-avatar>",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins.",
+        "demoOnly": [
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      },
+      "nativeIntegration": {
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
       }
     }
   ],

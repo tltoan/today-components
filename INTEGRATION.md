@@ -118,3 +118,9 @@ Use `today-artwork` and the original files in assets/artwork, with dimensions/ha
 ## Reusable Home cards
 
 `today-habit-card` is shared by Home and the standalone [card gallery](habit-cards.html), with hero/compact layouts. Read HABIT-CARDS.md and the ordered manifest dependencies. `today-target-feedback` supplies the selected Gradient Rise; `today-streak-badge` displays a host-supplied overall logging streak outside the cards. Handle target-reached for native success haptics after save confirmation; browser visuals are not native haptics.
+
+
+## New native source
+
+- Liquid orbit alternative: include `native/reference/LiquidOrbitLoader.swift` and `native/TodayLiquidOrbitLoader.swift`; use `TodayLiquidOrbitLoader`. The original is unchanged.
+- Party avatars: `native/TodayPartyAvatars.swift` supplies `TodayProfileAvatar`, `TodayAvatarStack` and `TodayLeadAvatar`. The same member ID always selects the same gradient across SwiftUI and browser; photos override it. Read `PARTY-AVATARS.md` for the model contract and placement.

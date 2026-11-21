@@ -72,9 +72,17 @@ Browser previews use synthetic data and keep state in the page session. Native f
 - Gradient Rise is the only live completion direction. setMet(value,{animate:true}) reverses on confirmed undo below target; see HABIT-CARDS.md. Main Home preview includes an external Undo last log control.
 
 ## November 21 follow-up
-- Party logs share automatically after joining; photos optional. Invite scope, upper-right avatar placements and three invite compositions: https://tltoan.github.io/today-components/HABIT-PARTIES.md
+- Party logs share automatically after joining; photos optional. Invite scope, selected upper-right overlapping avatars and Book cover invite: https://tltoan.github.io/today-components/HABIT-PARTIES.md
 - Trial/routine choice (cards/split/rail): https://tltoan.github.io/today-components/components/continuation-choice.js and https://tltoan.github.io/today-components/components/continuation-choice.css
 - Recap plan-layout a/b/c: https://tltoan.github.io/today-components/RECAP.md
 - Rejected first Habits layouts replaced by Plan cards, Habit shelf and Weekly view: https://tltoan.github.io/today-components/HABITS-LAYOUTS.md
 
 Habits: Weekly view (variant c) is selected/default. Cradle navigation floats over content without a black backing; A/B remain comparisons.
+
+
+New source: Liquid orbit loader (additional proposal): https://tltoan.github.io/today-components/LOADERS.md
+Original motion: https://tltoan.github.io/today-components/native/reference/LiquidOrbitLoader.swift
+Today SwiftUI wrapper: https://tltoan.github.io/today-components/native/TodayLiquidOrbitLoader.swift
+Independent profile, overlapping-stack and lead avatars: https://tltoan.github.io/today-components/PARTY-AVATARS.md
+Native avatar source: https://tltoan.github.io/today-components/native/TodayPartyAvatars.swift
+Latest selections: max party 4 including you; overlapping avatars; Book cover invite; recap One plan card A. Loader circle/globe stays selected; liquid orbit is an alternative.
