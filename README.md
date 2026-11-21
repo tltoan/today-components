@@ -255,3 +255,20 @@ The browser page counter now has inline padding and a full font line box around 
 Each visible component now has a Code link to its source-index row. `INTEGRATION.md` includes an agent prompt, retrieval instructions, and a minimal page-counter example. The manifest's `browserIntegration` records reusable files, load order, markup, assets, and demo-only files; shared gallery specimens are identified explicitly.
 
 Verified this revision at desktop (1600 × 900) and mobile (390 × 844): complete numeral 2, keyboard increments to 7 with reduced motion, no overflow, and a working Code link to the counter's source row. All ten font numeral ink bounds fit the padded paint box. The integration guide's exact HTML example was loaded separately with only counter CSS/JS and fonts; keyboard increment changed 10 to 11 without gallery dependencies. All manifest integration paths and 13 source-row anchors resolve, and the browser reported no warnings/errors. The temporary example page was removed after verification.
+
+
+## November 20 additions: widgets, step progress and layered flames
+
+| Component | Source / preview | Status and supported states |
+| --- | --- | --- |
+| Step progress indicator | components/step-progress.* · step-progress.html | Five browser proposals: slim segments, active pill, rail, numbers, ring. Configurable current/total; shared 3/5/7-step preview; reverse transitions; boundary states. |
+| Habit widgets | components/habit-widget.* + widget-primitives.js · widgets.html | Small numeric/check-off, medium overview/streak, large list/portraits, lock rectangular/circular/check-in/streak/summary, ten message states. Asynchronous save adapter; queue, undo, retained failure data, retry. |
+| Calendar, streak hero, recent log | components/habit-insights.* · widgets.html | Build activity, break activity/completion, date selection, explicit zero/no-log/future states. Caller-supplied saved history and confirmed streak. |
+| Layered streak flame | components/streak-flame* · streak-flame.html | New reference-inspired ember/lilac/silver artwork, hero/badge/widget placements, 1.6-second animation then still, immediate Still control, static/animated SVG downloads. Original Figma flame remains intact. |
+
+WIDGETS.md maps every widget family and reusable part on the linked Figma canvas. The Apple phone contexts and full detail-screen chrome are not widget components. No native application UI, WidgetKit extension, persistence, authentication, or shared store was added.
+
+The focused preview headers now align their wordmark, descriptor and controls. Pressing today. returns to index.html#library. The main library still has no header bar.
+
+
+Verification for this addition: checked changed JavaScript syntax, all local HTML/manifest source paths, and exported SVG XML. Browser checks at desktop and 390 × 844 covered three consecutive numeric taps (750 → 1,500), failure retaining 1,500, retry to 1,750, check-off Log/Undo including Enter, minimum-goal decrement to no log, upper-limit decrement to recorded zero, long names without artwork overlap, date selection and arrow-key focus, closed-day vs open-day zero, 3/7-step clamping and both navigation boundaries, and reduced-motion states. Flame playback reached still, canceled via Still, and stayed still with Less motion. The corrected Today link returned to the main library; the main page mounted all new collections with no console errors or horizontal page overflow. Native/device integration was not tested because it was not changed.

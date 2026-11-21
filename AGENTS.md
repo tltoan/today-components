@@ -23,3 +23,11 @@ This directory is the working Today component library and interactive showcase e
 - Keep `components.json` and `llms.txt` aligned when adding or moving components. All browser code must remain readable in the repository; do not replace source files with generated bundles.
 - Run `node --check` for changed JavaScript. Check the affected browser preview at desktop and 390 × 844, with keyboard and reduced motion. Supplied native sources can be type-checked against an iOS 17+ SDK; do not claim runtime integration from compilation alone.
 - Do not publish unrelated local files, credentials, or app data. Sample dates and habits in this library are fixtures.
+
+
+## New proposals
+
+- WIDGETS.md is the widget coverage/data contract. Keep null (no log) separate from recorded zero; upper-limit goals stay open for the current day. Preserve confirmed data on save failure. The host owns actual persistence, historical eligibility, dates and auth.
+- Step progress is a position indicator: do not describe the current step as a completed submission. Five shapes remain proposals until the user selects one.
+- The layered streak flame has three proposed palettes. Play once for a confirmed increase, then settle; never add an idle loop. Keep the original Figma warm/monochrome assets separate. Export still/animated SVGs with node scripts/export-streak-assets.js.
+- Preserve the corrected focused-page header alignment and make the Today wordmark link to the library.

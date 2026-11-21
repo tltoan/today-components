@@ -78,3 +78,11 @@ Other browser components use the same `Future` font-family definitions. The logo
 `swiftSource` in the manifest lists native source when it exists: logo, welcome landing, page counter, staggered bar chart, and shared motion tokens. The supplied files are preserved unchanged. `TodayWelcomeIntro.swift` needs `TodayIntro.swift`; both are included in `native/TodayWelcomeIntro.zip`. Register the required font in the target app as described by the source.
 
 An empty `swiftSource` means that this library does not yet supply a native version of that component. Do not describe a browser custom element as SwiftUI or claim app integration from the presence of a source file. Ask for or perform an explicit port when a native implementation is required.
+
+
+## Widgets, progress and streaks
+
+- Step progress: import only components/step-progress.css and .js. The five variants share the same current/total attributes. step-progress-study.js is only the gallery comparison controller.
+- Widgets: read WIDGETS.md for the complete Figma coverage and data contract. Load widget-primitives.js before habit-widget.js or habit-insights.js. Assign a real asynchronous save handler; never import the gallery's simulated handler or fictional history into a product.
+- Layered flame: load streak-flame-art.js, then streak-flame.js and .css. Use palette ember, lilac, or silver. play() celebrates a confirmed change once; still() settles immediately. Static and animated SVGs are downloadable in assets/streaks/, and scripts/export-streak-assets.js regenerates them from the source geometry.
+- These new collections have no SwiftUI source yet. Browser accessibility and motion checks do not establish WidgetKit, VoiceOver or real-device behavior.

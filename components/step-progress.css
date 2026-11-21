@@ -1,0 +1,24 @@
+today-step-progress{display:block;width:100%;max-width:350px;color:#f5f3f7;font:400 14px/1.45 Future,sans-serif;--step-accent:#bdaed9;--step-track:#575160;--step-ease:cubic-bezier(.37,0,.18,1)}
+today-step-progress *{box-sizing:border-box}
+.step-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:16px}
+.step-caption{font-size:15px}.step-count{color:#babac4;font-size:12px;white-space:nowrap;font-variant-numeric:tabular-nums;display:block}
+.step-visual{display:flex;gap:6px;align-items:center;min-height:28px}
+.step-segment{display:block;flex:1;height:3px;border-radius:2px;background:var(--step-track);transition:background 420ms var(--step-ease),flex 520ms var(--step-ease),opacity 420ms}
+.step-segment[data-state=past],.step-segment[data-state=current]{background:var(--step-accent)}
+.sp-pill .step-visual{justify-content:center;gap:9px}
+.sp-pill .step-segment{flex:0 1 8px;height:8px;border-radius:12px;background:#575160}
+.sp-pill .step-segment[data-state=past]{background:#bdaed9;opacity:.5}
+.sp-pill .step-segment[data-state=current]{flex-basis:36px;background:#bdaed9}
+.sp-rail .step-visual{min-height:6px;height:6px;border-radius:6px;background:#3d3745;overflow:hidden;margin-block:11px}
+.step-rail-fill{display:block;width:100%;height:100%;background:#bdaed9;transform:scaleX(var(--step-fraction));transform-origin:left;transition:transform 580ms var(--step-ease)}
+.sp-numbers .step-visual{gap:7px;justify-content:space-between}
+.sp-numbers .step-segment{flex:0 1 32px;aspect-ratio:1;height:auto;display:grid;place-items:center;border-radius:50%;font-size:12px;background:transparent;color:#babac4;box-shadow:inset 0 0 0 1px #575160;transition:background 420ms,color 420ms,box-shadow 420ms}
+.sp-numbers .step-segment[data-state=past]{background:#bdaed91f;color:#d6c8ea;box-shadow:inset 0 0 0 1px #bdaed970}
+.sp-numbers .step-segment[data-state=current]{background:#bdaed9;color:#201a29;box-shadow:none}
+.sp-ring{display:flex;align-items:center;gap:18px}.sp-ring .step-top{order:2;flex:1;display:block;margin:0}.sp-ring .step-count{margin-top:6px}
+.sp-ring .step-visual{position:relative;display:grid;place-items:center;width:64px;flex:none;height:64px}
+.sp-ring svg{display:block;width:64px;height:64px;fill:none;stroke-width:3;transform:rotate(-90deg)}
+.step-ring-track{stroke:#575160}.step-ring-fill{stroke:#bdaed9;stroke-linecap:round;stroke-dasharray:100;transition:stroke-dashoffset 580ms var(--step-ease)}
+.step-ring-number{position:absolute;font-size:20px;color:#e5dcec}
+@media(prefers-reduced-motion:reduce){today-step-progress *{transition:none!important;animation:none!important}}
+.reduce-motion today-step-progress *{transition:none!important;animation:none!important}

@@ -1,0 +1,18 @@
+today-habit-calendar{display:block;width:350px;max-width:100%;color:#f5f3f7;font:400 13px/1.4 Future,sans-serif}
+.tw-calendar-heading h3{font-size:19px;margin:0;letter-spacing:-.02em}.tw-calendar-heading p{font-size:12px;color:#babac4;margin:4px 0 10px}
+.tw-calendar-week,.tw-calendar-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}
+.tw-calendar-week{margin-bottom:4px;text-align:center;font-size:10px;color:#babac4}
+.tw-calendar-days button{min-height:44px;padding:4px 0;display:flex;align-items:center;flex-direction:column;gap:4px;border-radius:12px;color:#c8c3cf;font-size:12px;transition:background 250ms,box-shadow 250ms}
+.tw-calendar-days button:disabled{color:#a19aa9;opacity:.6;cursor:default}
+.tw-calendar-days button[aria-pressed=true]{box-shadow:inset 0 0 0 1.5px #ddc9f3;background:#bdaed915}
+.tw-calendar-days small{font-size:10px;line-height:12px;color:#e0dce6}
+.tw-calendar-days .tw-mark{width:15px;height:15px}
+[data-mode=completion] .tw-calendar-days button:not(:disabled){background:#ffffff10}
+[data-mode=completion] .tw-calendar-days button[data-complete=true]{background:#4a5269}
+.tw-calendar-selection{font-size:12px;line-height:18px;min-height:36px;margin:14px 0 0;color:#d6c6e8}
+today-streak-hero{display:flex;align-items:center;gap:20px;width:350px;max-width:100%;min-height:132px;color:#f5f3f7;font:400 18px/1.4 Future,sans-serif}
+.tw-hero-flame{width:112px;height:128px;display:block;flex:none;padding:8px}
+today-streak-hero p{margin:0;white-space:nowrap}today-streak-hero strong{font-size:56px;line-height:64px;margin-right:4px;font-weight:400}today-streak-hero div>span{font-size:13px;color:#babac4}
+today-recent-log{display:block;width:350px;max-width:100%;font:400 15px/1.4 Future,sans-serif}
+today-recent-log button{display:flex;width:100%;min-height:68px;align-items:center;gap:12px;padding:8px 0!important;text-align:left}
+today-recent-log strong{margin-left:auto;font-weight:500;white-space:nowrap}today-recent-log button>span:last-child{font-size:28px;color:#938c9e}

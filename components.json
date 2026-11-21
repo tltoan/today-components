@@ -363,6 +363,312 @@
         ],
         "note": "Not mounted and not connected to navigation. Readiness rules are a sample, not a production parser."
       }
+    },
+    {
+      "id": "step-progress",
+      "name": "Step progress indicator",
+      "preview": "step-progress.html",
+      "browserSource": [
+        "components/step-progress.js",
+        "components/step-progress.css",
+        "step-progress-study.js"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser proposal; no native app integration.",
+      "sourcePage": "source.html#step-progress",
+      "figmaNodes": [
+        "541:12973",
+        "549:6900"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-step-progress",
+        "styles": [
+          "components/step-progress.css"
+        ],
+        "scripts": [
+          "components/step-progress.js"
+        ],
+        "assets": [
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-step-progress variant=\"segments\" current=\"4\" total=\"7\"></today-step-progress>",
+        "usage": "Set current, total (1\u201312), variant (segments, pill, rail, numbers, ring), and optional label attributes. This is presentation only, not navigation.",
+        "events": [],
+        "demoOnly": [
+          "step-progress-study.js"
+        ]
+      }
+    },
+    {
+      "id": "widgets",
+      "name": "Habit widgets",
+      "preview": "widgets.html",
+      "browserSource": [
+        "components/widget-primitives.js",
+        "components/habit-widget.js",
+        "components/habit-widget.css",
+        "WIDGETS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser proposal; no native app integration.",
+      "sourcePage": "source.html#widgets",
+      "figmaNodes": [
+        "426:1987",
+        "426:2511",
+        "426:2558",
+        "426:2585",
+        "426:2609",
+        "426:2648",
+        "426:2660",
+        "441:2850",
+        "441:2932",
+        "441:2955",
+        "441:3046",
+        "441:3052",
+        "441:3061"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-habit-widget",
+        "styles": [
+          "components/habit-widget.css"
+        ],
+        "scripts": [
+          "components/widget-primitives.js",
+          "components/habit-widget.js"
+        ],
+        "assets": [
+          "assets/widgets/Custom.svg",
+          "assets/widgets/DayOff.svg",
+          "assets/widgets/Decrease.svg",
+          "assets/widgets/Flame.svg",
+          "assets/widgets/FlameMono.svg",
+          "assets/widgets/Increase.svg",
+          "assets/widgets/OpenBook.svg",
+          "assets/widgets/PlannedDay.svg",
+          "assets/widgets/WaterFull.svg",
+          "assets/widgets/WaterSilhouette.svg",
+          "assets/StretchMat.svg",
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-habit-widget></today-habit-widget>",
+        "usage": "Assign model and an async save handler. Variants: small, medium, list, portraits, streak, lock, circular, lock-streak, summary, message. Read WIDGETS.md for all states, data semantics, action events and the full Figma coverage map.",
+        "events": [
+          "widget-open",
+          "widget-change",
+          "widget-error"
+        ],
+        "demoOnly": [
+          "widget-fixtures.js",
+          "widget-study.js",
+          "widget-studies.css"
+        ]
+      }
+    },
+    {
+      "id": "habit-calendar",
+      "name": "Habit calendar",
+      "preview": "widgets.html",
+      "browserSource": [
+        "components/widget-primitives.js",
+        "components/habit-insights.js",
+        "components/habit-widget.css",
+        "components/habit-insights.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser proposal; no native app integration.",
+      "sourcePage": "source.html#habit-calendar",
+      "figmaNodes": [
+        "441:3863",
+        "441:4208",
+        "441:4553",
+        "445:5152"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-habit-calendar",
+        "styles": [
+          "components/habit-widget.css",
+          "components/habit-insights.css"
+        ],
+        "scripts": [
+          "components/widget-primitives.js",
+          "components/habit-insights.js"
+        ],
+        "assets": [
+          "assets/widgets/Custom.svg",
+          "assets/widgets/DayOff.svg",
+          "assets/widgets/Decrease.svg",
+          "assets/widgets/Flame.svg",
+          "assets/widgets/FlameMono.svg",
+          "assets/widgets/Increase.svg",
+          "assets/widgets/OpenBook.svg",
+          "assets/widgets/PlannedDay.svg",
+          "assets/widgets/WaterFull.svg",
+          "assets/widgets/WaterSilhouette.svg",
+          "assets/StretchMat.svg",
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-habit-calendar></today-habit-calendar>",
+        "usage": "Assign model with year, month, today, selected, entries, target, unit, rule and mode (activity/completion). Provide saved per-date target/rule and eligibility when history varies. See WIDGETS.md.",
+        "events": [
+          "date-select"
+        ],
+        "demoOnly": [
+          "widget-fixtures.js",
+          "widget-study.js"
+        ]
+      }
+    },
+    {
+      "id": "streak-hero",
+      "name": "Streak hero",
+      "preview": "widgets.html",
+      "browserSource": [
+        "components/widget-primitives.js",
+        "components/habit-insights.js",
+        "components/habit-insights.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser proposal; no native app integration.",
+      "sourcePage": "source.html#streak-hero",
+      "figmaNodes": [
+        "441:4931"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-streak-hero",
+        "styles": [
+          "components/habit-widget.css",
+          "components/habit-insights.css"
+        ],
+        "scripts": [
+          "components/widget-primitives.js",
+          "components/habit-insights.js"
+        ],
+        "assets": [
+          "assets/widgets/Custom.svg",
+          "assets/widgets/DayOff.svg",
+          "assets/widgets/Decrease.svg",
+          "assets/widgets/Flame.svg",
+          "assets/widgets/FlameMono.svg",
+          "assets/widgets/Increase.svg",
+          "assets/widgets/OpenBook.svg",
+          "assets/widgets/PlannedDay.svg",
+          "assets/widgets/WaterFull.svg",
+          "assets/widgets/WaterSilhouette.svg",
+          "assets/StretchMat.svg",
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-streak-hero></today-streak-hero>",
+        "usage": "Assign model {count, label, through}. Confirmed streak calculation belongs to the host.",
+        "events": [],
+        "demoOnly": [
+          "widget-study.js"
+        ]
+      }
+    },
+    {
+      "id": "recent-log",
+      "name": "Recent habit log",
+      "preview": "widgets.html",
+      "browserSource": [
+        "components/widget-primitives.js",
+        "components/habit-insights.js",
+        "components/habit-insights.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser proposal; no native app integration.",
+      "sourcePage": "source.html#recent-log",
+      "figmaNodes": [
+        "452:5148"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-recent-log",
+        "styles": [
+          "components/habit-widget.css",
+          "components/habit-insights.css"
+        ],
+        "scripts": [
+          "components/widget-primitives.js",
+          "components/habit-insights.js"
+        ],
+        "assets": [
+          "assets/widgets/Custom.svg",
+          "assets/widgets/DayOff.svg",
+          "assets/widgets/Decrease.svg",
+          "assets/widgets/Flame.svg",
+          "assets/widgets/FlameMono.svg",
+          "assets/widgets/Increase.svg",
+          "assets/widgets/OpenBook.svg",
+          "assets/widgets/PlannedDay.svg",
+          "assets/widgets/WaterFull.svg",
+          "assets/widgets/WaterSilhouette.svg",
+          "assets/StretchMat.svg",
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-recent-log></today-recent-log>",
+        "usage": "Assign model {label, amount, unit, mark, date}. Route the log-open event using its supplied data.",
+        "events": [
+          "log-open"
+        ],
+        "demoOnly": [
+          "widget-study.js"
+        ]
+      }
+    },
+    {
+      "id": "streak-flame",
+      "name": "Layered streak flame",
+      "preview": "streak-flame.html",
+      "browserSource": [
+        "components/streak-flame-art.js",
+        "components/streak-flame.js",
+        "components/streak-flame.css",
+        "scripts/export-streak-assets.js"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser proposal; no native app integration.",
+      "sourcePage": "source.html#streak-flame",
+      "figmaNodes": [],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-streak-flame",
+        "styles": [
+          "components/streak-flame.css"
+        ],
+        "scripts": [
+          "components/streak-flame-art.js",
+          "components/streak-flame.js"
+        ],
+        "assets": [
+          "assets/streaks/ember-animated.svg",
+          "assets/streaks/ember.svg",
+          "assets/streaks/lilac-animated.svg",
+          "assets/streaks/lilac.svg",
+          "assets/streaks/silver-animated.svg",
+          "assets/streaks/silver.svg"
+        ],
+        "markup": "<today-streak-flame palette=\"ember\"></today-streak-flame>",
+        "usage": "Palettes: ember, lilac, silver. Call play() for a confirmed streak increase; still() cancels. One-shot 1.6 second motion settles to the still. SVG downloads live in assets/streaks/.",
+        "events": [],
+        "demoOnly": [
+          "streak-flame-study.js"
+        ]
+      }
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."
