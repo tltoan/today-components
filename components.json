@@ -2925,6 +2925,99 @@
           "onboarding-study.js"
         ]
       }
+    },
+    {
+      "id": "minimal-face",
+      "name": "Seven animated faces",
+      "preview": "faces.html#minimal-faces",
+      "sourcePage": "source.html#minimal-face",
+      "browserSource": [
+        "components/party-avatars.js",
+        "components/face-palettes.js",
+        "components/minimal-face-motion.js",
+        "components/minimal-face.js",
+        "components/face-picker.css",
+        "FACES.md"
+      ],
+      "swiftSource": [
+        "native/PlayfulFaces.swift"
+      ],
+      "dependencies": [
+        "profile-avatar"
+      ],
+      "status": "Standalone browser and SwiftUI source. Portrait & color selected; approved onboarding remains unchanged.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-minimal-face",
+        "scripts": [
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js"
+        ],
+        "styles": [
+          "components/face-picker.css"
+        ],
+        "markup": "<today-minimal-face></today-minimal-face>",
+        "events": [
+          "face-tap"
+        ],
+        "usage": "See FACES.md. Host owns saving the faceStyle/gradientIndex choice. No account or onboarding writes.",
+        "demoOnly": [
+          "faces-study.js",
+          "faces-study.css",
+          "faces.html"
+        ]
+      }
+    },
+    {
+      "id": "face-picker",
+      "name": "Profile picture picker · Portrait & color selected",
+      "preview": "faces.html",
+      "sourcePage": "source.html#face-picker",
+      "browserSource": [
+        "components/party-avatars.js",
+        "components/face-palettes.js",
+        "components/minimal-face-motion.js",
+        "components/minimal-face.js",
+        "components/face-picker.js",
+        "components/face-picker.css",
+        "FACES.md"
+      ],
+      "swiftSource": [
+        "native/PlayfulFaces.swift",
+        "native/TodayPartyAvatars.swift",
+        "native/TodayFacePicker.swift"
+      ],
+      "dependencies": [
+        "minimal-face",
+        "profile-avatar"
+      ],
+      "status": "Standalone browser and SwiftUI source. Portrait & color selected; approved onboarding remains unchanged.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-face-picker",
+        "scripts": [
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
+          "components/face-picker.js"
+        ],
+        "styles": [
+          "components/face-picker.css"
+        ],
+        "markup": "<today-face-picker variant=\"portrait\" face-style=\"tilt\" value=\"0\"></today-face-picker>",
+        "events": [
+          "change"
+        ],
+        "usage": "See FACES.md. Arrows cycle all seven faces; swatches change one of 12 gradients. Photo selection is local. Host owns confirmation, persistence and upload.",
+        "demoOnly": [
+          "faces-study.js",
+          "faces-study.css",
+          "faces.html"
+        ]
+      }
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."

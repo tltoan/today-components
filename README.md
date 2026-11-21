@@ -25,6 +25,7 @@ This is the working Today component library. This README and AGENTS.md contain t
 
 | Component | Reusable source | Status |
 | --- | --- | --- |
+| Seven animated faces / Profile picture picker | `components/face-palettes.js`, `components/minimal-face-motion.js`, `components/minimal-face.js`, `components/face-picker.*`, `native/PlayfulFaces.swift`, `native/TodayFacePicker.swift` + avatar palette dependency | Portrait & color (A) selected in [faces.html](faces.html); approved onboarding unchanged. Arrows cycle seven faces independently of twelve gradient swatches. Soft 74% portraits, local photo selection, keyboard, reduced motion and local confirmation. Original SwiftUI retained unchanged. See [FACES.md](FACES.md). |
 | Dropdown/disclosure motion | `foundations/motion.css`, `foundations/disclosure.js`, `native/TodayMotion.swift` | User-approved standard, November 20, 2026. Applied to all current library dropdowns/expansions. Native tokens available; app-wide integration pending. |
 | Selection dropdown | `components/dropdown.js`, `components/dropdown.css` | Reusable browser component; used by logo speed. Keyboard, focus return, outside dismissal, and reduced motion supported. |
 | Reading schedule | `index.html`, `app.js`, `style.css` | Browser specimen consuming shared disclosure motion. Its layout/fixture is separate from the approved motion rule. |
@@ -448,3 +449,10 @@ See [PARTY-ROOM.md](PARTY-ROOM.md) for the model and integration contract. `part
 Entry journal is now the selected history layout. Onboarding review omits Edit trial length/Edit reminder; its Home step reuses the preferred Home week bar. Profile and edit-profile portraits use a subtle one-point lavender rim; overlapping party portraits keep their separating rim.
 
 Verification: eight pure streak tests pass, including partial/zero logs, day off, missing coverage, duplicate entries, confirmed undo and dated membership. JavaScript syntax and local source paths checked. Browser checks at desktop and effective 390 × 844 covered compact merged activity, expandable originals, avatar reactions, per-member nudge success/failure/retry, fourth member, shared streak/undo, planning proposal, invitation target/join states, keyboard week selection, review cleanup, reduced motion and softened profile rim. The avatar SwiftUI source type-checks against the iOS 17 simulator target. These checks do not verify native runtime, haptics, delivery, persistence or production streak enforcement.
+
+
+## November 21 profile picture picker
+
+Portrait & color (A) is selected. Seven faces switch independently of twelve gradient swatches; only features travel inside the fixed circle. Gradient stops blend over 560 ms and retarget during rapid changes. The face/color caption is removed, and the preview CTA is Save profile. Own-photo selection remains local. Browser and SwiftUI source contracts are in FACES.md; onboarding is unchanged.
+
+Checks for this revision: JavaScript syntax and source paths; desktop and observed 390 × 844 browser layout without horizontal overflow; all seven faces cycling with wraparound; keyboard face/color changes; smooth intermediate color paint and rapid retargeting; fixed disk; immediate reduced-motion colors; photo selection/invalid-file preservation; local confirmation. The seven-face original SwiftUI is byte-identical to the attachment. Native sources type-check with warnings as errors for the iOS 17 simulator target. This is source verification, not native app integration.

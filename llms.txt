@@ -101,3 +101,5 @@ Habit detail selection: Grouped cards (B). Independent history (day summaries / 
 
 Party room / compact feed / identity reactions / planning proposal: PARTY-ROOM.md; components/party-room.js, components/party-activity.js, components/party-progress.js, components/party-reactions.js, components/party-setup.js, components/party-room.css. Shared schedule; personal targets/reminders; shared scheduled-day streak. party-room-demo.js is demo only.
 Shared Home/onboarding date strip: components/week-bar.js and components/week-bar.css. Entry journal is the selected history default.
+
+- Selected profile picker and seven supplied faces: [Preview](https://tltoan.github.io/today-components/faces.html), [API](https://tltoan.github.io/today-components/FACES.md), [original SwiftUI](https://tltoan.github.io/today-components/native/PlayfulFaces.swift), [SwiftUI layouts](https://tltoan.github.io/today-components/native/TodayFacePicker.swift). Portrait & color selected; arrows cycle all seven faces, swatches change one of twelve gradients, with local photo selection. Onboarding unchanged. Dependencies and APIs are in components.json and FACES.md.
