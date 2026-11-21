@@ -18,3 +18,5 @@
 .hp-compact-target{display:block;font-size:10px;color:#beb6cd;margin-top:8px}
 .hp-avatar-result{min-height:20px;font-size:12px;color:#cbbbdc}
 @media(max-width:700px){.hp-avatar-pieces{grid-template-columns:1fr}}
+/* Keep the selected cover above its two new comparisons. */
+.hp-invite-studies>#party-invite-b{grid-column:1/-1;width:min(390px,100%);justify-self:center}
