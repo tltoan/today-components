@@ -28,6 +28,8 @@ This directory is the working Today component library and interactive showcase e
 ## New proposals
 
 - WIDGETS.md is the widget coverage/data contract. Keep null (no log) separate from recorded zero; upper-limit goals stay open for the current day. Preserve confirmed data on save failure. The host owns actual persistence, historical eligibility, dates and auth.
-- Step progress is a position indicator: do not describe the current step as a completed submission. Five shapes remain proposals until the user selects one.
-- The layered streak flame has three proposed palettes. Play once for a confirmed increase, then settle; never add an idle loop. Keep the original Figma warm/monochrome assets separate. Export still/animated SVGs with node scripts/export-streak-assets.js.
+- The user selected Active Pill for step progress on November 20, 2026. It is the default and the live library specimen. Other implementations are retained historical options. Step progress is a position indicator: do not describe the current step as a completed submission.
+- The user selected Warm Ember for streak artwork on November 20, 2026. Use assets/streaks/ember.svg for widgets and habit insights and palette="ember" for the animated component. The live gallery shows the same selected art in hero, badge, and widget placements. Other palettes and original Figma artwork are retained historical assets. Play once for a confirmed increase, then settle; never add an idle loop. Export SVGs with node scripts/export-streak-assets.js.
 - Preserve the corrected focused-page header alignment and make the Today wordmark link to the library.
+
+- Widget refinements use balanced small-card metric rows, optically centered original counter symbols, spaced quick-action labels, full-width portrait actions, and left-aligned streak dates. Calendar selection content is centered with equal vertical insets. Water uses the single TodayWidgets.setWaterFill spring controller; do not layer a CSS clip transition on top.

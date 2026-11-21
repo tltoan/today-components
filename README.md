@@ -261,10 +261,10 @@ Verified this revision at desktop (1600 × 900) and mobile (390 × 844): complet
 
 | Component | Source / preview | Status and supported states |
 | --- | --- | --- |
-| Step progress indicator | components/step-progress.* · step-progress.html | Five browser proposals: slim segments, active pill, rail, numbers, ring. Configurable current/total; shared 3/5/7-step preview; reverse transitions; boundary states. |
+| Step progress indicator | components/step-progress.* · step-progress.html | Active Pill selected. Other variants retained in source. Configurable current/total; shared 3/5/7-step preview; reverse transitions; boundary states. |
 | Habit widgets | components/habit-widget.* + widget-primitives.js · widgets.html | Small numeric/check-off, medium overview/streak, large list/portraits, lock rectangular/circular/check-in/streak/summary, ten message states. Asynchronous save adapter; queue, undo, retained failure data, retry. |
 | Calendar, streak hero, recent log | components/habit-insights.* · widgets.html | Build activity, break activity/completion, date selection, explicit zero/no-log/future states. Caller-supplied saved history and confirmed streak. |
-| Layered streak flame | components/streak-flame* · streak-flame.html | New reference-inspired ember/lilac/silver artwork, hero/badge/widget placements, 1.6-second animation then still, immediate Still control, static/animated SVG downloads. Original Figma flame remains intact. |
+| Layered streak flame | components/streak-flame* · streak-flame.html | Selected Warm Ember artwork in hero/badge/widget placements; other palettes retained in source, 1.6-second animation then still, immediate Still control, static/animated SVG downloads. Original Figma flame remains intact. |
 
 WIDGETS.md maps every widget family and reusable part on the linked Figma canvas. The Apple phone contexts and full detail-screen chrome are not widget components. No native application UI, WidgetKit extension, persistence, authentication, or shared store was added.
 
@@ -272,3 +272,13 @@ The focused preview headers now align their wordmark, descriptor and controls. P
 
 
 Verification for this addition: checked changed JavaScript syntax, all local HTML/manifest source paths, and exported SVG XML. Browser checks at desktop and 390 × 844 covered three consecutive numeric taps (750 → 1,500), failure retaining 1,500, retry to 1,750, check-off Log/Undo including Enter, minimum-goal decrement to no log, upper-limit decrement to recorded zero, long names without artwork overlap, date selection and arrow-key focus, closed-day vs open-day zero, 3/7-step clamping and both navigation boundaries, and reduced-motion states. Flame playback reached still, canceled via Still, and stayed still with Less motion. The corrected Today link returned to the main library; the main page mounted all new collections with no console errors or horizontal page overflow. Native/device integration was not tested because it was not changed.
+
+
+## Selected directions and widget refinement · November 20, 2026
+
+The user selected **Active Pill** for step progress and **Warm Ember** for streak artwork. These are now the defaults and the live library direction; earlier alternatives remain in the readable source. Warm Ember also appears in habit widgets and insight heroes.
+
+Refined all small widget alignment, enlarged reading art, optically centered the existing plus/minus SVGs, separated quick-action signs and labels, enlarged lock actions, reworked the four-habit overview into spacious metric rows with full-width actions, aligned streak dates beneath the count, and centered calendar selection content. Water now rises with a small settling wave; repeated updates redirect one animation and reduced motion settles immediately. Browser specimen sizes can grow for clarity; no native WidgetKit implementation changed.
+
+
+Verification for this refinement: at desktop and 390 × 844, checked the revised small-card alignment, enlarged artwork, centered original control symbols, long titles, full-width portrait actions, 64 px lock actions with 16 px separation, and no page/card overflow. Selected calendar content has equal 7 px top/bottom insets. Confirmed rapid water updates redirect the running fill, reversing settles correctly, reduced motion snaps to the saved level, and a failed save preserves that level until Retry succeeds. Active Pill passed keyboard navigation, first/last boundaries, total reduction to three steps and reduced motion. All three Warm Ember placements use ember; playback settles, Still cancels, and Less motion stays still. Browser logs showed no warnings/errors.

@@ -375,7 +375,7 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Reusable browser proposal; no native app integration.",
+      "status": "Active Pill selected by the user November 20, 2026; browser component.",
       "sourcePage": "source.html#step-progress",
       "figmaNodes": [
         "541:12973",
@@ -394,8 +394,8 @@
           "assets/TestTheFuture-Regular.otf",
           "assets/TestTheFuture-Medium.otf"
         ],
-        "markup": "<today-step-progress variant=\"segments\" current=\"4\" total=\"7\"></today-step-progress>",
-        "usage": "Set current, total (1\u201312), variant (segments, pill, rail, numbers, ring), and optional label attributes. This is presentation only, not navigation.",
+        "markup": "<today-step-progress variant=\"pill\" current=\"4\" total=\"7\"></today-step-progress>",
+        "usage": "Active Pill (pill) is the selected default. Set current, total (1\u201312), and optional label. Other variants remain historical options. This component displays position; the host owns navigation.",
         "events": [],
         "demoOnly": [
           "step-progress-study.js"
@@ -454,7 +454,8 @@
           "assets/widgets/WaterSilhouette.svg",
           "assets/StretchMat.svg",
           "assets/TestTheFuture-Regular.otf",
-          "assets/TestTheFuture-Medium.otf"
+          "assets/TestTheFuture-Medium.otf",
+          "assets/streaks/ember.svg"
         ],
         "markup": "<today-habit-widget></today-habit-widget>",
         "usage": "Assign model and an async save handler. Variants: small, medium, list, portraits, streak, lock, circular, lock-streak, summary, message. Read WIDGETS.md for all states, data semantics, action events and the full Figma coverage map.",
@@ -514,7 +515,8 @@
           "assets/widgets/WaterSilhouette.svg",
           "assets/StretchMat.svg",
           "assets/TestTheFuture-Regular.otf",
-          "assets/TestTheFuture-Medium.otf"
+          "assets/TestTheFuture-Medium.otf",
+          "assets/streaks/ember.svg"
         ],
         "markup": "<today-habit-calendar></today-habit-calendar>",
         "usage": "Assign model with year, month, today, selected, entries, target, unit, rule and mode (activity/completion). Provide saved per-date target/rule and eligibility when history varies. See WIDGETS.md.",
@@ -567,7 +569,8 @@
           "assets/widgets/WaterSilhouette.svg",
           "assets/StretchMat.svg",
           "assets/TestTheFuture-Regular.otf",
-          "assets/TestTheFuture-Medium.otf"
+          "assets/TestTheFuture-Medium.otf",
+          "assets/streaks/ember.svg"
         ],
         "markup": "<today-streak-hero></today-streak-hero>",
         "usage": "Assign model {count, label, through}. Confirmed streak calculation belongs to the host.",
@@ -617,7 +620,8 @@
           "assets/widgets/WaterSilhouette.svg",
           "assets/StretchMat.svg",
           "assets/TestTheFuture-Regular.otf",
-          "assets/TestTheFuture-Medium.otf"
+          "assets/TestTheFuture-Medium.otf",
+          "assets/streaks/ember.svg"
         ],
         "markup": "<today-recent-log></today-recent-log>",
         "usage": "Assign model {label, amount, unit, mark, date}. Route the log-open event using its supplied data.",
@@ -631,7 +635,7 @@
     },
     {
       "id": "streak-flame",
-      "name": "Layered streak flame",
+      "name": "Warm Ember streak flame",
       "preview": "streak-flame.html",
       "browserSource": [
         "components/streak-flame-art.js",
@@ -641,7 +645,7 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Reusable browser proposal; no native app integration.",
+      "status": "Warm Ember selected by the user November 20, 2026; browser component and static/animated SVG.",
       "sourcePage": "source.html#streak-flame",
       "figmaNodes": [],
       "browserIntegration": {
@@ -663,7 +667,7 @@
           "assets/streaks/silver.svg"
         ],
         "markup": "<today-streak-flame palette=\"ember\"></today-streak-flame>",
-        "usage": "Palettes: ember, lilac, silver. Call play() for a confirmed streak increase; still() cancels. One-shot 1.6 second motion settles to the still. SVG downloads live in assets/streaks/.",
+        "usage": "Use palette ember, the selected default. Call play() for a confirmed streak increase; still() cancels. One-shot 1.6 second motion settles to the still. Other palettes remain historical options.",
         "events": [],
         "demoOnly": [
           "streak-flame-study.js"

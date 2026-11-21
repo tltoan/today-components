@@ -82,7 +82,7 @@ An empty `swiftSource` means that this library does not yet supply a native vers
 
 ## Widgets, progress and streaks
 
-- Step progress: import only components/step-progress.css and .js. The five variants share the same current/total attributes. step-progress-study.js is only the gallery comparison controller.
+- Step progress: import only components/step-progress.css and .js. Active Pill is the selected default; current/total remain the control attributes. step-progress-study.js is only the gallery comparison controller.
 - Widgets: read WIDGETS.md for the complete Figma coverage and data contract. Load widget-primitives.js before habit-widget.js or habit-insights.js. Assign a real asynchronous save handler; never import the gallery's simulated handler or fictional history into a product.
-- Layered flame: load streak-flame-art.js, then streak-flame.js and .css. Use palette ember, lilac, or silver. play() celebrates a confirmed change once; still() settles immediately. Static and animated SVGs are downloadable in assets/streaks/, and scripts/export-streak-assets.js regenerates them from the source geometry.
+- Layered flame: load streak-flame-art.js, then streak-flame.js and .css. Use palette ember, the selected Warm Ember direction. Other palettes remain historical options. play() celebrates a confirmed change once; still() settles immediately. Static and animated SVGs are downloadable in assets/streaks/, and scripts/export-streak-assets.js regenerates them from the source geometry.
 - These new collections have no SwiftUI source yet. Browser accessibility and motion checks do not establish WidgetKit, VoiceOver or real-device behavior.

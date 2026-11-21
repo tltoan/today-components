@@ -18,7 +18,7 @@
     attributeChangedCallback() { if (this.isConnected) this.render(); }
     render() {
       const variants = ['segments', 'pill', 'rail', 'numbers', 'ring'];
-      const variant = variants.includes(this.getAttribute('variant')) ? this.getAttribute('variant') : 'segments';
+      const variant = variants.includes(this.getAttribute('variant')) ? this.getAttribute('variant') : 'pill';
       const key = variant + this.total;
       if (key !== this._key) {
         this.innerHTML = '<div class="step-top"><span class="step-caption"></span><span class="step-count"></span></div><div class="step-visual" aria-hidden="true"></div>';

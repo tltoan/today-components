@@ -21,7 +21,15 @@
   };
   class TodayHabitWidget extends HTMLElement {
     constructor() { super(); this._model={variant:'small',habits:[{...defaults}]}; this._version=0; this._queues=new Map(); }
-    connectedCallback() { if (!this._listening) { this.addEventListener('click', e=>this.handleClick(e)); this._listening=true; } this.render(); }
+    connectedCallback() {
+      if (!this._listening) { this.addEventListener('click', e=>this.handleClick(e)); this._listening=true; }
+      this.render();
+      this._media=matchMedia('(prefers-reduced-motion: reduce)');
+      this._motionChanged=()=>{if(W.reduced())W.settleWater(this);};
+      this._media.addEventListener('change',this._motionChanged);
+      this._motionObserver=new MutationObserver(this._motionChanged);
+      this._motionObserver.observe(document.documentElement,{attributes:true,attributeFilter:['data-reduced','data-motion-override']});
+    }
     set model(value) {
       this._version++;
       this._queues.clear();
@@ -41,12 +49,21 @@
       if(h.tracker==='checkoff')return this.context(h);
       return h.amount==null?this.context(h):W.format(h.amount)+' '+this.context(h);
     }
-    actionLabel(h) { return h.tracker==='checkoff'?(h.amount?'Undo':'Log'):h.rule==='atMost'?'Log':'+'+W.format(h.step)+' '+h.unit; }
+    actionLabel(h) { return h.tracker==='checkoff'?(h.amount?'Undo':'Log'):h.rule==='atMost'?'Log':'+ '+W.format(h.step)+' '+h.unit; }
+    setActionLabel(button,h,busy=false) {
+      const text=busy&&h.tracker==='checkoff'?'Saving…':this.actionLabel(h);
+      if(button.dataset.label===text)return;
+      button.dataset.label=text;
+      if(text.startsWith('+ '))button.innerHTML='<span class="tw-action-sign" aria-hidden="true">+</span><span class="tw-action-value">'+esc(W.format(h.step))+' <span>'+esc(h.unit)+'</span></span>';
+      else button.textContent=text;
+    }
     action(h) { return h.tracker==='checkoff'?'toggle':h.rule==='atMost'?'open':'increase'; }
     row(h,portrait=false) {
+      if(portrait)return '<div class="tw-row tw-portrait" data-habit="'+esc(h.id)+'"><button type="button" class="tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-portrait-metric"><span class="tw-row-amount"></span><span class="tw-art">'+W.art(h.artwork)+'</span></span><span class="tw-context"></span></button><button type="button" class="tw-action" data-action="'+this.action(h)+'"></button><span class="tw-pending" role="status"></span></div>';
       return '<div class="tw-row '+(portrait?'tw-portrait':'')+'" data-habit="'+esc(h.id)+'"><button type="button" class="tw-content" data-action="open"><span class="tw-art">'+W.art(h.artwork)+'</span><span class="tw-copy"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-row-amount"></span><span class="tw-context"></span></span></button><button type="button" class="tw-action" data-action="'+this.action(h)+'"></button><span class="tw-pending" role="status"></span></div>';
     }
     render() {
+      W.settleWater(this);
       const m=this._model, v=m.variant||'small', h=m.habits[0]||defaults;
       this.dataset.variant=v;
       this.setAttribute('role','group');
@@ -58,7 +75,7 @@
       } else if(v==='small') {
         // Controls are assembled separately so symbol artwork stays the supplied asset.
         const controls = h.tracker==='checkoff'?'<button type="button" class="tw-action" data-action="toggle"></button>':'<button type="button" class="tw-symbol" data-action="decrease"><img src="'+W.asset('widgets/Decrease.svg')+'" alt=""></button><span class="tw-increment">'+W.format(h.step)+'<br>'+esc(h.unit)+'</span><button type="button" class="tw-symbol" data-action="increase"><img src="'+W.asset('widgets/Increase.svg')+'" alt=""></button>';
-        html='<div data-habit="'+esc(h.id)+'"><button type="button" class="tw-small-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-amount"></span><span class="tw-context"></span><span class="tw-art">'+W.art(h.artwork)+'</span><span class="tw-check-label"></span></button><div class="tw-page-marks" aria-hidden="true">'+'<i></i>'.repeat(10)+'</div><div class="tw-controls">'+controls+'</div><span class="tw-pending" role="status"></span></div>';
+        html='<div data-habit="'+esc(h.id)+'"><button type="button" class="tw-small-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-small-metric"><span class="tw-amount"></span><span class="tw-art">'+W.art(h.artwork)+'</span></span><span class="tw-context"></span></button><div class="tw-page-marks" aria-hidden="true">'+'<i></i>'.repeat(10)+'</div><div class="tw-controls">'+controls+'</div><span class="tw-pending" role="status"></span></div>';
       } else if(['medium','list','portraits'].includes(v)) {
         const capacity=v==='medium'?2:v==='list'?5:4;
         const total=m.total||m.habits.length;
@@ -69,7 +86,7 @@
       } else if(v==='circular') {
         html='<button type="button" class="tw-circle tw-content" data-action="open" data-habit="'+esc(h.id)+'"><svg viewBox="0 0 72 72" aria-hidden="true"><circle class="tw-circle-track" cx="36" cy="36" r="27"/><circle class="tw-circle-fill" cx="36" cy="36" r="27" pathLength="100"/></svg><span class="tw-circle-copy"><span class="tw-name">'+esc(m.shortName||h.title)+'</span><span class="tw-amount"></span><span class="tw-context"></span></span></button>';
       } else if(v==='streak'||v==='lock-streak') {
-        html='<button type="button" class="tw-streak tw-content" data-action="open" data-habit="'+esc(h.id)+'"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-streak-count"><strong>'+W.format(m.count??6)+'</strong> '+esc(m.streakLabel||'day streak')+'</span><span class="tw-context">'+esc(m.through||'Through Nov 16')+'</span><span class="tw-flame">'+W.art(v==='streak'?'flame':'mono')+'</span><span class="tw-streak-days">'+(m.days||[10,11,12,13,14,15,16]).map((d,i)=>'<span>'+W.mark(i===0?'partial':'full')+'<small>'+esc(d)+'</small></span>').join('')+'</span></button>';
+        html='<button type="button" class="tw-streak tw-content" data-action="open" data-habit="'+esc(h.id)+'"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-streak-body"><span class="tw-streak-summary"><span class="tw-streak-count"><strong>'+W.format(m.count??6)+'</strong><span>'+esc(m.streakLabel||'day streak')+'</span></span><span class="tw-context">'+esc(m.through||'Through Nov 16')+'</span></span><span class="tw-flame">'+W.art(v==='streak'?'flame':'mono')+'</span></span><span class="tw-streak-days">'+(m.days||[10,11,12,13,14,15,16]).map((d,i)=>'<span>'+W.mark(i===0?'partial':'full')+'<small>'+esc(d)+'</small></span>').join('')+'</span></button>';
       } else if(v==='summary') {
         html='<button type="button" class="tw-summary tw-content" data-action="today"><span class="tw-name">today.</span><strong>'+W.format(m.total||5)+' habits</strong><span>'+W.format(m.met??2)+' build targets met · Open Today</span></button>';
       }
@@ -84,27 +101,28 @@
         item.setAttribute('aria-busy',String(busy));
         const amount=item.querySelector('.tw-amount');
         if(amount) { const text=h.tracker==='checkoff'?'':W.format(h.amount); if(amount.textContent!==text) { const hadValue=Boolean(amount.textContent); amount.textContent=text; if(hadValue)W.animateText(amount); } }
+        item.style.setProperty('--tw-number-size',W.format(h.amount).length>6?'22px':W.format(h.amount).length>4?'28px':'34px');
         const context=item.querySelector('.tw-context');
         if(context && !['streak','lock-streak'].includes(this._model.variant))context.textContent=this._model.variant==='circular'?h.unit:this.context(h);
         const rowAmount=item.querySelector('.tw-row-amount');
-        if(rowAmount)rowAmount.textContent=this._model.variant==='portraits'?W.format(h.amount):'';
+        if(rowAmount)rowAmount.textContent=this._model.variant==='portraits'?(h.tracker==='checkoff'?(h.amount?'Done':'—'):W.format(h.amount)):'';
         if(context&&this._model.variant!=='portraits'&&item.classList.contains('tw-row'))context.textContent=this.summary(h);
         const ratio=h.amount==null?0:h.target>0?Math.min(1,h.amount/h.target):0;
         if(item.matches('button[data-action="open"]'))item.setAttribute('aria-label',this._model.variant?.includes('streak')?'Open '+h.title+', '+W.format(this._model.count??6)+' '+(this._model.streakLabel||'day streak')+', '+(this._model.through||'Through Nov 16'):'Open '+h.title+', '+this.summary(h));
         item.style.setProperty('--tw-fill',h.rule==='atMost'?0:ratio);
+        W.setWaterFill(item.querySelector('.tw-water'),h.rule==='atMost'?0:ratio);
         const circle=item.querySelector('.tw-circle-fill'); if(circle)circle.style.strokeDashoffset=100-ratio*100;
         item.querySelectorAll('.tw-page-marks i').forEach((mark,i)=>mark.dataset.filled=String(i<Math.floor(ratio*10)));
         item.querySelectorAll('[data-action]').forEach(button=>{
           const action=button.dataset.action;
-          if(action==='open'){button.setAttribute('aria-label','Open '+h.title+', '+this.summary(h));if(button.classList.contains('tw-action'))button.textContent=this.actionLabel(h);return;}
+          if(action==='open'){button.setAttribute('aria-label','Open '+h.title+', '+this.summary(h));if(button.classList.contains('tw-action'))this.setActionLabel(button,h);return;}
           if(action==='increase'||action==='decrease'){
             button.disabled=!this._save || (action==='decrease' && (!h.amount || h.amount<=0));
             button.setAttribute('aria-label',(action==='increase'?'Add ':'Subtract ')+h.step+' '+h.unit+(action==='increase'?' to ':' from ')+h.title);
           } else if(action==='toggle'){button.disabled=!this._save||busy;button.setAttribute('aria-pressed',String(Boolean(h.amount)));}
-          if(button.classList.contains('tw-action'))button.textContent=busy&&h.tracker==='checkoff'?'Saving…':this.actionLabel(h);
+          if(button.classList.contains('tw-action'))this.setActionLabel(button,h,busy);
         });
         const pending=item.querySelector('.tw-pending');if(pending)pending.textContent=busy?'Saving…':'';
-        const check=item.querySelector('.tw-check-label');if(check)check.textContent=h.tracker==='checkoff'?h.amount?'✓ Logged':'No log yet':'';
         item.dataset.tracker=h.tracker;
         item.dataset.artwork=h.artwork;
         item.dataset.rule=h.rule;
@@ -157,7 +175,7 @@
       this._queues.delete(id);
       this.update();
     }
-    disconnectedCallback(){this._version++;this._queues.clear();this.getAnimations({subtree:true}).forEach(a=>a.cancel());}
+    disconnectedCallback(){this._version++;this._queues.clear();W.settleWater(this);this._motionObserver?.disconnect();this._media?.removeEventListener('change',this._motionChanged);this.getAnimations({subtree:true}).forEach(a=>a.cancel());}
   }
   window.TodayWidgets.messageStates=messageStates;
   if(!customElements.get('today-habit-widget'))customElements.define('today-habit-widget',TodayHabitWidget);

@@ -1,11 +1,7 @@
 /* Gallery controls only. Production pages import components/step-progress.*. */
 (() => {
   const variations=[
-    ['segments','A','Slim segments','Closest to your Figma reference. Each step gets equal space.'],
-    ['pill','B','Active pill','The current step gently expands, then hands off to the next.'],
-    ['rail','C','Continuous rail','One quiet line carries the progress across the screen.'],
-    ['numbers','D','Numbered steps','A clearer sense of position in a short, fixed sequence.'],
-    ['ring','E','Compact ring','A small footprint beside a title or inside a header.']
+    ['pill','Selected','Active pill','The current step gently expands, then hands off to the next.']
   ];
   document.querySelectorAll('[data-component="step-progress"]').forEach(root=>{
     root.innerHTML='<div class="study-controls"><div class="study-step-buttons"><button type="button" data-prev>← Previous</button><span data-step-state role="status">Step 4 of 7</span><button type="button" data-next>Next →</button></div><label class="study-select-label">Steps <today-dropdown label="Number of steps" value="7"><option value="3">3 steps</option><option value="5">5 steps</option><option value="7">7 steps</option></today-dropdown></label></div><div class="sp-studies">'+variations.map(([variant,letter,title,copy])=>'<article class="sp-study"><div class="sp-study-heading"><span>'+letter+'</span><h3>'+title+'</h3></div><div class="sp-study-stage"><today-step-progress variant="'+variant+'" total="7" current="4"></today-step-progress></div><p>'+copy+'</p></article>').join('')+'</div>';
