@@ -97,7 +97,20 @@ today-trial-days-input .pk-custom{padding-top:0}
 
 today-day-ruler>.pk-trial-value{margin-bottom:28px}
 today-picker-wheel[data-axis=x] .pk-wheel-option:before{transform-origin:bottom;transition:transform 160ms var(--pk-ease),background 160ms}
-today-picker-wheel[data-axis=x] .pk-wheel-option[aria-selected=true]:before{transform:scaleY(1.2)}
+today-picker-wheel[data-axis=x] .pk-wheel-option[aria-selected=true]:not([data-major]):before{transform:scaleY(1.2)}
 html[data-reduced] today-picker-wheel[data-axis=x] .pk-wheel-option:before{transform:none}
 @media(prefers-reduced-motion:reduce){html:not([data-motion-override]) today-picker-wheel[data-axis=x] .pk-wheel-option:before{transform:none}}
 today-period-pill{width:152px;max-width:100%;margin:18px auto 22px}today-time-picker[data-variant=dial] today-period-pill{margin:16px auto 8px}
+
+/* Center the amount itself, independent of the unit's width. */
+today-day-ruler>.pk-trial-value{display:grid;grid-template-columns:minmax(0,1fr) max-content minmax(0,1fr);column-gap:10px}
+today-day-ruler>.pk-trial-value output{grid-column:2}
+today-day-ruler>.pk-trial-value>span{grid-column:3;justify-self:start}
+today-time-editor{display:block;min-width:0;color:var(--today-control-text);font:400 14px/1.45 Future,sans-serif;--pk-accent:var(--today-control-accent);--pk-muted:var(--today-control-secondary);--pk-line:#ffffff12;--pk-ease:cubic-bezier(.22,.76,.28,1)}
+today-time-editor *{box-sizing:border-box}today-time-editor .pk-time-editor{padding-top:0}today-time-editor[disabled]{opacity:.45}
+
+today-time-editor .pk-edit-heading today-button{margin-right:0}
+
+/* The center grows continuously with scroll position, without changing row pitch. */
+today-picker-wheel[data-axis=y] .pk-wheel-label{display:block;line-height:1;transform:scale(var(--pk-wheel-scale,1));transform-origin:center}
+.pk-wheel-band{mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 16%,#000 84%,transparent)}

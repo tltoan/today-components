@@ -30,8 +30,10 @@
       ['Custom trial length','trial-days-input','<today-trial-days-input value="21" min="1" max="90"></today-trial-days-input>','Exact days, with validation and a separate apply action.'],
       ['Week cards','week-cards','<today-week-cards value="21" days="14,21,28"></today-week-cards>','Three common lengths. Each option is a full tap target.'],
       ['AM / PM pill','period-pill','<today-period-pill value="PM"></today-period-pill>','A shared moving highlight. Tap either side or use arrow keys.'],
+      ['Choose a time','time-editor','<today-time-editor value="21:30"></today-time-editor>','Swipe each wheel, then confirm. Cancel keeps the last confirmed time.'],
       ['Switch','switch','<div class="pk-reminder-toggle"><span>Remind me</span><today-switch label="Remind me" checked></today-switch></div>','Already part of Today’s controls. On, off and disabled states.']
     ].map(([name,id,markup,note])=>'<article class="pk-piece" id="piece-'+id+'"><div class="pk-piece-heading"><h3>'+name+'</h3><a href="source.html#'+(id==='switch'?'controls':id)+'">Code ↗</a></div><div class="pk-piece-stage">'+markup+'</div><p>'+note+'</p><output class="pk-piece-feedback" aria-live="polite"></output></article>').join('')+'</div>';
+    root.addEventListener('picker-cancel',e=>{const feedback=e.target.closest('.pk-piece')?.querySelector('.pk-piece-feedback');if(feedback)feedback.textContent='Kept '+e.detail.value+'.';});
     root.addEventListener('change',e=>{const feedback=e.target.closest('.pk-piece')?.querySelector('.pk-piece-feedback');if(!feedback)return;feedback.textContent=e.target.localName==='today-switch'?(e.target.checked?'Reminder on.':'Reminder off.'):(e.detail.days?e.detail.days+' days selected.':e.detail.value+' selected.');});
   }
 })();

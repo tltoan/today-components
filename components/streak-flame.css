@@ -22,3 +22,14 @@ today-streak-flame .flame-core{transform-origin:94px 145px}
 .flame-note{font-size:12px;line-height:1.7;color:#b4abba;margin-top:22px;max-width:760px}
 @media(max-width:800px){.flame-studies{grid-template-columns:1fr}.flame-stage{height:252px}.flame-study>p{min-height:0}}
 @media(prefers-reduced-motion:reduce){today-streak-flame *{animation:none!important;transition:none!important}}
+
+/* Medium iPhone widget specimen: fixed 338 × 158 pt-equivalent, not a free-size card. */
+.flame-studies{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(338px,1.15fr)}
+.flame-study:last-child .flame-stage{padding:0}
+.flame-widget{box-sizing:border-box;width:338px;min-width:338px;max-width:none;height:158px;min-height:158px;padding:16px;border-radius:22px;display:grid;grid-template-columns:minmax(0,1fr) 86px;grid-template-rows:20px minmax(0,1fr) 16px;gap:4px 12px}
+.flame-widget>span{grid-column:1;grid-row:1;font-size:13px;max-width:none}
+.flame-widget-metric{display:contents}.flame-widget-metric>div{grid-column:1;grid-row:2;align-self:center}.flame-widget-metric strong{font-size:36px;line-height:39px}.flame-widget-metric small{font-size:12px;line-height:16px}
+.flame-widget>small{grid-column:1;grid-row:3;margin:0;font-size:11px;line-height:16px}
+.flame-widget today-streak-flame{grid-column:2;grid-row:1/4;align-self:center;justify-self:center;width:72px;height:83px}
+@media(max-width:1050px){.flame-studies{grid-template-columns:repeat(2,minmax(0,1fr))}.flame-study:last-child{grid-column:1/-1}}
+@media(max-width:800px){.flame-studies{grid-template-columns:1fr}.flame-study:last-child{grid-column:auto}}

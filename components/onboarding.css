@@ -32,3 +32,17 @@ today-onboarding-screen{display:block;width:100%;max-width:390px;min-width:0;mar
 @media(max-width:420px){.ob-presets .tc-segments button{font-size:12px!important}.ob-entry-head today-button[data-action=skip] button{padding-inline:14px}}
 
 .ob-phone[data-page=review] .ob-footer{padding-top:24px}
+
+/* Shared screen-change wash, separate from the moving content. */
+.ob-phone:not([data-page=welcome]):not([data-page=features]) .ob-screen-content{background:transparent}
+.ob-phone .ob-screen-content{z-index:1}
+.ob-phone>today-onboarding-gradient[hidden]{display:none}
+.ob-phone[variant=b][data-page=track] .ob-book{justify-content:center;padding-left:0}
+
+/* Schedule marks stay in place while the shared preset pill hands off selection. */
+.ob-schedule-panel .ob-calendar-day{isolation:isolate;width:28px;justify-self:center;transition:color 300ms ease var(--ob-mark-delay,0ms)}
+.ob-schedule-panel .ob-calendar-day.is-planned{background:transparent}
+.ob-schedule-panel .ob-calendar-day:before{content:"";position:absolute;inset:0;border-radius:50%;background:#b7a2d51f;z-index:-1;opacity:0;transform:scale(.84);transition:opacity 360ms cubic-bezier(.22,.8,.24,1) var(--ob-mark-delay,0ms),transform 440ms cubic-bezier(.22,.8,.24,1) var(--ob-mark-delay,0ms)}
+.ob-schedule-panel .ob-calendar-day.is-planned:before{opacity:1;transform:scale(1)}
+html[data-reduced] .ob-schedule-panel .ob-calendar-day,html[data-reduced] .ob-schedule-panel .ob-calendar-day:before{transition:none}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) .ob-schedule-panel .ob-calendar-day,html:not([data-motion-override]) .ob-schedule-panel .ob-calendar-day:before{transition:none}}

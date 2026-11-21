@@ -35,3 +35,16 @@ Tap Hour or Minute to select its digits and request a numeric keypad. Hour → M
 Source context: Figma trial 299:6535 / 299:6537 / 541:12708 and reminder 529:5326 / 529:5200 / 529:5411. The original creation examples use a 21-day default. The separate approved onboarding comparison deliberately preserves its two-week wording; see ONBOARDING.md. Browser components only; no native app integration is claimed.
 
 The AM/PM wrapper now composes `today-segmented-control` from controls.js. The same control supports three schedule options in onboarding; see CONTROLS.md.
+
+## Independent time editor · November 21
+
+`<today-time-editor value="21:30"></today-time-editor>` is the extracted **Choose a time** soft-wheel panel, with its own [focused preview](time-editor.html) and Picker pieces specimen. It includes Hour, Minute, Period, Cancel and Use this time. It has no reminder switch, onboarding copy, weekday marks or outer disclosure. The wheel variant of `today-time-picker` now consumes this same component.
+
+- `.value` / `value` is a confirmed 24-hour `HH:mm` string (default `21:30`). Wheel changes only edit a private draft. A host value assignment replaces the draft.
+- Use this time emits `change {value}` after committing the wheel position. Cancel or Escape restores the confirmed value and emits `picker-cancel {value}`. The standalone editor stays mounted; the host chooses whether to dismiss it.
+- `disabled` makes wheels inert and disables actions. Each wheel supports arrows, Home/End, tapping and scrolling. Reduced motion uses immediate settling. Notifications, timezone interpretation and persistence remain host responsibilities.
+- Load `components/pickers.js`/`.css`, controls/icons, and the shared disclosure foundation in the manifest order. `time-editor-study.js` is only the standalone demo's confirmation output/reset.
+
+The ruler's numeric readout is centered independently of its “days” suffix. Selected weekly marks (7, 14, 21…) keep their existing 28 px height without the extra 20% selection lift; ordinary marks retain their subtle lift. Weekly emphasis is preserved without crowding the selection capsule.
+
+Soft-wheel labels now grow continuously to 130% at the center, using scroll position rather than waiting for selection to settle. Row spacing stays 44 px. The selection-band lines fade at both ends. The same treatment applies inside the reminder picker and the independent editor.

@@ -1172,9 +1172,10 @@
         "page-counter",
         "navigation",
         "landing",
-        "segmented-control"
+        "segmented-control",
+        "onboarding-gradient"
       ],
-      "status": "Selected hybrid flow from November 21 review; A/B comparisons retained. Landing and Features shared unchanged. Browser only.",
+      "status": "Selected hybrid flow; normalized background, persistent gradient travel and no Skip for now. Landing/Features unchanged. Browser only.",
       "figmaNodes": [
         "322:484",
         "121:11953",
@@ -1199,6 +1200,7 @@
           "components/bottom-nav.css",
           "components/welcome-intro.css",
           "components/artwork.css",
+          "components/onboarding-gradient.css",
           "components/onboarding.css"
         ],
         "scripts": [
@@ -1213,13 +1215,15 @@
           "today-logo.js",
           "components/welcome-intro.js",
           "components/artwork.js",
+          "components/onboarding-gradient.js",
           "components/onboarding.js"
         ],
         "markup": "<today-onboarding-screen screen=\"review\" variant=\"a\"></today-onboarding-screen>",
         "events": [
           "draftchange",
           "navigate",
-          "preview-action"
+          "preview-action",
+          "schedule-selection"
         ],
         "usage": "Read ONBOARDING.md. Selected flow follows the per-screen choices; Compare A/B remains available. Approved four-step/two-week reading fixture, no backend or persistence.",
         "demoOnly": [
@@ -1255,6 +1259,130 @@
           "change: event.detail.value"
         ],
         "usage": "Two or more equal options; value, disabled, optional no selection, arrow keys, Home/End. Read CONTROLS.md."
+      }
+    },
+    {
+      "id": "onboarding-gradient",
+      "name": "Onboarding gradient transition",
+      "preview": "onboarding.html",
+      "sourcePage": "source.html#onboarding-gradient",
+      "browserSource": [
+        "components/onboarding-gradient.js",
+        "components/onboarding-gradient.css",
+        "ONBOARDING.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Browser motion adapted from supplied SwiftUI; existing dark library gradient preserved and normalized.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-onboarding-gradient",
+        "styles": [
+          "components/onboarding-gradient.css"
+        ],
+        "scripts": [
+          "components/onboarding-gradient.js"
+        ],
+        "markup": "<today-onboarding-gradient position=\"top\"></today-onboarding-gradient>",
+        "events": [],
+        "usage": "Place one persistent instance inside a positioned, clipped container. Set position top/bottom. 65 ms delay, 640 ms cubic-bezier(.24,.74,.26,1); reduced motion jumps immediately. Keep content above it.",
+        "demoOnly": []
+      }
+    },
+    {
+      "id": "home-overview",
+      "name": "Home with multiple habits",
+      "preview": "home.html",
+      "sourcePage": "source.html#home-overview",
+      "browserSource": [
+        "components/home-overview.js",
+        "components/home-overview.css",
+        "home-study.js",
+        "home-study.css",
+        "HOME.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "artwork",
+        "navigation",
+        "widgets"
+      ],
+      "status": "Browser proposal extending the selected Home. One, three, six and day-off fixtures; no real persistence.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-home-overview",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/bottom-nav.css",
+          "components/habit-widget.css",
+          "components/home-overview.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/cradle-fluid.js",
+          "components/bottom-nav.js",
+          "components/artwork.js",
+          "components/widget-primitives.js",
+          "components/home-overview.js"
+        ],
+        "markup": "<today-home-overview></today-home-overview>",
+        "events": [
+          "daychange",
+          "logrequest",
+          "destination",
+          "add"
+        ],
+        "usage": "Assign .model with selectedDate, days, eligible habits and confirmed amounts; host owns save/eligibility/timezone. See HOME.md.",
+        "demoOnly": [
+          "home-study.js",
+          "home-study.css"
+        ]
+      }
+    },
+    {
+      "id": "time-editor",
+      "name": "Choose a time \u2014 soft wheels",
+      "preview": "time-editor.html",
+      "sourcePage": "source.html#time-editor",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "time-editor-study.js",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons"
+      ],
+      "status": "Independent browser wheel editor; the reminder wheel picker consumes the same component.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-time-editor",
+        "styles": [
+          "foundations/motion.css",
+          "components/controls.css",
+          "components/pickers.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "markup": "<today-time-editor value=\"21:30\"></today-time-editor>",
+        "events": [
+          "change",
+          "picker-cancel"
+        ],
+        "usage": "value is confirmed HH:mm. Wheel changes stay a draft. Use this time confirms; Cancel/Escape restores. Host owns presentation/persistence. See PICKERS.md.",
+        "demoOnly": [
+          "time-editor-study.js"
+        ]
       }
     }
   ],

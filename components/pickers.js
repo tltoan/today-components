@@ -19,8 +19,8 @@
       this.dataset.axis=this.axis;const id='pk-wheel-'+(++nextId);
       this.innerHTML='<div class="pk-wheel-scroll" role="listbox" tabindex="0"></div>';
       this.scroller=this.firstElementChild;this.scroller.setAttribute('aria-label',this._label);this.scroller.setAttribute('aria-orientation',this.axis==='x'?'horizontal':'vertical');
-      this.values.forEach((v,i)=>{const option=document.createElement('div');option.className='pk-wheel-option';option.id=id+'-'+i;option.setAttribute('role','option');option.dataset.index=i;if(this.axis==='x'&&Number(v)%7===0)option.dataset.major='';option.textContent=v;this.scroller.append(option);});
-      this.scroller.addEventListener('scroll',()=>{if(this.live&&this._userDriven)this.readPosition();clearTimeout(this._timer);this._timer=setTimeout(()=>this.settle(),120);},options);
+      this.values.forEach((v,i)=>{const option=document.createElement('div');option.className='pk-wheel-option';option.id=id+'-'+i;option.setAttribute('role','option');option.dataset.index=i;if(this.axis==='x'&&Number(v)%7===0)option.dataset.major='';const label=document.createElement('span');label.className='pk-wheel-label';label.textContent=v;option.append(label);this.scroller.append(option);});
+      this.scroller.addEventListener('scroll',()=>{this.updateFocus();if(this.live&&this._userDriven)this.readPosition();clearTimeout(this._timer);this._timer=setTimeout(()=>this.settle(),120);},options);
       this.scroller.addEventListener('wheel',()=>{this._programmatic=false;this._userDriven=true;this._targetIndex=null;},options);
       this.scroller.addEventListener('pointerdown',e=>{this._programmatic=false;this._userDriven=true;this._targetIndex=null;this._ignoreClick=false;if(e.pointerType!=='mouse'||e.button!==0)return;this._drag={id:e.pointerId,start:this.axis==='x'?e.clientX:e.clientY,scroll:this.axis==='x'?this.scroller.scrollLeft:this.scroller.scrollTop,moved:false};},options);
       this.scroller.addEventListener('pointermove',e=>{const d=this._drag;if(!d||d.id!==e.pointerId)return;const delta=(this.axis==='x'?e.clientX:e.clientY)-d.start;if(!d.moved&&Math.abs(delta)<4)return;d.moved=true;e.preventDefault();this.scroller.setPointerCapture(e.pointerId);this.scroller.classList.add('pk-wheel-dragging');this.scroller[this.axis==='x'?'scrollLeft':'scrollTop']=d.scroll-delta;},options);
@@ -31,10 +31,11 @@
       this._resize?.disconnect();this._resize=new ResizeObserver(()=>this.position(false));this._resize.observe(this);
       this.mark();this.position(false);
     }
+    updateFocus(){if(this.axis!=='y'||!this.scroller)return;const center=this.scroller.scrollTop/44;[...this.scroller.children].forEach((el,i)=>{const focus=Math.max(0,1-Math.abs(i-center));el.style.setProperty('--pk-wheel-scale',(1+.3*focus).toFixed(4));});}
     get value(){return this._value;}
     set value(value){this._programmatic=false;this._userDriven=false;this._targetIndex=null;this._value=String(value);if(this.scroller){this.mark();this.position(false);}}
     mark(){const i=this.values.indexOf(this._value);this.scroller.querySelectorAll('[role=option]').forEach((el,n)=>el.setAttribute('aria-selected',n===i));this.scroller.setAttribute('aria-activedescendant',this.scroller.children[i]?.id||'');}
-    position(smooth){const i=this.values.indexOf(this._value);if(i<0)return;this.scroller.scrollTo({[this.axis==='x'?'left':'top']:i*44,behavior:smooth&&!reduced()?'smooth':'instant'});}
+    position(smooth){const i=this.values.indexOf(this._value);if(i<0)return;this.scroller.scrollTo({[this.axis==='x'?'left':'top']:i*44,behavior:smooth&&!reduced()?'smooth':'instant'});this.updateFocus();}
     choose(index){if(this.live){this._targetIndex=index;this._userDriven=true;this.scroller.scrollTo({[this.axis==='x'?'left':'top']:index*44,behavior:reduced()?'instant':'smooth'});this.readPosition();return;}this._programmatic=true;this._value=this.values[index];this.mark();this.position(true);event(this,'change',{value:this._value});}
     commit(){if(!this._programmatic)this.settle();}
     readPosition(){const index=clamp(Math.round((this.axis==='x'?this.scroller.scrollLeft:this.scroller.scrollTop)/44),0,this.values.length-1);const value=this.values[index];if(value!==this._value){this._value=value;this.mark();event(this,'change',{value});}}
@@ -127,6 +128,26 @@
   const timeParts=value=>{const [h,m]=value.split(':').map(Number);return{hour:h%12||12,minute:m,period:h<12?'AM':'PM'};};
   const serialize=p=>pad(p.hour%12+(p.period==='PM'?12:0))+':'+pad(p.minute);
   const timeLabel=value=>{const p=timeParts(value);return p.hour+':'+pad(p.minute)+' '+p.period;};
+  // Independent wheel editor. Draft changes never commit the confirmed time.
+  class TimeEditor extends HTMLElement {
+    static observedAttributes=['value','disabled'];
+    get value(){return validTime(this.getAttribute('value'))?this.getAttribute('value'):'21:30';}
+    set value(value){if(validTime(value))this.setAttribute('value',value);}
+    connectedCallback(){
+      if(this._mounted)return;this._mounted=true;this._draft=timeParts(this.value);
+      this.innerHTML='<div class="pk-time-editor"><div class="pk-edit-heading"><span>Choose a time</span>'+press('Cancel','variant="quiet" data-cancel')+'</div><div class="pk-time-wheels"><span class="pk-wheel-band" aria-hidden="true"></span>'+['hour','minute','period'].map(unit=>'<div><span class="pk-wheel-title">'+unit[0].toUpperCase()+unit.slice(1)+'</span><today-picker-wheel data-wheel="'+unit+'"></today-picker-wheel></div>').join('')+'</div><p class="pk-error" role="status"></p>'+press('Use this time','variant="primary" block data-confirm')+'</div>';
+      const values={hour:Array.from({length:12},(_,i)=>String(i+1)),minute:Array.from({length:60},(_,i)=>pad(i)),period:['AM','PM']};
+      this.querySelectorAll('[data-wheel]').forEach(w=>{const unit=w.dataset.wheel;w.configure({values:values[unit],value:unit==='minute'?pad(this._draft[unit]):String(this._draft[unit]),label:unit==='period'?'AM or PM':unit==='hour'?'Hour':'Minute'});w.addEventListener('change',e=>{e.stopPropagation();if(!this.hasAttribute('disabled'))this._draft[unit]=unit==='period'?e.detail.value:Number(e.detail.value);});});
+      this.addEventListener('today-activate',e=>{if(this.hasAttribute('disabled'))return;if(e.target.matches('[data-cancel]'))this.cancel();if(e.target.matches('[data-confirm]'))this.confirm();});
+      this.addEventListener('keydown',e=>{if(e.key==='Escape'&&!this.hasAttribute('disabled')){e.preventDefault();e.stopPropagation();this.cancel();}});
+      this.sync();
+    }
+    attributeChangedCallback(){if(this._mounted)this.sync();}
+    sync(){this._draft=timeParts(this.value);this.querySelectorAll('[data-wheel]').forEach(w=>w.value=w.dataset.wheel==='minute'?pad(this._draft.minute):String(this._draft[w.dataset.wheel]));this.querySelector('.pk-time-wheels').inert=this.hasAttribute('disabled');this.querySelectorAll('today-button').forEach(b=>b.toggleAttribute('disabled',this.hasAttribute('disabled')));}
+    cancel(){this.sync();event(this,'picker-cancel',{value:this.value});}
+    confirm(){if(this.hasAttribute('disabled'))return;this.querySelectorAll('[data-wheel]').forEach(w=>w.commit());this.value=serialize(this._draft);event(this,'change',{value:this.value});}
+  }
+  customElements.define('today-time-editor',TimeEditor);
   class TimePicker extends HTMLElement {
     static observedAttributes=['value','disabled'];
     get value(){return validTime(this.getAttribute('value'))?this.getAttribute('value'):'21:30';}
@@ -136,10 +157,10 @@
     attributeChangedCallback(name){if(this._mounted){if(name==='disabled'){if(this.hasAttribute('disabled'))this.cancel(false);this.querySelector('[data-edit-time]').toggleAttribute('disabled',this.hasAttribute('disabled'));}else{this._draft=timeParts(this.value);this.update();this.sync();}}}
     build(){
       const variant=['inline','wheel','dial'].includes(this.getAttribute('variant'))?this.getAttribute('variant'):'inline';this.dataset.variant=variant;this._draft=timeParts(this.value);this._unit='hour';
+      if(variant==='wheel'){this.buildWheel();return;}
       const period='<today-period-pill value="PM"></today-period-pill>';
       const fields='<div class="pk-clock-fields"><label><span>Hour</span><input aria-label="Hour" inputmode="numeric" type="text" pattern="[0-9]*" maxlength="2" enterkeyhint="next" autocomplete="off" data-min="1" data-max="12" data-unit="hour"></label><b aria-hidden="true">:</b><label><span>Minute</span><input aria-label="Minute" inputmode="numeric" type="text" pattern="[0-9]*" maxlength="2" enterkeyhint="done" autocomplete="off" data-min="0" data-max="59" data-unit="minute"></label></div>';
       let control=fields+'<div class="pk-field-navigation" role="group" aria-label="Time field navigation"><button type="button" data-focus-unit="hour">Hour</button><button type="button" data-focus-unit="minute">Minute</button><button type="button" data-done>Done</button></div><p class="pk-input-hint">Tap a number to type. Done closes the keypad.</p>'+period;
-      if(variant==='wheel')control='<div class="pk-time-wheels"><span class="pk-wheel-band" aria-hidden="true"></span><div><span class="pk-wheel-title">Hour</span><today-picker-wheel data-wheel="hour"></today-picker-wheel></div><div><span class="pk-wheel-title">Minute</span><today-picker-wheel data-wheel="minute"></today-picker-wheel></div><div><span class="pk-wheel-title">Period</span><today-picker-wheel data-wheel="period"></today-picker-wheel></div></div>';
       if(variant==='dial')control='<div class="pk-dial-tabs" role="group" aria-label="Adjust hours or minutes"><button type="button" data-dial-unit="hour" aria-pressed="true"></button><b>:</b><button type="button" data-dial-unit="minute" aria-pressed="false"></button></div><div class="pk-dial" role="slider" tabindex="0" aria-label="Hour" aria-valuemin="1" aria-valuemax="12"><div class="pk-dial-hand" aria-hidden="true"><span></span></div><div class="pk-dial-numbers" aria-hidden="true"></div><span class="pk-dial-center" aria-hidden="true"></span></div>'+period+'<div class="pk-dial-nudge">'+press('','variant="quiet" symbol="−" accessible-label="Decrease selected time unit" data-nudge="-1"')+'<span>Tap the dial or adjust by one.</span>'+press('','variant="quiet" symbol="+" accessible-label="Increase selected time unit" data-nudge="1"')+'</div>';
       this.innerHTML='<div class="pk-current-panel"><div><button type="button" class="pk-saved-time" data-edit-time><span>Reminder time</span><strong></strong><span class="pk-edit-label">Edit <today-icon name="pencil"></today-icon></span></button></div></div><div class="pk-time-panel"><div><div class="pk-time-editor"><div class="pk-edit-heading"><span>Choose a time</span>'+press('Cancel','variant="quiet" data-cancel')+'</div>'+control+'<p class="pk-error" role="status"></p>'+press('Use this time','variant="primary" block data-confirm')+'</div></div></div><p class="pk-time-feedback" role="status"></p>';
       this._summaryDisclosure=new TodayUI.Disclosure(this.querySelector('.pk-current-panel'),{open:true});
@@ -159,11 +180,17 @@
       });
       this.querySelectorAll('[data-focus-unit]').forEach(button=>button.onclick=()=>this.focusField(button.dataset.focusUnit));
       this.querySelector('[data-done]')?.addEventListener('click',()=>this.finishTyping());
-      if(variant==='wheel'){
-        const values={hour:Array.from({length:12},(_,i)=>String(i+1)),minute:Array.from({length:60},(_,i)=>pad(i)),period:['AM','PM']};
-        this.querySelectorAll('[data-wheel]').forEach(w=>{const unit=w.dataset.wheel;w.configure({values:values[unit],value:unit==='minute'?pad(this._draft[unit]):String(this._draft[unit]),label:unit==='period'?'AM or PM':unit==='hour'?'Hour':'Minute'});w.addEventListener('change',e=>{e.stopPropagation();this._draft[unit]=unit==='period'?e.detail.value:Number(e.detail.value);});});
-      }
       if(variant==='dial')this.bindDial();
+      this.update();this.sync();this.querySelector('[data-edit-time]').disabled=this.hasAttribute('disabled');
+    }
+    buildWheel(){
+      this.innerHTML='<div class="pk-current-panel"><div><button type="button" class="pk-saved-time" data-edit-time><span>Reminder time</span><strong></strong><span class="pk-edit-label">Edit <today-icon name="pencil"></today-icon></span></button></div></div><div class="pk-time-panel"><div><today-time-editor value="'+this.value+'"></today-time-editor></div></div><p class="pk-time-feedback" role="status"></p>';
+      this._wheelEditor=this.querySelector('today-time-editor');
+      this._summaryDisclosure=new TodayUI.Disclosure(this.querySelector('.pk-current-panel'),{open:true});
+      this._disclosure=new TodayUI.Disclosure(this.querySelector('.pk-time-panel'),{trigger:this.querySelector('[data-edit-time]')});
+      this.querySelector('[data-edit-time]').onclick=()=>this._editing?this.cancel():this.open(true);
+      this._wheelEditor.addEventListener('picker-cancel',e=>{e.stopPropagation();this.cancel();});
+      this._wheelEditor.addEventListener('change',e=>{e.stopPropagation();this.value=e.detail.value;this._editing=false;this._summaryDisclosure.setOpen(true);this._disclosure.setOpen(false);this.querySelector('.pk-time-feedback').textContent=timeLabel(this.value)+' selected.';settle(this.querySelector('.pk-saved-time strong'));event(this,'change',{value:this.value});});
       this.update();this.sync();this.querySelector('[data-edit-time]').disabled=this.hasAttribute('disabled');
     }
     markField(unit){this.querySelectorAll('[data-focus-unit]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.focusUnit===unit));}
@@ -172,10 +199,11 @@
     validateFields(){let valid=true;this.querySelectorAll('input[data-unit]').forEach(input=>{const n=Number(input.value),okay=input.value!==''&&Number.isInteger(n)&&/^\d{1,2}$/.test(input.value)&&n>=Number(input.dataset.min)&&n<=Number(input.dataset.max);input.setAttribute('aria-invalid',String(!okay));if(!okay)valid=false;});this.querySelector('.pk-error').textContent=valid?'':'Use an hour from 1–12 and a minute from 00–59.';this.querySelector('[data-confirm]').toggleAttribute('disabled',!valid);return valid;}
     open(focus=false){if(this.hasAttribute('disabled'))return;this.markField(null);this._draft=timeParts(this.value);this._editing=true;this.sync();this.querySelector('.pk-error').textContent='';this.querySelector('[data-confirm]').removeAttribute('disabled');this._summaryDisclosure.setOpen(false);this._disclosure.setOpen(true);if(focus)this.querySelector('input,.pk-wheel-scroll,[data-dial-unit]')?.focus({preventScroll:true});this.querySelector('.pk-time-feedback').textContent='';event(this,'picker-open',{});}
     cancel(announce=true){if(!this._editing)return;this._editing=false;this._draft=timeParts(this.value);this._summaryDisclosure.setOpen(true);this._disclosure.setOpen(false);this.sync();if(announce)this.querySelector('.pk-time-feedback').textContent='Kept '+timeLabel(this.value)+'.';event(this,'picker-cancel',{value:this.value});}
-    confirm(){if(!this._editing||!this.validateFields())return;this.querySelectorAll('input[data-unit]').forEach(input=>this._draft[input.dataset.unit]=Number(input.value));this.querySelectorAll('[data-wheel]').forEach(w=>w.commit());const value=serialize(this._draft);this.value=value;this._editing=false;this._summaryDisclosure.setOpen(true);this._disclosure.setOpen(false);this.querySelector('.pk-time-feedback').textContent=timeLabel(value)+' selected.';settle(this.querySelector('.pk-saved-time strong'));event(this,'change',{value});}
+    confirm(){if(this._wheelEditor){if(this._editing)this._wheelEditor.confirm();return;}if(!this._editing||!this.validateFields())return;this.querySelectorAll('input[data-unit]').forEach(input=>this._draft[input.dataset.unit]=Number(input.value));this.querySelectorAll('[data-wheel]').forEach(w=>w.commit());const value=serialize(this._draft);this.value=value;this._editing=false;this._summaryDisclosure.setOpen(true);this._disclosure.setOpen(false);this.querySelector('.pk-time-feedback').textContent=timeLabel(value)+' selected.';settle(this.querySelector('.pk-saved-time strong'));event(this,'change',{value});}
     update(){if(this.querySelector('.pk-saved-time strong'))this.querySelector('.pk-saved-time strong').textContent=timeLabel(this.value);}
     sync(){
       if(!this._draft)return;
+      if(this._wheelEditor){this._wheelEditor.value=this.value;this._wheelEditor.toggleAttribute('disabled',this.hasAttribute('disabled'));return;}
       this.querySelectorAll('input[data-unit]').forEach(input=>{input.value=input.dataset.unit==='minute'?pad(this._draft.minute):this._draft.hour;input.removeAttribute('aria-invalid');});
       if(this.querySelector('today-period-pill'))this.querySelector('today-period-pill').value=this._draft.period;
       this.querySelectorAll('[data-wheel]').forEach(w=>w.value=w.dataset.wheel==='minute'?pad(this._draft.minute):String(this._draft[w.dataset.wheel]));

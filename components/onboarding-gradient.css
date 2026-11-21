@@ -1,0 +1,7 @@
+/* A two-screen-tall paint plane puts the same gradient center at either edge.
+   The approved 110% × 35% top wash is unchanged at its resting position. */
+today-onboarding-gradient{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;background:#000}
+today-onboarding-gradient .og-paint{position:absolute;inset:-100% 0 0;background:radial-gradient(ellipse var(--og-width,110%) var(--og-height,17.5%) at var(--og-x,40%) 50%,var(--og-color,#2222396b),transparent);transform:translateY(0);transition:transform 640ms cubic-bezier(.24,.74,.26,1) 65ms}
+today-onboarding-gradient[position=bottom] .og-paint{transform:translateY(50%)}
+html[data-reduced] today-onboarding-gradient .og-paint{transition:none}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) today-onboarding-gradient .og-paint{transition:none}}

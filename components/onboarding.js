@@ -30,8 +30,9 @@
       this._intersection=new IntersectionObserver(entries=>{this._visible=entries[0].isIntersecting;this.syncFeatureMotion();});this._intersection.observe(this);
       this.render();
     }
-    disconnectedCallback(){this._connected=false;this._abort?.abort();this._motionObserver?.disconnect();this._intersection?.disconnect();this.stopFeatureMotion();this._entrance?.cancel();}
-    attributeChangedCallback(){if(this._connected)this.render();}
+    disconnectedCallback(){this._connected=false;this._abort?.abort();this._motionObserver?.disconnect();this._intersection?.disconnect();this.stopFeatureMotion();this._entrance?.cancel();this._countMotion?.cancel();}
+    attributeChangedCallback(){if(this._connected&&!this._configuring)this.render();}
+    configure(screen,variant,model){this._configuring=true;this.setAttribute('screen',screen);this.setAttribute('variant',variant);this.draft={...makeDraft(),...model,days:[...model.days]};this._configuring=false;if(this._connected)this.render();}
     get screen(){return pages.includes(this.getAttribute('screen'))?this.getAttribute('screen'):'describe';}
     set screen(value){this.setAttribute('screen',value);}
     set model(value){this.draft={...makeDraft(),...value,days:[...(value.days||[0,2,4])]};if(this._connected)this.render();}
@@ -45,7 +46,28 @@
     weekGrid(numbers=false){return `<div class="ob-week-grid" aria-label="Two-week reading schedule">${days.map(d=>`<span class="ob-day-label">${d.slice(0,2)}</span>`).join('')}${Array.from({length:14},(_,i)=>`<span class="ob-calendar-day ${this.draft.days.includes(i%7)?'is-planned':''}" aria-label="${format(i)}${this.draft.days.includes(i%7)?', planned reading night':', day off'}">${numbers?i+15:`<today-icon name="${this.draft.days.includes(i%7)?'planned-day':'day-off'}"></today-icon>`}</span>`).join('')}</div>`;}
     metric(){return `<div class="ob-metric">${this.draft.method==='check'?'<strong>Check it off</strong>':`<strong>${this.draft.amount}<small>${unit(this.draft)}</small></strong>`}<span>per reading session</span></div>`;}
     presetValue(){const key=this.draft.days.join(',');return key==='0,1,2,3,4,5,6'?'daily':key==='1,2,3,4,5'?'weekdays':key==='0,6'?'weekends':'';}
-    refreshSchedule(){this.querySelector('.ob-frequency strong').textContent=this.draft.days.length;this.querySelector('.ob-frequency span').textContent=this.draft.days.length===1?'time':'times';this.querySelectorAll('.ob-day-choices today-button').forEach(b=>b.toggleAttribute('selected',this.draft.days.includes(Number(b.getAttribute('value')))));this.querySelector('.ob-week-grid').outerHTML=this.weekGrid(true);this.querySelector('[data-schedule-presets]').value=this.presetValue();}
+    refreshSchedule(source='weekday'){
+      const count=this.querySelector('.ob-frequency strong'),old=count.textContent;
+      count.textContent=this.draft.days.length;
+      this.querySelector('.ob-frequency span').textContent=this.draft.days.length===1?'time':'times';
+      this.querySelectorAll('.ob-day-choices today-button').forEach((b,i)=>{
+        b.style.setProperty('--today-selection-delay',source==='preset'?`${45+i*16}ms`:'0ms');
+        b.toggleAttribute('selected',this.draft.days.includes(Number(b.getAttribute('value'))));
+      });
+      // Keep calendar marks mounted so their fill can interpolate and reverse.
+      this.querySelectorAll('.ob-calendar-day').forEach((cell,i)=>{
+        const planned=this.draft.days.includes(i%7);
+        cell.style.setProperty('--ob-mark-delay',source==='preset'?`${75+(i%7)*16+Math.floor(i/7)*28}ms`:'25ms');
+        cell.classList.toggle('is-planned',planned);
+        cell.setAttribute('aria-label',`${format(i)}${planned?', planned reading night':', day off'}`);
+      });
+      this.querySelector('[data-schedule-presets]').value=this.presetValue();
+      this._countMotion?.cancel();
+      if(old!==String(this.draft.days.length)&&!reduced())this._countMotion=count.animate([{opacity:.55,transform:'translateY(3px)'},{opacity:1,transform:'translateY(0)'}],{duration:280,easing:'cubic-bezier(.22,.8,.24,1)'});
+      this.dispatchEvent(new CustomEvent('schedule-selection',{bubbles:true,detail:{days:[...this.draft.days],preset:this.presetValue()||null,source}}));
+      // Optional browser feedback; iPhone haptics belong to the native event adapter.
+      if(!reduced()&&typeof navigator.vibrate==='function')navigator.vibrate(6);
+    }
     firstSession(){let n=this.draft.start;while(!this.draft.days.includes(n%7)&&n<this.draft.start+7)n++;return format(n);}
     render(animate=true){
       this.stopFeatureMotion();const s=this.screen,d=this.draft;
@@ -53,7 +75,7 @@
       let content='';
       if(s==='welcome')content='<today-welcome-intro aria-label="Today. What will you do?"></today-welcome-intro>';
       if(s==='features')content=`<div class="ob-features-head"><h3>You’re making the first STEP<br>in reaching your goals</h3><p>here, we will give you the tools you need to achieve and lead the life you want</p></div><div class="ob-features-window" tabindex="0" role="group" aria-label="Today features. Drag or use left and right arrows to explore."><div class="ob-features-tilt" aria-hidden="true"><div class="ob-feature-belt">${Array.from({length:3},()=>[['plan','Personalized plans','schedule','Flexible schedules'],['log','Quick logging','history','Progress history'],['custom','Custom habits','fitness','Fitness sync'],['tracking','Track your way','review','Plan reviews']].map(col=>`<div class="ob-feature-column">${[0,2].map(i=>`<div class="ob-feature-tile">${art('feature-'+col[i])}<span>${col[i+1]}</span></div>`).join('')}</div>`).join('')).join('')}</div></div></div><p class="ob-sr">Personalized plans, Quick logging, Flexible schedules, Progress history, Custom habits, Fitness sync, Track your way, Plan reviews</p>${this.footer()}`;
-      if(s==='describe')content=`<div class="ob-entry-head"><span>New habit</span>${button('Skip for now','skip','quiet')}</div><div class="ob-description"><label for="ob-description-${this.getAttribute('variant')||'a'}" class="ob-sr">Describe your habit</label><textarea id="ob-description-${this.getAttribute('variant')||'a'}" aria-label="Describe your habit" placeholder="What a habit you’ve been wanting to achieve?" spellcheck="true">${esc(d.description)}</textarea></div><div class="ob-entry-footer">${button('','close','icon','icon="close" accessible-label="Close"')}<today-plan-button></today-plan-button></div>`;
+      if(s==='describe')content=`<div class="ob-entry-head"><span>New habit</span></div><div class="ob-description"><label for="ob-description-${this.getAttribute('variant')||'a'}" class="ob-sr">Describe your habit</label><textarea id="ob-description-${this.getAttribute('variant')||'a'}" aria-label="Describe your habit" placeholder="What a habit you’ve been wanting to achieve?" spellcheck="true">${esc(d.description)}</textarea></div><div class="ob-entry-footer">${button('','close','icon','icon="close" accessible-label="Close"')}<today-plan-button></today-plan-button></div>`;
       if(s==='privacy')content=`<div class="ob-privacy-art">${art('privacy-lock')}</div><div class="ob-story"><span class="ob-eyebrow">before we continue</span>${this.title('Your data is <u>yours.</u>')}<div class="ob-prose"><p>Your habits are personal. You choose what to track, what to share, and which apps to connect. We will never sell data.</p><p>Our subscription model keeps us thriving and building without compromise, creating a today better for you.</p></div></div>${this.footer()}`;
       if(s==='intro')content=`${this.title('We do things a little differently.','We intelligently break your goal into digestible portion you can trial for two weeks.')}<p class="ob-example-intro">For example: if your goal was to read before bed</p><div class="ob-example"><span class="ob-eyebrow">READ BEFORE BED</span><h4>10 pages, 3 nights a week</h4><div class="ob-trial-weeks">${[1,2].map(w=>`<div><span>Week ${w}</span>${days.map((_,i)=>`<today-icon name="${[0,2,4].includes(i)?'planned-day':'day-off'}"></today-icon>`).join('')}</div>`).join('')}</div><p class="ob-legend"><today-icon name="planned-day"></today-icon>Planned reading night</p></div><p class="ob-after-trial">After two weeks, see what you managed and decide what to keep or adjust.</p>${this.footer()}`;
       if(s==='track')content=`${this.header(1)}${this.title('Choose a way to track','You can change how you track anytime.')}<div class="ob-book">${art('open-book')}</div><div class="ob-methods" role="group" aria-label="Tracking method">${[['pages','Pages'],['minutes','Minutes'],['check','Check it off']].map(([value,label])=>`<div class="ob-method">${button(label,'method','choice',`value="${value}" ${d.method===value?'selected':''}`)}${value==='pages'?'<span>Recommended</span>':''}</div>`).join('')}</div>${this.footer('Continue','continue',true)}`;
@@ -62,7 +84,11 @@
       if(s==='review')content=`${this.header(4)}${this.title('Your goal plan','Try it for two weeks. Then check in.')}<div class="ob-plan-summary">${this.metric()}${this.weekGrid()}</div><div class="ob-start-options" role="group" aria-label="Plan start">${['Today','Tomorrow'].map((label,i)=>button(label,'start','choice',`value="${i}" ${d.start===i?'selected':''}`)).join('')}</div><dl class="ob-dates"><div><dt>First session</dt><dd>${this.firstSession()}</dd></div><div><dt>Check-in</dt><dd>${format(d.start+14)}</dd></div></dl>${button('Change how you track','track','quiet')}${this.footer('Start plan','save')}`;
       if(s==='saved')content=`<div class="ob-saved-habit">Read before bed</div>${this.title('Let’s get to it!','Make the habit yours.')}<div class="ob-saved-art">${art('first-habit-steps')}</div><div class="ob-saved-summary">${this.metric()}${this.weekGrid()}<dl class="ob-dates"><div><dt>First session</dt><dd>${this.firstSession()}</dd></div></dl></div>${this.footer('Go to Home','home')}`;
       if(s==='home')content=`<div class="ob-home-head"><div><strong>today.</strong><span>what will you do?</span></div><span class="ob-avatar" aria-label="Profile AT">AT</span></div><div class="ob-home-week">${days.map((label,i)=>`<div ${i===0?'aria-current="date"':''}><span>${label}</span><b>${15+i}</b></div>`).join('')}</div>${d.empty?`<div class="ob-empty">${art('first-habit-steps')}<h3>Start with one habit</h3><p>Use the “+” icon to make your first habit</p></div>`:`<h3 class="ob-session-heading">Your first session</h3><div class="ob-session"><div class="ob-session-art">${art('open-book')}</div><div class="ob-session-copy"><h4>Read before bed</h4><p>${d.method==='check'?'Check it off':`${d.amount} ${unit(d)} per reading session`}</p><span>${this.firstSession()}</span></div>${button('Log','log','secondary')}</div>`}<div class="ob-home-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div>`;
-      this.innerHTML=`<div class="ob-screen-content">${content}</div>`;
+      // Preserve one wash across screen changes, outside the content entrance.
+      if(!this._wash){this._wash=document.createElement('today-onboarding-gradient');this._content=document.createElement('div');this._content.className='ob-screen-content';this.replaceChildren(this._wash,this._content);}
+      this._wash.position=['privacy','intro','features'].includes(s)?'bottom':'top';
+      this._wash.hidden=['welcome','features'].includes(s);
+      this._content.innerHTML=content;
       if(s==='describe')this.assess(true);
       if(s==='features')this.bindFeatures();
       this._entrance?.cancel();if(animate&&!reduced())this._entrance=this.querySelector('.ob-screen-content').animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,easing:'cubic-bezier(.22,.8,.24,1)'});
@@ -70,7 +96,7 @@
     assess(immediate=false){const b=this.querySelector('today-plan-button');if(b)b.setState(TodayUI.PlanReadiness.assess(this.draft.description),{immediate});}
     refreshKeepingFocus(value){this.render(false);const selector=`today-button[data-action="${value.action}"]${value.value!=null?`[value="${value.value}"]`:''}`;this.querySelector(selector+' button')?.focus({preventScroll:true});}
     change(e){
-      if(e.target.matches('[data-schedule-presets]')){this.draft.days=e.detail.value==='weekdays'?[1,2,3,4,5]:e.detail.value==='weekends'?[0,6]:[0,1,2,3,4,5,6];this.refreshSchedule();this.emitDraft();}
+      if(e.target.matches('[data-schedule-presets]')){this.draft.days=e.detail.value==='weekdays'?[1,2,3,4,5]:e.detail.value==='weekends'?[0,6]:[0,1,2,3,4,5,6];this.refreshSchedule('preset');this.emitDraft();}
       if(e.target.matches('today-page-counter')){this.draft.amount=Math.max(1,e.detail.amount);if(e.detail.amount===0)e.target.amount=1;this.emitDraft();}
       if(e.target.matches('today-stepper')){this.draft.amount=e.detail.value;this.emitDraft();}
     }
@@ -79,7 +105,6 @@
       if(action==='method'){d.method=value;this.querySelectorAll('.ob-method today-button').forEach(el=>el.toggleAttribute('selected',el===b));this.emitDraft();return;}
       if(action==='weekday'){const n=Number(value);if(d.days.includes(n)&&d.days.length===1){b.setAttribute('selected','');this.notify('Keep at least one reading day.');return;}d.days=d.days.includes(n)?d.days.filter(x=>x!==n):[...d.days,n].sort();this.emitDraft();this.refreshSchedule();return;}
       if(action==='start'){d.start=Number(value);this.emitDraft();this.refreshKeepingFocus({action,value});return;}
-      if(action==='skip'){d.empty=true;this.navigate('home');return;}
       if(action==='close'){this.navigate('features');return;}
       if(action==='save'){d.empty=false;this.emitDraft();this.navigate('saved');return;}
       if(action==='log'){this.notify('Log opens the habit logger in the app. No log has been saved in this layout preview.');return;}

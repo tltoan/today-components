@@ -54,3 +54,8 @@ Browser previews use synthetic data and keep state in the page session. Native f
 - Standalone picker pieces: today-day-ruler, today-trial-days-input, today-week-cards, today-period-pill. See PICKERS.md and manifest entries. Live ruler count and ruler-tick event; optional browser vibration is not verified native haptics. Inline time fields have explicit Hour/Minute/Done navigation; Use this time confirms.
 
 - Segmented selection: `today-segmented-control` in controls.js/css, documented in CONTROLS.md. Reused by the AM/PM wrapper and aligned three-option onboarding schedule bar. Value/change/disabled plus keyboard navigation; no selection for a custom day combination.
+
+- Multiple-habit Home: [preview](https://tltoan.github.io/today-components/home.html), [API](https://tltoan.github.io/today-components/HOME.md), [source](https://tltoan.github.io/today-components/components/home-overview.js). Proposed stable illustrated list with local one/three/six/day-off fixtures; host-controlled confirmed values and saves.
+- Onboarding gradient: [source](https://tltoan.github.io/today-components/components/onboarding-gradient.js), [paint/motion](https://tltoan.github.io/today-components/components/onboarding-gradient.css). Persistent top/bottom wash with 65 ms delay and 640 ms supplied easing. All onboarding backgrounds normalized except Landing/Features; no Skip for now.
+
+- Choose a time: [standalone preview](https://tltoan.github.io/today-components/time-editor.html), `<today-time-editor>` in [pickers.js](https://tltoan.github.io/today-components/components/pickers.js). Confirmed HH:mm, separate draft, change/picker-cancel events. The reminder wheel picker consumes it too.
