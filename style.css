@@ -68,3 +68,4 @@ html[data-reduced] *,html[data-reduced] *:before{animation:none!important;transi
 @media(prefers-reduced-motion:reduce){html:not([data-motion-override]) *,html:not([data-motion-override]) *:before{animation:none!important;transition:none!important}}
 
 .component-code{display:inline-flex;align-items:center;min-height:28px;font:400 11px/1.3 Future,sans-serif;white-space:nowrap;color:#9c94a6;text-decoration:none}.component-code:hover{color:#efedf3}
+.identity h1 a{display:block;color:transparent;background:linear-gradient(100deg,#fafafa,#aaa1b4);background-clip:text;-webkit-background-clip:text;text-decoration:none}
