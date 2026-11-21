@@ -8,18 +8,20 @@
     return value(t,y1,y2);
   }
   class TodaySnapScroller {
-    constructor(viewport,{selector,onSelect=()=>{},onInteract=()=>{},reducedMotion=()=>false}={}){
-      this.viewport=viewport;this.selector=selector;this.onSelect=onSelect;this.onInteract=onInteract;this.reducedMotion=reducedMotion;
+    constructor(viewport,{selector,onSelect=()=>{},onInteract=()=>{},reducedMotion=()=>false,interactiveDrag=false}={}){
+      this.viewport=viewport;this.selector=selector;this.onSelect=onSelect;this.onInteract=onInteract;this.reducedMotion=reducedMotion;this.interactiveDrag=interactiveDrag;
       this.index=0;this.targetIndex=0;this.drag=null;this.frame=0;this.paintFrame=0;this.timer=0;this.wheelGesture=null;
       this.abort=new AbortController();const signal=this.abort.signal;
       viewport.addEventListener('scroll',()=>this._onScroll(),{passive:true,signal});
       viewport.addEventListener('wheel',event=>this._wheel(event),{passive:false,signal});
+      viewport.addEventListener('click',event=>{if(performance.now()<(this.suppressClickUntil||0)){event.preventDefault();event.stopImmediatePropagation();}},{capture:true,signal});
       viewport.addEventListener('pointerdown',event=>this._pointerDown(event),{signal});
       viewport.addEventListener('pointermove',event=>this._pointerMove(event),{signal});
       viewport.addEventListener('pointerup',event=>this._pointerEnd(event),{signal});
       viewport.addEventListener('pointercancel',()=>this.cancelDrag(),{signal});
       viewport.addEventListener('lostpointercapture',()=>{if(this.drag)this.cancelDrag();},{signal});
       viewport.addEventListener('keydown',event=>{
+        if(event.target.closest('button,a,input,select,textarea'))return;
         const base=this.frame?this.targetIndex:this.index;
         const target={ArrowDown:base+1,ArrowUp:base-1,PageDown:base+1,PageUp:base-1,Home:0,End:this.rows.length-1}[event.key];
         if(target!==undefined){event.preventDefault();this.onInteract();this.goTo(target);}
@@ -94,13 +96,17 @@
     }
     _pointerDown(event){
       if(!event.isPrimary||event.button!==0)return;
+      const interactive=event.target.closest('button,a,input,select,textarea');
+      if(interactive&&!this.interactiveDrag)return;
       this.onInteract();this._cancelAnimation();this.wheelGesture=null;
-      this.drag={pointer:event.pointerId,startY:event.clientY,startTop:this.viewport.scrollTop,index:this.nearest(),lastY:event.clientY,lastTime:performance.now(),velocity:0};
+      this.drag={pending:!!interactive,pointer:event.pointerId,startY:event.clientY,startTop:this.viewport.scrollTop,index:this.nearest(),lastY:event.clientY,lastTime:performance.now(),velocity:0};
+      if(interactive)return;
       this.viewport.classList.add('dragging');this.viewport.setPointerCapture(event.pointerId);
       this.viewport.focus({preventScroll:true});event.preventDefault();
     }
     _pointerMove(event){
       const drag=this.drag;if(!drag||drag.pointer!==event.pointerId)return;
+      if(drag.pending){if(Math.abs(event.clientY-drag.startY)<7)return;drag.pending=false;this.viewport.classList.add('dragging');this.viewport.setPointerCapture(event.pointerId);this.viewport.focus({preventScroll:true});}
       const now=performance.now(),dt=Math.max(1,now-drag.lastTime);
       drag.velocity=.65*drag.velocity+.35*(drag.lastY-event.clientY)/dt;
       drag.lastTime=now;drag.lastY=event.clientY;
@@ -110,6 +116,8 @@
     _pointerEnd(event){
       if(!this.drag)return;
       const drag=this.drag;if(drag.pointer!==event.pointerId)return;
+      if(drag.pending){this._releaseDrag();return;}
+      this.suppressClickUntil=performance.now()+350;
       const velocity=performance.now()-drag.lastTime<90?drag.velocity:0;
       const displacement=this.viewport.scrollTop-drag.startTop;
       const offsets=this.offsets(),stride=offsets[1]-offsets[0]||126;

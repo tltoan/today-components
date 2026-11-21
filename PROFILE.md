@@ -4,11 +4,11 @@ The selected profile combines **C Expandable groups + B Section cards’ identit
 
 Earlier A Compact groups and B Section cards remain behind “Compare previous profile layouts.” They also omit the removed setting.
 
-The default avatar reuses the party identity primitive and its deterministic ID-based gradient. Phone number appears only inside Account details. No charts, streak or history is duplicated here. Reference frame 390 × 844; previews wrap and each screen scrolls internally.
+The avatar uses the confirmed face/gradient or photo saved during onboarding. Identities without a chosen portrait retain the deterministic gradient fallback. Phone number appears only inside Account details. No charts, streak or history is duplicated here. Reference frame 390 × 844; previews wrap and each screen scrolls internally.
 
 ## Reuse
 
-Load `foundations/motion.css`, `components/controls.css`, `components/party-avatars.css`, `components/profile.css`; then `foundations/disclosure.js`, `components/icons.js`, `components/controls.js`, `components/party-avatars.js`, `components/profile.js`.
+Load `foundations/motion.css`, `components/controls.css`, `components/party-avatars.css`, `components/profile.css`; then `foundations/disclosure.js`, `components/icons.js`, `components/controls.js`, `components/party-avatars.js`, `components/face-palettes.js`, `components/minimal-face-motion.js`, `components/minimal-face.js`, `components/face-picker.js`, `components/profile.js`. Also load `components/face-picker.css`.
 
 ```html
 <today-profile variant="c"></today-profile>
@@ -17,11 +17,11 @@ Load `foundations/motion.css`, `components/controls.css`, `components/party-avat
 
 `today-settings-row` has `label`, `value`, `action`, optional `icon`, and `destructive`. `action` makes it a native button; otherwise it is a value row. Set attributes before mounting. It emits `settings-open` with `{action}`. The profile consumes that event to open the detail page.
 
-`today-profile.model` is a copied object: `id`, `name`, `initials`, `photoURL`, `notifications` (`allowed|denied|unasked`), `quiet`, `quietStart`, `quietEnd` (HH:mm), `backup` (`unavailable|success`), `phone`, `version`. `go(page)` opens a preview screen. `complete(message)` displays host confirmation. Display names are plain text, limited to 40 characters. Photo preview accepts local JPG/PNG/WebP up to 8 MB. No upload occurs.
+`today-profile.model` is a copied object: `id`, `name`, `initials`, `faceStyle`, `gradientIndex`, `photoURL`, `notifications` (`allowed|denied|unasked`), `quiet`, `quietStart`, `quietEnd` (HH:mm), `backup` (`unavailable|success`), `phone`, `version`. `go(page)` opens a preview screen. `complete(message)` displays host confirmation. Display names are plain text, limited to 40 characters. Edit profile reuses `today-face-picker` with local image decoding and a 10 MB limit. No upload occurs.
 
-`profile-request` bubbles `{action, value?}`. Actions: `save-profile`, `save-notifications` (proposed full model), `permission`, `system-settings`, `backup`, `export`, `feedback`, `change-phone`, `widget-guide`, `terms`, `confirm-signout`, `confirm-delete`. The element does not call a server, change OS settings, send feedback or delete anything. Production hosts must supply authorization, persistence, success/error state, actual permission requests and platform routing.
+`profile-request` bubbles `{action, value?}`. `save-profile` supplies `value: {name, selection}`; confirm through the shared identity store before leaving the editor. Cancel discards its draft. Actions: `save-profile`, `save-notifications` (proposed full model), `permission`, `system-settings`, `backup`, `export`, `feedback`, `change-phone`, `widget-guide`, `terms`, `confirm-signout`, `confirm-delete`. The element does not call a server, change OS settings, send feedback or delete anything. Production hosts must supply authorization, persistence, success/error state, actual permission requests and platform routing.
 
-`profile-study.js` is explicitly a local sample host. Saved identity is reflected across the three previews. It contains no real account. Do not import its mock responses into production.
+`profile-study.js` is explicitly a local sample host. Its `profile-identity-demo.js` adapter stores confirmed identity locally in the browser and reflects it in onboarding, Profile, Home and party avatars. A failed write preserves the prior identity. It contains no real account. Do not import its mock responses into production.
 
 ## States and motion
 

@@ -1,6 +1,6 @@
 # Profile picture picker: seven faces
 
-[Open the selected layout](faces.html). **Portrait & color (A)** is selected. Tilt is the initial face. The picker remains standalone; the approved onboarding and current profile components are unchanged.
+[Open the selected layout](faces.html). **Portrait & color (A)** is selected. Tilt is the initial face. The picker now follows Features in onboarding and is reused by Edit profile. Saving confirms one identity for Profile, Home and your party avatars. Landing and Features retain their approved compositions. See [PROFILE-IDENTITY.md](PROFILE-IDENTITY.md).
 
 ## Independent choices
 
@@ -20,11 +20,12 @@ Load `components/party-avatars.js`, `components/face-palettes.js`, `components/m
                     style="width:40px"></today-minimal-face>
 ```
 
-The picker accepts `variant="portrait|grid|carousel"`, `face-style="loop|tilt|mellow|dash|drift|skeptic|lift"` (default Tilt), clamped `value="0...11"` and `display-name`. `value`/`faceStyle` properties mirror those attributes. Setting attributes/properties is silent. Its `selection` getter returns either:
+The picker accepts `variant="portrait|grid|carousel"`, `face-style="loop|tilt|mellow|dash|drift|skeptic|lift"` (default Tilt), clamped `value="0...11"` and `display-name`. `value`/`faceStyle` properties mirror those attributes. Setting attributes/properties is silent. Its `selection` getter/setter restores a draft silently and returns either:
 
 ```js
 { kind: 'avatar', faceStyle: 'loop', gradientIndex: 3 }
-{ kind: 'photo', file: File }
+{ kind: 'photo', faceStyle: 'loop', gradientIndex: 3, file: File }
+// A restored confirmed photo uses photoURL instead of file.
 ```
 
 A bubbling `change` event includes the selection and `source` (`tap`, `keyboard`, `button`, `scroll`, `face-button`, `face-swipe`, `photo`, or `remove-photo`). Swatches provide radio semantics, roving focus and arrow/Home/End keys. Portrait arrows and photo controls have 44 px targets. The host owns confirmation, persistence and upload.
@@ -38,7 +39,7 @@ The standalone face accepts `face="loop|tilt|mellow|dash|drift|skeptic|lift"`, o
 Copy these three files into the host target:
 
 - `native/PlayfulFaces.swift`: supplied seven-face original, preserved byte for byte.
-- `native/TodayPartyAvatars.swift`: existing six Today avatar palettes.
+- `native/TodayPartyAvatars.swift`: shared identity avatars and the existing six fallback palettes.
 - `native/TodayFacePicker.swift`: twelve palettes, `TodayFaceSelection`, `TodayFacePortrait`, and `TodayFacePicker` including PhotosPicker.
 
 ```swift
@@ -58,6 +59,8 @@ The host confirms and persists the explicit lowercase `faceStyle` (`loop`, `tilt
 ## Motion
 
 Only the facial features slide 36 px with a soft crossfade over 480 ms using cubic-bezier(.22,.8,.24,1). The gradient circle stays mounted and stationary. Both arrows cycle all seven faces; direction controls the feature slide. There is no face/color caption below the portrait. Color changes blend all three stops in place over 560 ms with the same easing, retargeting from the currently painted colors during rapid taps. They never move the disk or trigger a wink. Browser registered color properties and native animatable RGB stops preserve this behavior. The gallery confirmation is labeled “Save profile”; the host still owns actual persistence. The supplied ten-second idle cycle and each face’s distinct 3.8-second expression are preserved, including the 55 ms eye lead, 45 ms head delay and 105 ms nose delay. A tap cannot restart an expression before it finishes. Small identity examples stay still. Browser animation suspends offscreen and in background tabs. Reduced motion freezes the face and switches immediately. Native selection feedback does not imply browser iPhone haptics.
+
+For confirmed identity integration, also copy `native/TodayProfileIdentity.swift`. It provides an injected persistence store, an onboarding portrait step, and the same member model for Profile and parties. Native app installation remains separate.
 
 The earlier two-face `native/MinimalFace.swift` is retained unchanged as a historical source; it is not a dependency of the current picker.
 

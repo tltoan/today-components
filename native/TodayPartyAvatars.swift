@@ -1,4 +1,9 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 /// The shared party maximum is four people, including you.
 /// Keep IDs stable. Gradient selection uses FNV-1a UTF-8 in browser and SwiftUI;
@@ -10,6 +15,8 @@ struct TodayPartyMember: Identifiable {
     var photoURL: URL? = nil
     var gradientIndex: Int? = nil
     var isYou = false
+    var faceStyle: String? = nil
+    var photoData: Data? = nil
 }
 
 enum TodayAvatarPalette {
@@ -41,7 +48,8 @@ struct TodayProfileAvatar: View {
     var size: CGFloat = 36
     var rim: Color = Color(red: 23/255, green: 21/255, blue: 30/255)
     var rimWidth: CGFloat = 2
-    private var fallback: some View {
+    var animated = true
+    private var initialsFallback: some View {
         LinearGradient(colors: TodayAvatarPalette.colors(for: member),
                        startPoint: .topLeading, endPoint: .bottomTrailing)
         .overlay {
@@ -49,10 +57,29 @@ struct TodayProfileAvatar: View {
                 .foregroundStyle(.white).shadow(color: .black.opacity(0.4), radius: 2, y: 1)
         }
     }
+    @ViewBuilder private var fallback: some View {
+        if let face = member.faceStyle {
+            TodayFacePortrait(selection: TodayFaceSelection(faceStyle: face,
+                gradientIndex: member.gradientIndex ?? TodayAvatarPalette.index(for: member.id)),
+                animated: animated && member.photoData == nil && member.photoURL == nil, cropped: true)
+                .background(.black)
+        } else { initialsFallback }
+    }
+    private var localPhoto: Image? {
+        guard let data = member.photoData else { return nil }
+        #if canImport(UIKit)
+        return UIImage(data: data).map { Image(uiImage: $0) }
+        #elseif canImport(AppKit)
+        return NSImage(data: data).map { Image(nsImage: $0) }
+        #else
+        return nil
+        #endif
+    }
     var body: some View {
         ZStack {
             fallback
-            if let url = member.photoURL {
+            if let photo = localPhoto { photo.resizable().scaledToFill() }
+            else if let url = member.photoURL {
                 AsyncImage(url: url) { phase in
                     if let image = phase.image { image.resizable().scaledToFill() }
                 }
@@ -72,7 +99,7 @@ struct TodayAvatarStack: View {
     var body: some View {
         HStack(spacing: -size * 0.27) {
             ForEach(Array(members.prefix(TodayAvatarPalette.maximumMembers))) { member in
-                TodayProfileAvatar(member: member, size: size)
+                TodayProfileAvatar(member: member, size: size, animated: false)
             }
         }
         .accessibilityElement(children: .ignore)
@@ -93,7 +120,7 @@ struct TodayLeadAvatar: View {
     var body: some View {
         Group {
             if let member = lead {
-                TodayProfileAvatar(member: member, size: size)
+                TodayProfileAvatar(member: member, size: size, animated: false)
                     .padding(.trailing, 12).padding(.bottom, 2)
                     .overlay(alignment: .bottomTrailing) {
                         if shown.count > 1 {

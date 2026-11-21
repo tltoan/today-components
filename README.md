@@ -417,7 +417,7 @@ November 21 slider/profile refinement checks: changed JavaScript passes syntax c
 
 ## Invitation and nudge comparisons · November 21
 
-Book cover remains selected; two new invitations are available alongside it: Shared cover uses layered surfaces with overlapping artwork and avatars, while Reading circle shows the four party places. Both reuse the same confirmed join states, personal plan options and automatic sharing scope.
+Book cover is now the only live invitation. Shared cover and Reading circle remain historical source; the current preview uses the shared sliding target pill.
 
 Nudges now compare a send button and slider side by side in each of the three layouts. Set `interaction="button"` or `interaction="slide"` on `today-party-nudge`. Both share confirmed Gradient Rise, a check response, failure/retry and availability states. These are browser prototypes, with no actual notifications or membership changes.
 
@@ -438,7 +438,7 @@ Current detail/onboarding checks: desktop and phone widths, keyboard tracking se
 | Component | Source | Status and supported states |
 | --- | --- | --- |
 | Party room | `components/party-room.*`, `party-progress.js` | Controlled browser prototype. All four members, personal plans, shared schedule, dated shared streak, recipient-specific nudges. |
-| Compact activity | `components/party-activity.js`, `party-room.css` | One person/day summary, expandable original entries, photos and avatar-heart reactions. Earlier activity is disclosed. |
+| Compact activity | `components/party-activity.js`, `party-room.css` | Date-first snap cards with compact member rows; expandable original entries, photos and avatar-heart reactions. |
 | Avatar reactions | `components/party-reactions.js`, `party-room.css` | Controlled reaction add/remove; profiles show who left a heart; reduced-motion support. |
 | Party setup | `components/party-setup.js`, `party-room.css` | Planning proposal only: personal plan, shared schedule scope, create/invite preview. Independent trial review policy is proposed. |
 | Week bar | `components/week-bar.*` | Shared Home/onboarding control. Controlled date, separate today mark, keyboard focus and selection, reduced motion. |
@@ -453,6 +453,25 @@ Verification: eight pure streak tests pass, including partial/zero logs, day off
 
 ## November 21 profile picture picker
 
-Portrait & color (A) is selected. Seven faces switch independently of twelve gradient swatches; only features travel inside the fixed circle. Gradient stops blend over 560 ms and retarget during rapid changes. The face/color caption is removed, and the preview CTA is Save profile. Own-photo selection remains local. Browser and SwiftUI source contracts are in FACES.md; onboarding is unchanged.
+Portrait & color (A) is selected. Seven faces switch independently of twelve gradient swatches; only features travel inside the fixed circle. Gradient stops blend over 560 ms and retarget during rapid changes. The face/color caption is removed, and the preview CTA is Save profile. Own-photo selection remains local. Browser and SwiftUI source contracts are in FACES.md. The later identity integration below adds this picker to onboarding.
 
 Checks for this revision: JavaScript syntax and source paths; desktop and observed 390 × 844 browser layout without horizontal overflow; all seven faces cycling with wraparound; keyboard face/color changes; smooth intermediate color paint and rapid retargeting; fixed disk; immediate reduced-motion colors; photo selection/invalid-file preservation; local confirmation. The seven-face original SwiftUI is byte-identical to the attachment. Native sources type-check with warnings as errors for the iOS 17 simulator target. This is source verification, not native app integration.
+
+## Confirmed portrait identity and party photos
+
+| Piece | Source | Current status |
+| --- | --- | --- |
+| Onboarding portrait | `components/onboarding.*`, `components/face-picker.*` | Portrait & color after Features. Save profile advances to Describe after confirmation. |
+| Shared identity | `profile-identity-demo.js`, `native/TodayProfileIdentity.swift`, [PROFILE-IDENTITY.md](PROFILE-IDENTITY.md) | Browser-local persistence, Profile editing, current-user Home/party avatar propagation. Native store requires host persistence. |
+| Reading attachments | `assets/party-samples/`, `components/party-room.*`, `components/party-activity.js` | Four user-supplied photos; date-card thumbnails open original check-ins. Fictional people/logs remain fixtures. |
+
+The party-creation switch keeps its thumb centered. The selected Book cover invite retains the shared moving target pill across taps; other live invitation variants were removed.
+
+## Curved signature variation
+
+[Preview](logo-variations.html) · [Browser/SwiftUI integration](LOGOS.md). The rounded-t, curved-y signature is an additional variation, with replay, pause, half speed, looping and diagonal-y comparison. The approved opening is unchanged. Supplied reference is retained byte for byte; the namespaced native file can coexist with the original.
+
+For continuing work in a new chat, start with [CHAT-HANDOFF.md](CHAT-HANDOFF.md).
+
+
+Latest verification (November 21): changed/new JavaScript syntax and local HTML source/asset paths pass. Portrait identity and the curved signature were reviewed at desktop and 390 × 844, with keyboard/reduced-motion checks. Date-first party activity supports older/newer and keyboard navigation, expands original photos, and keeps offscreen dates inert. Shared streak logging/undo, a fourth member, avatar reactions, and per-recipient nudge failure/retry were checked; eight streak unit checks pass. Main-library mounting was checked after fixing the missing snap-scroller dependency on focused party/detail pages. The original + curved logo sources and portrait/identity SwiftUI sources type-check together against the iOS 17 simulator SDK with warnings as errors. Native runtime and production persistence/delivery remain unverified.

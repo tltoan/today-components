@@ -6,3 +6,5 @@ today-profile{display:block;width:100%;max-width:390px;font-family:Future,sans-s
 
 /* Profile uses a quiet light rim; stacked avatars retain their separating outline. */
 .pr-identity today-profile-avatar,.pr-edit-identity today-profile-avatar{--pa-rim:#dac8ee24;--pa-rim-width:1px}
+
+.pr-picture-picker{margin:12px 0 28px}.pr-picture-picker .fp-portrait-stage{min-height:230px}

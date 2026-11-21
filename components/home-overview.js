@@ -10,7 +10,7 @@
       this._abort = new AbortController();
       const signal = this._abort.signal;
       this.addEventListener('tabchange', e => this.emit('destination', {tab:e.detail.active}), {signal});
-      this.innerHTML = `<div class="ho-header"><div><strong>today.</strong><p>what will you do?</p></div><span class="ho-avatar" aria-label="Profile AT">AT</span></div><today-week-bar></today-week-bar><div class="ho-body"><div class="ho-day-heading"><div><h3></h3><p class="ho-report-count"></p></div><today-streak-badge hidden></today-streak-badge></div><div class="ho-list" tabindex="0" role="region" aria-label="Habits for the selected day"></div></div><div class="ho-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div><p class="ho-announcement" role="status"></p>`;
+      this.innerHTML = `<div class="ho-header"><div><strong>today.</strong><p>what will you do?</p></div><a class="ho-profile-link" href="profile.html" aria-label="Open your profile"><today-profile-avatar size="40" person='{"id":"antony","self":true,"name":"Antony"}'></today-profile-avatar></a></div><today-week-bar></today-week-bar><div class="ho-body"><div class="ho-day-heading"><div><h3></h3><p class="ho-report-count"></p></div><today-streak-badge hidden></today-streak-badge></div><div class="ho-list" tabindex="0" role="region" aria-label="Habits for the selected day"></div></div><div class="ho-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div><p class="ho-announcement" role="status"></p>`;
       this.render();
     }
     disconnectedCallback() { this._connected = false; this._abort?.abort(); }

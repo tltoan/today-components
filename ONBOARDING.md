@@ -2,7 +2,7 @@
 
 [Compare the screens](onboarding.html) · [Browser compositions](components/onboarding.js) · [Styles](components/onboarding.css) · [Gallery](onboarding-study.js)
 
-Two browser layout proposals for nine screens, using the existing Today components. A is an open canvas with prominent artwork. B groups choices and summaries into smaller surfaces. The user selected B for Privacy, Introduction, Tracking, Schedule, Review, Saved and Home. Describe uses B’s input panel on the shared darker background; Target combines A’s layout with a panel background. The existing landing animation is reused unchanged. The Features composition retains its approved content, tilted two-row carousel, original artwork, and Continue action; there is no second Features design.
+Selected browser flow with A/B comparisons for the original nine screens, using the existing Today components. A is an open canvas with prominent artwork. B groups choices and summaries into smaller surfaces. The user selected B for Privacy, Introduction, Tracking, Schedule, Review, Saved and Home. Describe uses B’s input panel on the shared darker background; Target combines A’s layout with a panel background. The existing landing animation is reused unchanged. The Features composition retains its approved content, tilted two-row carousel, original artwork, and Continue action; there is no second Features design.
 
 ## Approved source and sequence
 
@@ -12,6 +12,7 @@ The source is [Figma section 322:484](https://www.figma.com/design/Xf03CH47k7G0g
 | --- | --- | --- |
 | Landing | 121:11927 | Existing `today-welcome-intro`; logo, question, gradient |
 | Features | 121:11953 | Shared approved composition |
+| Your picture | User selection, Nov 21 | Portrait & color, seven faces/twelve gradients or photo |
 | Describe | 121:12443 | A + B |
 | Privacy | 121:12612 | A + B |
 | Introduction | 121:12622 | A + B |
@@ -25,7 +26,7 @@ The source is [Figma section 322:484](https://www.figma.com/design/Xf03CH47k7G0g
 | Saved | 369:2340 | A + B |
 | Home | 169:2471 | A + B |
 
-Flow: Landing → Features → Describe → Privacy → Introduction → Tracking → Target → Schedule → Review → Saved → Home. Check-off skips Target. There is no Skip for now route; the user removed onboarding skipping on November 21. Back and Review plan preserve the local draft. At least one scheduled day remains selected. The Home + stays disconnected from the habit editor, as requested earlier.
+Flow: Landing → Features → Your picture → Describe → Privacy → Introduction → Tracking → Target → Schedule → Trial length → Start date → Reminders → Review → Saved → Home. The seven creation positions remain separate from identity setup. Check-off skips Target. There is no Skip for now route; the user removed onboarding skipping on November 21. Back and Review plan preserve the local draft. At least one scheduled day remains selected. The Home + stays disconnected from the habit editor, as requested earlier.
 
 **November 21 update:** the user explicitly selected Day Ruler and Soft Wheels and requested both in first-time creation. The sequence is now Tracking → Target → Schedule → Trial length → Start date → Reminders → Review. Duration starts at 21 days and is editable; reminder is optional and starts off. Check-off skips Target. Landing and Features remain unchanged. Introduction copy now describes a chosen trial duration, and the two-week schedule illustration is only an example/preview.
 
@@ -87,7 +88,7 @@ All nine editable screen compositions, in both variants, now use the darker A/De
 
 The gallery retains phone instances across screen changes. `.configure(screen, variant, model)` updates the three inputs together without remounting the wash. Keep the same component mounted when routing in a host. Features and Landing keep their own existing backgrounds; the shared wash is hidden there.
 
-The Describe screen has no Skip for now control or skip-to-Home handler. Closing returns to Features, not Home. The comparison tabs remain review tools outside the product screen. The Home specimen links to the separate [multiple-habit Home proposal](home.html).
+The Describe screen has no Skip for now control or skip-to-Home handler. Closing returns to Your picture, not Home. The comparison tabs remain review tools outside the product screen. The Home specimen links to the separate [multiple-habit Home proposal](home.html).
 
 ### Schedule selection motion
 
@@ -101,3 +102,9 @@ Draft fields `trialDays`, `reminderEnabled`, and `reminderTime` persist across s
 
 
 Home now uses `today-week-bar`, the same interactive date strip as the Home overview. Review omits the Edit trial length and Edit reminder footer shortcuts; their actual setup steps and back navigation remain. The original Change how you track action is retained.
+
+## Confirmed portrait
+
+The shared `today-face-picker` is shown after Features. Save profile emits `portrait-save-request` with `{selection, resolve, reject}`. The host must await persistence, then call `resolve(confirmedSelection)` to advance to Describe, or `reject(message)` to retain the draft and show an inline error. `draft.portrait` preserves edits during navigation. Returning to Features or editing colors does not save. Reset examples restores habit fixtures while retaining the confirmed identity.
+
+The gallery uses [profile-identity-demo.js](profile-identity-demo.js), browser-local storage only. No account or server upload exists here. The saved face/gradient or photo is reused in Profile, Home and current-user party avatars; friends are unchanged. See [PROFILE-IDENTITY.md](PROFILE-IDENTITY.md) for SwiftUI integration.

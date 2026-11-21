@@ -4,3 +4,7 @@ today-home-overview *{box-sizing:border-box}.ho-header{display:flex;justify-cont
 .ho-nav{padding-top:16px;background:linear-gradient(transparent,#000 45%)}.ho-nav today-bottom-nav{height:100px}.ho-empty{display:grid;justify-items:center;text-align:center;padding:35px 16px;gap:20px}.ho-empty today-artwork{width:130px}.ho-empty h4{font-size:22px;font-weight:500;letter-spacing:-.035em;margin:0}.ho-empty p{margin:0;color:var(--ho-secondary);font-size:13px;line-height:1.7}.ho-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 today-home-overview button:focus-visible,.ho-list:focus-visible{outline:2px solid #bcb0d7;outline-offset:2px}today-home-overview button:active{filter:brightness(1.15)}
 @media(max-width:380px){today-home-overview{padding-inline:16px}.ho-habit{padding:14px}.ho-habit h4{font-size:16px}.ho-day-heading h3{font-size:20px}}
+
+.ho-profile-link{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;text-decoration:none}
+.ho-profile-link:focus-visible{outline:2px solid #cbb9e6;outline-offset:3px}
+.ho-profile-link .pa-portrait{border:1px solid #cbb9e633}

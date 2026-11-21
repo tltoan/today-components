@@ -49,3 +49,17 @@ html[data-reduced] .ob-schedule-panel .ob-calendar-day,html[data-reduced] .ob-sc
 
 /* Selected creation cycle: duration and optional reminder remain separate steps. */
 .ob-reminder-toggle{display:flex;align-items:center;justify-content:space-between;min-height:56px;margin:8px 0 24px}.ob-reminder-note{font-size:13px;color:#bcb7c9;line-height:1.5;margin:22px 0}.ob-phone today-trial-picker{margin:12px 0 24px}.ob-phone .ob-reminder-panel today-time-picker{display:block;padding-top:12px}.ob-phone[data-page=trial] .ob-footer,.ob-phone[data-page=reminders] .ob-footer{margin-top:28px}
+
+/* Approved portrait step, preceding habit creation. */
+.ob-phone[data-page=portrait] .ob-screen-content{padding:24px 24px 28px}
+.ob-portrait-back{height:44px;margin-left:-10px}
+.ob-portrait-heading{margin-top:22px}
+.ob-portrait-heading .ob-title{margin:12px 0 24px}
+.ob-phone[data-page=portrait] .ob-footer{padding-top:30px}
+.ob-phone .ob-portrait-note{margin-top:16px;text-align:center;font-size:12px}
+.ob-phone .ob-profile-error{margin-top:16px}
+.ob-profile-error[hidden]{display:none}
+.ob-avatar-link{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;text-decoration:none}
+.ob-home-head .pa-portrait{margin:0}.ob-home-head .pa-portrait span{margin:0}
+.ob-avatar-link:focus-visible{outline:2px solid #cbb9e6;outline-offset:3px}
+.ob-avatar-link .pa-portrait{border:1px solid #cbb9e633}

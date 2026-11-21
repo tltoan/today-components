@@ -5,8 +5,8 @@
   const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const reduced=()=>document.documentElement.hasAttribute('data-reduced')||(!document.documentElement.hasAttribute('data-motion-override')&&matchMedia('(prefers-reduced-motion: reduce)').matches);
   const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  const pages=['welcome','features','describe','privacy','intro','track','target','rhythm','trial','start-date','reminders','review','saved','home'];
-  const makeDraft=()=>({description:'',method:'pages',amount:10,days:[0,2,4],start:0,trialDays:21,reminderEnabled:false,reminderTime:'21:30',empty:false});
+  const pages=['welcome','features','portrait','describe','privacy','intro','track','target','rhythm','trial','start-date','reminders','review','saved','home'];
+  const makeDraft=()=>({description:'',method:'pages',amount:10,days:[0,2,4],start:0,trialDays:21,reminderEnabled:false,reminderTime:'21:30',portrait:null,empty:false});
   const button=(label,action,variant='primary',extra='')=>`<today-button label="${esc(label)}" variant="${variant}" data-action="${action}" ${extra}></today-button>`;
   const art=(name,cls='')=>`<today-artwork class="${cls}" name="${name}"></today-artwork>`;
   const unit=d=>d.method==='check'?'Check it off':d.method;
@@ -75,6 +75,7 @@
       let content='';
       if(s==='welcome')content='<today-welcome-intro aria-label="Today. What will you do?"></today-welcome-intro>';
       if(s==='features')content=`<div class="ob-features-head"><h3>You’re making the first STEP<br>in reaching your goals</h3><p>here, we will give you the tools you need to achieve and lead the life you want</p></div><div class="ob-features-window" tabindex="0" role="group" aria-label="Today features. Drag or use left and right arrows to explore."><div class="ob-features-tilt" aria-hidden="true"><div class="ob-feature-belt">${Array.from({length:3},()=>[['plan','Personalized plans','schedule','Flexible schedules'],['log','Quick logging','history','Progress history'],['custom','Custom habits','fitness','Fitness sync'],['tracking','Track your way','review','Plan reviews']].map(col=>`<div class="ob-feature-column">${[0,2].map(i=>`<div class="ob-feature-tile">${art('feature-'+col[i])}<span>${col[i+1]}</span></div>`).join('')}</div>`).join('')).join('')}</div></div></div><p class="ob-sr">Personalized plans, Quick logging, Flexible schedules, Progress history, Custom habits, Fitness sync, Track your way, Plan reviews</p>${this.footer()}`;
+      if(s==='portrait')content=`<div class="ob-portrait-back">${button('','back','icon','icon="chevron" rotation="180" accessible-label="Back to Features"')}</div><div class="ob-portrait-heading"><span class="ob-eyebrow">YOUR PICTURE</span>${this.title('Choose your look','For your profile and habit parties.')}</div><today-face-picker variant="portrait"></today-face-picker><p class="ob-profile-error" role="status" hidden></p>${this.footer('Save profile','save-profile')}<p class="ob-portrait-note">You can change it later.</p>`;
       if(s==='describe')content=`<div class="ob-entry-head"><span>New habit</span></div><div class="ob-description"><label for="ob-description-${this.getAttribute('variant')||'a'}" class="ob-sr">Describe your habit</label><textarea id="ob-description-${this.getAttribute('variant')||'a'}" aria-label="Describe your habit" placeholder="What a habit you’ve been wanting to achieve?" spellcheck="true">${esc(d.description)}</textarea></div><div class="ob-entry-footer">${button('','close','icon','icon="close" accessible-label="Close"')}<today-plan-button></today-plan-button></div>`;
       if(s==='privacy')content=`<div class="ob-privacy-art">${art('privacy-lock')}</div><div class="ob-story"><span class="ob-eyebrow">before we continue</span>${this.title('Your data is <u>yours.</u>')}<div class="ob-prose"><p>Your habits are personal. You choose what to track, what to share, and which apps to connect. We will never sell data.</p><p>Our subscription model keeps us thriving and building without compromise, creating a today better for you.</p></div></div>${this.footer()}`;
       if(s==='intro')content=`${this.title('We do things a little differently.','We break your goal into a manageable plan. Choose how long to try it.')}<p class="ob-example-intro">For example: if your goal was to read before bed</p><div class="ob-example"><span class="ob-eyebrow">READ BEFORE BED</span><h4>10 pages, 3 nights a week</h4><div class="ob-trial-weeks">${[1,2].map(w=>`<div><span>Week ${w}</span>${days.map((_,i)=>`<today-icon name="${[0,2,4].includes(i)?'planned-day':'day-off'}"></today-icon>`).join('')}</div>`).join('')}</div><p class="ob-legend"><today-icon name="planned-day"></today-icon>Planned reading night</p></div><p class="ob-after-trial">At the end of your trial, see what you managed and decide what to keep or adjust.</p>${this.footer()}`;
@@ -86,7 +87,7 @@
       if(s==='reminders')content=`${this.header(6)}${this.title('A nudge, when it suits you.','Only on your scheduled days.')}<div class="ob-reminder-toggle"><span>Remind me</span><today-switch label="Remind me" ${d.reminderEnabled?'checked':''}></today-switch></div><div class="ob-reminder-panel"><div><today-time-picker variant="wheel" value="${d.reminderTime}"></today-time-picker></div></div><p class="ob-reminder-note">${d.reminderEnabled?'Allow notifications when you continue in the app.':'No reminder for this habit.'}</p>${this.footer()}`;
       if(s==='review')content=`${this.header(7)}${this.title('Your goal plan',`Try it for ${d.trialDays} days. Then check in.`)}<div class="ob-plan-summary">${this.metric()}${this.weekGrid()}</div><dl class="ob-dates"><div><dt>First session</dt><dd>${this.firstSession()}</dd></div><div><dt>Check-in</dt><dd>${format(d.start+d.trialDays)}</dd></div><div><dt>Reminder</dt><dd>${d.reminderEnabled?`${Number(d.reminderTime.slice(0,2))%12||12}:${d.reminderTime.slice(3)} ${Number(d.reminderTime.slice(0,2))<12?"AM":"PM"}`:"Off"}</dd></div></dl>${button('Change how you track','track','quiet')}${this.footer('Start plan','save')}`;
       if(s==='saved')content=`<div class="ob-saved-habit">Read before bed</div>${this.title('Let’s get to it!','Make the habit yours.')}<div class="ob-saved-art">${art('first-habit-steps')}</div><div class="ob-saved-summary">${this.metric()}${this.weekGrid()}<dl class="ob-dates"><div><dt>First session</dt><dd>${this.firstSession()}</dd></div></dl></div>${this.footer('Go to Home','home')}`;
-      if(s==='home')content=`<div class="ob-home-head"><div><strong>today.</strong><span>what will you do?</span></div><span class="ob-avatar" aria-label="Profile AT">AT</span></div><today-week-bar></today-week-bar>${d.empty?`<div class="ob-empty">${art('first-habit-steps')}<h3>Start with one habit</h3><p>Use the “+” icon to make your first habit</p></div>`:`<h3 class="ob-session-heading">Your first session</h3><div class="ob-session"><div class="ob-session-art">${art('open-book')}</div><div class="ob-session-copy"><h4>Read before bed</h4><p>${d.method==='check'?'Check it off':`${d.amount} ${unit(d)} per reading session`}</p><span>${this.firstSession()}</span></div>${button('Log','log','secondary')}</div>`}<div class="ob-home-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div>`;
+      if(s==='home')content=`<div class="ob-home-head"><div><strong>today.</strong><span>what will you do?</span></div><a class="ob-avatar-link" href="profile.html" aria-label="Open your profile"><today-profile-avatar size="40" person='{"id":"antony","name":"Antony","self":true}'></today-profile-avatar></a></div><today-week-bar></today-week-bar>${d.empty?`<div class="ob-empty">${art('first-habit-steps')}<h3>Start with one habit</h3><p>Use the “+” icon to make your first habit</p></div>`:`<h3 class="ob-session-heading">Your first session</h3><div class="ob-session"><div class="ob-session-art">${art('open-book')}</div><div class="ob-session-copy"><h4>Read before bed</h4><p>${d.method==='check'?'Check it off':`${d.amount} ${unit(d)} per reading session`}</p><span>${this.firstSession()}</span></div>${button('Log','log','secondary')}</div>`}<div class="ob-home-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div>`;
       // Preserve one wash across screen changes, outside the content entrance.
       if(!this._wash){this._wash=document.createElement('today-onboarding-gradient');this._content=document.createElement('div');this._content.className='ob-screen-content';this.replaceChildren(this._wash,this._content);}
       this._wash.position=['privacy','intro','features'].includes(s)?'bottom':'top';
@@ -98,6 +99,7 @@
         showDay(selected);
         bar.addEventListener('daychange',e=>{e.stopPropagation();showDay(e.detail.date);});
       }
+      if(s==='portrait'&&d.portrait)this.querySelector('today-face-picker').selection=d.portrait;
       if(s==='describe')this.assess(true);
       if(s==='features')this.bindFeatures();
       if(s==='reminders'){
@@ -113,6 +115,7 @@
     assess(immediate=false){const b=this.querySelector('today-plan-button');if(b)b.setState(TodayUI.PlanReadiness.assess(this.draft.description),{immediate});}
     refreshKeepingFocus(value){this.render(false);const selector=`today-button[data-action="${value.action}"]${value.value!=null?`[value="${value.value}"]`:''}`;this.querySelector(selector+' button')?.focus({preventScroll:true});}
     change(e){
+      if(e.target.matches('today-face-picker')){this.draft.portrait=e.target.selection;this.emitDraft();}
       if(e.target.matches('today-trial-picker')){this.draft.trialDays=e.detail.days;this.emitDraft();}
       if(e.target.matches('today-time-picker')){this.draft.reminderTime=e.detail.value;this.emitDraft();}
       if(e.target.matches('[data-schedule-presets]')){this.draft.days=e.detail.value==='weekdays'?[1,2,3,4,5]:e.detail.value==='weekends'?[0,6]:[0,1,2,3,4,5,6];this.refreshSchedule('preset');this.emitDraft();}
@@ -121,10 +124,18 @@
     }
     activate(e){
       const b=e.target.closest('today-button[data-action]');if(!b)return;const action=b.dataset.action,value=b.getAttribute('value'),s=this.screen,d=this.draft;
+      if(action==='save-profile'){
+        if(this._profileSaving)return;this._profileSaving=true;b.setAttribute('disabled','');b.setAttribute('label','Saving…');
+        const selection=this.querySelector('today-face-picker').selection;
+        this.dispatchEvent(new CustomEvent('portrait-save-request',{bubbles:true,detail:{selection,
+          resolve:saved=>{this._profileSaving=false;this.draft.portrait=saved;this.emitDraft();if(this.screen==='portrait'&&this.contains(b))this.navigate('describe');},
+          reject:message=>{this._profileSaving=false;if(this.screen!=='portrait'||!this.contains(b))return;b.removeAttribute('disabled');b.setAttribute('label','Save profile');const error=this.querySelector('.ob-profile-error');error.hidden=false;error.textContent=message;}
+        }}));return;
+      }
       if(action==='method'){d.method=value;this.querySelectorAll('.ob-method today-button').forEach(el=>el.toggleAttribute('selected',el===b));this.emitDraft();return;}
       if(action==='weekday'){const n=Number(value);if(d.days.includes(n)&&d.days.length===1){b.setAttribute('selected','');this.notify('Keep at least one reading day.');return;}d.days=d.days.includes(n)?d.days.filter(x=>x!==n):[...d.days,n].sort();this.emitDraft();this.refreshSchedule();return;}
       if(action==='start'){d.start=Number(value);this.emitDraft();this.refreshKeepingFocus({action,value});return;}
-      if(action==='close'){this.navigate('features');return;}
+      if(action==='close'){this.navigate('portrait');return;}
       if(action==='save'){d.empty=false;this.emitDraft();this.navigate('saved');return;}
       if(action==='log'){this.notify('Log opens the habit logger in the app. No log has been saved in this layout preview.');return;}
       if(['track','review','home','trial','reminders'].includes(action)){this.navigate(action);return;}

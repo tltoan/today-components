@@ -5,7 +5,7 @@
   const button = (action, label, variant='secondary', disabled=false) => `<today-button data-party-action="${action}" variant="${variant}" label="${esc(label)}" ${disabled?'disabled':''}></today-button>`;
   const avatars = members => `<today-avatar-stack members="${esc(JSON.stringify(members))}" aria-hidden="true"></today-avatar-stack>`;
   const sample = () => '<div class="hp-photo hp-sample-photo" role="img" aria-label="Illustrated sample attachment: an open book"><today-artwork name="open-book"></today-artwork><span>Sample attachment</span></div>';
-  const photo = m => m.samplePhoto ? sample() : m.photoURL && /^(blob:|data:image\/)/.test(m.photoURL) ? `<img class="hp-photo" src="${esc(m.photoURL)}" alt="${esc(m.photoAlt || 'Photo attached to this check-in')}">` : '';
+  const photo = m => m.samplePhoto ? sample() : m.photoURL && /^(blob:|data:image\/|assets\/party-samples\/[a-z-]+\.jpg$)/.test(m.photoURL) ? `<img class="hp-photo" src="${esc(m.photoURL)}" alt="${esc(m.photoAlt || 'Photo attached to this check-in')}">` : '';
   class PartyPiece extends HTMLElement {
     connectedCallback(){
       if(this._connected)return;this._connected=true;
@@ -43,6 +43,10 @@
   }
   class PartyInvite extends PartyPiece {
     render(){const m=this.model,full=m.state==='full'||(m.members||[]).length>=4&&m.state!=='joined',joined=m.state==='joined',busy=m.state==='joining',chosen=m.plan||'pages',v=this.getAttribute('variant')||'b',count=(m.members||[]).length,places=Math.max(0,4-count);
+      const {plan,...content}=m,key=JSON.stringify([v,content]);
+      const control=this.querySelector('today-segmented-control');
+      if(this._contentKey===key&&control){control.value=chosen;return;}
+      this._contentKey=key;
       if(v==='b'){
         const people=(m.members||[]).filter(person=>!person.self);
         const names=people.map(person=>person.name).join(' & ');

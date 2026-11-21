@@ -23,7 +23,7 @@ enum TodayFacePalette {
 }
 
 
-/// Portrait & color is selected. It remains outside the approved onboarding.
+/// Portrait & color is selected for onboarding and Edit profile.
 /// Store this value on confirmation; wink/glance state is never part of identity.
 struct TodayFaceSelection: Equatable, Codable {
     var faceStyle = "tilt"

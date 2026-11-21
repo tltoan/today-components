@@ -8,3 +8,6 @@
 .pa-count{position:absolute;right:0;bottom:0;display:grid;place-items:center;min-width:24px;height:24px;padding:0 4px;box-sizing:border-box;border:2px solid var(--pa-rim,#17151e);background:#373143;color:#eeeaf3;border-radius:50%;font-size:10px}
 @media(prefers-reduced-motion:reduce){.pa-portrait img{transition:none}}
 [data-reduced] .pa-portrait img{transition:none}
+
+/* Selected portraits share the exact still artwork and softened disk. */
+.pa-face-portrait{background:#000}.pa-face-portrait today-minimal-face{width:100%;height:100%;pointer-events:none}

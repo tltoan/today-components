@@ -111,7 +111,7 @@ Read [PICKERS.md](PICKERS.md) before reusing `today-trial-picker` or `today-time
 
 ## Composed onboarding, artwork and slide action
 
-`ONBOARDING.md` maps nine paired layouts to the approved source frames and records the two-week/four-step flow. Load its manifest dependencies; omit onboarding-study.js from production because it is only the comparison controller. Landing and Features remain shared baselines. No new backend or native integration is implied.
+`ONBOARDING.md` maps the approved layouts and the seven-position creation cycle. Your picture follows Features; Day Ruler, Start date and Soft Wheels reminders are included. Load its manifest dependencies; omit onboarding-study.js from production because it is only the comparison controller. Landing and Features remain shared baselines. No new backend or native integration is implied.
 
 Use `today-artwork` and the original files in assets/artwork, with dimensions/hashes in the asset manifest. Read ARTWORK.md for decorative versus labelled use. `today-slide-log` is now independent; read SLIDE-TO-LOG.md and import components/slide-to-log.js/css, not app.js.
 
@@ -123,7 +123,7 @@ Use `today-artwork` and the original files in assets/artwork, with dimensions/ha
 ## New native source
 
 - Liquid orbit alternative: include `native/reference/LiquidOrbitLoader.swift` and `native/TodayLiquidOrbitLoader.swift`; use `TodayLiquidOrbitLoader`. The original is unchanged.
-- Party avatars: `native/TodayPartyAvatars.swift` supplies `TodayProfileAvatar`, `TodayAvatarStack` and `TodayLeadAvatar`. The same member ID always selects the same gradient across SwiftUI and browser; photos override it. Read `PARTY-AVATARS.md` for the model contract and placement.
+- Party avatars: `native/TodayPartyAvatars.swift` supplies `TodayProfileAvatar`, `TodayAvatarStack` and `TodayLeadAvatar`. Copy its `TodayFacePicker.swift` and `PlayfulFaces.swift` dependencies too. Saved faceStyle/gradientIndex overrides the deterministic fallback; photos override both. Use `TodayProfileIdentity.swift` for one confirmed current-user identity across screens. Read `PARTY-AVATARS.md` for the model contract and placement.
 
 ## Profile and nudge proposals
 

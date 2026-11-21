@@ -36,8 +36,8 @@
     update(){
       const m=this.model,state=m.state||'available',name=m.name||'Maya',window=m.window||'8–9 PM';this.dataset.state=state;
       this.querySelector('today-profile-avatar').person=m.person||{id:m.id||name,name,initials:name.slice(0,1)};
-      this.querySelector('.pn-name').textContent=name;this.querySelector('.pn-window').textContent=window+' · reminder window';
-      const messages={available:'',muted:`${name} has nudges off.`,window:`Available ${window}.`,limit:`${name} already received a nudge today.`,sending:'Sending…',sent:'Sent to '+name+'.',error:'Couldn’t send. Try again.'};
+      this.querySelector('.pn-name').textContent=name;this.querySelector('.pn-window').textContent='';
+      const messages={available:'',muted:`${name} has nudges off.`,window:`Available ${window}.`,limit:`${name} already received a nudge today.`,sending:'',sent:'',error:'Couldn’t send. Try again.'};
       this.querySelector('.pn-status').textContent=messages[state]||'';
       const label='Send '+(this._choice==='reading'?'Reading tonight?':'You’ve got this.')+' to '+name,slider=this.querySelector('.pn-slider');
       if(slider){slider.setAttribute('action-label',label);slider.setAttribute('state',state==='sent'?'complete':state==='sending'?'pending':state==='error'?'error':this.available?'idle':'unavailable');}

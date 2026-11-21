@@ -1,5 +1,5 @@
 /* Reusable seven-face artwork. Palette is optional; no palette preserves the source's light disk.
-   Use passive + still for identity avatars. Expression motion is feedback, never a persisted identity state. */
+   Use passive for animated identity avatars; add still for stacks or static contexts. Expression motion is feedback, never a persisted identity state. */
 (() => {
   class MinimalFace extends HTMLElement {
     static observedAttributes=['face','palette','still','paused','passive','cropped','features-only'];

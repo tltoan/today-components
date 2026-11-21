@@ -88,7 +88,9 @@
       "sourcePage": "source.html#reading-schedule",
       "browserIntegration": {
         "kind": "specimen",
-        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import."
+        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import.",
+        "scripts": [],
+        "styles": []
       }
     },
     {
@@ -109,7 +111,8 @@
         "scripts": [
           "components/snap-scroller.js"
         ],
-        "usage": "new TodayUI.SnapScroller(viewport, {selector: \".agenda-entry\", onSelect}); extract the agenda markup/styles from index.html/style.css; app.js holds the sample data."
+        "usage": "new TodayUI.SnapScroller(viewport, {selector: \".agenda-entry\", onSelect}); extract the agenda markup/styles from index.html/style.css; app.js holds the sample data.",
+        "styles": []
       }
     },
     {
@@ -162,7 +165,9 @@
       "sourcePage": "source.html#checklist",
       "browserIntegration": {
         "kind": "specimen",
-        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import."
+        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import.",
+        "scripts": [],
+        "styles": []
       }
     },
     {
@@ -415,7 +420,7 @@
           "assets/TestTheFuture-Medium.otf"
         ],
         "markup": "<today-step-progress variant=\"pill\" current=\"4\" total=\"7\"></today-step-progress>",
-        "usage": "Active Pill (pill) is the selected default. Set current, total (1–12), and optional label. Other variants remain historical options. This component displays position; the host owns navigation.",
+        "usage": "Active Pill (pill) is the selected default. Set current, total (1\u201312), and optional label. Other variants remain historical options. This component displays position; the host owns navigation.",
         "events": [],
         "demoOnly": [
           "step-progress-study.js"
@@ -726,7 +731,7 @@
         ],
         "assets": [],
         "markup": "<today-loader label=\"Loading\"></today-loader>",
-        "usage": "Mount while work is pending, then remove on completion. The transparent 4.84-second loop uses a blue/lavender/peach gradient. Methods: play(), pause(), replay(); speed attribute/property from 0.1–4 (default 1), paused attribute, label attribute. Offscreen/hidden work is suspended; reduced motion shows a still globe. Host owns actual progress and completion; never claim percentage progress from the loop.",
+        "usage": "Mount while work is pending, then remove on completion. The transparent 4.84-second loop uses a blue/lavender/peach gradient. Methods: play(), pause(), replay(); speed attribute/property from 0.1\u20134 (default 1), paused attribute, label attribute. Offscreen/hidden work is suspended; reduced motion shows a still globe. Host owns actual progress and completion; never claim percentage progress from the loop.",
         "demoOnly": [
           "loader-study.js"
         ]
@@ -1160,7 +1165,8 @@
         "components/onboarding.css",
         "onboarding-study.js",
         "onboarding-study.css",
-        "ONBOARDING.md"
+        "ONBOARDING.md",
+        "PROFILE-IDENTITY.md"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -1177,9 +1183,11 @@
         "trial-pickers",
         "time-pickers",
         "disclosure",
-        "week-bar"
+        "week-bar",
+        "face-picker",
+        "profile-avatar"
       ],
-      "status": "Selected flow with Day Ruler and Soft Wheels; seven-position creation cycle. Browser only.",
+      "status": "Selected flow: Portrait & color after Features, then seven-position habit creation. Browser integration with local gallery identity.",
       "figmaNodes": [
         "322:484",
         "121:11953",
@@ -1207,7 +1215,9 @@
           "components/onboarding-gradient.css",
           "components/onboarding.css",
           "components/pickers.css",
-          "components/week-bar.css"
+          "components/week-bar.css",
+          "components/party-avatars.css",
+          "components/face-picker.css"
         ],
         "scripts": [
           "foundations/disclosure.js",
@@ -1225,6 +1235,11 @@
           "components/onboarding-gradient.js",
           "components/pickers.js",
           "components/week-bar.js",
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
+          "components/face-picker.js",
           "components/onboarding.js"
         ],
         "markup": "<today-onboarding-screen screen=\"review\" variant=\"a\"></today-onboarding-screen>",
@@ -1232,12 +1247,14 @@
           "draftchange",
           "navigate",
           "preview-action",
-          "schedule-selection"
+          "schedule-selection",
+          "portrait-save-request"
         ],
-        "usage": "Read ONBOARDING.md. Seven setup steps now include Day Ruler duration, start date and optional Soft Wheels reminder; 21 days prefilled. Check-off skips Target. Landing/Features unchanged. Browser fixtures only.",
+        "usage": "Read ONBOARDING.md. Seven setup steps now include Day Ruler duration, start date and optional Soft Wheels reminder; 21 days prefilled. Check-off skips Target. Landing/Features unchanged. Browser fixtures only. Portrait emits portrait-save-request {selection,resolve,reject}. Confirm persistence before resolve/advance. Reuse the confirmed profile in Home and party avatars. See PROFILE-IDENTITY.md.",
         "demoOnly": [
           "onboarding-study.js",
-          "onboarding-study.css"
+          "onboarding-study.css",
+          "profile-identity-demo.js"
         ]
       }
     },
@@ -1366,7 +1383,7 @@
     },
     {
       "id": "time-editor",
-      "name": "Choose a time — soft wheels",
+      "name": "Choose a time \u2014 soft wheels",
       "preview": "time-editor.html",
       "sourcePage": "source.html#time-editor",
       "browserSource": [
@@ -1563,13 +1580,17 @@
           "components/artwork.css",
           "components/habit-party.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js"
         ],
@@ -1612,13 +1633,17 @@
           "components/artwork.css",
           "components/habit-party.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js"
         ],
@@ -1660,13 +1685,17 @@
           "components/artwork.css",
           "components/habit-party.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js"
         ],
@@ -1683,7 +1712,7 @@
     },
     {
       "id": "party-nudge",
-      "name": "Party nudges — button and slider comparisons",
+      "name": "Party nudges \u2014 button and slider comparisons",
       "preview": "nudges.html",
       "sourcePage": "source.html#party-nudge",
       "browserSource": [
@@ -1703,6 +1732,9 @@
         "tag": "today-party-nudge",
         "scripts": [
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/slide-to-log.js",
           "components/target-feedback.js",
           "components/party-nudge.js"
@@ -1711,7 +1743,8 @@
           "components/party-avatars.css",
           "components/slide-to-log.css",
           "components/target-feedback.css",
-          "components/party-nudge.css"
+          "components/party-nudge.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-party-nudge variant=\"pulse\" interaction=\"button\"></today-party-nudge>",
         "events": [
@@ -1727,7 +1760,7 @@
     },
     {
       "id": "party-invite",
-      "name": "Party invites — three variations",
+      "name": "Party invitation \u00b7 Book cover selected",
       "preview": "habit-parties.html",
       "sourcePage": "source.html#party-invite",
       "browserSource": [
@@ -1741,7 +1774,8 @@
         "artwork",
         "avatar-stack",
         "lead-avatar",
-        "profile-avatar"
+        "profile-avatar",
+        "segmented-control"
       ],
       "status": "Controlled browser invitation. Compact Book cover selected; proposed Habits entry. No real membership change.",
       "browserIntegration": {
@@ -1752,13 +1786,17 @@
           "components/artwork.css",
           "components/habit-party.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js"
         ],
@@ -1766,7 +1804,7 @@
         "events": [
           "party-request"
         ],
-        "usage": "Assign confirmed .model with members (id, name, target), schedule, proposedDates, plan, state and optional message. variant=b is the compact selected cover; d/e remain earlier alternatives. Host handles party-request actions plan, join and decline. Dates are display facts, not an enforced shared trial. See HABIT-PARTIES.md.",
+        "usage": "Assign confirmed .model with members (id, name, target), schedule, proposedDates, plan, state and optional message. variant=b is the compact selected cover; the only live invitation. The personal target uses the shared moving segmented pill without rebuilding it on selection. Host handles party-request actions plan, join and decline. Dates are display facts, not an enforced shared trial. See HABIT-PARTIES.md.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -1800,13 +1838,17 @@
           "components/artwork.css",
           "components/habit-party.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js"
         ],
@@ -1879,7 +1921,7 @@
     },
     {
       "id": "habits-layouts",
-      "name": "Habits tab — Weekly view selected",
+      "name": "Habits tab \u2014 Weekly view selected",
       "preview": "habits-layouts.html",
       "sourcePage": "source.html#habits-layouts",
       "browserSource": [
@@ -1923,7 +1965,7 @@
     },
     {
       "id": "continuation-choice",
-      "name": "Trial or routine choice — three layouts",
+      "name": "Trial or routine choice \u2014 three layouts",
       "preview": "recap.html#continuation-choices",
       "sourcePage": "source.html#continuation-choice",
       "browserSource": [
@@ -1956,7 +1998,7 @@
     },
     {
       "id": "liquid-orbit-loader",
-      "name": "Liquid orbit loader — alternative",
+      "name": "Liquid orbit loader \u2014 alternative",
       "preview": "liquid-orbit-loader.html",
       "sourcePage": "source.html#liquid-orbit-loader",
       "browserSource": [
@@ -1986,7 +2028,7 @@
         ],
         "assets": [],
         "markup": "<today-liquid-orbit-loader label=\"Loading\"></today-liquid-orbit-loader>",
-        "usage": "Mount during pending work; remove at completion. Transparent 740:700 aspect. Methods play(), pause(), replay(); speed 0.1–4 (default 1); paused and label attributes. Pauses preserve elapsed time; offscreen/background suspends. Reduced motion shows supplied time-zero pose. No percentage progress. WebGL contour with Canvas fallback.",
+        "usage": "Mount during pending work; remove at completion. Transparent 740:700 aspect. Methods play(), pause(), replay(); speed 0.1\u20134 (default 1); paused and label attributes. Pauses preserve elapsed time; offscreen/background suspends. Reduced motion shows supplied time-zero pose. No percentage progress. WebGL contour with Canvas fallback.",
         "demoOnly": [
           "liquid-orbit-study.js"
         ]
@@ -2006,6 +2048,8 @@
         "components/party-avatars.css"
       ],
       "swiftSource": [
+        "native/PlayfulFaces.swift",
+        "native/TodayFacePicker.swift",
         "native/TodayPartyAvatars.swift"
       ],
       "dependencies": [],
@@ -2014,14 +2058,18 @@
         "kind": "custom-element",
         "tag": "today-profile-avatar",
         "styles": [
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/face-picker.css"
         ],
         "scripts": [
-          "components/party-avatars.js"
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js"
         ],
         "assets": [],
         "markup": "<today-profile-avatar></today-profile-avatar>",
-        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24–96, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins.",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins. Saved portraits accept faceStyle and explicit gradientIndex 0\u201311; photo overrides the face. The host resolves confirmed identities with TodayPartyAvatars.setIdentityResolver. See PROFILE-IDENTITY.md. Individual saved faces animate using the shared face renderer; still attribute freezes them. Stacks/lead stay still. Reduced motion and offscreen/background suspension are respected.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -2029,7 +2077,7 @@
       },
       "nativeIntegration": {
         "minimumOS": "iOS 17 / macOS 14",
-        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
+        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md. Include all three swiftSource files; TodayPartyMember accepts faceStyle and photoData. Optional TodayProfileIdentity.swift shares confirmed identity across routes."
       }
     },
     {
@@ -2042,6 +2090,8 @@
         "components/party-avatars.css"
       ],
       "swiftSource": [
+        "native/PlayfulFaces.swift",
+        "native/TodayFacePicker.swift",
         "native/TodayPartyAvatars.swift"
       ],
       "dependencies": [],
@@ -2050,14 +2100,18 @@
         "kind": "custom-element",
         "tag": "today-avatar-stack",
         "styles": [
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/face-picker.css"
         ],
         "scripts": [
-          "components/party-avatars.js"
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js"
         ],
         "assets": [],
         "markup": "<today-avatar-stack></today-avatar-stack>",
-        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24–96, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins.",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins. Saved portraits accept faceStyle and explicit gradientIndex 0\u201311; photo overrides the face. The host resolves confirmed identities with TodayPartyAvatars.setIdentityResolver. See PROFILE-IDENTITY.md.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -2065,7 +2119,7 @@
       },
       "nativeIntegration": {
         "minimumOS": "iOS 17 / macOS 14",
-        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
+        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md. Include all three swiftSource files; TodayPartyMember accepts faceStyle and photoData. Optional TodayProfileIdentity.swift shares confirmed identity across routes."
       }
     },
     {
@@ -2078,6 +2132,8 @@
         "components/party-avatars.css"
       ],
       "swiftSource": [
+        "native/PlayfulFaces.swift",
+        "native/TodayFacePicker.swift",
         "native/TodayPartyAvatars.swift"
       ],
       "dependencies": [],
@@ -2086,14 +2142,18 @@
         "kind": "custom-element",
         "tag": "today-lead-avatar",
         "styles": [
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/face-picker.css"
         ],
         "scripts": [
-          "components/party-avatars.js"
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js"
         ],
         "assets": [],
         "markup": "<today-lead-avatar></today-lead-avatar>",
-        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24–96, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins.",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins. Saved portraits accept faceStyle and explicit gradientIndex 0\u201311; photo overrides the face. The host resolves confirmed identities with TodayPartyAvatars.setIdentityResolver. See PROFILE-IDENTITY.md.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -2101,23 +2161,25 @@
       },
       "nativeIntegration": {
         "minimumOS": "iOS 17 / macOS 14",
-        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md."
+        "usage": "TodayPartyAvatars.swift exposes TodayPartyMember, TodayProfileAvatar, TodayAvatarStack, TodayLeadAvatar and TodayAvatarPalette. Stable IDs required; never hashValue or array-position colors. See PARTY-AVATARS.md. Include all three swiftSource files; TodayPartyMember accepts faceStyle and photoData. Optional TodayProfileIdentity.swift shares confirmed identity across routes."
       }
     },
     {
       "id": "profile",
-      "name": "Profile — selected expandable groups + identity card",
+      "name": "Profile \u2014 selected expandable groups + identity card",
       "preview": "profile.html",
       "sourcePage": "source.html#profile",
       "browserSource": [
         "components/profile.js",
         "components/profile.css",
-        "PROFILE.md"
+        "PROFILE.md",
+        "PROFILE-IDENTITY.md"
       ],
       "swiftSource": [],
       "dependencies": [
         "profile-avatar",
-        "controls"
+        "controls",
+        "face-picker"
       ],
       "status": "Interactive browser proposal; no native app, account or backend integration. Sample states only.",
       "browserIntegration": {
@@ -2128,22 +2190,28 @@
           "components/icons.js",
           "components/controls.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
+          "components/face-picker.js",
           "components/profile.js"
         ],
         "styles": [
           "foundations/motion.css",
           "components/controls.css",
           "components/party-avatars.css",
-          "components/profile.css"
+          "components/profile.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-profile variant=\"c\"></today-profile>",
         "events": [
           "profile-request"
         ],
-        "usage": "Selected C expandable groups + B identity panel. No Haptics setting. See PROFILE.md for copied model, request events, scope boundaries and fixtures.",
+        "usage": "Selected C expandable groups + B identity panel. No Haptics setting. See PROFILE.md for copied model, request events, scope boundaries and fixtures. Edit profile reuses today-face-picker. Save emits {action:save-profile,value:{name,selection}}; drafts/Cancel do not update avatars. Gallery adapter persists locally; replace with an account store in the app.",
         "demoOnly": [
           "profile-study.js",
-          "profile-study.css"
+          "profile-study.css",
+          "profile-identity-demo.js"
         ]
       }
     },
@@ -2171,13 +2239,17 @@
           "components/icons.js",
           "components/controls.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/profile.js"
         ],
         "styles": [
           "foundations/motion.css",
           "components/controls.css",
           "components/party-avatars.css",
-          "components/profile.css"
+          "components/profile.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-settings-row action=\"privacy\" label=\"Privacy\"></today-settings-row>",
         "events": [
@@ -2192,7 +2264,7 @@
     },
     {
       "id": "habit-detail",
-      "name": "Habit detail — Grouped cards",
+      "name": "Habit detail \u2014 Grouped cards",
       "preview": "habit-detail.html",
       "sourcePage": "source.html#habit-detail",
       "browserSource": [
@@ -2225,6 +2297,9 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
@@ -2255,7 +2330,8 @@
           "components/pickers.css",
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-habit-detail></today-habit-detail>",
         "events": [
@@ -2304,6 +2380,9 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
@@ -2334,7 +2413,8 @@
           "components/pickers.css",
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-habit-entry></today-habit-entry>",
         "events": [
@@ -2383,6 +2463,9 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
@@ -2413,7 +2496,8 @@
           "components/pickers.css",
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-habit-plan-editor></today-habit-plan-editor>",
         "events": [
@@ -2429,7 +2513,7 @@
     },
     {
       "id": "habit-history",
-      "name": "Habit history — three variations",
+      "name": "Habit history \u2014 three variations",
       "preview": "habit-detail.html#habit-history",
       "sourcePage": "source.html#habit-history",
       "browserSource": [
@@ -2462,6 +2546,9 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
@@ -2492,7 +2579,8 @@
           "components/pickers.css",
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-habit-history></today-habit-history>",
         "events": [
@@ -2541,6 +2629,9 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
@@ -2571,7 +2662,8 @@
           "components/pickers.css",
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-habit-reminder></today-habit-reminder>",
         "events": [
@@ -2620,6 +2712,9 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
@@ -2650,7 +2745,8 @@
           "components/pickers.css",
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-habit-schedule></today-habit-schedule>",
         "events": [
@@ -2687,11 +2783,15 @@
         "tag": "today-party-reactions",
         "scripts": [
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js"
         ],
         "styles": [
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-party-reactions></today-party-reactions>",
         "events": [
@@ -2722,7 +2822,8 @@
         "components/habit-party.css",
         "components/party-avatars.css",
         "components/party-room.css",
-        "PARTY-ROOM.md"
+        "PARTY-ROOM.md",
+        "components/snap-scroller.js"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2738,8 +2839,12 @@
           "foundations/disclosure.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
+          "components/snap-scroller.js",
           "components/party-activity.js"
         ],
         "styles": [
@@ -2747,13 +2852,14 @@
           "components/artwork.css",
           "components/habit-party.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-party-activity></today-party-activity>",
         "events": [
           "party-request"
         ],
-        "usage": "Set party model and optional memberID filter. Three person/day summaries initially; expand for original entries, photos and reactions. See PARTY-ROOM.md.",
+        "usage": "Set party model and optional memberID filter. One date at a time via shared SnapScroller; compact member totals expand original entries/photos/reactions. See PARTY-ROOM.md.",
         "demoOnly": [
           "party-room-demo.js",
           "habit-party-study.js",
@@ -2786,7 +2892,8 @@
         "components/slide-to-log.css",
         "components/target-feedback.css",
         "components/party-nudge.css",
-        "PARTY-ROOM.md"
+        "PARTY-ROOM.md",
+        "components/snap-scroller.js"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2803,8 +2910,12 @@
           "foundations/disclosure.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-reactions.js",
           "components/habit-party.js",
+          "components/snap-scroller.js",
           "components/party-activity.js",
           "components/slide-to-log.js",
           "components/target-feedback.js",
@@ -2820,24 +2931,31 @@
           "components/party-room.css",
           "components/slide-to-log.css",
           "components/target-feedback.css",
-          "components/party-nudge.css"
+          "components/party-nudge.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-party-room></today-party-room>",
         "events": [
           "party-request",
           "party-member-change"
         ],
-        "usage": "Controlled roster, dated eligibility and entries. Shared scheduled-day streak; each member has a personal target/reminder. See PARTY-ROOM.md.",
+        "usage": "Controlled roster, dated eligibility and entries. Shared scheduled-day streak; each member has a personal target/reminder. See PARTY-ROOM.md. Confirmed photoURL/photoAlt entries appear in a compact four-photo strip; select a thumbnail to reveal its original check-in.",
         "demoOnly": [
           "party-room-demo.js",
           "habit-party-study.js",
           "habit-party-study.css"
+        ],
+        "assets": [
+          "assets/party-samples/afternoon-reading.jpg",
+          "assets/party-samples/book-and-coffee.jpg",
+          "assets/party-samples/reading-in-bed.jpg",
+          "assets/party-samples/reading-on-the-go.jpg"
         ]
       }
     },
     {
       "id": "party-setup",
-      "name": "Create a party at plan review · Proposal",
+      "name": "Create a party at plan review \u00b7 Proposal",
       "preview": "habit-parties.html#party-planning",
       "sourcePage": "source.html#party-setup",
       "browserSource": [
@@ -2871,6 +2989,9 @@
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
           "components/party-setup.js"
         ],
         "styles": [
@@ -2878,7 +2999,8 @@
           "components/controls.css",
           "components/artwork.css",
           "components/party-avatars.css",
-          "components/party-room.css"
+          "components/party-room.css",
+          "components/face-picker.css"
         ],
         "markup": "<today-party-setup></today-party-setup>",
         "events": [
@@ -2945,7 +3067,7 @@
       "dependencies": [
         "profile-avatar"
       ],
-      "status": "Standalone browser and SwiftUI source. Portrait & color selected; approved onboarding remains unchanged.",
+      "status": "Reusable browser and SwiftUI source; Portrait & color is integrated after Features in the browser onboarding and in Edit profile. Native app integration remains separate.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-minimal-face",
@@ -2962,7 +3084,7 @@
         "events": [
           "face-tap"
         ],
-        "usage": "See FACES.md. Host owns saving the faceStyle/gradientIndex choice. No account or onboarding writes.",
+        "usage": "See FACES.md. Host owns saving the faceStyle/gradientIndex choice; the passive portrait can be reused in Profile and party avatars.",
         "demoOnly": [
           "faces-study.js",
           "faces-study.css",
@@ -2972,7 +3094,7 @@
     },
     {
       "id": "face-picker",
-      "name": "Profile picture picker · Portrait & color selected",
+      "name": "Profile picture picker \u00b7 Portrait & color selected",
       "preview": "faces.html",
       "sourcePage": "source.html#face-picker",
       "browserSource": [
@@ -2993,7 +3115,7 @@
         "minimal-face",
         "profile-avatar"
       ],
-      "status": "Standalone browser and SwiftUI source. Portrait & color selected; approved onboarding remains unchanged.",
+      "status": "Reusable browser and SwiftUI source; Portrait & color is integrated after Features in the browser onboarding and in Edit profile. Native app integration remains separate.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-face-picker",
@@ -3011,13 +3133,89 @@
         "events": [
           "change"
         ],
-        "usage": "See FACES.md. Arrows cycle all seven faces; swatches change one of 12 gradients. Photo selection is local. Host owns confirmation, persistence and upload.",
+        "usage": "See FACES.md. Arrows cycle all seven faces; swatches change one of 12 gradients. Photo selection is local. Host owns confirmation, persistence and upload. Read/write .selection for draft restoration, including photoURL. See PROFILE-IDENTITY.md for confirmation and persistence.",
         "demoOnly": [
           "faces-study.js",
           "faces-study.css",
-          "faces.html"
+          "faces.html",
+          "profile-identity-demo.js"
         ]
       }
+    },
+    {
+      "id": "profile-identity",
+      "name": "Shared confirmed profile identity",
+      "preview": "onboarding.html",
+      "sourcePage": "source.html#profile-identity",
+      "browserSource": [
+        "profile-identity-demo.js",
+        "PROFILE-IDENTITY.md"
+      ],
+      "swiftSource": [
+        "native/PlayfulFaces.swift",
+        "native/TodayFacePicker.swift",
+        "native/TodayPartyAvatars.swift",
+        "native/TodayProfileIdentity.swift"
+      ],
+      "dependencies": [
+        "face-picker",
+        "profile-avatar"
+      ],
+      "status": "Browser gallery persistence + reusable SwiftUI store and onboarding step. Host supplies actual account persistence.",
+      "browserIntegration": {
+        "kind": "host-adapter",
+        "scripts": [],
+        "styles": [],
+        "markup": "",
+        "usage": "Read PROFILE-IDENTITY.md. Resolve current-user avatars by stable ID from one confirmed identity. Commit only after persistence succeeds. Gallery localStorage is not an account backend.",
+        "demoOnly": [
+          "profile-identity-demo.js"
+        ]
+      },
+      "nativeIntegration": {
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "Create TodayProfileIdentityStore(confirmed:persist:) above all routes. TodayProfilePortraitStep saves before onSaved. Profile uses store.confirmed.member(); parties use store.members(roster)."
+      }
+    },
+    {
+      "id": "logo-curved",
+      "name": "Today signature \u2014 curved variation",
+      "preview": "logo-variations.html",
+      "sourcePage": "source.html#logo-curved",
+      "browserSource": [
+        "today-logo.js",
+        "components/logo-curved.js",
+        "LOGOS.md"
+      ],
+      "swiftSource": [
+        "native/TodayLogoCurvedAnimation.swift"
+      ],
+      "dependencies": [
+        "logo"
+      ],
+      "status": "Additional supplied variation. Original opening unchanged; byte-identical reference retained.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-logo-curved",
+        "styles": [],
+        "scripts": [
+          "today-logo.js",
+          "components/logo-curved.js"
+        ],
+        "markup": "<today-logo-curved y-style=\"curved\"></today-logo-curved>",
+        "usage": "See LOGOS.md. y-style curved or original (diagonal). Same replay/pause/speed/loop/reduced-motion clock. Set host width.",
+        "demoOnly": [
+          "components/logo-curved.css",
+          "logo-variation-study.js"
+        ]
+      },
+      "nativeIntegration": {
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "TodayLogoCurvedAnimation(yStyle: .curved), standalone namespaced source. Reference file retains original type names; do not compile it alongside the original logo."
+      },
+      "referenceSource": [
+        "native/reference/TodayLogoCurvedVariation.swift"
+      ]
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."

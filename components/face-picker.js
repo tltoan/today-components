@@ -1,4 +1,4 @@
-/* Standalone choice, outside the approved onboarding. Host owns persistence.
+/* Reusable portrait choice. Host owns draft restoration and persistence.
    A photo selection contains a File, not an upload or a durable URL. */
 (() => {
   const {names,colors}=TodayFacePalettes, last=names.length-1;
@@ -12,7 +12,9 @@
     set value(v){this.setAttribute('value',clean(v));}
     get faceStyle(){return TodayFaceMotion.styles.includes(this.getAttribute('face-style'))?this.getAttribute('face-style'):'tilt';}
     set faceStyle(v){this.setAttribute('face-style',TodayFaceMotion.styles.includes(v)?v:'tilt');}
-    get selection(){return this._photoFile?{kind:'photo',file:this._photoFile}:{kind:'avatar',faceStyle:this.faceStyle,gradientIndex:this.value};}
+    get selection(){return {kind:this.hasPhoto?'photo':'avatar',faceStyle:this.faceStyle,gradientIndex:this.value,...(this._photoFile?{file:this._photoFile}:this._savedPhotoURL?{photoURL:this._savedPhotoURL}:{})};}
+    get hasPhoto(){return !!(this._photoFile||this._savedPhotoURL);}
+    set selection(value){this.clearPhoto();this.faceStyle=value?.faceStyle;this.value=value?.gradientIndex;if(value?.kind==='photo'){if(value.file){this._photoFile=value.file;this._photoURL=URL.createObjectURL(value.file);}else if(/^(https?:\/\/|data:image\/)/i.test(value.photoURL||''))this._savedPhotoURL=value.photoURL;}if(this.isConnected)this.sync();}
     connectedCallback(){if(this._photoFile&&!this._photoURL)this._photoURL=URL.createObjectURL(this._photoFile);this.render();}
     disconnectedCallback(){this._portraitAnimations?.forEach(a=>a.cancel());this._resize?.disconnect();clearTimeout(this._scrollTimer);cancelAnimationFrame(this._scrollFrame);this._photoRequest=(this._photoRequest||0)+1;if(this._photoURL)URL.revokeObjectURL(this._photoURL);this._photoURL=null;}
     attributeChangedCallback(name){if(this.isConnected){if(name==='variant'||name==='display-name')this.render();else{this.sync();if(!this._choosing)this.center(false);}}}
@@ -54,11 +56,11 @@
         if(this._photoURL)URL.revokeObjectURL(this._photoURL);this._photoURL=url;this._photoFile=file;this.sync();this.emit('photo');
       } catch {URL.revokeObjectURL(url);if(request!==this._photoRequest||!this.isConnected)return;error.textContent='This image could not be opened. Try a JPG or PNG.';error.hidden=false;}
     }
-    clearPhoto(){this._photoRequest=(this._photoRequest||0)+1;if(this._photoURL)URL.revokeObjectURL(this._photoURL);this._photoURL=null;this._photoFile=null;const error=this.querySelector('.fp-photo-error');if(error)error.hidden=true;}
+    clearPhoto(){this._photoRequest=(this._photoRequest||0)+1;if(this._photoURL)URL.revokeObjectURL(this._photoURL);this._photoURL=null;this._photoFile=null;this._savedPhotoURL=null;const error=this.querySelector('.fp-photo-error');if(error)error.hidden=true;}
     emit(source){this.dispatchEvent(new CustomEvent('change',{bubbles:true,detail:{...this.selection,source}}));}
-    choose(index,source){const value=clean(index),changed=value!==this.value||!!this._photoFile;this.clearPhoto();this._choosing=true;this.value=value;this._choosing=false;this.sync();if(source!=='scroll')this.center(true);if(changed)this.emit(source);}
+    choose(index,source){const value=clean(index),changed=value!==this.value||this.hasPhoto;this.clearPhoto();this._choosing=true;this.value=value;this._choosing=false;this.sync();if(source!=='scroll')this.center(true);if(changed)this.emit(source);}
     chooseFace(direction,source){
-      if(this._photoFile)return;
+      if(this.hasPhoto)return;
       const outgoing=this.snapshotPortrait();
       const styles=TodayFaceMotion.styles;
       this.faceStyle=styles[(styles.indexOf(this.faceStyle)+direction+styles.length)%styles.length];
@@ -67,9 +69,9 @@
     snapshotPortrait(){
       if(this.variant!=='portrait'||reduced())return null;
       this._portraitAnimations?.forEach(a=>a.cancel());this.querySelector('.fp-outgoing')?.remove();
-      const source=this._photoFile?this.querySelector('.fp-photo-preview'):this.querySelector('.fp-hero');
+      const source=this.hasPhoto?this.querySelector('.fp-photo-preview'):this.querySelector('.fp-hero');
       // Clone canvas pixels; custom-element clones would register extra animation clocks.
-      if(!this._photoFile){const canvas=source.querySelector('canvas'),flat=document.createElement('canvas');flat.width=canvas.width;flat.height=canvas.height;flat.getContext('2d').drawImage(canvas,0,0);flat.style.opacity='.74';return flat;}
+      if(!this.hasPhoto){const canvas=source.querySelector('canvas'),flat=document.createElement('canvas');flat.width=canvas.width;flat.height=canvas.height;flat.getContext('2d').drawImage(canvas,0,0);flat.style.opacity='.74';return flat;}
       return source.cloneNode(true);
     }
     slidePortrait(outgoing,direction){
@@ -81,7 +83,7 @@
       this._portraitAnimations=[old,next];old.onfinish=()=>outgoing.remove();
     }
     sync(){
-      if(!this._options)return;const photo=!!this._photoFile;
+      if(!this._options)return;const photo=this.hasPhoto;
       this._options.forEach((b,i)=>{b.setAttribute('aria-checked',String(!photo&&i===this.value));b.tabIndex=i===this.value?0:-1;if(this.variant==='carousel')b.querySelector('today-minimal-face').toggleAttribute('still',i!==this.value);});
       this.querySelectorAll('.fp-color-name').forEach(s=>s.textContent=photo?'Your photo':`${TodayFaceMotion.label(this.faceStyle)} · ${names[this.value]}`);
       const disc=this.querySelector('.fp-disc');if(disc){
@@ -91,7 +93,7 @@
         if(!disc.classList.contains('is-ready')){void disc.offsetWidth;disc.classList.add('is-ready');}
       }
       const hero=this.querySelector('.fp-hero,.fp-identity-face');if(hero){hero.setAttribute('palette',this.value);hero.setAttribute('face',this.faceStyle);hero.hidden=photo;hero.style.display=photo?'none':'';}
-      const image=this.querySelector('.fp-photo-preview');if(image){image.hidden=!photo;if(photo)image.src=this._photoURL;else image.removeAttribute('src');this.querySelector('[data-photo] span').textContent=photo?'Change photo':'Upload a photo';this.querySelector('[data-use-avatar]').hidden=!photo;}
+      const image=this.querySelector('.fp-photo-preview');if(image){image.hidden=!photo;if(photo)image.src=this._photoURL||this._savedPhotoURL;else image.removeAttribute('src');this.querySelector('[data-photo] span').textContent=photo?'Change photo':'Upload a photo';this.querySelector('[data-use-avatar]').hidden=!photo;}
       this.querySelectorAll('.fp-option today-minimal-face').forEach(f=>f.setAttribute('face',this.faceStyle));
       if(this.variant==='portrait'){this.querySelector('[data-prev]').disabled=photo;this.querySelector('[data-next]').disabled=photo;}
       if(this.variant==='carousel'){this.querySelector('[data-prev]').disabled=this.value===0;this.querySelector('[data-next]').disabled=this.value===last;}

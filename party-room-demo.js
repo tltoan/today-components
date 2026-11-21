@@ -7,6 +7,8 @@
     function reset(){generation++;fail=false;const members=people.map(hydrate),self=members.find(p=>p.self)||members[0];
       state={id:'reading-party',name:'Reading party',today:'2026-11-17',timezoneLabel:'New York',schedule:'Sun, Tue, Thu',viewerID:self.id,members,days:[],entries:[]};
       for(let d=1;d<=17;d++){const date=`2026-11-${String(d).padStart(2,'0')}`;const scheduled=[0,2,4].includes(new Date(date+'T12:00:00Z').getUTCDay());state.days.push({date,scheduled,memberIDs:members.map(p=>p.id)});if(!scheduled)continue;members.forEach((p,i)=>{if((d===5||d===17)&&i===2)return;state.entries.push({id:`${p.id}-${d}`,memberID:p.id,date,amount:i===1?15:d===17?5:10,unit:i===1?'min':'pages',time:i===1?'8:12 PM':'7:36 PM',order:i===1?2:1,samplePhoto:d===17&&i===1,reactorIDs:d===17&&i===1?[members[2].id]:[]});});}
+      const photos=[['maya-17','reading-on-the-go','An open book on a reader’s lap'],['maya-15','afternoon-reading','A Little Life held over a reader’s face in afternoon light'],['sam-15','book-and-coffee','An open book and coffee on a wooden floor'],[self.id+'-15','reading-in-bed','Reading an open book in bed']];
+      for(const [id,file,alt] of photos){const entry=state.entries.find(e=>e.id===id);if(entry)Object.assign(entry,{samplePhoto:false,photoURL:`assets/party-samples/${file}.jpg`,photoAlt:alt});}
       render();
     }
     function render(){for(const room of views){if(room.isConnected)room.model=state;else views.delete(room);}}
