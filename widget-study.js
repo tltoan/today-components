@@ -20,7 +20,7 @@
       article.querySelector('.wg-stage').append(widget);root.querySelector(selector).append(article);widgets.push({widget,initial:widget.model});return widget;
     };
     mount('[data-small]','Water','Amount + a continuous fill',{variant:'small',habits:[habit(0)]});
-    mount('[data-small]','Reading','Page marks + one quick action',{variant:'small',habits:[habit(1)]});
+    mount('[data-small]','Reading','Page count + one quick action',{variant:'small',habits:[habit(1)]});
     mount('[data-small]','Check-off','Log once. Undo when needed.',{variant:'small',habits:[habit(2,{amount:null})]});
     mount('[data-small]','Custom count','Your unit and increment',{variant:'small',habits:[habit(6)]});
     mount('[data-small]','Minimum met','Actual amount stays visible',{variant:'small',habits:[habit(0,{amount:2250})]});

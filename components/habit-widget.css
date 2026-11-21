@@ -29,12 +29,8 @@ today-habit-widget button:disabled{opacity:.45;cursor:default}
 .tw-small-content>.tw-name{flex:none}
 .tw-small-metric{display:grid;grid-template-columns:minmax(0,1fr) 32px;gap:4px;align-items:center;flex:1;min-height:0;width:100%}
 .tw-small-value{min-width:0}
-.tw-controls{display:flex;margin-top:2px;height:44px;flex:none}
+.tw-controls{display:flex;margin-top:8px;height:44px;flex:none}
 .tw-controls .tw-action{width:100%;min-width:0}
-.tw-page-marks{display:flex;gap:2px;height:4px;margin-top:2px;visibility:hidden;flex:none}
-[data-artwork=reading]>.tw-page-marks{visibility:visible}
-.tw-page-marks i{flex:1;border-radius:2px;background:#ffffff24;transition:background 380ms}
-.tw-page-marks i[data-filled=true]{background:#bdaed9}
 [data-tracker=checkoff] .tw-small-content{gap:2px}
 [data-tracker=checkoff] .tw-small-metric{display:flex;flex-direction:column;justify-content:center;gap:8px}
 [data-tracker=checkoff] .tw-small-value{order:1;width:100%;text-align:center}

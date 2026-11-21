@@ -83,7 +83,7 @@
         html='<div class="tw-message"><h3>'+esc(m.headline||title)+'</h3><p>'+esc(m.detail||detail)+'</p><button type="button" class="tw-action" data-action="message">'+esc(action)+'</button></div>';
       } else if(v==='small') {
         const action=h.tracker==='checkoff'?'toggle':'increase';
-        html='<div class="tw-small-body" data-habit="'+esc(h.id)+'"><button type="button" class="tw-small-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-small-metric"><span class="tw-small-value"><span class="tw-amount"></span><span class="tw-context"></span></span><span class="tw-art">'+W.art(h.artwork)+'</span></span></button><div class="tw-page-marks" aria-hidden="true">'+'<i></i>'.repeat(10)+'</div><div class="tw-controls"><button type="button" class="tw-action" data-action="'+action+'"></button></div><span class="tw-pending" role="status"></span></div>';
+        html='<div class="tw-small-body" data-habit="'+esc(h.id)+'"><button type="button" class="tw-small-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-small-metric"><span class="tw-small-value"><span class="tw-amount"></span><span class="tw-context"></span></span><span class="tw-art">'+W.art(h.artwork)+'</span></span></button><div class="tw-controls"><button type="button" class="tw-action" data-action="'+action+'"></button></div><span class="tw-pending" role="status"></span></div>';
       } else if(['medium','list','portraits'].includes(v)) {
         const capacity=v==='medium'?2:4;
         const total=m.total||m.habits.length;
@@ -125,7 +125,6 @@
         item.style.setProperty('--tw-fill',h.rule==='atMost'?0:ratio);
         W.setWaterFill(item.querySelector('.tw-water'),h.rule==='atMost'?0:ratio);
         const circle=item.querySelector('.tw-circle-fill'); if(circle)circle.style.strokeDashoffset=100-ratio*100;
-        item.querySelectorAll('.tw-page-marks i').forEach((mark,i)=>mark.dataset.filled=String(i<Math.floor(ratio*10)));
         item.querySelectorAll('[data-action]').forEach(button=>{
           const action=button.dataset.action;
           if(action==='open'){button.setAttribute('aria-label','Open '+h.title+', '+this.summary(h));if(button.classList.contains('tw-action'))this.setActionLabel(button,h);return;}

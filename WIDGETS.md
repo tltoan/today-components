@@ -29,7 +29,7 @@ File: `Xf03CH47k7G0graqTZ4zis` · Canvas: `426:1987`.
 | Reading art `426:2468`, custom art `426:2478`, stretch/custom slots `441:2774 / 2789` | Exact bundled artwork through `TodayWidgets.art()` |
 | Quick-log controls `426:2486 / 2496 / 2498`, actions `441:2827–2837`, lock action `441:3044` | Shared action / counter controls composed within the widget |
 | Overview rows `426:2594 / 441:2797` | Shared keyed habit row; no row reordering after a save |
-| Reading marks `426:2500`, lock bars `426:2645 / 434:2767`, gauges `435:2768 / 2773` | Reusable CSS marks, rail, and dynamic circle inside their consuming widget |
+| Lock bars `426:2645 / 434:2767`, gauges `435:2768 / 2773` | Reusable rail and dynamic circle inside their consuming widget. Reading marks `426:2500` were removed from the small widget at user request; the amount and target communicate progress. |
 | Warm / monochrome flames `452:5143 / 5144` | Original source assets are retained; selected Warm Ember is used in the live components |
 
 Apple phone contexts, wallpaper, app icons, layout annotations, and the full habit-detail phone chrome are presentation context, not additional widget components. No Apple Code Connect implementation exists in this vanilla JS repository, so its design shell is represented with the existing Today graphite surface.
@@ -86,7 +86,6 @@ Streak hero: `model = {count, label, through}`. Use “scheduled-day streak” f
 - Press: 130 ms, no layout shift.
 - Amount: 320 ms shallow fade/rise after confirmation.
 - Water: one damped spring raises the level and gently settles a surface wave. A new value redirects the current level and velocity; there is no idle loop. Rail/ring: 540 ms.
-- Page marks: 380 ms.
 - Selection dropdowns retain the approved 600 ms disclosure system.
 - No idle widget loops. Reduced motion preserves the same final state without spatial transitions.
 - The selected Warm Ember streak flame uses a 1.6 second lift and glow, settles to the exported still, and supports an explicit Still action.
