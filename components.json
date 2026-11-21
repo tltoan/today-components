@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "name": "Today component library",
+  "repository": "https://github.com/tltoan/today-components",
+  "site": "https://tltoan.github.io/today-components/",
+  "entrypoints": {
+    "guide": "AGENTS.md",
+    "readme": "README.md",
+    "agentIndex": "llms.txt",
+    "humanSourceIndex": "source.html"
+  },
+  "sharedFiles": [
+    "style.css",
+    "component-studies.css",
+    "navigation-page.js",
+    "assets/TestTheFuture-Regular.otf",
+    "assets/TestTheFuture-Medium.otf"
+  ],
+  "components": [
+    {
+      "id": "disclosure",
+      "name": "Dropdown/disclosure motion",
+      "preview": "index.html",
+      "browserSource": [
+        "foundations/motion.css",
+        "foundations/disclosure.js"
+      ],
+      "swiftSource": [
+        "native/TodayMotion.swift"
+      ],
+      "dependencies": [],
+      "status": "Approved shared 600 ms motion."
+    },
+    {
+      "id": "dropdown",
+      "name": "Selection dropdown",
+      "preview": "index.html",
+      "browserSource": [
+        "components/dropdown.js",
+        "components/dropdown.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure"
+      ],
+      "status": "Reusable browser selection control."
+    },
+    {
+      "id": "reading-schedule",
+      "name": "Reading schedule",
+      "preview": "index.html",
+      "browserSource": [
+        "index.html",
+        "app.js",
+        "style.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure"
+      ],
+      "status": "Browser specimen."
+    },
+    {
+      "id": "agenda",
+      "name": "A space in your day",
+      "preview": "index.html",
+      "browserSource": [
+        "components/snap-scroller.js",
+        "app.js",
+        "style.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Browser one-day snapping controller."
+    },
+    {
+      "id": "slide-to-log",
+      "name": "Slide to log",
+      "preview": "index.html",
+      "browserSource": [
+        "app.js",
+        "style.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Browser specimen; linked with checklist example state."
+    },
+    {
+      "id": "checklist",
+      "name": "Daily checklist",
+      "preview": "index.html",
+      "browserSource": [
+        "app.js",
+        "style.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Browser specimen with synthetic data."
+    },
+    {
+      "id": "logo",
+      "name": "Today logo",
+      "preview": "index.html",
+      "browserSource": [
+        "today-logo.js"
+      ],
+      "swiftSource": [
+        "native/TodayLogoAnimation.swift"
+      ],
+      "dependencies": [],
+      "status": "Browser component and unchanged supplied SwiftUI."
+    },
+    {
+      "id": "landing",
+      "name": "Welcome landing",
+      "preview": "landing.html",
+      "browserSource": [
+        "components/welcome-intro.js",
+        "components/welcome-intro.css",
+        "welcome-study.js"
+      ],
+      "swiftSource": [
+        "native/TodayWelcomeIntro.swift",
+        "native/TodayIntro.swift"
+      ],
+      "dependencies": [
+        "logo"
+      ],
+      "status": "Full-screen preview. Begin replays only in the demo."
+    },
+    {
+      "id": "navigation",
+      "name": "Center cradle navigation",
+      "preview": "navigation.html",
+      "browserSource": [
+        "components/bottom-nav.js",
+        "components/bottom-nav.css",
+        "components/cradle-fluid.js",
+        "navigation-study.js"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Selected shape. Plus is disconnected from the editor."
+    },
+    {
+      "id": "plan-button",
+      "name": "Adaptive plan button",
+      "preview": "plan-button.html",
+      "browserSource": [
+        "components/plan-button.js",
+        "components/plan-button.css",
+        "component-studies.js"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Standalone state-controlled button with letter transitions."
+    },
+    {
+      "id": "page-counter",
+      "name": "Page counter",
+      "preview": "page-counter.html",
+      "browserSource": [
+        "components/page-counter.js",
+        "components/page-counter.css",
+        "component-studies.js"
+      ],
+      "swiftSource": [
+        "native/AnimatedPageCounter.swift"
+      ],
+      "dependencies": [],
+      "status": "Tap/hold counter with sequential one-page marks."
+    },
+    {
+      "id": "bar-chart",
+      "name": "Staggered bar chart",
+      "preview": "bar-chart.html",
+      "browserSource": [
+        "components/staggered-bar-chart.js",
+        "components/staggered-bar-chart.css",
+        "component-studies.js"
+      ],
+      "swiftSource": [
+        "native/StaggeredBarChart.swift"
+      ],
+      "dependencies": [],
+      "status": "Synthetic dated chart; zero and no log are distinct."
+    },
+    {
+      "id": "habit-editor",
+      "name": "Retained New habit editor",
+      "preview": null,
+      "browserSource": [
+        "components/habit-editor.js",
+        "components/habit-editor.css",
+        "components/plan-readiness.js"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "plan-button"
+      ],
+      "status": "Retained source, not mounted. Sample English readiness rules; no AI or plan persistence."
+    }
+  ]
+}

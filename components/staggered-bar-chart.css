@@ -1,0 +1,12 @@
+today-staggered-bar-chart{display:block;width:100%;font:400 12px/1.3 Future,sans-serif;color:#babac4}
+.staggered-plot{height:144px;position:relative;border-bottom:.5px solid #574f63;box-sizing:border-box}
+.staggered-target{position:absolute;left:0;right:0;border-bottom:.5px solid #574f63;pointer-events:none}
+.staggered-target span{position:absolute;bottom:5px;left:0;white-space:nowrap}
+.staggered-columns{height:100%;display:grid;align-items:end;position:relative}
+.staggered-column{height:100%;position:relative;display:flex;justify-content:center;align-items:flex-end;min-width:0}
+.staggered-bar{width:min(40px,calc(100% - 12px));border-radius:8px 8px 0 0;background:linear-gradient(#bdadd9,#6b5c8a)}
+.staggered-bar.target-met{background:linear-gradient(#9ebfef,#526b91)}
+today-staggered-bar-chart[data-pending] .staggered-bar[data-animate]{height:0!important}
+today-staggered-bar-chart[data-pending] .staggered-value[data-animate]{opacity:0}
+.staggered-value{position:absolute;bottom:0;font:inherit;white-space:nowrap;line-height:14px;pointer-events:none}
+.staggered-inside{color:#15121b}.staggered-dates{display:grid;height:28px;align-items:center;text-align:center}.staggered-dates span{white-space:nowrap}.staggered-empty{display:flex;align-items:center;justify-content:center}

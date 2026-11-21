@@ -1,0 +1,36 @@
+/* Approved Today disclosure motion, November 20, 2026.
+   Import after component styles. Future dropdowns use this contract. */
+:root {
+  --today-disclosure-duration: 600ms;
+  --today-disclosure-easing: cubic-bezier(.37, 0, .18, 1);
+  --today-disclosure-enter: 380ms;
+  --today-disclosure-enter-delay: 120ms;
+  --today-disclosure-exit: 230ms;
+  --today-disclosure-chevron: 440ms;
+  --today-agenda-settle: 680ms;
+  --today-agenda-easing: cubic-bezier(.22, .68, .24, 1);
+}
+.today-disclosure,
+.today-disclosure[data-open="false"] {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows var(--today-disclosure-duration) var(--today-disclosure-easing),
+              opacity var(--today-disclosure-exit) ease;
+}
+.today-disclosure[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transition: grid-template-rows var(--today-disclosure-duration) var(--today-disclosure-easing),
+              opacity var(--today-disclosure-enter) ease var(--today-disclosure-enter-delay);
+}
+.today-disclosure > .today-disclosure__content { min-height: 0; overflow: hidden; }
+.today-disclosure__chevron {
+  transition: transform var(--today-disclosure-chevron) var(--today-disclosure-easing);
+}
+html[data-reduced] .today-disclosure,
+html[data-reduced] .today-disclosure__chevron { transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion-override]) .today-disclosure,
+  html:not([data-motion-override]) .today-disclosure__chevron { transition: none !important; }
+}

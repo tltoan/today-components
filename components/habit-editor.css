@@ -1,0 +1,37 @@
+/* Figma 121:12444, 390 × 844. Product typography reuses Today's local font.
+   The keyboard is an interactive desktop facsimile; touch devices use the OS. */
+today-habit-editor{display:contents}
+body.habit-editor-open{overflow:hidden}
+.habit-editor-dialog{position:fixed;inset:0;margin:auto;border:0;padding:0;width:390px;max-width:calc(100vw - 24px);height:844px;max-height:calc(100dvh - 24px);overflow:hidden;color:#f0f0f0;background:#000;border-radius:34px 34px 70px 70px;box-shadow:0 30px 100px #0009}
+.habit-editor-dialog::backdrop{background:#09070cb8;backdrop-filter:blur(8px)}
+.habit-editor-screen{height:100%;display:grid;grid-template-rows:58px 44px minmax(80px,1fr) 78px 315px;position:relative;isolation:isolate;background:#000}
+.habit-editor-screen:before{content:"";position:absolute;z-index:-1;inset:0 0 auto;height:440px;pointer-events:none;background:linear-gradient(180deg,#0000 0%,#00000059 36%,#000000e0 74%,#000 100%),linear-gradient(93.3443deg,#5e91f626 7.7225%,#a781f026 54.078%,#ffb27626 98.615%)}
+.habit-editor-status{display:flex;align-items:flex-start;justify-content:space-between;padding:19px 29px 0 26px;font:500 14px/normal -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#f0f0f0}
+.habit-editor-battery{width:21px;height:9px;border:1px solid #bfbfbf;border-radius:2px;padding:1px;margin-top:4px}
+.habit-editor-battery:before{content:"";display:block;width:15px;height:5px;border-radius:1px;background:#e6e6e6}
+.habit-editor-heading{display:flex;align-items:center;justify-content:space-between;padding:0 23px 0 24px;gap:12px}
+.habit-editor-heading h2{font:500 14px/normal Future,sans-serif;letter-spacing:0;background:linear-gradient(90deg,#fafafa,#949494);background-clip:text;color:transparent}
+.habit-editor-skip{height:44px;padding:0;min-width:118px;text-align:right;font:400 13px/21px -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#bfbfc7}
+.habit-editor-writing{min-height:0;padding:12px 23px 0}
+.habit-editor-input{display:block;resize:none;box-sizing:border-box;width:100%;height:100%;min-height:80px;max-height:291px;margin:0;padding:3px 0 0 4px;border:0;border-radius:0;background:transparent;color:#dedbe4;caret-color:#d6d6d6;font:500 31px/1.42 Future,sans-serif;letter-spacing:0;outline:none;scrollbar-width:thin;overflow-y:auto}
+.habit-editor-input::placeholder{color:#696871;opacity:1}
+.habit-editor-input:focus-visible{outline:none}
+.habit-editor-actions{display:flex;align-items:flex-end;justify-content:space-between;padding:0 23px 15px;gap:16px}
+.habit-editor-close{flex:none;display:grid;place-items:center;width:48px;height:48px;background:#1f1f1f;border:1px solid #3b3b3b;border-radius:50%;font:500 25px/1 -apple-system,BlinkMacSystemFont,Arial,sans-serif;color:#d3d3d3}
+.habit-editor-close:focus-visible,.habit-editor-skip:focus-visible{outline:2px solid #d9c9ec;outline-offset:3px}
+.habit-editor-keyboard{position:relative;background:#1f1f1f;border-radius:29px 29px 0 0;padding:0 6px;color:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;user-select:none}
+.keyboard-suggestions{height:49px;display:grid;grid-template-columns:repeat(3,1fr);align-items:center;margin:0 -6px}
+.keyboard-suggestions button{height:22px;border-right:1px solid #3b3b3b;color:#b3b3b3;font:400 15px/22px -apple-system,BlinkMacSystemFont,Arial,sans-serif}
+.keyboard-suggestions button:last-child{border:0}
+.keyboard-row{display:grid;gap:3px;height:42px;margin-bottom:10px}
+.keyboard-row button{border-radius:7px;background:#3c3c3c;color:#f5f5f5;font:400 22px/42px -apple-system,BlinkMacSystemFont,Arial,sans-serif;padding:0;min-width:0;touch-action:manipulation}
+.keyboard-row button:active{background:#666;scale:1}
+.keyboard-row-one{grid-template-columns:repeat(10,minmax(0,1fr))}
+.keyboard-row-two{grid-template-columns:repeat(9,minmax(0,1fr));margin-left:19px;margin-right:19px}
+.keyboard-row-three{grid-template-columns:42px repeat(7,minmax(0,1fr)) 42px;column-gap:5px}
+.keyboard-row-four{grid-template-columns:51px 1fr 83px;gap:5px}
+.keyboard-row-four button{font-size:16px}
+.keyboard-row button.selected{background:#d8d8d8;color:#222}
+.habit-editor-home{position:absolute;width:116px;height:4px;border-radius:2px;background:#d9d9d9;bottom:12px;left:50%;transform:translateX(-50%)}
+@media(max-width:640px){.habit-editor-dialog{width:100vw;height:100dvh;max-width:none;max-height:none;border-radius:0;box-shadow:none}}
+@media(pointer:coarse){.habit-editor-dialog{height:var(--editor-height,100dvh);bottom:auto;top:0}.habit-editor-screen{grid-template-rows:env(safe-area-inset-top,20px) 44px minmax(80px,1fr) 78px}.habit-editor-status,.habit-editor-keyboard{display:none}.habit-editor-input{max-height:none}.habit-editor-actions{padding-bottom:max(15px,env(safe-area-inset-bottom))}}

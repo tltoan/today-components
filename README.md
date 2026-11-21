@@ -1,0 +1,223 @@
+# Today component library
+
+[Live component library](https://tltoan.github.io/today-components/) · [Source repository](https://github.com/tltoan/today-components) · [Agent guide](AGENTS.md) · [Component manifest](components.json)
+
+## For agents and developers
+
+All implementation code is committed here as readable HTML, CSS, JavaScript, and SwiftUI. There is no compiled bundle, package install, backend, or secret required to inspect or run the components. Start with [AGENTS.md](AGENTS.md), use [components.json](components.json) for each component's source/dependencies/preview, and [llms.txt](llms.txt) for a compact entry point. Native SwiftUI files are under `native/`; browser source is under `components/`, `foundations/`, and the root. The repository can be cloned without authentication.
+
+```sh
+git clone https://github.com/tltoan/today-components.git
+cd today-components
+python3 -m http.server 4318
+```
+
+GitHub Pages publishes this repository's default branch from its root. `.nojekyll` preserves source paths and raw Markdown files. Relative asset paths work both locally and under `/today-components/`. Changes pushed to the publishing branch update the site after the Pages build.
+
+
+An interactive component showcase adapting the four-panel motion composition in [Monotree — features sections by Oleksandr Plyuto](https://www.cosmos.so/e/1503723395) to Today, with the supplied Today logo animation, the selected Center cradle navigation, an independent adaptive action button, and the supplied page counter, staggered bar chart, and full welcome landing screen.
+
+Open `index.html` directly, or serve this directory with a local HTTP server. No build, package install, or network dependency is needed.
+
+This is the working Today component library. This README and AGENTS.md contain the component contracts needed to work in this repository. The separate native app specification is not required to run these previews; native app integration is not implied.
+
+## Component inventory
+
+| Component | Reusable source | Status |
+| --- | --- | --- |
+| Dropdown/disclosure motion | `foundations/motion.css`, `foundations/disclosure.js`, `native/TodayMotion.swift` | User-approved standard, November 20, 2026. Applied to all current library dropdowns/expansions. Native tokens available; app-wide integration pending. |
+| Selection dropdown | `components/dropdown.js`, `components/dropdown.css` | Reusable browser component; used by logo speed. Keyboard, focus return, outside dismissal, and reduced motion supported. |
+| Reading schedule | `index.html`, `app.js`, `style.css` | Browser specimen consuming shared disclosure motion. Its layout/fixture is separate from the approved motion rule. |
+| Vertical agenda | `components/snap-scroller.js` | Reusable browser controller. One day per scroll/swipe, with smooth snapping as requested November 20. Native implementation pending. |
+| Slide to log | `app.js`, `style.css` | Browser specimen based on the existing native control; not yet extracted as a standalone component. |
+| Daily checklist | `app.js`, `style.css` | Browser specimen; shares sample state with slide-to-log. |
+| Today logo | `today-logo.js`, `native/TodayLogoAnimation.swift` | Reusable browser component plus unchanged user-supplied SwiftUI source. |
+| Welcome landing | `components/welcome-intro.js`, `components/welcome-intro.css`, `native/TodayWelcomeIntro.swift`, `native/TodayIntro.swift` | Full-screen supplied motion added as its own library section and `landing.html` preview. Original wrapper and matching local dependency preserved unchanged; native app integration pending. |
+| Bottom navigation | `components/bottom-nav.js`, `components/bottom-nav.css`, `components/cradle-fluid.js` | Center cradle (B) selected November 20. Animated Home/Habits highlight and central +. Browser implemented; Figma/native migration pending. |
+| Adaptive plan button | `components/plan-button.js`, `components/plan-button.css`, `components/plan-readiness.js` | Standalone browser component with a dedicated `plan-button.html` preview and manual state/replay controls. Staggered letter roll; no editor or parser required. |
+| Page counter | `components/page-counter.js`, `components/page-counter.css`, `native/AnimatedPageCounter.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `page-counter.html` preview; tap/hold, limits, rolling digits, sequential fill and labeled overflow. Native app integration pending. |
+| Staggered bar chart | `components/staggered-bar-chart.js`, `components/staggered-bar-chart.css`, `native/StaggeredBarChart.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `bar-chart.html` preview; replay, stagger pacing, recorded zero and missing-log examples. Native app integration pending. |
+| New habit entry (retained source) | `components/habit-editor.js`, `components/habit-editor.css` | Earlier Figma `121:12444` entry implementation retained. Latest user request disconnects it from +; no longer mounted in the library. Generation/setup integration pending. |
+
+## Shared dropdown contract
+
+The user explicitly approved the slower schedule motion and asked to standardize it across all dropdowns. New dropdowns reuse these tokens, not separate local durations:
+
+| Part | Standard |
+| --- | --- |
+| Expansion/collapse | 600 ms, cubic-bezier `(0.37, 0, 0.18, 1)` |
+| Incoming content | 380 ms fade after 120 ms |
+| Outgoing content | 230 ms fade, no delay |
+| Chevron | 440 ms using the expansion curve |
+| Input/state | Applied immediately; reversing mid-transition remains possible |
+| Reduced motion | Immediate layout and state; no travel or stagger |
+
+Keep the trigger/heading anchored where possible. Animate height with clipped content; do not show/hide whole sections instantly. Closed panels are inert and hidden from accessibility. Preserve selections and return focus to the trigger when closing a focused panel. The standard applies to custom Today dropdowns and inline disclosures; operating-system menus keep platform behavior.
+
+Load `foundations/motion.css` after local component styles and `foundations/disclosure.js` before component scripts. Then construct `new TodayUI.Disclosure(panel, {trigger, open: false})` and call `setOpen(boolean)`. The panel needs one inner wrapper; the controller adds the shared classes and state attributes.
+
+For selection menus load `components/dropdown.css` and `components/dropdown.js`, then use:
+
+```html
+<today-dropdown label="Tracking method" value="pages">
+  <option value="pages">Pages</option>
+  <option value="minutes">Minutes</option>
+  <option value="checkoff">Check it off</option>
+</today-dropdown>
+```
+
+Read/write `.value` and listen for the bubbling `change` event. `placement="top"` opens above the trigger. Enter/Space opens or selects; arrows/Home/End navigate; Escape and outside focus/pointer dismiss.
+
+## Design source and scope
+
+- Source context: Today app design specification, version 2, November 20, 2026. Relevant component decisions and implementation status are recorded here and in AGENTS.md.
+- Reused roles: Test The Future Regular/Medium, graphite surfaces, neutral selection gradient, 20 px plan-field radius, 12 px weekday selection radius, the 265 × 58 slider with a 46 px handle, native slider color stops, and supplied StretchMat, WaterPlants, and Meditation artwork.
+- The slider derives from the author’s existing native `SlideToLog` and motion study. Its complete browser implementation is in `app.js` and `style.css`; those earlier app files are not dependencies of this repository.
+- Fixture: synthetic November 20–23, 2026 plans and activity. Reading defaults to Sun/Tue/Thu, 10 pages, a 21-day trial. The three Friday check-off habits start with Water plants logged. Agenda cards are independent sample plans. No production/user data is loaded.
+- Proposed departures: this presentation board, compact schedule repeat switch, agenda carousel, and interactive daily checklist. Checkmarks are action control states, not replacements for the established activity-calendar marks. The count describes habits with a reported log, not target attainment, a streak, or a finalization of the day. Dropdown motion is now explicitly approved; these other layouts remain browser studies, and the native app has not been changed.
+- The existing local preview has Regular/Medium font files. The showcase wordmark uses Medium; this is not the native Bold main-tab header.
+
+## Interactions
+
+- Repeat expands/collapses the day controls. The preset menu offers Every day, Weekdays, and remembered Custom days. At least one day stays selected.
+- Schedule unfolding now takes 600 ms, with a smooth acceleration/deceleration curve, staged content fades, and an anchored heading. Repeat-off copy and preset choices animate their height instead of appearing/disappearing instantly. Reversing a transition is supported; Less motion makes it immediate.
+- Drag the slider handle all the way and release to log. Early release, Escape, pointer cancellation, leaving the vertical track region, window blur, and resize cancel the drag. Enter/Space on the handle and “Or tap to log” provide non-drag alternatives.
+- The slider and Evening stretch checklist row share state. Either can undo the sample log.
+- The agenda is a real vertically scrolling list of four sample dates. Touch/trackpad/wheel scrolling and mouse dragging snap to day cards. Arrows and dots navigate the same list; Up/Down, Page Up/Down, Home, and End work when it is focused. The faded next card is reachable.
+- Agenda movement uses one controller and a 680 ms landing. A wheel/trackpad burst advances exactly one day and ignores its inertial tail; reversing direction can reverse the landing. Mouse/touch drags follow the pointer over at most one adjacent day, then commit at 22% of a card (capped at 28 px) or a short intentional flick. Smaller releases return to the same day. The component owns touch gestures within its bounds; it no longer uses free native momentum there. Card opacity changes continuously. Reduced motion settles immediately. Browser CSS snapping remains disabled so two mechanisms cannot compete.
+- The progress bar is derived from the three logged states. Every action is reversible.
+- Replay motion runs one 6.5-second demonstration. Direct interaction interrupts it. It never loops automatically. Less motion follows the OS preference and can be changed locally; reduced motion retains all controls and uses a static reset for replay.
+- State lasts for this page session only. Refresh or Replay resets the example. No backend or native integration is included.
+
+## Verification
+
+Verified in the browser on November 20, 2026:
+
+- Desktop at 1600 CSS px wide and mobile at an observed 390 × 844 CSS px viewport; no horizontal overflow, fonts and artwork loaded.
+- Expanded schedule menu fits without overlap; Weekdays selects Monday–Friday; repeat-off collapses controls and repeat-on preserves selection.
+- Enter on the slider logs the habit; undo clears it; an actual partial drag does not log; a full drag logs once and updates the progress count.
+- Checklist completion reaches 3/3, and the slider and checklist remain in sync.
+- Agenda navigation changes its date/content and updates boundary controls.
+- The 6.5-second replay completes at Sunday, November 22 and 3/3 logged, then stops.
+- Less motion gives the slider a computed transition duration of 0 seconds; logging still works and replay resets statically.
+- No browser warnings or errors were reported. `node --check app.js` passes.
+
+Captures: `desktop-preview.jpg` and `mobile-preview.jpg`. This pass did not run native simulator tests because no native files changed, nor a screen-reader audit or an OS-level Reduce Motion toggle; the browser's local reduced-motion control was exercised.
+
+### Direct agenda scrolling correction
+
+The original preview only wired arrows/dots. Replaced the swapped card with a native scroll container and real entries, with mouse drag support and scroll snapping. Verified direct wheel scrolling, dragging in both directions, first/last keyboard navigation, the visible next-day arrow, synchronized selected dots, and reduced-motion end navigation. No console warnings/errors were reported. Touch uses browser-native vertical scrolling; it was not exercised on a physical touch device. Updated capture: `agenda-scroll-preview.jpg`. This remains HTML/CSS/JavaScript, not a SwiftUI implementation.
+
+### Shared motion foundation and agenda refinement
+
+Verified this revision at desktop and an observed 390 × 844 CSS px viewport, with no horizontal overflow. Schedule disclosures and the logo speed menu use the same computed 600 ms layout transition. Keyboard speed selection updates the logo, closes the menu, and returns focus to its trigger; Escape dismisses the menu. Agenda navigation and dragging settle on aligned dates, with continuous intermediate card opacity and no competing CSS snap. The local Less motion control gives disclosures a computed zero duration and settles agenda navigation immediately. No browser warnings/errors were reported.
+
+`node --check` passes for the app, disclosure, dropdown, and snap-scroller scripts. Both native source files pass Swift type-checking together. Physical touch momentum and native runtime integration have not been tested. Updated capture: `shared-motion-library-preview.jpg`.
+
+### Explicit day snapping and navigation shapes
+
+This revision replaces the earlier agenda's free native momentum with discrete day paging. Verified two separate wheel gestures advance Friday → Saturday → Sunday, and a mouse drag returns to Saturday. A short drag returns to the same day. Settled positions align to card offsets within browser subpixel rounding (126.25 px scroll position against a 126 px measured row offset). End reaches Monday and disables Next; reduced-motion Home returns to Friday immediately. Physical touch hardware was not tested.
+
+All six navigation variants switch the selected destination and sample context. Checked keyboard arrows, + expansion, Escape/close, and reduced motion. At an observed 390 × 844 CSS px viewport, there is no horizontal overflow and every nav target is at least 44 × 44 px. The creation preview stays within its phone frame. No browser warnings/errors were reported. JavaScript syntax checks pass for the snap controller, navigation component, gallery, and focused-page controls. These are browser checks; no native runtime was changed or tested.
+
+## Selected Center cradle navigation
+
+Open `navigation.html` for the selected component, or scroll to Bottom navigation on `index.html`. The user chose **B — Center cradle** and requested an animated Home ↔ Habits switch. The options below record the earlier exploration; the live preview now uses only Center cradle.
+
+| Option | Shape | Difference |
+| --- | --- | --- |
+| A | Floating pill | Existing capsule direction with a separate + above the right end. |
+| B | Center cradle | Smooth concave center accommodates a raised circular +. |
+| C | Three islands | Separate Home, +, and Habits surfaces. |
+| D | Sidecar | Two-tab capsule with the + alongside at the same level. |
+| E | Soft dock | Rounded rectangular bar with an inline rounded-square +. |
+| F | Raised center | Continuous convex center lifts the + above the tab baseline. |
+
+**Center cradle is approved; A/C/D/E/F remain historical studies.** The approved two destinations remain Home and Habits. Reused the project's exact HomeIcon and HabitsIcon assets and graphite finish; labels use the existing local Future font. The selected cradle has a 352 × 71 body and 54 px central +, superseding the earlier capsule / separate upper-right button for the next navigation implementation. The phone crops illustrate bottom placement and a reserved home-indicator area; they are not native device shells.
+
+Load `components/bottom-nav.css`, then `components/cradle-fluid.js` followed by `components/bottom-nav.js`, and insert `<today-bottom-nav variant="cradle" active="home" label="Main navigation"></today-bottom-nav>`. Supported variants are `floating`, `cradle`, `islands`, `sidecar`, `compact`, and `saddle`. Set the shape at construction; `.active` can be changed between `home` and `habits`. Listen to bubbling `tabchange` (`event.detail.active`) and `add` events to connect real routes and creation. The component uses `aria-current="page"`; Left/Right/Home/End switch destinations. Position it inside the app's safe-area shell, with room for raised controls.
+
+The selected nav uses one deforming SVG contour with a 1.4 px, 8%-white border and equal 6 px top/bottom insets. The outline treatment matches the outer container, with lower selection-border opacity per the latest refinement. It stretches sideways and compresses vertically beneath the actual cradle boundary, then rounds back into the destination tab. The border stays continuous; clipping is only a safeguard, not the deformation mechanism. A complete switch takes 600 ms using `(0.37, 0, 0.18, 1)`; reversing starts from the current shape and takes proportionally less time. Labels stay in place; the sample page content fades over 380 ms and travels 14 px. These are current browser motion values for review, not a change to every existing app selector. Reduced motion applies the final state immediately. The earlier six-shape capture remains `navigation-shapes-preview.jpg`.
+
+### Fluid selection refinement
+
+The user requested a matching border and fluid deformation beneath the divot. `components/cradle-fluid.js` owns the shared cradle outline, its boundary function, and the highlight contour; the nav has a single animation controller. Reduced motion and resize settle to a valid endpoint, and disconnect cancels the animation.
+
+Verified the matching computed border color/width, a visible deformed intermediate frame, reversal from the middle without resetting to an endpoint, and reduced motion canceling an in-flight morph. Desktop and observed 390 × 844 layouts have no horizontal overflow. A geometry sweep over 202 positions at desktop/mobile widths sampled the actual cubic contour, with no boundary violations: minimum top clearance 4.78 SVG units; bottom remains inside y=64.03 against the outer y=70 edge. JavaScript syntax checks passed; no browser warnings/errors were reported. Native UI was not changed. Capture: `fluid-cradle-preview.jpg`.
+
+Latest spacing refinement: selection-border opacity is now 8% (previously 15%). One shared 6 px inset governs the top, bottom, and divot clearance. Browser measurements at rest give equal 5.974 px top/bottom gaps after curve interpolation.
+
+### Full-screen New habit entry — retained, disconnected
+
+**Latest user correction:** + has no page attached. The live showcase no longer loads or mounts the editor, and the adaptive action is reviewed separately. The implementation notes below describe the earlier retained source.
+
+The + previously opened the user-confirmed [Figma screen 121:12444](https://www.figma.com/design/Xf03CH47k7G0graqTZ4zis/today.?node-id=121-12444), replacing the small popup. It was implemented from high-fidelity design context and checked against the returned screenshot; no screenshot is used as a runtime asset. The design has no image/SVG assets to download.
+
+At 390 × 844, the heading/input/actions/keyboard use the source layout (input y=114, actions y=466, keyboard y=529). The placeholder wording is preserved verbatim. The background paint is taken from the source. Future Medium is the local product face; browser system fonts stand in for the Figma Inter/SF keyboard and chrome. Desktop shows an interactive keyboard facsimile; coarse-pointer devices use their own keyboard with viewport-aware action placement. No physical touch device or iOS keyboard was tested.
+
+Load `components/plan-button.css` and `components/habit-editor.css`, then load `components/plan-readiness.js`, `components/plan-button.js`, and `components/habit-editor.js` in that order. Add `<today-habit-editor></today-habit-editor>`. Call `.show(trigger)` or `.close()`; `planrequest` bubbles with `{description}`. The semantic modal traps focus, closes with Escape/Close/Skip, and restores focus to +. It retains the in-session draft and returns to the selected tab. The adaptive action stays disabled until the current description passes the preview readiness check; empty/whitespace and incomplete descriptions cannot emit a plan request. The earlier showcase captured the emitted description outside the phone specimen; it does not generate a plan, navigate through further setup, save, or claim persistence. Entry reveals from the actual + position over 330 ms; reduced motion opens immediately.
+
+Verification for this revision: JavaScript syntax checks passed. Browser checks covered the 600 ms moving highlight, rapid reversal, selected scene accessibility, Close/Skip/Escape return, in-session draft retention, whitespace validation, keyboard character/backspace input, and the emitted description. Reduced motion gives the highlight a zero-duration transition. At the observed 390 × 844 viewport, the editor has no horizontal overflow and its control offsets match the source within subpixel rounding. No browser warnings/errors were reported. Native app and Figma components were not edited. Captures: `center-cradle-preview.jpg` and `new-habit-editor-preview.jpg`.
+
+### Adaptive plan button
+
+User direction, November 20: keep the pill filled, with muted text while the description needs more detail. Change the prompt inside the button, then enable **Build my plan** when there is enough information to parse the habit. The current copy and exact readiness threshold are review proposals.
+
+Open `plan-button.html`, or the Adaptive button section in `index.html`. The button is a standalone component with three manual state controls and a one-shot replay. It has no dependency on the editor or sample parser. **Say a little more → How often? → Build my plan** keeps a steady 158 × 48 graphite pill. The refined text motion rolls individual graphemes upward in a soft wave: outgoing letters lift 10 px over 260 ms with a 5 ms stagger; incoming letters settle from 12 px over 520 ms after a 100 ms lead-in, staggered 9 ms. A subtle 2 px blur resolves to sharp text; easing is `(0.22, 0.8, 0.24, 1)`. Text brightens from 48% to 100% as it becomes ready. Reversals sample current letter positions and never accumulate more than two labels. Reduced motion swaps immediately. Exact motion is the current review implementation.
+
+`<today-plan-button>` renders a semantic button. Call `.setState({label, ready, hint})` to display an assessment; `.button` exposes the native control. The editor waits 320 ms after typing before assessing; editing immediately disables submission, composition waits until committed, late assessments are ignored, and closing cancels pending work. The accessibility name updates with the visible label and a polite status provides the missing detail. Repeated identical assessments do not replay the animation.
+
+The retained, currently unloaded `TodayUI.PlanReadiness.assess(description)` is a deliberately bounded, English-only demonstration. It recognizes common activity words plus a repeat schedule/cue. “Read” asks “How often?”; “Read before bed” is ready. Vague text such as “I want to feel better every day” remains incomplete. These are **sample rules, not semantic parsing or an approved production readiness requirement**. They may miss valid custom habits or accept misleading wording. Assign `editor.assessDescription = yourAssessor` (sync or async, returning `{label, ready, hint}`) to use actual parser results without changing the motion. No input is sent to an external service, and no plan is generated or saved.
+
+Checks in this revision: JavaScript syntax; 11 readiness fixtures; live desktop empty/partial/ready states; a captured in-flight fade/lift; rapid reversal with a single settled label; immediate disabling on edit; whitespace; keyboard activation and focus return; reduced motion without travel. At an observed 390 × 844 viewport, both prompt/ready states keep the same 158 × 48 button at the source action position with no horizontal overflow. This is browser verification, not iOS keyboard or native integration testing.
+
+## Supplied page counter and staggered bar chart
+
+Both user-supplied SwiftUI files are preserved byte for byte in `native/`. Browser counterparts make them reviewable in this library; native app integration is separate. Both files pass `xcrun swiftc -typecheck` together against the installed iOS simulator SDK with an iOS 17 target. This is compilation verification, not simulator interaction testing.
+
+### Page counter
+
+Open `page-counter.html` or use `<today-page-counter amount="10" maximum="20" mark-count="20"></today-page-counter>` after loading `components/page-counter.css` and `.js`. Read/write `.amount`, and listen for bubbling `change` with `{amount}`. The standalone preview sets maximum to 40 solely to demonstrate overflow beyond its 20 visible marks.
+
+Reproduces the supplied 82 px gradient digits, 48 px controls, 48 px page marks, 5 px gaps and transparent component background. Tap/keyboard activation steps once. Holding begins at 280 ms, repeats every 75 ms, and stops on release, cancellation, pointer exit, focus loss, inactive document, disconnect or a limit. A release after repeating adds no extra step. Digits and one continuous mark-fill value retarget over 180 ms using `(0.2, 0.8, 0.2, 1)`. At most two digit layers exist. One mark always represents one page; excess pages are explicitly labeled and never rescale the marks. Reduced motion applies browser endpoints immediately.
+
+### Staggered bar chart
+
+Open `bar-chart.html` or load `components/staggered-bar-chart.css` and `.js` and insert `<today-staggered-bar-chart></today-staggered-bar-chart>`. Set `.points` to `{id, dateLabel, value}` entries (`null` means no log), set `target`, `target-label`, `unit`, and `stagger` (milliseconds) before render, and call `.replay()`. The preview offers default 140 ms staggering and optional 500 ms one-at-a-time pacing.
+
+Preserves the supplied November 1–12, 2026 sample (5, 10, 12, no log, 8, 15; total 50), 10-page target, 144 px plot, 40 px maximum bars, 8 px top corners and square baseline. Bars grow by height over 500 ms rather than scaling rounded corners; labels rise with their amount. The first visible entry animates once, and replay is explicit. A recorded zero is a 1 px baseline marker with “0”; a missing value has “No log” and no bar. The zero demonstration changes the first sample to zero and recalculates total to 45. Data is synthetic. Reduced motion shows final bars immediately.
+
+### Current browser verification
+
+Verified the nav + no longer opens or mounts an editor and carries no dialog ARIA relationship. Button checks covered individual letter transforms, rapid reversals settling to one label, keyboard state controls, fixed size and immediate reduced-motion state. Counter checks covered one-step keyboard activation, a real 650 ms pointer hold (11 → 16), no extra release increment, upper bound 40, zero/lower bound, 25-page overflow and reduced-motion single-mark fill. Chart checks covered progressive staggered heights, restored 50-page total, zero vs no log, and reduced motion without entrance animation. At an observed 390 × 844 browser viewport the three components fit without horizontal overflow and chart date labels remain unclipped. Updated JavaScript syntax checks pass. No native UI was modified.
+
+## Full welcome landing screen
+
+The user supplied `TodayWelcomeIntro.swift` and asked for the full landing screen on the component page. It is now the **Welcome landing** section (`index.html#landing`), with a 390 × 844 composition, replay/pause/half-speed controls, and a full-viewport preview at `landing.html`. The preview-only control bar on that page is separate from the supplied screen. The nav + remains disconnected.
+
+The supplied welcome source and its required `TodayIntro.swift` dependency came from the author’s matching animation study. Both are copied unchanged to `native/` and included in `native/TodayWelcomeIntro.zip` with installation notes. Use the existing registered TestTheFuture-Medium font; the wordmark itself is embedded vector geometry. Both files pass iOS 17 simulator SDK type-checking together. No Today native screens or Figma files were edited.
+
+The browser reuses the exact wordmark outlines, stroke masks and sampled curves through `TodayUI.WordmarkArt` exported by the existing logo script. This export leaves the standalone logo's behavior unchanged. One sampled drop drives both period motion and background translation, including their rebound. Paint, placement and supporting copy follow the supplied SwiftUI and the locally saved welcome still. Browser font rasterization is not claimed to be pixel-identical to SwiftUI.
+
+| Time | Sequence |
+| --- | --- |
+| 0–2.017 seconds | Black opening, letters draw, period and gradient descend and settle together. |
+| 2.06–2.58 seconds | Wordmark moves/scales from its 55 pt hero role into the 35 pt landing role. |
+| 2.30–2.76 seconds | “what will you do?” fades in and rises 7 pt. |
+| 2.62–3.10 seconds | Begin and privacy/terms copy enter together, rising 10 pt. |
+| 3.10–4 seconds | Resting hold; playback then stops. |
+
+Load `today-logo.js`, then `components/welcome-intro.js`, plus `components/welcome-intro.css`; insert `<today-welcome-intro></today-welcome-intro>` into a sized container. `isPlaying`, `speed` (0.1–2), `replay()`, `replay-token`, `currentTime`, `finished` and `reduced-motion` support review. Listen for `begin`, `complete` and `playbackchange`. The component emits `begin`; only the supplied-style demo handler replays the entrance. It does not start onboarding, accept terms, save anything, or reconnect navigation. Playback pauses offscreen/inactive; reduced motion immediately shows the completed composition. Hidden content is removed from accessibility/focus until its entrance.
+
+Current verification: original/dependency byte comparisons; ZIP contents; JavaScript syntax; both native files type-checked together. Browser checks covered a paused black opening at 0.006 seconds with Begin hidden/inert, half-speed without resetting the paused time, resumed playback, completion at 4 seconds, reduced motion exposing the final screen, and keyboard Begin resetting the preview to time zero. Desktop library placement was visually checked against the supplied composition. At an observed 390 × 844 viewport there is no horizontal overflow; Begin is approximately 265 × 65 at y=694 and the footer ends at y=810, within subpixel rounding of source geometry. Native runtime, OS Reduce Motion, and physical-device behavior were not tested in this pass.
+
+## Today logo component
+
+- `native/TodayLogoAnimation.swift` is the user's supplied SwiftUI source, preserved byte for byte. It is a reusable native view; the other four showcase components remain browser implementations. The Today app project has not been modified.
+- `today-logo.js` is its dependency-free browser counterpart, registered as `<today-logo-animation>`. It copies the six vector outlines, stroke construction, gradient, monotone Hermite curves, letter offsets, and period choreography from the source. It does not use a font or raster image.
+- The showcase provides replay, pause/resume, 0.5×–2× speed, and looping. The component also supports `isPlaying`, `speed` (clamped to 0.1–2), `loops`, `replayToken`, and `replay()` properties/methods. Matching attributes are `playing`, `speed`, `loop`, and `replay-token`.
+- Default playback runs once for 2.1 seconds. It pauses offscreen or in a hidden document, and holds the completed mark. `reduced-motion` can override the operating system preference; reduced motion displays the finished mark and does not loop.
+- Browser usage: load `today-logo.js`, then insert `<today-logo-animation></today-logo-animation>`. Size its width with CSS; the aspect ratio is 2.4:1 and its background is transparent.
+- Native usage: add the Swift file to the target and use `TodayLogoAnimation().frame(width: 240, height: 100)`. The supplied source specifies iOS 17+ / macOS 14+.
+
+Verification for this addition: the unchanged Swift source passes `xcrun swiftc -typecheck` on this Mac; both JavaScript files pass `node --check`. Visually checked the browser logo at desktop and 390 × 844, its completed outlines and transparent counters, pause/resume, speed selection, looping, and the completed reduced-motion state. The schedule menu remains within its tile at both sizes, and rapid keyboard toggles preserve the selected state. No native runtime/simulator comparison was performed.

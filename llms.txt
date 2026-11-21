@@ -1,0 +1,27 @@
+# Today component library
+
+> Interactive Today UI components with readable browser code and supplied SwiftUI source. Public source, no authentication required.
+
+## Start here
+- [Repository](https://github.com/tltoan/today-components): clone or browse every file.
+- [Agent guide](https://tltoan.github.io/today-components/AGENTS.md): constraints, approved motion, and verification.
+- [README](https://tltoan.github.io/today-components/README.md): inventory, API details, and source status.
+- [Component manifest](https://tltoan.github.io/today-components/components.json): machine-readable source and dependency mapping.
+
+## Components
+- Dropdown/disclosure motion: [motion.css](https://tltoan.github.io/today-components/foundations/motion.css), [disclosure.js](https://tltoan.github.io/today-components/foundations/disclosure.js), [TodayMotion.swift](https://tltoan.github.io/today-components/native/TodayMotion.swift). Approved shared 600 ms motion.
+- Selection dropdown: [dropdown.js](https://tltoan.github.io/today-components/components/dropdown.js), [dropdown.css](https://tltoan.github.io/today-components/components/dropdown.css). Reusable browser selection control.
+- Reading schedule: [index.html](https://tltoan.github.io/today-components/index.html), [app.js](https://tltoan.github.io/today-components/app.js), [style.css](https://tltoan.github.io/today-components/style.css). Browser specimen.
+- A space in your day: [snap-scroller.js](https://tltoan.github.io/today-components/components/snap-scroller.js), [app.js](https://tltoan.github.io/today-components/app.js), [style.css](https://tltoan.github.io/today-components/style.css). Browser one-day snapping controller.
+- Slide to log: [app.js](https://tltoan.github.io/today-components/app.js), [style.css](https://tltoan.github.io/today-components/style.css). Browser specimen; linked with checklist example state.
+- Daily checklist: [app.js](https://tltoan.github.io/today-components/app.js), [style.css](https://tltoan.github.io/today-components/style.css). Browser specimen with synthetic data.
+- Today logo: [today-logo.js](https://tltoan.github.io/today-components/today-logo.js), [TodayLogoAnimation.swift](https://tltoan.github.io/today-components/native/TodayLogoAnimation.swift). Browser component and unchanged supplied SwiftUI.
+- Welcome landing: [welcome-intro.js](https://tltoan.github.io/today-components/components/welcome-intro.js), [welcome-intro.css](https://tltoan.github.io/today-components/components/welcome-intro.css), [welcome-study.js](https://tltoan.github.io/today-components/welcome-study.js), [TodayWelcomeIntro.swift](https://tltoan.github.io/today-components/native/TodayWelcomeIntro.swift), [TodayIntro.swift](https://tltoan.github.io/today-components/native/TodayIntro.swift). Full-screen preview. Begin replays only in the demo.
+- Center cradle navigation: [bottom-nav.js](https://tltoan.github.io/today-components/components/bottom-nav.js), [bottom-nav.css](https://tltoan.github.io/today-components/components/bottom-nav.css), [cradle-fluid.js](https://tltoan.github.io/today-components/components/cradle-fluid.js), [navigation-study.js](https://tltoan.github.io/today-components/navigation-study.js). Selected shape. Plus is disconnected from the editor.
+- Adaptive plan button: [plan-button.js](https://tltoan.github.io/today-components/components/plan-button.js), [plan-button.css](https://tltoan.github.io/today-components/components/plan-button.css), [component-studies.js](https://tltoan.github.io/today-components/component-studies.js). Standalone state-controlled button with letter transitions.
+- Page counter: [page-counter.js](https://tltoan.github.io/today-components/components/page-counter.js), [page-counter.css](https://tltoan.github.io/today-components/components/page-counter.css), [component-studies.js](https://tltoan.github.io/today-components/component-studies.js), [AnimatedPageCounter.swift](https://tltoan.github.io/today-components/native/AnimatedPageCounter.swift). Tap/hold counter with sequential one-page marks.
+- Staggered bar chart: [staggered-bar-chart.js](https://tltoan.github.io/today-components/components/staggered-bar-chart.js), [staggered-bar-chart.css](https://tltoan.github.io/today-components/components/staggered-bar-chart.css), [component-studies.js](https://tltoan.github.io/today-components/component-studies.js), [StaggeredBarChart.swift](https://tltoan.github.io/today-components/native/StaggeredBarChart.swift). Synthetic dated chart; zero and no log are distinct.
+- Retained New habit editor: [habit-editor.js](https://tltoan.github.io/today-components/components/habit-editor.js), [habit-editor.css](https://tltoan.github.io/today-components/components/habit-editor.css), [plan-readiness.js](https://tltoan.github.io/today-components/components/plan-readiness.js). Retained source, not mounted. Sample English readiness rules; no AI or plan persistence.
+
+## Scope
+Browser previews use synthetic data and keep state in the page session. Native files are reusable source, not proof of app integration. No backend or private app repository is required. All URLs above are direct source paths, not compiled bundles.

@@ -1,0 +1,25 @@
+# Today component library
+
+This directory is the working Today component library and interactive showcase established in this chat on November 20, 2026.
+
+- Read `README.md` for implementation status, `components.json` for source/dependency mappings, and `llms.txt` for the compact source entry point. All code needed to run the previews is in this repository; do not require a local path from the author’s machine.
+- The user approved the 600 ms dropdown/disclosure motion here and requested it for all dropdowns. Reuse `foundations/motion.css` and `TodayUI.Disclosure`; do not invent per-component opening/closing timings or restore `display:none` jumps. `native/TodayMotion.swift` contains matching SwiftUI tokens.
+- Use `<today-dropdown>` for new browser selection menus. Inline expansions use the same disclosure controller and CSS contract. Keep focus, selected values, and reduced motion working when transitions are interrupted.
+- `components/snap-scroller.js` owns agenda movement. Keep one animation controller; do not combine browser snap with another animated settling mechanism.
+- The user selected **Center cradle (B)** on November 20. It is the default bottom nav: Home, Habits, and a raised central +. Preserve its shape and animate one highlight within the silhouette. The user requested the same border as the container and a fluid contour that compresses beneath the divot; reuse `components/cradle-fluid.js` instead of sliding/clipping a rigid pill. The latest refinement lowers the selection rim to 8% white and uses equal 6 px top/bottom insets. Alternative shapes are historical, not competing current directions.
+- Latest user correction: the nav + is **disconnected** from the habit-entry page. Keep the navigation study independent; do not mount or launch `today-habit-editor` from it. The editor source is retained but no longer loaded in the live showcase.
+- The standalone adaptive action uses `<today-plan-button>` and has a dedicated `plan-button.html` preview plus its own library section: muted clarification prompts animate to Build my plan only for a current ready assessment. Reuse `components/plan-button.*`; keep sample rules in `components/plan-readiness.js` distinct from a real parser. Do not reduce readiness back to a nonempty-string check or replay text motion for every keystroke.
+- Preserve the supplied `native/AnimatedPageCounter.swift` and `native/StaggeredBarChart.swift` byte for byte. Their browser counterparts are independent custom elements with focused previews. The page counter uses the supplied 280 ms hold threshold / 75 ms repeat, 180 ms rolling digits and one-mark-per-page fill. The chart uses 500 ms rises / 140 ms stagger; keep zero distinct from no log and retain dated labels. These are source-specific motions, not changes to every Today control.
+- The full Welcome landing has its own section and `landing.html` preview. Preserve `native/TodayWelcomeIntro.swift` and its matching `native/TodayIntro.swift` dependency unchanged. The browser uses `TodayUI.WordmarkArt` from `today-logo.js`; period and background share one drop state. Keep preview replay controls outside the screen composition. Begin emits an event; only the review demo replays it. Do not wire it into onboarding or the nav + without a new request.
+- Preserve supplied logo vector geometry and choreography. The original SwiftUI file is retained unchanged.
+- Browser specimens, reusable native source, and integration into the Today app are separate states. Do not claim native app integration from a browser change or a source file in this library.
+- Add new components to the README inventory with source, status, supported states, and checks actually performed. Keep approved decisions distinct from proposals.
+- Check updated browser components at desktop and 390 × 844, including keyboard use and reduced motion. Only native app UI changes require simulator verification. Do not use tests from previous passes as current evidence.
+
+## Development and publishing
+
+- Serve the repository root with `python3 -m http.server 4318`; no build or install step is required.
+- GitHub Pages publishes the default branch from `/`. Keep `.nojekyll`, relative paths, and direct source downloads working under the `/today-components/` project prefix.
+- Keep `components.json` and `llms.txt` aligned when adding or moving components. All browser code must remain readable in the repository; do not replace source files with generated bundles.
+- Run `node --check` for changed JavaScript. Check the affected browser preview at desktop and 390 × 844, with keyboard and reduced motion. Supplied native sources can be type-checked against an iOS 17+ SDK; do not claim runtime integration from compilation alone.
+- Do not publish unrelated local files, credentials, or app data. Sample dates and habits in this library are fixtures.

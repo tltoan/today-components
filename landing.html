@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <title>Today — Welcome landing</title>
+  <link rel="stylesheet" href="style.css?v=day-snap-2">
+  <link rel="stylesheet" href="components/welcome-intro.css?v=welcome-1">
+  <script src="today-logo.js?v=welcome-1" defer></script>
+  <script src="components/welcome-intro.js?v=welcome-1" defer></script>
+  <script src="welcome-study.js?v=welcome-1" defer></script>
+  <script src="navigation-page.js" defer></script>
+</head>
+<body class="welcome-screen-page">
+  <today-welcome-intro aria-label="Today welcome screen"></today-welcome-intro>
+  <aside class="welcome-review-tools" aria-label="Landing preview controls">
+    <a href="index.html#landing" aria-label="Back to component library">Library ↗</a>
+    <button class="welcome-replay" type="button">Replay ↻</button>
+    <button class="welcome-pause" type="button">Pause</button>
+    <button class="welcome-speed" type="button" aria-pressed="false">Half speed</button>
+    <label><input type="checkbox" id="reduce-motion">Less motion</label>
+  </aside>
+</body>
+</html>

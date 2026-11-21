@@ -1,0 +1,12 @@
+today-plan-button{display:block;flex:none;width:158px;height:48px}
+.today-plan-button{position:relative;width:100%;height:100%;padding:0 10px;overflow:hidden;isolation:isolate;border:0;border-radius:24px;background:#29272d;color:#e2dfe7;font:500 15px/normal -apple-system,BlinkMacSystemFont,Arial,sans-serif;transition:background 600ms cubic-bezier(.37,0,.18,1)}
+.plan-button-labels{position:absolute;inset:0;display:grid;place-items:center;opacity:.48;transition:opacity 600ms cubic-bezier(.37,0,.18,1);pointer-events:none}
+.plan-button-label{grid-area:1/1;white-space:nowrap;display:flex;align-items:center}
+.plan-button-letter{display:inline-block;transform-origin:center 70%}
+.plan-button-status{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+today-plan-button[data-ready="true"] .plan-button-labels{opacity:1}
+.today-plan-button:disabled{cursor:default;opacity:1}
+.today-plan-button:not(:disabled):active{background:#35323c}
+.today-plan-button:focus-visible{outline:2px solid #d9c9ec;outline-offset:3px}
+html[data-reduced] .today-plan-button,html[data-reduced] .plan-button-labels{transition:none}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) .today-plan-button,html:not([data-motion-override]) .plan-button-labels{transition:none}}
