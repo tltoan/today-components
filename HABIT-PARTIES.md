@@ -1,6 +1,6 @@
 # Private habit parties — components and state map
 
-Design proposal from the November 21 discussion. Browser mockups are now available in [habit-parties.html](habit-parties.html), including Home and habit-detail contexts. This is not production sharing or an approved addition to the PRD. First version: four people total, including you, attached to one selected habit. People share the habit intention while keeping their own targets and schedules.
+Design proposal from the November 21 discussion. Browser mockups are now available in [habit-parties.html](habit-parties.html), including Home and habit-detail contexts. This is not production sharing or an approved addition to the PRD. First version: four people total, including you, attached to one selected habit. Everyone follows the same scheduled days. Targets, recorded amounts and reminder preferences remain personal.
 
 ## Product state map (includes future coverage)
 
@@ -8,15 +8,15 @@ Design proposal from the November 21 discussion. Browser mockups are now availab
 | --- | --- | --- |
 | Party entry row | Habit detail below the personal plan: up to four avatars, “Read together”, latest shared check-in, chevron. Reuse the navigation row and artwork. | Not shared / invite pending / two people / full at four / no shared check-ins / recent activity / muted. |
 | Invite and join sheet | Habit name/artwork, up to three invitation slots, short sharing-scope summary, Join / Not now. Reuse buttons, disclosure and selected plan cards. | Sending / sent / retry / expired or revoked invite / party full / already joined / own-plan confirmation. |
-| Your plan within a party | Reuse tracking, target and schedule controls. “Same habit. Your own pace.” Each person can track a different unit. | Existing habit linked / new personal plan / schedule changed / paused / trial ended. Personal settings do not alter friends’ plans. |
-| Shared check-in card | Name, timestamp, self-contained entry such as “Read 5 pages”, optional image and small reaction row. Keep the personal Target met gradient on the owner's private card. | Text only / photo / partial amount / target reached / explicit none / edited / removed / loading / retry. No rankings or a group completion bar. |
+| Your plan within a party | Reuse tracking, target controls and the shared schedule. Each person can track a different unit. | Existing habit linked / new personal plan / shared schedule changed / paused / trial ended. Personal target and reminder edits do not alter friends’ plans. |
+| Shared check-in card | Name, timestamp, self-contained entry such as “Read 5 pages”, optional image and small reaction row. Keep the personal Target met gradient on the owner's private card. | Text only / photo / partial amount / target reached / explicit none / edited / removed / loading / retry. No rankings; the party summary separately shows how many members logged. |
 | Post-log share/photo composer | After a saved group-habit log: the log is shared automatically. “Add a photo” attaches optional media to that shared log. | Shared log / photo draft / uploading / photo saved / failed upload / retry / remove photo. A photo failure cannot undo the log. |
-| Reaction and nudge controls | A quiet reaction chip on a check-in; preset messages in a nudge sheet. Reuse buttons, pill selection and time controls. | Available / sending / sent / failed / muted / outside reminder window / daily limit reached. Do not show whether someone ignored a nudge. |
+| Reaction and nudge controls | Profiles with heart badges on a check-in; preset messages in a nudge sheet. Reuse buttons, pill selection and time controls. | Available / sending / sent / failed / muted / outside reminder window / daily limit reached. Do not show whether someone ignored a nudge. |
 | Party settings | Members, sharing scope, nudge permission/window, leave party. Reuse switches and disclosure rows. | Enabled / muted / permission denied / member left / remove member / leave confirmation. Historical photo/log visibility after leaving needs a product decision. |
 
 ## Changes to current components
 
-- **Home habit card:** optional avatar row or upper-right border placement linking to that habit's party. Keep logging primary. Do not add a feed, group score or friends’ statuses to every card. The overall logging streak remains private and outside this row.
+- **Home habit card:** optional avatar row or upper-right border placement linking to that habit's party. Keep logging primary. Do not add a feed, group score or friends’ statuses to every card. The overall logging streak remains private and outside this row. A separate shared scheduled-day streak appears only inside the party.
 - **Habit detail:** add the party entry row and a compact preview of recent shared check-ins. Tapping opens the party's photos, logs and reactions. Preserve the owner's target, history and corrections.
 - **Log success:** joining authorizes automatic sharing of new logs for that habit. State this before Join. Photos remain an optional attachment. A failed share stays pending for retry; it must not masquerade as a private-only choice.
 - **Saved/logged states:** separate “Logged”, “Shared with your party” and “Photo upload failed”. They represent different operations.
@@ -29,7 +29,7 @@ Design proposal from the November 21 discussion. Browser mockups are now availab
 - A confirmed reaction can gently press and settle once. Do not animate friends’ avatars continuously.
 - A shared check-in can enter with a short fade and small vertical settle after confirmation; failures keep the draft in place.
 - Upload progress is separate from the saved-log state. Reduced motion uses instant state changes or a quiet opacity change.
-- No shared-streak fireworks, countdown guilt, empty-avatar pressure or alerts announcing that someone is falling behind.
+- Shared streak changes settle once; no idle fireworks, countdown pressure or alerts announcing that someone is falling behind.
 
 ## Recommended first comparison
 
@@ -43,12 +43,12 @@ Open product decisions: who can invite/remove members; invite expiry; previous-p
 
 ## Implemented browser pieces
 
-Load the ordered dependencies from `components.json`. All six elements are in `components/habit-party.js` and styled by `components/habit-party.css`. They are controlled components: assign `.model` with confirmed state, listen for bubbling `party-request`, then update the model after the host accepts the operation. No component sends or saves anything itself.
+Load the ordered dependencies from `components.json`. The core invite, entry, check-in, composer and settings elements are in `components/habit-party.js`; nudges and the room are independent modules. They are controlled components: assign `.model` with confirmed state, listen for bubbling `party-request`, then update the model after the host accepts the operation. No component sends or saves anything itself.
 
 | Element | Model fields | Requests / demonstrated states |
 | --- | --- | --- |
 | `today-party-entry` | `id`, `members:[{id,name,initials,self,photoURL,gradientIndex}]`, `title`, `summary`, `placement: inline|stack|capsule|lead`; optional `compact` attribute | `open`; recent check-in and empty copy |
-| `today-party-checkin` | `memberID`, `name`, `initials`, optional `profilePhotoURL`, `time`, `amount`, `note`, `reactions`, `reacted`, optional `photoURL`, `photoAlt` | `react`; text, sample attachment, like on/off with a single 620 ms heart settle; 360 ms removal |
+| `today-party-checkin` | `memberID`, `name`, `initials`, optional `profilePhotoURL`, `time`, `amount`, `note`, `viewer`, `reactors:[{id,name,initials}]`, `reacted`, optional `photoURL`, `photoAlt` | `react`; text, sample attachment, avatar-heart on/off with a single 540 ms settle; optional `compact` presentation |
 | `today-party-composer` | `members`, `amount`, `state`, `message`, optional photo | `photo` (includes File), `remove-photo`, `share` (photo only), `retry-sync`; shared, photo-draft, uploading, photo-saved, photo-error and sync-error |
 | `today-party-nudge` | `name`, `window`, `state` | `nudge-reading`, `nudge-encourage`; available, muted, window, limit, sending, sent, error |
 | `today-party-invite` | `members`, `plan:'pages'|'minutes'`, `state`, `message` | `plan` with `value`, `join`, `decline`; invite, joining, joined, full. `variant="b"` (default): selected Book cover; d Shared cover and e Reading circle are new alternatives; a/c retained historical sources |
@@ -76,3 +76,16 @@ Party maximum: **four people including you**. The main three-person fixture stay
 - Book cover (b) remains selected. Two new live comparisons are Shared cover (d), with layered surfaces and overlapping book/profile elements, and Reading circle (e), showing all four party places. All three share the same plan choices, sharing scope, capacity and join/full states. Personal note / orbit sources are historical only.
 
 Nudges now live in components/party-nudge.js and components/party-nudge.css; load them independently before the study. See NUDGES.md and nudges.html for three placement proposals, each comparing `interaction="button"` with `interaction="slide"` and the same confirmed Gradient Rise. No notifications are sent.
+
+## Current compact party composition
+
+See [PARTY-ROOM.md](PARTY-ROOM.md) for `today-party-room`, `today-party-activity`, `today-party-reactions` and the separate planning proposal `today-party-setup`. The room replaces the old single-Maya feed and nudge panel in both Home/detail contexts and the selected habit-detail dialog. Tap any member to inspect their target and activity or nudge that recipient. The feed shows one person/day total, expanded into original entries and their own avatar reactions.
+
+The shared streak is now explicitly approved: shared scheduled days only, every eligible member has a saved log, days off unchanged. This supersedes the earlier no-shared-streak proposal. The overall Today streak remains private on Home. Trial reviews staying individual and party creation from plan review are mock proposals, not settled lifecycle policy.
+
+
+### Compact invitation and proposed entry
+
+Book cover (b) keeps its illustration in a shorter cover. The host supplies `schedule`, `proposedDates` (display text) and `members[].target`; omitted facts render as unconfirmed, never fabricated. The fixture is Sun/Tue/Thu, Nov 22–Dec 12, with Maya at 15 minutes and Sam at 10 pages. Dates are a proposed invitation window, not an approved shared trial lifecycle. The invitee chooses their personal target and confirms Join. Only this habit’s logs are shared, with optional photos.
+
+Proposed location: an Invitations row above the Habits plan list. Notification/deep-link entry should open the same invite; Profile remains identity/settings. The library row links to the standalone invitation specimen; it does not represent a working invitation inbox.

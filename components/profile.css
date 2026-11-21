@@ -3,3 +3,6 @@ today-profile{display:block;width:100%;max-width:390px;font-family:Future,sans-s
 .pr-system .pr-battery{width:20px;height:12px;stroke-width:1;opacity:.8}.pr-system .pr-battery path{fill:currentColor}
 
 .pr-notice:not(:empty){padding:12px 14px;border:1px solid #baa4d82c;border-radius:14px;background:#bfa6df10;margin:0 0 20px}
+
+/* Profile uses a quiet light rim; stacked avatars retain their separating outline. */
+.pr-identity today-profile-avatar,.pr-edit-identity today-profile-avatar{--pa-rim:#dac8ee24;--pa-rim-width:1px}

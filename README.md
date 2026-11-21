@@ -430,3 +430,21 @@ Comparison checks: six paired nudge demos and three invitation variants mount in
 Habit detail selection: Grouped cards (B). Independent history (day summaries / journal / chart), weekly schedule and reminder card sources are in `components/habit-detail-pieces.js`, with shared `components/habit-detail.css`; see `HABIT-DETAIL.md` and `components.json`. Browser prototypes only. History initially shows the past three days, with expansion. Onboarding now includes Day Ruler trial length and optional Soft Wheels reminders within seven creation positions.
 
 Current detail/onboarding checks: desktop and phone widths, keyboard tracking selection, reduced-motion history collapse, saved log/correction, timer completion, schedule/reminder editing and failed-save preservation. See HABIT-DETAIL.md for scope.
+
+
+### Shared party schedule and compact activity · November 21
+
+| Component | Source | Status and supported states |
+| --- | --- | --- |
+| Party room | `components/party-room.*`, `party-progress.js` | Controlled browser prototype. All four members, personal plans, shared schedule, dated shared streak, recipient-specific nudges. |
+| Compact activity | `components/party-activity.js`, `party-room.css` | One person/day summary, expandable original entries, photos and avatar-heart reactions. Earlier activity is disclosed. |
+| Avatar reactions | `components/party-reactions.js`, `party-room.css` | Controlled reaction add/remove; profiles show who left a heart; reduced-motion support. |
+| Party setup | `components/party-setup.js`, `party-room.css` | Planning proposal only: personal plan, shared schedule scope, create/invite preview. Independent trial review policy is proposed. |
+| Week bar | `components/week-bar.*` | Shared Home/onboarding control. Controlled date, separate today mark, keyboard focus and selection, reduced motion. |
+| Compact invitation | `components/habit-party.*` | Selected Book cover shortened to shared days, proposed dates, each member’s target, personal target choice and join. Open/joining/joined/full states. |
+
+See [PARTY-ROOM.md](PARTY-ROOM.md) for the model and integration contract. `party-room-demo.js` supplies local fixtures, never network or account actions. Invitations have a proposed entry above the Habits plan list; Profile remains identity and settings. The native app is unchanged. New party compositions are browser-only; `native/TodayPartyAvatars.swift` retains the native avatar implementation with configurable rim width.
+
+Entry journal is now the selected history layout. Onboarding review omits Edit trial length/Edit reminder; its Home step reuses the preferred Home week bar. Profile and edit-profile portraits use a subtle one-point lavender rim; overlapping party portraits keep their separating rim.
+
+Verification: eight pure streak tests pass, including partial/zero logs, day off, missing coverage, duplicate entries, confirmed undo and dated membership. JavaScript syntax and local source paths checked. Browser checks at desktop and effective 390 × 844 covered compact merged activity, expandable originals, avatar reactions, per-member nudge success/failure/retry, fourth member, shared streak/undo, planning proposal, invitation target/join states, keyboard week selection, review cleanup, reduced motion and softened profile rim. The avatar SwiftUI source type-checks against the iOS 17 simulator target. These checks do not verify native runtime, haptics, delivery, persistence or production streak enforcement.

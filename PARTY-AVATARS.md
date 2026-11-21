@@ -40,3 +40,5 @@ TodayProfileAvatar(member: people[0], size: 36)
 ```
 
 For navigation, wrap in `Button` and provide the party label. These are standalone native pieces; app/WidgetKit integration and Dynamic Type runtime checks remain separate.
+
+Profile cards use a softer 1 px lavender rim at 14% opacity: `--pa-rim:#dac8ee24; --pa-rim-width:1px`. Stacks retain the darker separating rim. Native counterpart: `TodayProfileAvatar(member: member, size: 56, rim: Color(red: 218/255, green: 200/255, blue: 238/255).opacity(0.14), rimWidth: 1)`.

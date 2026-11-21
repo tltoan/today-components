@@ -67,3 +67,6 @@ Load `habit-detail-pieces.js` before `habit-detail.js`; load the shared controls
 ## Verified in the browser · November 21
 
 Desktop and 390 px detail / 375 px onboarding pages show no horizontal overflow. Tested keyboard tracking choices, three-day history expansion, immediate reduced-motion collapse, confirmed logging, correction below target, tracking changes, timer completion, schedule saves, reminder Cancel/Use behavior and a save failure retaining confirmed entries. Onboarding ruler selection carries forward and reminders require confirmation before review. Changed JavaScript passes `node --check`; no browser console errors were observed in the focused detail preview. Native integration is not part of this check.
+
+
+Entry journal (B) is the selected history default; the past three calendar days show first, with earlier history expandable. The party dialog now mounts `today-party-room`: host handles the `habit-detail-request` action `party-room` and supplies the controlled model to `detail.room`. See PARTY-ROOM.md for shared-schedule streaks, member selection and compact activity.

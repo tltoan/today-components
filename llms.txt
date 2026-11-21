@@ -96,3 +96,8 @@ Latest selections: max party 4 including you; overlapping avatars; Book cover in
 - Onboarding now uses seven setup positions: tracking, target (skip for check-off), schedule, Day Ruler trial length, start date, optional Soft Wheels reminder, review. 21-day editable default. Details in ONBOARDING.md. Landing/Features unchanged.
 
 Habit detail selection: Grouped cards (B). Independent history (day summaries / journal / chart), weekly schedule and reminder card sources are in `components/habit-detail-pieces.js`, with shared `components/habit-detail.css`; see `HABIT-DETAIL.md` and `components.json`. Browser prototypes only. History initially shows the past three days, with expansion. Onboarding now includes Day Ruler trial length and optional Soft Wheels reminders within seven creation positions.
+
+
+
+Party room / compact feed / identity reactions / planning proposal: PARTY-ROOM.md; components/party-room.js, components/party-activity.js, components/party-progress.js, components/party-reactions.js, components/party-setup.js, components/party-room.css. Shared schedule; personal targets/reminders; shared scheduled-day streak. party-room-demo.js is demo only.
+Shared Home/onboarding date strip: components/week-bar.js and components/week-bar.css. Entry journal is the selected history default.

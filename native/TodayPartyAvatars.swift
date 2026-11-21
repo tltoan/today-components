@@ -40,6 +40,7 @@ struct TodayProfileAvatar: View {
     var member: TodayPartyMember
     var size: CGFloat = 36
     var rim: Color = Color(red: 23/255, green: 21/255, blue: 30/255)
+    var rimWidth: CGFloat = 2
     private var fallback: some View {
         LinearGradient(colors: TodayAvatarPalette.colors(for: member),
                        startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -58,7 +59,7 @@ struct TodayProfileAvatar: View {
             }
         }
         .frame(width: size, height: size).clipShape(Circle())
-        .overlay(Circle().strokeBorder(rim, lineWidth: 2))
+        .overlay(Circle().strokeBorder(rim, lineWidth: rimWidth))
         .accessibilityLabel(member.name)
     }
 }

@@ -40,3 +40,5 @@ Each composition uses a scrolling body behind floating cradle navigation. The na
 The first three proposals were rejected and replaced with the directions above. Each design uses a 390 × 844 CSS-pixel reference frame (logical-point composition), including a 47 px top safe-area illustration and bottom home-indicator clearance. This is one reference size, not a universal iPhone specification or native validation. The library uses auto-fit columns with a 390 px minimum when available, so a 1020 px section wraps to two previews rather than squeezing three to about 324 px. Narrow browsers adapt the frame to available width and keep inner content scrollable behind the transparent navigation wrapper. Native safe areas, Dynamic Type and actual device classes still need native verification.
 
 November 21 follow-up: Weekly view is the main example; Plan cards and Habit shelf remain behind “Compare previous Habits layouts”.
+
+The November 21 proposal adds an Invitations row above the active plan list, linking to the compact Book cover invite. This is a fixture with one invitation, not a real inbox or unread count.

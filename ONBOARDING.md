@@ -98,3 +98,6 @@ Preset selection now keeps weekday buttons and all 14 calendar cells mounted. Th
 ## Selected duration and reminder cycle
 
 Draft fields `trialDays`, `reminderEnabled`, and `reminderTime` persist across selected layouts and back navigation. Review shows the chosen duration, resulting check-in date and confirmed reminder. Trial length never changes weekdays. The day ruler commits an explicit tap/key target before Continue, even if its scroll has not yet settled. The reminder uses `today-time-picker variant="wheel"`; Continue is disabled while an enabled reminder is being edited. Only Use this time commits a wheel edit; Cancel keeps the last confirmed time, and off retains it. The app owns requesting notification permission. This browser does not schedule notifications. The previous Review plan shortcuts were removed from early setup so the new creation steps are encountered in order.
+
+
+Home now uses `today-week-bar`, the same interactive date strip as the Home overview. Review omits the Edit trial length and Edit reminder footer shortcuts; their actual setup steps and back navigation remain. The original Change how you track action is retained.

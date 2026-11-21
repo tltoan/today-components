@@ -36,7 +36,7 @@
     connectedCallback(){if(this._model)this.render();}
     set selectedDate(date){this._date=date;this.render();}
     dayTotal(date){const es=this._model.entries.filter(e=>e.date===date);const groups={};for(const e of es)groups[e.unit]=(groups[e.unit]||0)+e.amount;return Object.entries(groups).map(([u,n])=>u==='check'?(n?'Logged':'Recorded zero'):`${n.toLocaleString()} ${u}`).join(' · ')||'No log';}
-    render(){const m=this._model;if(!m)return;const variant=this.getAttribute('variant')||'days',recent=[offset(m.today,-2),offset(m.today,-1),m.today];this._date=m.selectedDate||this._date;const older=[...new Set(m.entries.map(e=>e.date).filter(d=>d<recent[0]))].sort().reverse();
+    render(){const m=this._model;if(!m)return;const variant=this.getAttribute('variant')||'journal',recent=[offset(m.today,-2),offset(m.today,-1),m.today];this._date=m.selectedDate||this._date;const older=[...new Set(m.entries.map(e=>e.date).filter(d=>d<recent[0]))].sort().reverse();
       this.innerHTML=`<div class="hh-root hh-style-${variant}"><div class="hh-heading"><h3>History</h3><span>Past 3 days</span></div><div class="hh-recent"></div><button type="button" class="hh-expand" aria-expanded="false">${this._expanded?'Show less':'View earlier history'}</button><div class="hh-earlier"><div></div></div></div>`;
       const holder=this.querySelector('.hh-recent');
       if(this._date){holder.innerHTML=`<div class="hh-filter"><strong>${label(this._date)}</strong><button type="button">Back to recent</button></div>`;holder.querySelector('button').onclick=()=>{this._date=null;this._model={...m,selectedDate:null};this.dispatchEvent(new CustomEvent('history-clear',{bubbles:true}));this.render();};this.rows(holder,this._date);}

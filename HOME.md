@@ -53,3 +53,6 @@ Home accepts `feedback:"wash"` (selected default), `"bloom"` or `"halo"` and opt
 
 
 November 21 refinement: only selected Gradient Rise remains in the live gallery. The external **Undo last log** review control restores the previous confirmed log list, with a retreat only if the resulting amount falls below target. Failed saves do not enter undo history. Party composition is demonstrated separately in habit-parties.html via the card’s optional party model; the base Home fixture remains personal.
+
+
+`today-week-bar` is the shared Home/onboarding date strip. Assign `.model={days:[{date,weekday,number,label,today}],selectedDate}`. Listen for `daychange {date}` and confirm the selected model. Today is independent from selected date. Arrow/Home/End keys move focus; Enter/Space activates. Load components/week-bar.js and components/week-bar.css.

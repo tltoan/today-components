@@ -1176,7 +1176,8 @@
         "onboarding-gradient",
         "trial-pickers",
         "time-pickers",
-        "disclosure"
+        "disclosure",
+        "week-bar"
       ],
       "status": "Selected flow with Day Ruler and Soft Wheels; seven-position creation cycle. Browser only.",
       "figmaNodes": [
@@ -1205,7 +1206,8 @@
           "components/artwork.css",
           "components/onboarding-gradient.css",
           "components/onboarding.css",
-          "components/pickers.css"
+          "components/pickers.css",
+          "components/week-bar.css"
         ],
         "scripts": [
           "foundations/disclosure.js",
@@ -1222,6 +1224,7 @@
           "components/artwork.js",
           "components/onboarding-gradient.js",
           "components/pickers.js",
+          "components/week-bar.js",
           "components/onboarding.js"
         ],
         "markup": "<today-onboarding-screen screen=\"review\" variant=\"a\"></today-onboarding-screen>",
@@ -1315,7 +1318,8 @@
         "navigation",
         "widgets",
         "habit-card",
-        "streak-badge"
+        "streak-badge",
+        "week-bar"
       ],
       "status": "Browser proposal extending the selected Home. One, three, six and day-off fixtures; no real persistence.",
       "browserIntegration": {
@@ -1329,7 +1333,8 @@
           "components/target-feedback.css",
           "components/habit-card.css",
           "components/streak-badge.css",
-          "components/home-overview.css"
+          "components/home-overview.css",
+          "components/week-bar.css"
         ],
         "scripts": [
           "components/icons.js",
@@ -1341,6 +1346,7 @@
           "components/target-feedback.js",
           "components/habit-card.js",
           "components/streak-badge.js",
+          "components/week-bar.js",
           "components/home-overview.js"
         ],
         "markup": "<today-home-overview></today-home-overview>",
@@ -1556,13 +1562,15 @@
           "components/controls.css",
           "components/artwork.css",
           "components/habit-party.css",
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/party-room.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-entry></today-party-entry>",
@@ -1592,7 +1600,8 @@
         "artwork",
         "avatar-stack",
         "lead-avatar",
-        "profile-avatar"
+        "profile-avatar",
+        "party-reactions"
       ],
       "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
       "browserIntegration": {
@@ -1602,20 +1611,22 @@
           "components/controls.css",
           "components/artwork.css",
           "components/habit-party.css",
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/party-room.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-checkin></today-party-checkin>",
         "events": [
           "party-request"
         ],
-        "usage": "Assign confirmed .model; host handles requests. See HABIT-PARTIES.md for fields and state coverage.",
+        "usage": "Set .model with viewer, reactors and reacted. Avatar-heart reactions; optional compact attribute. Host confirms requests. See PARTY-ROOM.md.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -1648,13 +1659,15 @@
           "components/controls.css",
           "components/artwork.css",
           "components/habit-party.css",
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/party-room.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-composer></today-party-composer>",
@@ -1730,7 +1743,7 @@
         "lead-avatar",
         "profile-avatar"
       ],
-      "status": "Selected Book cover (b), plus Shared cover (d) and Reading circle (e) alternatives. Up to four people including you. Controlled browser proposal, no actual membership service.",
+      "status": "Controlled browser invitation. Compact Book cover selected; proposed Habits entry. No real membership change.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-party-invite",
@@ -1738,20 +1751,22 @@
           "components/controls.css",
           "components/artwork.css",
           "components/habit-party.css",
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/party-room.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-invite></today-party-invite>",
         "events": [
           "party-request"
         ],
-        "usage": "Assign confirmed .model; host handles requests. Variants: b selected Book cover (default), d Shared cover, e Reading circle. All share plan/join/full states. See HABIT-PARTIES.md.",
+        "usage": "Assign confirmed .model with members (id, name, target), schedule, proposedDates, plan, state and optional message. variant=b is the compact selected cover; d/e remain earlier alternatives. Host handles party-request actions plan, join and decline. Dates are display facts, not an enforced shared trial. See HABIT-PARTIES.md.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -1784,13 +1799,15 @@
           "components/controls.css",
           "components/artwork.css",
           "components/habit-party.css",
-          "components/party-avatars.css"
+          "components/party-avatars.css",
+          "components/party-room.css"
         ],
         "scripts": [
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js"
         ],
         "markup": "<today-party-settings></today-party-settings>",
@@ -2190,7 +2207,8 @@
         "party-entry",
         "time-pickers",
         "controls",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "party-room"
       ],
       "status": "Grouped cards selected. Earlier layouts retained behind disclosure; three history variations and independent editors. Browser prototype only.",
       "browserIntegration": {
@@ -2207,6 +2225,7 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
@@ -2214,6 +2233,9 @@
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
+          "components/party-activity.js",
+          "components/party-progress.js",
+          "components/party-room.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2232,7 +2254,8 @@
           "components/habit-card.css",
           "components/pickers.css",
           "components/onboarding-gradient.css",
-          "components/habit-detail.css"
+          "components/habit-detail.css",
+          "components/party-room.css"
         ],
         "markup": "<today-habit-detail></today-habit-detail>",
         "events": [
@@ -2241,7 +2264,8 @@
         "usage": "Set .model with confirmed data. Read HABIT-DETAIL.md. Host owns persistence, permissions, lifecycle, routing and timer recovery.",
         "demoOnly": [
           "habit-detail-study.js",
-          "habit-detail-study.css"
+          "habit-detail-study.css",
+          "party-room-demo.js"
         ]
       }
     },
@@ -2262,7 +2286,8 @@
         "party-entry",
         "time-pickers",
         "controls",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "party-room"
       ],
       "status": "Interactive browser proposal. Three layouts; controlled requests and sample host. Not native app integration.",
       "browserIntegration": {
@@ -2279,6 +2304,7 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
@@ -2286,6 +2312,9 @@
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
+          "components/party-activity.js",
+          "components/party-progress.js",
+          "components/party-room.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2304,7 +2333,8 @@
           "components/habit-card.css",
           "components/pickers.css",
           "components/onboarding-gradient.css",
-          "components/habit-detail.css"
+          "components/habit-detail.css",
+          "components/party-room.css"
         ],
         "markup": "<today-habit-entry></today-habit-entry>",
         "events": [
@@ -2313,7 +2343,8 @@
         "usage": "Set .model with confirmed data. Read HABIT-DETAIL.md. Host owns persistence, permissions, lifecycle, routing and timer recovery.",
         "demoOnly": [
           "habit-detail-study.js",
-          "habit-detail-study.css"
+          "habit-detail-study.css",
+          "party-room-demo.js"
         ]
       }
     },
@@ -2334,7 +2365,8 @@
         "party-entry",
         "time-pickers",
         "controls",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "party-room"
       ],
       "status": "Interactive browser proposal. Three layouts; controlled requests and sample host. Not native app integration.",
       "browserIntegration": {
@@ -2351,6 +2383,7 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
@@ -2358,6 +2391,9 @@
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
+          "components/party-activity.js",
+          "components/party-progress.js",
+          "components/party-room.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2376,7 +2412,8 @@
           "components/habit-card.css",
           "components/pickers.css",
           "components/onboarding-gradient.css",
-          "components/habit-detail.css"
+          "components/habit-detail.css",
+          "components/party-room.css"
         ],
         "markup": "<today-habit-plan-editor></today-habit-plan-editor>",
         "events": [
@@ -2385,7 +2422,8 @@
         "usage": "Set .model with confirmed data. Read HABIT-DETAIL.md. Host owns persistence, permissions, lifecycle, routing and timer recovery.",
         "demoOnly": [
           "habit-detail-study.js",
-          "habit-detail-study.css"
+          "habit-detail-study.css",
+          "party-room-demo.js"
         ]
       }
     },
@@ -2406,7 +2444,8 @@
         "party-entry",
         "time-pickers",
         "controls",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "party-room"
       ],
       "status": "Reusable browser component. Native implementation not yet supplied.",
       "browserIntegration": {
@@ -2423,6 +2462,7 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
@@ -2430,6 +2470,9 @@
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
+          "components/party-activity.js",
+          "components/party-progress.js",
+          "components/party-room.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2448,16 +2491,18 @@
           "components/habit-card.css",
           "components/pickers.css",
           "components/onboarding-gradient.css",
-          "components/habit-detail.css"
+          "components/habit-detail.css",
+          "components/party-room.css"
         ],
         "markup": "<today-habit-history></today-habit-history>",
         "events": [
           "habit-detail-request"
         ],
-        "usage": "Set .model {today,unit,entries,selectedDate?}. variant=\"days|journal|chart\". Last three calendar days shown initially; older history expands. Entry selection emits habit-detail-request.",
+        "usage": "Selected default: journal. Set .model {today,unit,entries,selectedDate?}; past three calendar days initially, expand earlier. Historical variants days/chart. See HABIT-DETAIL.md.",
         "demoOnly": [
           "habit-detail-study.js",
-          "habit-detail-study.css"
+          "habit-detail-study.css",
+          "party-room-demo.js"
         ]
       }
     },
@@ -2478,7 +2523,8 @@
         "party-entry",
         "time-pickers",
         "controls",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "party-room"
       ],
       "status": "Reusable browser component. Native implementation not yet supplied.",
       "browserIntegration": {
@@ -2495,6 +2541,7 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
@@ -2502,6 +2549,9 @@
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
+          "components/party-activity.js",
+          "components/party-progress.js",
+          "components/party-room.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2520,7 +2570,8 @@
           "components/habit-card.css",
           "components/pickers.css",
           "components/onboarding-gradient.css",
-          "components/habit-detail.css"
+          "components/habit-detail.css",
+          "components/party-room.css"
         ],
         "markup": "<today-habit-reminder></today-habit-reminder>",
         "events": [
@@ -2529,7 +2580,8 @@
         "usage": "Set .model {enabled,time}. Soft Wheels draft, cancel and explicit confirmation. Listen for save-reminder through habit-detail-request; call resolve(error?) after host save.",
         "demoOnly": [
           "habit-detail-study.js",
-          "habit-detail-study.css"
+          "habit-detail-study.css",
+          "party-room-demo.js"
         ]
       }
     },
@@ -2550,7 +2602,8 @@
         "party-entry",
         "time-pickers",
         "controls",
-        "onboarding-gradient"
+        "onboarding-gradient",
+        "party-room"
       ],
       "status": "Reusable browser component. Native implementation not yet supplied.",
       "browserIntegration": {
@@ -2567,6 +2620,7 @@
           "components/staggered-bar-chart.js",
           "components/target-feedback.js",
           "components/party-avatars.js",
+          "components/party-reactions.js",
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
@@ -2574,6 +2628,9 @@
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
+          "components/party-activity.js",
+          "components/party-progress.js",
+          "components/party-room.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2592,7 +2649,8 @@
           "components/habit-card.css",
           "components/pickers.css",
           "components/onboarding-gradient.css",
-          "components/habit-detail.css"
+          "components/habit-detail.css",
+          "components/party-room.css"
         ],
         "markup": "<today-habit-schedule></today-habit-schedule>",
         "events": [
@@ -2602,7 +2660,269 @@
         "usage": "Set .value to weekday indexes 0...6. Emits change and schedule-selection. Always weekly in trial adjustment; switching to one-off is not part of trial edits.",
         "demoOnly": [
           "habit-detail-study.js",
-          "habit-detail-study.css"
+          "habit-detail-study.css",
+          "party-room-demo.js"
+        ]
+      }
+    },
+    {
+      "id": "party-reactions",
+      "name": "Profile heart reactions",
+      "preview": "habit-parties.html#party-room",
+      "sourcePage": "source.html#party-reactions",
+      "browserSource": [
+        "components/party-avatars.js",
+        "components/party-reactions.js",
+        "components/party-avatars.css",
+        "components/party-room.css",
+        "PARTY-ROOM.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "profile-avatar"
+      ],
+      "status": "Controlled browser component and local preview. Native app integration is separate.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-reactions",
+        "scripts": [
+          "components/party-avatars.js",
+          "components/party-reactions.js"
+        ],
+        "styles": [
+          "components/party-avatars.css",
+          "components/party-room.css"
+        ],
+        "markup": "<today-party-reactions></today-party-reactions>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Set .model={id,viewer,reactors,reacted}; host confirms entry-specific reactions. See PARTY-ROOM.md.",
+        "demoOnly": [
+          "party-room-demo.js",
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-activity",
+      "name": "Compact party activity",
+      "preview": "habit-parties.html#party-room",
+      "sourcePage": "source.html#party-activity",
+      "browserSource": [
+        "foundations/disclosure.js",
+        "components/artwork.js",
+        "components/party-avatars.js",
+        "components/party-reactions.js",
+        "components/habit-party.js",
+        "components/party-activity.js",
+        "foundations/motion.css",
+        "components/artwork.css",
+        "components/habit-party.css",
+        "components/party-avatars.css",
+        "components/party-room.css",
+        "PARTY-ROOM.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure",
+        "party-checkin",
+        "party-reactions"
+      ],
+      "status": "Controlled browser component and local preview. Native app integration is separate.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-activity",
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/artwork.js",
+          "components/party-avatars.js",
+          "components/party-reactions.js",
+          "components/habit-party.js",
+          "components/party-activity.js"
+        ],
+        "styles": [
+          "foundations/motion.css",
+          "components/artwork.css",
+          "components/habit-party.css",
+          "components/party-avatars.css",
+          "components/party-room.css"
+        ],
+        "markup": "<today-party-activity></today-party-activity>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Set party model and optional memberID filter. Three person/day summaries initially; expand for original entries, photos and reactions. See PARTY-ROOM.md.",
+        "demoOnly": [
+          "party-room-demo.js",
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-room",
+      "name": "Shared habit party room",
+      "preview": "habit-parties.html#party-room",
+      "sourcePage": "source.html#party-room",
+      "browserSource": [
+        "foundations/disclosure.js",
+        "components/artwork.js",
+        "components/party-avatars.js",
+        "components/party-reactions.js",
+        "components/habit-party.js",
+        "components/party-activity.js",
+        "components/slide-to-log.js",
+        "components/target-feedback.js",
+        "components/party-nudge.js",
+        "components/party-progress.js",
+        "components/party-room.js",
+        "foundations/motion.css",
+        "components/artwork.css",
+        "components/habit-party.css",
+        "components/party-avatars.css",
+        "components/party-room.css",
+        "components/slide-to-log.css",
+        "components/target-feedback.css",
+        "components/party-nudge.css",
+        "PARTY-ROOM.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "party-activity",
+        "party-reactions",
+        "party-nudge",
+        "profile-avatar"
+      ],
+      "status": "Controlled browser component and local preview. Native app integration is separate.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-room",
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/artwork.js",
+          "components/party-avatars.js",
+          "components/party-reactions.js",
+          "components/habit-party.js",
+          "components/party-activity.js",
+          "components/slide-to-log.js",
+          "components/target-feedback.js",
+          "components/party-nudge.js",
+          "components/party-progress.js",
+          "components/party-room.js"
+        ],
+        "styles": [
+          "foundations/motion.css",
+          "components/artwork.css",
+          "components/habit-party.css",
+          "components/party-avatars.css",
+          "components/party-room.css",
+          "components/slide-to-log.css",
+          "components/target-feedback.css",
+          "components/party-nudge.css"
+        ],
+        "markup": "<today-party-room></today-party-room>",
+        "events": [
+          "party-request",
+          "party-member-change"
+        ],
+        "usage": "Controlled roster, dated eligibility and entries. Shared scheduled-day streak; each member has a personal target/reminder. See PARTY-ROOM.md.",
+        "demoOnly": [
+          "party-room-demo.js",
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "party-setup",
+      "name": "Create a party at plan review · Proposal",
+      "preview": "habit-parties.html#party-planning",
+      "sourcePage": "source.html#party-setup",
+      "browserSource": [
+        "foundations/disclosure.js",
+        "components/icons.js",
+        "components/controls.js",
+        "components/artwork.js",
+        "components/party-avatars.js",
+        "components/party-setup.js",
+        "foundations/motion.css",
+        "components/controls.css",
+        "components/artwork.css",
+        "components/party-avatars.css",
+        "components/party-room.css",
+        "PARTY-ROOM.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure",
+        "controls",
+        "artwork",
+        "profile-avatar"
+      ],
+      "status": "Controlled browser component and local preview. Native app integration is separate.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-setup",
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/party-avatars.js",
+          "components/party-setup.js"
+        ],
+        "styles": [
+          "foundations/motion.css",
+          "components/controls.css",
+          "components/artwork.css",
+          "components/party-avatars.css",
+          "components/party-room.css"
+        ],
+        "markup": "<today-party-setup></today-party-setup>",
+        "events": [
+          "party-setup-change",
+          "party-request"
+        ],
+        "usage": "Planning proposal only. Set .model and confirm created before invitation preview appears. Individual trial reviews are not settled lifecycle policy. See PARTY-ROOM.md.",
+        "demoOnly": [
+          "party-room-demo.js",
+          "habit-party-study.js",
+          "habit-party-study.css"
+        ]
+      }
+    },
+    {
+      "id": "week-bar",
+      "name": "Shared week calendar bar",
+      "preview": "home.html",
+      "sourcePage": "source.html#week-bar",
+      "browserSource": [
+        "components/week-bar.js",
+        "components/week-bar.css",
+        "HOME.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Controlled browser component and local preview. Native app integration is separate.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-week-bar",
+        "scripts": [
+          "components/week-bar.js"
+        ],
+        "styles": [
+          "components/week-bar.css"
+        ],
+        "markup": "<today-week-bar></today-week-bar>",
+        "events": [
+          "daychange"
+        ],
+        "usage": "Set .model={days:[{date,weekday,number,label,today}],selectedDate}; host confirms daychange. Shared by Home and onboarding. See HOME.md.",
+        "demoOnly": [
+          "home-study.js",
+          "onboarding-study.js"
         ]
       }
     }

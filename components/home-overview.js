@@ -9,12 +9,8 @@
       this._connected = true;
       this._abort = new AbortController();
       const signal = this._abort.signal;
-      this.addEventListener('click', e => {
-        const day = e.target.closest('[data-home-day]');
-        if (day) this.emit('daychange', {date:day.dataset.homeDay});
-      }, {signal});
       this.addEventListener('tabchange', e => this.emit('destination', {tab:e.detail.active}), {signal});
-      this.innerHTML = `<div class="ho-header"><div><strong>today.</strong><p>what will you do?</p></div><span class="ho-avatar" aria-label="Profile AT">AT</span></div><div class="ho-week" role="group" aria-label="Choose a day"></div><div class="ho-body"><div class="ho-day-heading"><div><h3></h3><p class="ho-report-count"></p></div><today-streak-badge hidden></today-streak-badge></div><div class="ho-list" tabindex="0" role="region" aria-label="Habits for the selected day"></div></div><div class="ho-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div><p class="ho-announcement" role="status"></p>`;
+      this.innerHTML = `<div class="ho-header"><div><strong>today.</strong><p>what will you do?</p></div><span class="ho-avatar" aria-label="Profile AT">AT</span></div><today-week-bar></today-week-bar><div class="ho-body"><div class="ho-day-heading"><div><h3></h3><p class="ho-report-count"></p></div><today-streak-badge hidden></today-streak-badge></div><div class="ho-list" tabindex="0" role="region" aria-label="Habits for the selected day"></div></div><div class="ho-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div><p class="ho-announcement" role="status"></p>`;
       this.render();
     }
     disconnectedCallback() { this._connected = false; this._abort?.abort(); }
@@ -32,16 +28,7 @@
       const list = this.querySelector('.ho-list');
       const changedDay = this._date !== m.selectedDate;
       this._date = m.selectedDate;
-      const week = this.querySelector('.ho-week');
-      if (week.dataset.dates !== m.days.map(d => d.date).join(',')) {
-        week.dataset.dates = m.days.map(d => d.date).join(',');
-        week.innerHTML = m.days.map(d => `<button type="button" data-home-day="${esc(d.date)}" aria-label="${esc(d.label)}"><span>${esc(d.weekday)}</span><b>${esc(d.number)}</b><i aria-hidden="true"></i></button>`).join('');
-      }
-      week.querySelectorAll('button').forEach(b => {
-        const d = m.days.find(v => v.date === b.dataset.homeDay);
-        b.setAttribute('aria-pressed', String(d.date === m.selectedDate));
-        if (d.today) b.setAttribute('aria-current','date'); else b.removeAttribute('aria-current');
-      });
+      this.querySelector('today-week-bar').model={days:m.days,selectedDate:m.selectedDate};
       this.querySelector('.ho-day-heading h3').textContent = day.today ? 'Your day' : day.label;
       const reported = m.habits.filter(h => h.amount !== null).length;
       this.querySelector('.ho-report-count').textContent = !m.habits.length ? 'Nothing scheduled' : day.future ? `${m.habits.length} scheduled` : `${reported}/${m.habits.length} logged`;
