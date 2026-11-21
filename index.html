@@ -13,16 +13,16 @@
   <link rel="stylesheet" href="components/page-counter.css?v=standalone-library-2">
   <link rel="stylesheet" href="components/staggered-bar-chart.css?v=standalone-library-2">
   <link rel="stylesheet" href="component-studies.css?v=standalone-library-2">
-  <link rel="stylesheet" href="components/welcome-intro.css?v=welcome-1">
+  <link rel="stylesheet" href="components/welcome-intro.css?v=welcome-2">
   <script src="foundations/disclosure.js" defer></script>
   <script src="components/dropdown.js" defer></script>
   <script src="components/snap-scroller.js?v=day-snap-2" defer></script>
   <script src="components/cradle-fluid.js?v=balanced-cradle-6" defer></script>
   <script src="components/bottom-nav.js?v=balanced-cradle-6" defer></script>
   <script src="navigation-study.js?v=standalone-library-2" defer></script>
-  <script src="today-logo.js?v=welcome-1" defer></script>
-  <script src="components/welcome-intro.js?v=welcome-1" defer></script>
-  <script src="welcome-study.js?v=welcome-1" defer></script>
+  <script src="today-logo.js?v=welcome-2" defer></script>
+  <script src="components/welcome-intro.js?v=welcome-2" defer></script>
+  <script src="welcome-study.js?v=welcome-2" defer></script>
   <script src="components/plan-button.js?v=standalone-library-2" defer></script>
   <script src="components/page-counter.js?v=standalone-library-2" defer></script>
   <script src="components/staggered-bar-chart.js?v=standalone-library-2" defer></script>
@@ -30,6 +30,8 @@
   <script src="app.js" defer></script>
 </head>
 <body>
+<a class="skip-intro" href="#library">Skip animation to component library</a>
+<today-welcome-intro id="intro" class="library-opening" role="img" aria-label="Today. What will you do?"></today-welcome-intro>
 <svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <symbol id="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
   <symbol id="arrows" viewBox="0 0 24 24"><path d="m5 6 6 6-6 6m8-12 6 6-6 6"/></symbol>
@@ -37,7 +39,7 @@
   <symbol id="replay" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 .6 6M4 4v6h6"/></symbol>
   <symbol id="moon" viewBox="0 0 24 24"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.6 8.6 0 1 0 20.5 14Z"/></symbol>
 </svg>
-<main>
+<main id="library">
   <header class="page-header">
     <div class="identity"><h1>today.</h1><p>Component library</p><a class="nav-jump" href="#landing">New components <span aria-hidden="true">↘</span></a></div>
     <div class="toolbar">
@@ -139,7 +141,7 @@
     </section>
   </div>
   <section class="library-component" id="landing" aria-labelledby="landing-heading" data-ui>
-    <div class="library-component-heading"><div><h2 id="landing-heading">Welcome landing</h2><p>The complete first impression.</p></div><a href="landing.html">Open screen ↗</a></div>
+    <div class="library-component-heading"><div><h2 id="landing-heading">Welcome landing</h2><p>The opening signature and gradient.</p></div><a href="#intro">View opening ↗</a></div>
     <div data-component="landing"></div>
   </section>
   <section class="library-component" id="plan-button" aria-labelledby="plan-button-heading" data-ui>

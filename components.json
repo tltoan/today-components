@@ -113,7 +113,7 @@
     {
       "id": "landing",
       "name": "Welcome landing",
-      "preview": "landing.html",
+      "preview": "index.html#intro",
       "browserSource": [
         "components/welcome-intro.js",
         "components/welcome-intro.css",
@@ -126,7 +126,7 @@
       "dependencies": [
         "logo"
       ],
-      "status": "Full-screen preview. Begin replays only in the demo."
+      "status": "Motion-only opening with logo, question, and gradient. Library follows below. Supplied native source preserved unchanged."
     },
     {
       "id": "navigation",
