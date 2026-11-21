@@ -16,10 +16,18 @@
     removed:['Habit unavailable','Choose another habit.','Choose habit'],
     failed:['Couldn’t save','750 mL is still recorded.','Open Today'],
     unavailable:['Open Today','Your data isn’t available.','Open Today'],
-    noDue:['A little breathing room','Nothing scheduled today.','Open Today'],
+    noDue:['No habits due','Nothing scheduled today.','Open Today'],
     complete:['Today, recorded','Your build targets are met.','View today']
   };
   class TodayHabitWidget extends HTMLElement {
+    static observedAttributes=['size'];
+    attributeChangedCallback(){if(this.isConnected)this.applySize();}
+    applySize(){
+      const variant=this._model.variant||'small',size=this.getAttribute('size')||'standard';
+      const [width,height]=W.dimensions(variant,size);
+      this.dataset.family=W.family(variant);
+      this.style.setProperty('--tw-width',width+'px');this.style.setProperty('--tw-height',height+'px');
+    }
     constructor() { super(); this._model={variant:'small',habits:[{...defaults}]}; this._version=0; this._queues=new Map(); }
     connectedCallback() {
       if (!this._listening) { this.addEventListener('click', e=>this.handleClick(e)); this._listening=true; }
@@ -49,38 +57,39 @@
       if(h.tracker==='checkoff')return this.context(h);
       return h.amount==null?this.context(h):W.format(h.amount)+' '+this.context(h);
     }
-    actionLabel(h) { return h.tracker==='checkoff'?(h.amount?'Undo':'Log'):h.rule==='atMost'?'Log':'+ '+W.format(h.step)+' '+h.unit; }
+    unit(h,value) { return value===1?({pages:'page',cups:'cup',stitches:'stitch',sessions:'session'}[h.unit]||h.unit):h.unit; }
+    actionLabel(h) { return h.tracker==='checkoff'?(h.amount?'Undo':'Log'):h.rule==='atMost'&&this._model.variant!=='small'?'Log':'+ '+W.format(h.step)+' '+this.unit(h,h.step); }
     setActionLabel(button,h,busy=false) {
-      const text=busy&&h.tracker==='checkoff'?'Saving…':this.actionLabel(h);
+      const text=busy?(this._model.variant==='lock'?'…':'Saving…'):this.actionLabel(h);
       if(button.dataset.label===text)return;
       button.dataset.label=text;
-      if(text.startsWith('+ '))button.innerHTML='<span class="tw-action-sign" aria-hidden="true">+</span><span class="tw-action-value">'+esc(W.format(h.step))+' <span>'+esc(h.unit)+'</span></span>';
+      if(text.startsWith('+ '))button.innerHTML='<span class="tw-action-sign" aria-hidden="true">+</span><span class="tw-action-value">'+esc(W.format(h.step))+' <span>'+esc(this.unit(h,h.step))+'</span></span>';
       else button.textContent=text;
     }
     action(h) { return h.tracker==='checkoff'?'toggle':h.rule==='atMost'?'open':'increase'; }
     row(h,portrait=false) {
-      if(portrait)return '<div class="tw-row tw-portrait" data-habit="'+esc(h.id)+'"><button type="button" class="tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-portrait-metric"><span class="tw-row-amount"></span><span class="tw-art">'+W.art(h.artwork)+'</span></span><span class="tw-context"></span></button><button type="button" class="tw-action" data-action="'+this.action(h)+'"></button><span class="tw-pending" role="status"></span></div>';
+      if(portrait)return '<div class="tw-row tw-portrait" data-habit="'+esc(h.id)+'"><button type="button" class="tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-portrait-metric"><span class="tw-portrait-value"><span class="tw-row-amount"></span><span class="tw-context"></span></span><span class="tw-art">'+W.art(h.artwork)+'</span></span></button><button type="button" class="tw-action" data-action="'+this.action(h)+'"></button><span class="tw-pending" role="status"></span></div>';
       return '<div class="tw-row '+(portrait?'tw-portrait':'')+'" data-habit="'+esc(h.id)+'"><button type="button" class="tw-content" data-action="open"><span class="tw-art">'+W.art(h.artwork)+'</span><span class="tw-copy"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-row-amount"></span><span class="tw-context"></span></span></button><button type="button" class="tw-action" data-action="'+this.action(h)+'"></button><span class="tw-pending" role="status"></span></div>';
     }
     render() {
       W.settleWater(this);
       const m=this._model, v=m.variant||'small', h=m.habits[0]||defaults;
-      this.dataset.variant=v;
+      this.dataset.variant=v;this.applySize();
       this.setAttribute('role','group');
       this.setAttribute('aria-label',m.label|| (v==='message'?'Widget message':v==='small'||v.startsWith('lock')||v==='circular'?h.title+' widget':'Today habits widget'));
       let html='';
       if(v==='message') {
         const [title,detail,action]=messageStates[m.state]||messageStates.configure;
-        html='<div class="tw-message"><span class="tw-name">'+esc(m.title||'today.')+'</span><h3>'+esc(m.headline||title)+'</h3><p>'+esc(m.detail||detail)+'</p><button type="button" class="tw-action" data-action="message">'+esc(action)+'</button></div>';
+        html='<div class="tw-message"><h3>'+esc(m.headline||title)+'</h3><p>'+esc(m.detail||detail)+'</p><button type="button" class="tw-action" data-action="message">'+esc(action)+'</button></div>';
       } else if(v==='small') {
-        // Controls are assembled separately so symbol artwork stays the supplied asset.
-        const controls = h.tracker==='checkoff'?'<button type="button" class="tw-action" data-action="toggle"></button>':'<button type="button" class="tw-symbol" data-action="decrease"><img src="'+W.asset('widgets/Decrease.svg')+'" alt=""></button><span class="tw-increment">'+W.format(h.step)+'<br>'+esc(h.unit)+'</span><button type="button" class="tw-symbol" data-action="increase"><img src="'+W.asset('widgets/Increase.svg')+'" alt=""></button>';
-        html='<div data-habit="'+esc(h.id)+'"><button type="button" class="tw-small-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-small-metric"><span class="tw-amount"></span><span class="tw-art">'+W.art(h.artwork)+'</span></span><span class="tw-context"></span></button><div class="tw-page-marks" aria-hidden="true">'+'<i></i>'.repeat(10)+'</div><div class="tw-controls">'+controls+'</div><span class="tw-pending" role="status"></span></div>';
+        const action=h.tracker==='checkoff'?'toggle':'increase';
+        html='<div class="tw-small-body" data-habit="'+esc(h.id)+'"><button type="button" class="tw-small-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-small-metric"><span class="tw-small-value"><span class="tw-amount"></span><span class="tw-context"></span></span><span class="tw-art">'+W.art(h.artwork)+'</span></span></button><div class="tw-page-marks" aria-hidden="true">'+'<i></i>'.repeat(10)+'</div><div class="tw-controls"><button type="button" class="tw-action" data-action="'+action+'"></button></div><span class="tw-pending" role="status"></span></div>';
       } else if(['medium','list','portraits'].includes(v)) {
-        const capacity=v==='medium'?2:v==='list'?5:4;
+        const capacity=v==='medium'?2:4;
         const total=m.total||m.habits.length;
-        html='<div class="tw-overview-header"><button type="button" data-action="today">today.</button><span>'+esc(v==='medium'?Math.max(0,total-2)+' more':v==='portraits'?Math.min(capacity,m.habits.length)+' of '+total+' habits':m.dateLabel||'Tue, Nov 17')+'</span></div><div class="tw-rows">'+m.habits.slice(0,capacity).map(item=>this.row(item,v==='portraits')).join('')+'</div>';
-        if(v!=='medium')html+='<button type="button" class="tw-footer" data-action="today">'+(total>capacity?'View all '+total+' habits ↗':'All '+total+' habits')+'</button>';
+        const header=v==='list'?'<div class="tw-overview-header"><span>Today</span><span>'+esc(m.dateLabel||'Tue, Nov 17')+'</span></div>':'';
+        html=header+'<div class="tw-rows">'+m.habits.slice(0,capacity).map(item=>this.row(item,v==='portraits')).join('')+'</div>';
+        if(v!=='medium')html+='<button type="button" class="tw-footer" data-action="today">'+(total>capacity?'View all '+total+' habits ↗':'All '+total+' habits ↗')+'</button>';
       } else if(v==='lock') {
         html='<div data-habit="'+esc(h.id)+'"><button type="button" class="tw-lock-content tw-content" data-action="open"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-amount"></span><span class="tw-context"></span><span class="tw-lock-track"><i></i></span></button><button type="button" class="tw-lock-action tw-action" data-action="'+this.action(h)+'"></button><span class="tw-pending" role="status"></span></div>';
       } else if(v==='circular') {
@@ -88,9 +97,10 @@
       } else if(v==='streak'||v==='lock-streak') {
         html='<button type="button" class="tw-streak tw-content" data-action="open" data-habit="'+esc(h.id)+'"><span class="tw-name">'+esc(h.title)+'</span><span class="tw-streak-body"><span class="tw-streak-summary"><span class="tw-streak-count"><strong>'+W.format(m.count??6)+'</strong><span>'+esc(m.streakLabel||'day streak')+'</span></span><span class="tw-context">'+esc(m.through||'Through Nov 16')+'</span></span><span class="tw-flame">'+W.art(v==='streak'?'flame':'mono')+'</span></span><span class="tw-streak-days">'+(m.days||[10,11,12,13,14,15,16]).map((d,i)=>'<span>'+W.mark(i===0?'partial':'full')+'<small>'+esc(d)+'</small></span>').join('')+'</span></button>';
       } else if(v==='summary') {
-        html='<button type="button" class="tw-summary tw-content" data-action="today"><span class="tw-name">today.</span><strong>'+W.format(m.total||5)+' habits</strong><span>'+W.format(m.met??2)+' build targets met · Open Today</span></button>';
+        html='<button type="button" class="tw-summary tw-content" data-action="today"><span class="tw-name">today.</span><strong>'+W.format(m.total||5)+' habits</strong><span>'+W.format(m.met??2)+' targets met</span></button>';
       }
-      this.innerHTML=html+'<div class="tw-error" hidden><span role="alert"></span><button type="button" data-action="retry">Retry</button><button type="button" data-action="today">Open Today</button></div><span class="tw-sr-status" role="status" aria-live="polite"></span>';
+      this.removeAttribute('data-error');
+      this.innerHTML=html+'<div class="tw-error" hidden><span role="alert"></span><button type="button" data-action="retry">Retry</button><button type="button" data-action="today" aria-label="Open Today">Open</button></div><span class="tw-sr-status" role="status" aria-live="polite"></span>';
       this.update();
     }
     update() {
@@ -100,10 +110,13 @@
         const busy=this._queues.has(h.id);
         item.setAttribute('aria-busy',String(busy));
         const amount=item.querySelector('.tw-amount');
-        if(amount) { const text=h.tracker==='checkoff'?'':W.format(h.amount); if(amount.textContent!==text) { const hadValue=Boolean(amount.textContent); amount.textContent=text; if(hadValue)W.animateText(amount); } }
-        item.style.setProperty('--tw-number-size',W.format(h.amount).length>6?'22px':W.format(h.amount).length>4?'28px':'34px');
+        if(amount) { const text=h.tracker==='checkoff'?'':h.amount==null&&this._model.variant==='small'?'No log':W.format(h.amount); if(amount.textContent!==text) { const hadValue=Boolean(amount.textContent); amount.textContent=text; if(hadValue)W.animateText(amount); } }
+        item.style.setProperty('--tw-number-size',h.amount==null?'18px':W.format(h.amount).length>6?'19px':W.format(h.amount).length>4?'24px':'28px');
         const context=item.querySelector('.tw-context');
-        if(context && !['streak','lock-streak'].includes(this._model.variant))context.textContent=this._model.variant==='circular'?h.unit:this.context(h);
+        if(context && !['streak','lock-streak'].includes(this._model.variant)){
+          const compact=['small','portraits','lock'].includes(this._model.variant);
+          context.textContent=this._model.variant==='circular'?h.unit:compact&&h.tracker!=='checkoff'?(h.rule==='atMost'?'limit ':'of ')+W.format(h.target)+' '+h.unit:this.context(h);
+        }
         const rowAmount=item.querySelector('.tw-row-amount');
         if(rowAmount)rowAmount.textContent=this._model.variant==='portraits'?(h.tracker==='checkoff'?(h.amount?'Done':'—'):W.format(h.amount)):'';
         if(context&&this._model.variant!=='portraits'&&item.classList.contains('tw-row'))context.textContent=this.summary(h);
@@ -118,11 +131,12 @@
           if(action==='open'){button.setAttribute('aria-label','Open '+h.title+', '+this.summary(h));if(button.classList.contains('tw-action'))this.setActionLabel(button,h);return;}
           if(action==='increase'||action==='decrease'){
             button.disabled=!this._save || (action==='decrease' && (!h.amount || h.amount<=0));
-            button.setAttribute('aria-label',(action==='increase'?'Add ':'Subtract ')+h.step+' '+h.unit+(action==='increase'?' to ':' from ')+h.title);
+            button.setAttribute('aria-label',(action==='increase'?'Add ':'Subtract ')+h.step+' '+this.unit(h,h.step)+(action==='increase'?' to ':' from ')+h.title);
           } else if(action==='toggle'){button.disabled=!this._save||busy;button.setAttribute('aria-pressed',String(Boolean(h.amount)));}
           if(button.classList.contains('tw-action'))this.setActionLabel(button,h,busy);
         });
         const pending=item.querySelector('.tw-pending');if(pending)pending.textContent=busy?'Saving…':'';
+        item.querySelectorAll('.tw-name').forEach(name=>name.title=h.title);
         item.dataset.tracker=h.tracker;
         item.dataset.artwork=h.artwork;
         item.dataset.rule=h.rule;
@@ -142,13 +156,13 @@
         return this.open(route==='habit'?h:null,route);
       }
       if(action==='retry')return this._retry && this.enqueue(this._retry.id,this._retry.action);
-      this.enqueue(h?.id,action);
+      this._returnFocus=button;this.enqueue(h?.id,action);
     }
     async enqueue(id,action) {
       if(!this._save||!id)return;
       if(this._queues.has(id)){if(action!=='toggle')this._queues.get(id).push(action);return;}
       const queue=[action]; this._queues.set(id,queue); const version=this._version;
-      this.querySelector('.tw-error').hidden=true;
+      this.setError();
       this.update();
       while(queue.length && version===this._version) {
         const currentAction=queue.shift();
@@ -167,13 +181,20 @@
           if(version!==this._version)return;
           queue.length=0;
           this._retry={id,action:currentAction};
-          const box=this.querySelector('.tw-error');box.hidden=false;
-          box.querySelector('[role=alert]').textContent='Couldn’t save. '+this.summary(h)+' is unchanged.';
+          this.setError('Couldn’t save. '+(h.tracker==='checkoff'?this.context(h):W.format(h.amount)+' '+h.unit)+' unchanged.');
           this.dispatchEvent(new CustomEvent('widget-error',{bubbles:true,detail:{id,error}}));
         }
       }
       this._queues.delete(id);
       this.update();
+    }
+    setError(message='') {
+      const box=this.querySelector('.tw-error');
+      const hadFocus=this.contains(document.activeElement);
+      box.hidden=!message;this.toggleAttribute('data-error',Boolean(message));
+      [...this.children].forEach(child=>{if(child!==box&&!child.classList.contains('tw-sr-status'))child.inert=Boolean(message);});
+      box.querySelector('[role=alert]').textContent=message;
+      if(hadFocus){if(message)box.querySelector('[data-action="retry"]').focus();else if(this._returnFocus?.isConnected)this._returnFocus.focus();}
     }
     disconnectedCallback(){this._version++;this._queues.clear();W.settleWater(this);this._motionObserver?.disconnect();this._media?.removeEventListener('change',this._motionChanged);this.getAnimations({subtree:true}).forEach(a=>a.cancel());}
   }

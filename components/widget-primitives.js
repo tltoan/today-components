@@ -65,5 +65,13 @@
     el.getAnimations().forEach(a=>a.cancel());
     if (!reduced()) el.animate([{opacity:.4,transform:'translateY(3px)'},{opacity:1,transform:'translateY(0)'}],{duration:320,easing:'cubic-bezier(.22,.76,.28,1)'});
   };
-  window.TodayWidgets = {escape,asset,format,art,mark,reduced,animateText,setWaterFill,settleWater};
+  // Apple HIG iOS dimensions, checked November 20, 2026. Points, represented 1:1 in CSS.
+  const sizes={
+    compact:{label:'Compact · 375 × 667',small:[148,148],medium:[321,148],large:[321,324],rectangular:[153,68],circular:[68,68]},
+    standard:{label:'Standard · 390 × 844',small:[158,158],medium:[338,158],large:[338,354],rectangular:[160,72],circular:[72,72]},
+    large:{label:'Large · 430 × 932',small:[170,170],medium:[364,170],large:[364,382],rectangular:[172,76],circular:[76,76]}
+  };
+  const family=variant=>['medium','streak'].includes(variant)?'medium':['list','portraits'].includes(variant)?'large':['lock','lock-streak','summary'].includes(variant)?'rectangular':variant==='circular'?'circular':'small';
+  const dimensions=(variant,size='standard')=>(sizes[size]||sizes.standard)[family(variant)];
+  window.TodayWidgets = {escape,asset,format,art,mark,reduced,animateText,setWaterFill,settleWater,sizes,family,dimensions};
 })();

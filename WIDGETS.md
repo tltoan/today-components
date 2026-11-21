@@ -9,10 +9,10 @@ File: `Xf03CH47k7G0graqTZ4zis` · Canvas: `426:1987`.
 | Figma family / node | Browser implementation |
 | --- | --- |
 | Numeric habit `426:2511` | `today-habit-widget`, variant `small`: water, reading, custom count, duration, upper limit |
-| Check-off `426:2558` | `small` + `tracker: "checkoff"`: Log / Undo |
+| Check-off `426:2558` | `small` + `tracker: "checkoff"`: Log / Undo inside a fixed square |
 | Message `426:2585`, state specimens `426:3472–3556` | `message`: new, configure, empty, scheduled, paused, removed, failed, unavailable; also noDue and complete |
 | Two habits `426:2609` | `medium`: two stable rows, each with its own action |
-| Large daily list `441:2850` | `list`: five rows, overflow opens the full day |
+| Large daily list `441:2850` | `list`: four rows, overflow opens the full day |
 | Large portraits `441:2932`, portrait `441:2939` | `portraits`: four habits; counts and units remain separate |
 | My rhythm `441:2955` | `streak`: selected Warm Ember flame, confirmed count, seven dated marks |
 | Rectangular accessory `426:2648` | `lock` + numeric habit: one quick action |
@@ -36,10 +36,11 @@ Apple phone contexts, wallpaper, app icons, layout annotations, and the full hab
 
 ## Deliberate clarity changes
 
-- Future replaces the temporary SF Pro used in the Figma drafts, matching the existing browser library.
-- Full habit names wrap and the browser cards can grow. A native fixed-size widget will need a separately verified truncation / accessibility policy.
-- The check-off explicitly says No log yet or Logged and retains Log / Undo.
-- Rectangle accessories use a 216 px browser specimen with a 64 px quick action and a 16 px gap; the plus and increment sit on separate lines. These are clarity studies, not verified fixed-size WidgetKit layouts.
+- Future is retained for prominent amounts; compact labels and controls use the system font for legibility.
+- Widgets have fixed family dimensions. Long names use a one-line ellipsis; the content action retains the full accessible name and opens details. The browser title tooltip also exposes the full habit name.
+- The check-off explicitly says No log yet or Logged today and retains Log / Undo, with artwork and status in separate rows.
+- Small numeric widgets have one full-width quick-add action. Tap the content to open details/corrections; plus/minus stepper assets remain in the repository as historical source.
+- Rectangular accessories use the selected Apple profile (160 × 72 pt by default), a 44-point action and an 8-point content/action gap. The amount’s unit remains in the content; the compact action displays +250. Its accessible label includes the unit.
 - Circular gauges use a dynamic circle so progress can update smoothly. They have no miniature plus/minus buttons.
 - Calendar selection exposes the date, actual amount, and meaning in text. Future days cannot be selected. The same fixture supplies the overview and calendar values.
 - An upper-limit goal never gets a completion celebration while the day is open. `null` means no log; `0` is a real recorded amount.
@@ -72,7 +73,7 @@ Load `components/widget-primitives.js` before `components/habit-widget.js`. Load
 </script>
 ```
 
-Without a `save` handler the mutation controls are disabled. The component never silently pretends to persist. Numeric taps are queued in order; check-offs cannot duplicate while pending. Failure preserves confirmed data and offers Retry / Open Today. Replacing `model` invalidates pending UI results; the host must still coordinate any real in-flight writes. Input limits and trusted data validation belong to the host.
+Without a `save` handler the mutation controls are disabled. The component never silently pretends to persist. Numeric taps are queued in order; check-offs cannot duplicate while pending. Failure preserves confirmed data and replaces the widget face within its fixed footprint. Small/Home Screen widgets offer Retry / Open; compact Lock Screen accessories offer Retry. Focus moves to Retry only if it was already inside the widget and returns to the triggering action after retry. Hidden face controls become inert. Replacing `model` invalidates pending UI results; the host must still coordinate any real in-flight writes. Input limits and trusted data validation belong to the host.
 
 `widget-change` contains the confirmed habit, action and date. `widget-error` reports a failed save. `widget-open` reports a route, optional habit and displayed date. UI focus stays on controls when amounts update.
 
@@ -99,6 +100,22 @@ No SwiftUI or WidgetKit port was added in this change. Native persistence, App I
 
 Warm Ember is the selected streak artwork, applied to the widget, insight hero and monochrome accessory. Active Pill is the selected step-progress pattern. The live galleries show the selected direction; alternatives remain available in source history.
 
-Small browser cards are now 184 px wide (responsive to their gallery cell) with aligned title, amount/artwork, context and control rows. The source symbol geometry remains unchanged: optical transforms center the original minus and plus ink in their 44 px hit areas. The book is enlarged with a wrapper transform. The four-habit overview grows vertically to give each habit its own metric row, explicit context and full-width action. Streak dates align to the left of their count group. Calendar cells center their content with equal vertical padding.
+The earlier growing 184 px cards and 216 px accessories are superseded by the fixed layouts below. Spacing is resolved through hierarchy and fewer actions, not a larger container.
 
-These spacing revisions intentionally allow browser specimen heights to grow; they have not been fitted or verified in native WidgetKit size families.
+## Apple size contract
+
+The gallery's iPhone size selector is a browser layout reference for Apple's published point dimensions. One CSS pixel represents one point; browser zoom and display density still affect physical onscreen size. These presets describe three iPhone screen classes, not every Apple device.
+
+| Preset / portrait screen (pt) | Small | Medium | Large | Rectangular accessory | Circular accessory |
+| --- | --- | --- | --- | --- | --- |
+| Compact · 375 × 667 | 148 × 148 | 321 × 148 | 321 × 324 | 153 × 68 | 68 × 68 |
+| Standard · 390 × 844 | 158 × 158 | 338 × 158 | 338 × 354 | 160 × 72 | 72 × 72 |
+| Large · 430 × 932 | 170 × 170 | 364 × 170 | 364 × 382 | 172 × 76 | 76 × 76 |
+
+Source: [Apple Human Interface Guidelines — widget specifications](https://developer.apple.com/design/human-interface-guidelines/widgets#Specifications), consulted November 20, 2026.
+
+Set `<today-habit-widget size="compact"></today-habit-widget>` or use `standard` (default) / `large`. Changing size preserves confirmed data and current motion. `TodayWidgets.sizes`, `family(variant)` and `dimensions(variant, size)` are the shared source of dimensions. Model variants map to families: small/message → small; medium/streak → medium; list/portraits → large; lock/lock-streak/summary → rectangular; circular → circular. Widgets never grow or shrink to fit the gallery. At very narrow browser widths the larger preview stage can scroll horizontally, without changing its frame.
+
+Home Screen families use 16-point insets and 44-point actions. Medium displays two habits without a redundant header. The large list displays four rows plus a full-day link; the large grid keeps four habits and full-width actions. Rectangular accessories have their own 4-point inset composition and readable amount/action. Circular accessories prioritize amount and unit. All ten message states fit inside the smallest preset. Calendar and habit-detail components are explicitly separated as in-app insights.
+
+This verifies browser layout constraints only. WidgetKit must still provide the real device family, system content margins, container background and native App Intents. Native previews/simulator tests, Dynamic Type, rendering modes, Home Screen tinting and iPad/Mac layouts remain separate integration work. Browser requestAnimationFrame water motion is a visual reference, not a directly reusable WidgetKit animation.

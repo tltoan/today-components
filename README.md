@@ -294,3 +294,12 @@ Verification: the browser math matches all 1,201 vertices in ten sampled frames 
 
 
 Check-off spacing refinement: small check-off widgets now reserve 16 px between the artwork and the status line, using 8 px of internal padding in the existing status row. The control baseline and card size stay stable. Verified No log yet / Logged today, keyboard Log / Undo, and reduced motion at desktop and 390 × 844 without horizontal overflow.
+
+
+## Apple widget size refit · November 20, 2026
+
+Replaced growing widget cards with fixed Apple iPhone family dimensions. The default 390 × 844 screen preset uses small 158 × 158, medium 338 × 158, large 338 × 354, rectangular accessory 160 × 72 and circular 72 × 72. Compact (375 × 667) and large (430 × 932) presets use the corresponding Apple HIG table values. A gallery selector and per-widget size captions make the constraints reviewable. WIDGETS.md contains the full size/source contract. This supersedes the earlier 184 px growing cards and 216 px accessories.
+
+Small widgets use one 44-point quick-log button, readable amount/target and contained artwork; tapping content opens corrections/details. Medium has two stable rows. The large list uses four rows plus a full-day link, and the four-habit grid fits its complete family frame. Lock Screen compositions use compact independent layouts. Long names truncate visually while preserving their full accessible name. Save failures replace the face inside its fixed size, preserve the confirmed amount, and keep keyboard focus on the retry flow. The ten message states also use the small family. In-app calendars and habit details are labeled separately. All browser code remains directly reusable; no native WidgetKit extension was added.
+
+Verification for this refit: checked all 20 widget specimens against compact, standard and large family dimensions, including at 375 × 667 and 390 × 844 browser viewports. No widget or page overflow was found. The smallest preset passed long-name truncation with complete accessible names, all ten message states, numeric and accessory failure/Retry preserving confirmed values, and focus recovery. Standard controls measured at least 44 × 44 CSS pixels (within fractional layout rounding). Keyboard Log/Undo and reduced motion were checked; three rapid numeric saves reached 1,500 with the fill settled at 75% and a stable 158 × 158 frame. JavaScript syntax, local source references and whitespace checks pass. Native runtime, Dynamic Type, tinting and other Apple platforms are not claimed as tested.

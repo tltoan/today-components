@@ -414,7 +414,7 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Reusable browser proposal; no native app integration.",
+      "status": "Fixed Apple iPhone family layouts in the browser; native WidgetKit integration is separate.",
       "sourcePage": "source.html#widgets",
       "figmaNodes": [
         "426:1987",
@@ -457,8 +457,8 @@
           "assets/TestTheFuture-Medium.otf",
           "assets/streaks/ember.svg"
         ],
-        "markup": "<today-habit-widget></today-habit-widget>",
-        "usage": "Assign model and an async save handler. Variants: small, medium, list, portraits, streak, lock, circular, lock-streak, summary, message. Read WIDGETS.md for all states, data semantics, action events and the full Figma coverage map.",
+        "markup": "<today-habit-widget size=\"standard\"></today-habit-widget>",
+        "usage": "Assign model and an async save handler. Variants: small, medium, list, portraits, streak, lock, circular, lock-streak, summary, message. Read WIDGETS.md for all states, data semantics, action events and the full Figma coverage map. Set size to compact, standard (default), or large for the documented Apple point dimensions. Small uses one quick-add action; tap content for corrections. Fixed frames never grow for names or errors. Read WIDGETS.md for the family mappings and native validation limits.",
         "events": [
           "widget-open",
           "widget-change",
@@ -469,7 +469,8 @@
           "widget-study.js",
           "widget-studies.css"
         ]
-      }
+      },
+      "sizeReference": "https://developer.apple.com/design/human-interface-guidelines/widgets#Specifications"
     },
     {
       "id": "habit-calendar",

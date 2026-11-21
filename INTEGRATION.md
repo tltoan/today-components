@@ -93,3 +93,10 @@ An empty `swiftSource` means that this library does not yet supply a native vers
 Load `components/loader.css`, then `components/loader-motion.js` and `components/loader.js`. Use `<today-loader label="Loading"></today-loader>` only while an operation is pending, and remove it once complete. Call `pause()`, `play()` or `replay()`; set `speed` (0.1–4) or the `paused` attribute when needed. Width controls size; the canvas remains transparent. The loop suspends when offscreen or the document is hidden, preserving time. Reduced motion shows the same still globe at 2 seconds. The host owns actual work, failure and completion.
 
 SwiftUI: copy `native/TodayLoader.swift` and use `TodayLoader().frame(width: 240, height: 240)`. It requires iOS 17+ or macOS 14+, no assets or packages. `isAnimating`, `speed`, `replayToken`, `colors` and `lineWidth` are configurable. The supplied orange/olive version remains unchanged under `native/reference/CoilSphereLoader.swift`; it is reference source, not a dependency.
+
+
+## Fixed widget families
+
+Habit widgets now use Apple iPhone family dimensions, not growing app cards. Use `size="compact"`, `size="standard"` (default), or `size="large"`. The geometry table and variant-to-family mappings are in `WIDGETS.md`; `TodayWidgets.sizes` is the code source. Changing the attribute resizes the reference frame without resetting data. Small cards use one quick-add action and open details for corrections. Errors replace the face rather than increase its height.
+
+Preserve the 16-point Home Screen insets and 44-point actions when translating the design. The browser layout is not a WidgetKit extension: native sizing, system margins, Dynamic Type, rendering modes and App Intent behavior still need validation in the host app.
