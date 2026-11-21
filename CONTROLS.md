@@ -31,7 +31,7 @@ The first ten are exact original SVGs matching the SHA-256 hashes in the Figma c
 <today-button variant="round" symbol="+" accessible-label="Add habit"></today-button>
 <today-button variant="round" icon="close" accessible-label="Close"></today-button>
 <today-button variant="icon" icon="increase" accessible-label="Increase target"></today-button>
-<today-button variant="choice" label="Build a habit" selected></today-button>
+<today-button variant="choice" label="Logged" icon="planned-day" selected></today-button>
 ```
 
 | Variant | Intended use | Minimum height |
@@ -69,6 +69,8 @@ save.addEventListener('today-activate', async () => {
 ```
 
 No persistence, route, or implied readiness is built into the primitive. The gallery's saving delay and feedback are synthetic. Specialized behavior stays in the existing adaptive plan button, Center Cradle nav, dropdown, slide-to-log and widget components; those are linked in the collection rather than reimplemented.
+
+Habit intent (building or breaking) is parsed from the user’s description. Do not use selectable chips to ask the user to choose Build or Break; the library has no such creation step.
 
 ## Switch
 
