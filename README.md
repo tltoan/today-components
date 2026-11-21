@@ -1,6 +1,6 @@
 # Today component library
 
-[Live component library](https://tltoan.github.io/today-components/) · [Source repository](https://github.com/tltoan/today-components) · [Agent guide](AGENTS.md) · [Component manifest](components.json)
+[Live component library](https://tltoan.github.io/today-components/) · [Source repository](https://github.com/tltoan/today-components) · [Agent guide](AGENTS.md) · [Integration guide](INTEGRATION.md) · [Component manifest](components.json)
 
 ## For agents and developers
 
@@ -246,3 +246,12 @@ Removed the repeated Today / Component library header, New components link, and 
 Verified after header removal: schedule preset selection, keyboard logging, and next-day navigation still work with no browser errors. At 390 × 844, the cards begin at 200 px with no horizontal overflow. A temporary local fixture simulated the device reduced-motion media query: the opening settled immediately, disclosures had 0 s transitions, and agenda navigation completed without animated settling. The fixture was removed; no device settings were changed. `node --check app.js` passes.
 
 Removed the redundant “View opening” shortcuts from the Welcome specimen; it retains its own playback controls and SwiftUI download.
+
+
+### Counter ink bounds and source access — November 20, 2026
+
+The browser page counter now has inline padding and a full font line box around gradient-filled digits. Future's numeral outlines can extend beyond their advance width; negative tracking made those edges fall outside the gradient paint area. The padding preserves the original font size and rolling motion while keeping the full glyph visible. The supplied SwiftUI source is unchanged.
+
+Each visible component now has a Code link to its source-index row. `INTEGRATION.md` includes an agent prompt, retrieval instructions, and a minimal page-counter example. The manifest's `browserIntegration` records reusable files, load order, markup, assets, and demo-only files; shared gallery specimens are identified explicitly.
+
+Verified this revision at desktop (1600 × 900) and mobile (390 × 844): complete numeral 2, keyboard increments to 7 with reduced motion, no overflow, and a working Code link to the counter's source row. All ten font numeral ink bounds fit the padded paint box. The integration guide's exact HTML example was loaded separately with only counter CSS/JS and fonts; keyboard increment changed 10 to 11 without gallery dependencies. All manifest integration paths and 13 source-row anchors resolve, and the browser reported no warnings/errors. The temporary example page was removed after verification.

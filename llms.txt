@@ -8,6 +8,10 @@
 - [README](https://tltoan.github.io/today-components/README.md): inventory, API details, and source status.
 - [Component manifest](https://tltoan.github.io/today-components/components.json): machine-readable source and dependency mapping.
 
+## Reusing components
+- [Integration guide](https://tltoan.github.io/today-components/INTEGRATION.md): copy reusable code, load dependencies in order, and distinguish SwiftUI from browser components.
+- Each entry in components.json now includes browserIntegration and a sourcePage anchor. Scripts such as component-studies.js and welcome-study.js mount demos; do not import them into a product page.
+
 ## Components
 - Dropdown/disclosure motion: [motion.css](https://tltoan.github.io/today-components/foundations/motion.css), [disclosure.js](https://tltoan.github.io/today-components/foundations/disclosure.js), [TodayMotion.swift](https://tltoan.github.io/today-components/native/TodayMotion.swift). Approved shared 600 ms motion.
 - Selection dropdown: [dropdown.js](https://tltoan.github.io/today-components/components/dropdown.js), [dropdown.css](https://tltoan.github.io/today-components/components/dropdown.css). Reusable browser selection control.

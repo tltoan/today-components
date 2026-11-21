@@ -7,7 +7,8 @@
     "guide": "AGENTS.md",
     "readme": "README.md",
     "agentIndex": "llms.txt",
-    "humanSourceIndex": "source.html"
+    "humanSourceIndex": "source.html",
+    "integration": "INTEGRATION.md"
   },
   "sharedFiles": [
     "style.css",
@@ -29,7 +30,18 @@
         "native/TodayMotion.swift"
       ],
       "dependencies": [],
-      "status": "Approved shared 600 ms motion."
+      "status": "Approved shared 600 ms motion.",
+      "sourcePage": "source.html#disclosure",
+      "browserIntegration": {
+        "kind": "controller",
+        "styles": [
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js"
+        ],
+        "usage": "new TodayUI.Disclosure(panel, {trigger, open: false}); panel needs one inner content wrapper."
+      }
     },
     {
       "id": "dropdown",
@@ -43,7 +55,21 @@
       "dependencies": [
         "disclosure"
       ],
-      "status": "Reusable browser selection control."
+      "status": "Reusable browser selection control.",
+      "sourcePage": "source.html#dropdown",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-dropdown",
+        "styles": [
+          "components/dropdown.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/dropdown.js"
+        ],
+        "markup": "<today-dropdown label=\"Tracking method\" value=\"pages\"><option value=\"pages\">Pages</option><option value=\"minutes\">Minutes</option></today-dropdown>"
+      }
     },
     {
       "id": "reading-schedule",
@@ -58,7 +84,12 @@
       "dependencies": [
         "disclosure"
       ],
-      "status": "Browser specimen."
+      "status": "Browser specimen.",
+      "sourcePage": "source.html#reading-schedule",
+      "browserIntegration": {
+        "kind": "specimen",
+        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import."
+      }
     },
     {
       "id": "agenda",
@@ -71,7 +102,15 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Browser one-day snapping controller."
+      "status": "Browser one-day snapping controller.",
+      "sourcePage": "source.html#agenda",
+      "browserIntegration": {
+        "kind": "controller-with-specimen",
+        "scripts": [
+          "components/snap-scroller.js"
+        ],
+        "usage": "new TodayUI.SnapScroller(viewport, {selector: \".agenda-entry\", onSelect}); extract the agenda markup/styles from index.html/style.css; app.js holds the sample data."
+      }
     },
     {
       "id": "slide-to-log",
@@ -83,7 +122,12 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Browser specimen; linked with checklist example state."
+      "status": "Browser specimen; linked with checklist example state.",
+      "sourcePage": "source.html#slide-to-log",
+      "browserIntegration": {
+        "kind": "specimen",
+        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import."
+      }
     },
     {
       "id": "checklist",
@@ -95,7 +139,12 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Browser specimen with synthetic data."
+      "status": "Browser specimen with synthetic data.",
+      "sourcePage": "source.html#checklist",
+      "browserIntegration": {
+        "kind": "specimen",
+        "note": "Extract the relevant markup/styles/state from index.html, style.css, and app.js. app.js initializes the complete showcase and is not an isolated component import."
+      }
     },
     {
       "id": "logo",
@@ -108,7 +157,18 @@
         "native/TodayLogoAnimation.swift"
       ],
       "dependencies": [],
-      "status": "Browser component and unchanged supplied SwiftUI."
+      "status": "Browser component and unchanged supplied SwiftUI.",
+      "sourcePage": "source.html#logo",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-logo-animation",
+        "styles": [],
+        "scripts": [
+          "today-logo.js"
+        ],
+        "markup": "<today-logo-animation></today-logo-animation>",
+        "note": "Styles and vector paths are inside its shadow root; size the host in the target layout."
+      }
     },
     {
       "id": "landing",
@@ -126,7 +186,23 @@
       "dependencies": [
         "logo"
       ],
-      "status": "Motion-only opening with logo, question, and gradient. Library follows below. Supplied native source preserved unchanged."
+      "status": "Motion-only opening with logo, question, and gradient. Library follows below. Supplied native source preserved unchanged.",
+      "sourcePage": "source.html#landing",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-welcome-intro",
+        "styles": [
+          "components/welcome-intro.css"
+        ],
+        "scripts": [
+          "today-logo.js",
+          "components/welcome-intro.js"
+        ],
+        "markup": "<div style=\"width:390px;height:844px\"><today-welcome-intro></today-welcome-intro></div>",
+        "demoOnly": [
+          "welcome-study.js"
+        ]
+      }
     },
     {
       "id": "navigation",
@@ -140,7 +216,31 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Selected shape. Plus is disconnected from the editor."
+      "status": "Selected shape. Plus is disconnected from the editor.",
+      "sourcePage": "source.html#navigation",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-bottom-nav",
+        "styles": [
+          "components/bottom-nav.css"
+        ],
+        "scripts": [
+          "components/cradle-fluid.js",
+          "components/bottom-nav.js"
+        ],
+        "assets": [
+          "assets/HomeIcon.svg",
+          "assets/HabitsIcon.svg"
+        ],
+        "markup": "<today-bottom-nav variant=\"cradle\" active=\"home\" label=\"Main navigation\"></today-bottom-nav>",
+        "demoOnly": [
+          "navigation-study.js"
+        ],
+        "events": [
+          "tabchange: event.detail.active",
+          "add: independent action, no page attached"
+        ]
+      }
     },
     {
       "id": "plan-button",
@@ -153,7 +253,23 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Standalone state-controlled button with letter transitions."
+      "status": "Standalone state-controlled button with letter transitions.",
+      "sourcePage": "source.html#plan-button",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-plan-button",
+        "styles": [
+          "components/plan-button.css"
+        ],
+        "scripts": [
+          "components/plan-button.js"
+        ],
+        "markup": "<today-plan-button></today-plan-button>",
+        "usage": "After connection, call element.setState({label, ready, hint}). Readiness is supplied by the host app, not built into this button.",
+        "demoOnly": [
+          "component-studies.js"
+        ]
+      }
     },
     {
       "id": "page-counter",
@@ -168,7 +284,25 @@
         "native/AnimatedPageCounter.swift"
       ],
       "dependencies": [],
-      "status": "Tap/hold counter with sequential one-page marks."
+      "status": "Tap/hold counter with sequential one-page marks.",
+      "sourcePage": "source.html#page-counter",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-page-counter",
+        "styles": [
+          "components/page-counter.css"
+        ],
+        "scripts": [
+          "components/page-counter.js"
+        ],
+        "markup": "<today-page-counter amount=\"10\" maximum=\"40\" mark-count=\"20\"></today-page-counter>",
+        "events": [
+          "change: event.detail.amount"
+        ],
+        "demoOnly": [
+          "component-studies.js"
+        ]
+      }
     },
     {
       "id": "bar-chart",
@@ -183,7 +317,23 @@
         "native/StaggeredBarChart.swift"
       ],
       "dependencies": [],
-      "status": "Synthetic dated chart; zero and no log are distinct."
+      "status": "Synthetic dated chart; zero and no log are distinct.",
+      "sourcePage": "source.html#bar-chart",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-staggered-bar-chart",
+        "styles": [
+          "components/staggered-bar-chart.css"
+        ],
+        "scripts": [
+          "components/staggered-bar-chart.js"
+        ],
+        "markup": "<today-staggered-bar-chart target=\"10\" stagger=\"140\"></today-staggered-bar-chart>",
+        "usage": "Set element.points to [{id, dateLabel, value}]; null means no log, 0 means recorded zero. The default points are synthetic.",
+        "demoOnly": [
+          "component-studies.js"
+        ]
+      }
     },
     {
       "id": "habit-editor",
@@ -198,7 +348,22 @@
       "dependencies": [
         "plan-button"
       ],
-      "status": "Retained source, not mounted. Sample English readiness rules; no AI or plan persistence."
+      "status": "Retained source, not mounted. Sample English readiness rules; no AI or plan persistence.",
+      "sourcePage": "source.html#habit-editor",
+      "browserIntegration": {
+        "kind": "retained-prototype",
+        "styles": [
+          "components/habit-editor.css",
+          "components/plan-button.css"
+        ],
+        "scripts": [
+          "components/plan-button.js",
+          "components/plan-readiness.js",
+          "components/habit-editor.js"
+        ],
+        "note": "Not mounted and not connected to navigation. Readiness rules are a sample, not a production parser."
+      }
     }
-  ]
+  ],
+  "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."
 }

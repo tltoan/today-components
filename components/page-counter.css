@@ -4,7 +4,8 @@ today-page-counter{display:block;width:100%;max-width:440px;box-sizing:border-bo
 .page-counter-minus{font:400 60px/1 Future,sans-serif}.page-counter-plus{font:900 44px/1 Future,sans-serif}
 .page-counter-row button:disabled{opacity:.3}.page-counter-row button[data-pressed=true]{transform:scale(.92)}.page-counter-row button:active{scale:1}
 .page-counter-digits{display:grid;place-items:center;width:156px;height:148px;flex:0 1 156px;min-width:0;isolation:isolate}
-.page-counter-number{grid-area:1/1;font:500 82px/1.2 Future,sans-serif;letter-spacing:-.04em;background:linear-gradient(90deg,#fafafa,#949494);background-clip:text;color:transparent}
+/* Future has overhanging digits; give the gradient paint box ink clearance. */
+.page-counter-number{grid-area:1/1;padding-inline:.12em;font:500 82px/1.4 Future,sans-serif;letter-spacing:-.04em;background:linear-gradient(90deg,#fafafa,#949494);background-clip:text;color:transparent}
 .page-counter-unit{font-size:16px;line-height:20px;margin-top:2px}
 .page-counter-marks{margin:20px 12px 0;height:48px}.page-counter-marks svg{display:block;width:100%;height:48px;stroke:none;overflow:visible}
 .page-counter-caption,.page-counter-overflow{font-size:12px;line-height:18px;color:#babac4}.page-counter-caption{margin:16px 0 0}.page-counter-overflow{margin:8px 0 0}.page-counter-overflow[hidden]{display:none}
