@@ -32,3 +32,5 @@ Only the host transition `sending` → `sent` plays the shared **Gradient Rise**
 `nudge-study.js` is the local demo host, with a 650 ms simulated response, failure/retry, availability fixtures, and revision guards against outdated completions after reset. It never sends a notification. `habit-party-study.js` remains a separate fixture host for the larger party context.
 
 The new component replaces the former `PartyNudge` class inside `habit-party.js`. Load the new file when adopting updated party specimens. All other party components remain unchanged.
+
+Message selection uses the shared selected fill and border, without an extra checkmark. Radio semantics remain exposed to assistive technology; the separate send confirmation retains its check.

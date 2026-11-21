@@ -35,3 +35,5 @@ Load `foundations/motion.css`, `components/controls.css`, `components/party-avat
 ## Product copy boundaries
 
 The privacy text and deletion consequences are **proposed product copy**, based on the user's brief, not verified backend behavior or legal terms. Before implementation confirm storage location, precise data sent to AI and processor/retention details, backup/recovery scope, export format, deletion scope/timing, and treatment of historical shared-party logs/photos. The no-sale promise comes from the approved proposal. Do not infer guarantees from these mockups. Terms, app version, notification authorization and phone number are fixtures. Original app code is unchanged.
+
+The identity panel shows the avatar, display name and Edit profile only; the redundant “Your profile” subtitle is omitted.
