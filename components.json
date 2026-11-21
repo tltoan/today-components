@@ -815,6 +815,110 @@
           "controls-study.css"
         ]
       }
+    },
+    {
+      "id": "trial-pickers",
+      "name": "Trial length picker proposals",
+      "preview": "pickers.html#trial-pickers",
+      "sourcePage": "source.html#trial-pickers",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure",
+        "controls",
+        "icons"
+      ],
+      "status": "Three interactive browser proposals; no direction selected or native integration.",
+      "figmaNodes": [
+        "299:6535",
+        "299:6537",
+        "541:12708"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-trial-picker",
+        "styles": [
+          "components/controls.css",
+          "components/pickers.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "assets": [
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf",
+          "assets/icons/Pencil.svg"
+        ],
+        "markup": "<today-trial-picker variant=\"cards\" value=\"21\"></today-trial-picker>",
+        "usage": "Read PICKERS.md for context, variants, bounds, draft/confirmation and host responsibilities.",
+        "events": [
+          "change: event.detail.days"
+        ],
+        "demoOnly": [
+          "picker-study.js",
+          "picker-study.css"
+        ]
+      }
+    },
+    {
+      "id": "time-pickers",
+      "name": "Reminder time picker proposals",
+      "preview": "pickers.html#time-pickers",
+      "sourcePage": "source.html#time-pickers",
+      "browserSource": [
+        "components/pickers.js",
+        "components/pickers.css",
+        "PICKERS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure",
+        "controls",
+        "icons"
+      ],
+      "status": "Three interactive browser proposals; no direction selected or native integration.",
+      "figmaNodes": [
+        "529:5326",
+        "529:5200",
+        "529:5411"
+      ],
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-time-picker",
+        "styles": [
+          "components/controls.css",
+          "components/pickers.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/pickers.js"
+        ],
+        "assets": [
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf",
+          "assets/icons/Pencil.svg"
+        ],
+        "markup": "<today-time-picker variant=\"inline\" value=\"21:30\"></today-time-picker>",
+        "usage": "Read PICKERS.md for context, variants, bounds, draft/confirmation and host responsibilities.",
+        "events": [
+          "change: event.detail.value (HH:mm), only on confirmation"
+        ],
+        "demoOnly": [
+          "picker-study.js",
+          "picker-study.css"
+        ]
+      }
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."

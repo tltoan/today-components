@@ -39,6 +39,8 @@ This is the working Today component library. This README and AGENTS.md contain t
 | Staggered bar chart | `components/staggered-bar-chart.js`, `components/staggered-bar-chart.css`, `native/StaggeredBarChart.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `bar-chart.html` preview; replay, stagger pacing, recorded zero and missing-log examples. Native app integration pending. |
 | App icons | `components/icons.js`, `assets/icons/manifest.json` | Ten Figma icons plus two original counter SVGs, exact source hashes and native dimensions. Browser reusable. |
 | Buttons & small controls | `components/controls.js`, `components/controls.css`, `CONTROLS.md` | Twelve button variants, switches, isolated +/− and bounded hold stepper. Interactive browser collection and documented APIs. |
+| Trial length picker | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Three browser proposals: week cards, day ruler, quiet default. Presets/custom entry, snap, bounds and reduced motion. 21-day default; alternatives remain proposals. |
+| Reminder time picker | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Three browser proposals: inline clock, wheels, dial. Confirm/cancel, exact minutes, AM/PM and retained time when off. No native integration. |
 | New habit entry (retained source) | `components/habit-editor.js`, `components/habit-editor.css` | Earlier Figma `121:12444` entry implementation retained. Latest user request disconnects it from +; no longer mounted in the library. Generation/setup integration pending. |
 
 ## Shared dropdown contract
@@ -319,3 +321,7 @@ Reusable `today-icon`, `today-button`, `today-switch` and `today-stepper` live i
 Verified original SVG files and rendered native-size geometry, desktop/390-point responsive composition, 375-point portrait and 844-point landscape without horizontal overflow, all new button targets at least 44 points (fractional rounding), keyboard activation, save feedback, standalone counting, held stepping without a release increment, minimum/maximum disabled directions, switch state under reduced motion, choice exclusivity and preset/weekday synchronization. JavaScript syntax and HTML/manifest local paths pass. Native Dynamic Type and SwiftUI integration are not part of this browser change.
 
 Standalone reuse check: loaded only controls.css, icons.js and controls.js in a temporary minimal page. At 375 points, the 1,000,000 maximum and a long button label fit without overflow; the increase action disabled correctly. The temporary fixture was removed after verification.
+
+## Picker proposals
+
+[Compare trial and time pickers](pickers.html). See [PICKERS.md](PICKERS.md) for the Figma context, APIs, motion, dependencies and the desktop/mobile/keyboard/reduced-motion checks performed on November 21, 2026. These alternatives have not been selected as product standards.

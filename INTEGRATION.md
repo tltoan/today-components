@@ -104,3 +104,7 @@ Preserve the 16-point Home Screen insets and 44-point actions when translating t
 ## Icons, buttons and small controls
 
 Read CONTROLS.md, then load components/controls.css, components/icons.js and components/controls.js. Use today-icon, today-button, today-switch or today-stepper directly. The asset manifest records every SVG path and source hash, and controls.html demonstrates their states. No gallery script is needed for reuse. The host handles today-activate/change events and owns navigation and persistence.
+
+## Trial and reminder picker proposals
+
+Read [PICKERS.md](PICKERS.md) before reusing `today-trial-picker` or `today-time-picker`. Load `foundations/disclosure.js`, `components/icons.js`, `components/controls.js`, then `components/pickers.js`; load controls/pickers CSS with shared motion CSS last. The source guide lists required fonts/assets and all attributes/events. Do not import `picker-study.*` into the product: it supplies comparison fixtures and simulated Continue actions. Only time confirmation emits a committed value; the host owns actual saving, notification permissions and delivery. No variation has been selected as the standard yet.

@@ -1,0 +1,26 @@
+.pk-collection-intro{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:32px}
+.pk-collection-intro>p{max-width:540px;font-size:15px;line-height:1.6;color:#babac4}
+.pk-collection-intro>span{font-size:11px;white-space:nowrap;color:#a995bf;padding-top:5px}
+.pk-studies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;align-items:start}
+.pk-study{min-width:0}
+.pk-study-title{display:flex;gap:12px;align-items:baseline;margin:0 4px 18px}
+.pk-study-title>span{font-size:12px;color:#bdaed9}.pk-study-title h3{font-size:18px;letter-spacing:-.02em;font-weight:500}
+.pk-context{padding:24px 20px 18px;border:1px solid #ffffff0d;border-radius:30px;background:linear-gradient(180deg,transparent,#050506 260px),linear-gradient(110deg,#5e91f612,#a781f014 55%,#ffb2760b),#050506;display:flex;flex-direction:column;min-height:655px}
+.pk-context-header{display:flex;align-items:center;gap:12px;color:#ded9e5;font-size:13px;margin-bottom:18px}
+.pk-context today-step-progress{margin-bottom:18px}.pk-context .step-top{margin-bottom:8px}.pk-context .step-caption{font-size:12px;color:#babac4}.pk-context .step-count{font-size:11px}.pk-context .sp-pill .step-visual{justify-content:flex-start}
+.pk-context-heading{margin-bottom:20px}.pk-context-heading h4{margin:0;font-size:25px;line-height:1.22;letter-spacing:-.045em;font-weight:500;color:#f0edf4}.pk-context-heading p{font-size:13px;line-height:1.5;color:#babac4;margin-top:10px}
+.pk-context-footer{margin-top:auto;padding-top:32px}.pk-context-feedback{font-size:11px;line-height:1.5;text-align:center;color:#b6a7c6;min-height:34px;margin-top:12px}
+.pk-study-note{font-size:13px;line-height:1.65;color:#b4aabe;margin:18px 4px 0;max-width:350px}
+.pk-study-scope{font-size:12px;line-height:1.6;color:#a99fb4;border-top:1px solid #ffffff0c;margin-top:32px;padding-top:18px;max-width:800px}
+.pk-reminder-toggle{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:-6px 0 12px;font-size:14px}
+.pk-reading-days{display:flex;justify-content:space-between;gap:4px;margin-top:14px;padding:0 4px}
+.pk-reading-days span{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:11px;color:#817988}
+.pk-reading-days [data-scheduled]{color:#d8cce6;background:#bdaed914}
+.pk-notification-note{font-size:11px;line-height:1.5;color:#a99fb4;text-align:center;margin-top:12px}
+[data-component=time-pickers] .pk-context{min-height:0}
+[data-component=time-pickers] .pk-context-footer{padding-top:24px}
+.picker-only main{max-width:1190px}
+@media(max-width:980px){.pk-studies{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 22px}.pk-collection-intro{display:block}.pk-collection-intro>span{display:block;margin-top:12px}}
+@media(max-width:640px){.pk-studies{grid-template-columns:1fr;gap:36px}.pk-context{padding:24px 20px 18px;min-height:610px;max-width:390px;width:100%;margin:auto}.pk-study-title,.pk-study-note{max-width:390px;margin-inline:auto}.pk-study-title{margin-bottom:16px}.pk-context-heading h4{margin:0;font-size:27px}.pk-collection-intro>p{font-size:14px}.pk-study-note{margin-top:16px;padding-inline:4px}[data-component=time-pickers] .pk-context{min-height:0}.pk-context-footer{padding-top:28px}.pk-collection-intro{margin-bottom:28px}.pk-study-scope{margin-top:24px}}
+
+.picker-only main{width:min(1160px,calc(100% - 40px))}.picker-only .library-component+.library-component{margin-top:72px}
