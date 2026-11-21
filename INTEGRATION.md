@@ -114,3 +114,7 @@ Read [PICKERS.md](PICKERS.md) before reusing `today-trial-picker` or `today-time
 `ONBOARDING.md` maps nine paired layouts to the approved source frames and records the two-week/four-step flow. Load its manifest dependencies; omit onboarding-study.js from production because it is only the comparison controller. Landing and Features remain shared baselines. No new backend or native integration is implied.
 
 Use `today-artwork` and the original files in assets/artwork, with dimensions/hashes in the asset manifest. Read ARTWORK.md for decorative versus labelled use. `today-slide-log` is now independent; read SLIDE-TO-LOG.md and import components/slide-to-log.js/css, not app.js.
+
+## Reusable Home cards
+
+`today-habit-card` is shared by Home and the standalone [card gallery](habit-cards.html), with hero/compact layouts. Read HABIT-CARDS.md and the ordered manifest dependencies. `today-target-feedback` supplies the selected Gradient Rise; `today-streak-badge` displays a host-supplied overall logging streak outside the cards. Handle target-reached for native success haptics after save confirmation; browser visuals are not native haptics.

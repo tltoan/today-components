@@ -47,7 +47,7 @@ This is the working Today component library. This README and AGENTS.md contain t
 | Home with multiple habits | `components/home-overview.*`, `HOME.md` | Proposed one/three/six/day-off composition; fixed nav, scrolling list, local logging/failure states. Browser only. |
 | Onboarding gradient | `components/onboarding-gradient.*` | Persistent dark wash; supplied 65 ms delay/640 ms travel; reduced-motion immediate. |
 | Onboarding | `components/onboarding.js`, `components/onboarding.css`, `ONBOARDING.md` | Nine screens × two comparisons, plus the selected hybrid flow; existing landing and approved Features shared unchanged. Reuses component primitives, local drafts and approved four-step/two-week flow. Browser only. |
-| Artwork | `components/artwork.js`, `components/artwork.css`, `assets/artwork/manifest.json` | 21 original assets, intrinsic geometry and source hashes; standalone renderer and downloads. |
+| Artwork | `components/artwork.js`, `components/artwork.css`, `assets/artwork/manifest.json` | 20 active original assets, intrinsic geometry and source hashes; standalone renderer and downloads. |
 | Picker pieces | `components/pickers.js`, `components/pickers.css`, `PICKERS.md` | Reusable day ruler, custom day input, week cards and AM/PM pill. Existing switch remains in controls. |
 
 ## Shared dropdown contract
@@ -335,7 +335,7 @@ Day ruler + custom entry is selected; week cards, inline clock, soft wheels, AM/
 
 [Onboarding comparisons](onboarding.html) contains two layouts for nine approved screens, plus the existing landing and unchanged Features composition. Both directions use the same approved content and components. Selected flow follows the user’s per-screen choices; Compare A/B keeps the alternatives available. The four-step/two-week flow is deliberately separate from the newer seven-step/21-day picker fixture. See [ONBOARDING.md](ONBOARDING.md) for source nodes, events and prototype boundaries.
 
-[Artwork](artwork.html) provides 21 original assets and download links. [Slide to log](slide-to-log.html) now has a focused standalone preview and an independent component.
+[Artwork](artwork.html) provides 20 active original assets and download links. [Slide to log](slide-to-log.html) now has a focused standalone preview and an independent component.
 
 ## November 21 validation
 
@@ -348,3 +348,15 @@ Standalone checks covered ruler endpoints and live value changes, invalid/custom
 [Home with more habits](home.html) extends the selected illustrated Home into an interactive, scrollable daily list. [HOME.md](HOME.md) records the PRD distinctions, model and event API. The onboarding gallery now uses one normalized darker background, centered Tracking artwork, and a persistent gradient transition. Landing and Features stay unchanged. Skip for now and its Home bypass were removed at the user's request. See [ONBOARDING.md](ONBOARDING.md) for current behavior; older verification notes above describe earlier revisions.
 
 November 21 follow-up checks: changed JavaScript parsed with `node --check`; manifest dependencies and local HTML/source links validated. Desktop and 390 × 844 browser checks covered Home list scrolling, keyboard logging/focus, partial/target-met states, failed saves, future/day-off states, centered Tracking artwork, equal onboarding paint, reduced gradient motion, schedule preset/custom selection, ruler centering and time editor confirm/cancel/12 AM conversion. The streak widget measured 338 × 158 without internal overflow. Native haptics, VoiceOver and device keyboard behavior remain unverified.
+
+## Home card extraction and feedback — November 21
+
+| Component | Source | Status and states |
+| --- | --- | --- |
+| Habit card | components/habit-card.js and .css | Shared by Home and standalone gallery; hero/compact, no log, partial, met, check/undo, pending, error, future. |
+| Target feedback | components/target-feedback.js and .css | Gradient Rise selected, stronger persistent fill; Bloom/Halo retained comparisons; reduced motion still. |
+| Overall streak badge | components/streak-badge.js and .css | Warm Ember with a host-supplied number; proposed placement beside Your day. |
+
+[Individual cards and comparisons](habit-cards.html) also appear under [Streaks](index.html#streak-cards). [API contract](HABIT-CARDS.md). Home now says `1/6 logged` and `Logged`; Fishing is removed from the active artwork catalog, with original bytes archived. Focused-page headers center the title and toolbar and remove the source-link top offset. [Habit parties](HABIT-PARTIES.md) is a proposed component/state map, not an implemented feature.
+
+Validation for this batch: changed JavaScript parsed; all 37 manifest entries and source anchors resolved, and 20 active artwork hashes matched. Browser checks at desktop and a verified 390 × 844 iframe covered hero/compact layout, keyboard logging, partial count, one target-crossing event, continued logging above target without another event, failed-save preservation, future-day actions hidden, six-card scrolling above the nav, and reduced-motion still paint. The focused card preview reported no console errors. Native haptics and app integration were not tested.

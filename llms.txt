@@ -59,3 +59,7 @@ Browser previews use synthetic data and keep state in the page session. Native f
 - Onboarding gradient: [source](https://tltoan.github.io/today-components/components/onboarding-gradient.js), [paint/motion](https://tltoan.github.io/today-components/components/onboarding-gradient.css). Persistent top/bottom wash with 65 ms delay and 640 ms supplied easing. All onboarding backgrounds normalized except Landing/Features; no Skip for now.
 
 - Choose a time: [standalone preview](https://tltoan.github.io/today-components/time-editor.html), `<today-time-editor>` in [pickers.js](https://tltoan.github.io/today-components/components/pickers.js). Confirmed HH:mm, separate draft, change/picker-cancel events. The reminder wheel picker consumes it too.
+
+## Home cards and completion
+- [Habit cards](https://tltoan.github.io/today-components/HABIT-CARDS.md): reusable today-habit-card, today-target-feedback and today-streak-badge. Gradient Rise is selected; Home/streak composition uses a private overall logging streak. Read components.json for ordered dependencies.
+- [Habit parties proposal](https://tltoan.github.io/today-components/HABIT-PARTIES.md): component/state map only, not implemented sharing or an approved PRD.

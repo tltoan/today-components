@@ -1,0 +1,10 @@
+today-target-feedback{display:block;position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:0}
+today-target-feedback .tf-paint,today-target-feedback .tf-rim{position:absolute;inset:0;border-radius:inherit;opacity:0}
+today-target-feedback .tf-paint{background:radial-gradient(ellipse at 80% 60%,#b6a0dc65,transparent 75%);transform-origin:80% 60%}
+today-target-feedback .tf-rim{border:1px solid #cab5ec;box-shadow:inset 0 0 22px #b6a0dc18}
+today-target-feedback[met] .tf-paint{opacity:.45}today-target-feedback[met] .tf-rim{opacity:.32}
+today-target-feedback[variant=wash] .tf-paint{background:linear-gradient(8deg,#5689e499,#ae8bea80 50%,#e4a18355 82%,transparent)}
+today-target-feedback[variant=wash][met] .tf-paint{opacity:.72}
+today-target-feedback[variant=halo] .tf-paint{background:radial-gradient(ellipse at 50% 100%,#bfa4e364,transparent 85%)}
+today-target-feedback[variant=halo] .tf-rim{box-shadow:inset 0 0 18px #c7b0e550;border-color:#cfb9e9}
+today-target-feedback[variant=halo][met] .tf-paint{opacity:.3}

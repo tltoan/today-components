@@ -300,21 +300,6 @@
       "key": "water-droplet",
       "group": "habit",
       "label": "Water Droplet"
-    },
-    {
-      "name": "Fishing",
-      "nodeId": "321:831",
-      "sourcePath": "Today/Resources/Assets.xcassets/Fishing.imageset/Fishing.png",
-      "sha256": "0f9f029ce54945213a22d3aa5175dcadf73cea20accc72c0caed5d6e9a9de8c1",
-      "width": 570,
-      "height": 321,
-      "bytes": 9988,
-      "matchesFigma": false,
-      "note": "Figma specimen has a label only; original bundled app asset supplied here.",
-      "asset": "assets/artwork/Fishing.png",
-      "key": "fishing",
-      "group": "habit",
-      "label": "Fishing"
     }
   ]
 }

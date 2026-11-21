@@ -1106,7 +1106,7 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Original app assets, 19 matching Figma exports plus 2 app assets for label-only Figma specimens.",
+      "status": "20 active original assets: 19 Figma matches plus the app Water Droplet. Fishing removed from catalog.",
       "figmaNodes": [
         "321:646",
         "321:564"
@@ -1140,8 +1140,7 @@
           "assets/artwork/FeatureFitness.svg",
           "assets/artwork/FeatureTracking.svg",
           "assets/artwork/FeatureReview.svg",
-          "assets/artwork/WaterDroplet.svg",
-          "assets/artwork/Fishing.png"
+          "assets/artwork/WaterDroplet.svg"
         ],
         "markup": "<today-artwork name=\"open-book\"></today-artwork>",
         "usage": "Original geometry preserved; decorative by default, optional accessible label. See ARTWORK.md.",
@@ -1307,7 +1306,9 @@
         "icons",
         "artwork",
         "navigation",
-        "widgets"
+        "widgets",
+        "habit-card",
+        "streak-badge"
       ],
       "status": "Browser proposal extending the selected Home. One, three, six and day-off fixtures; no real persistence.",
       "browserIntegration": {
@@ -1318,6 +1319,9 @@
           "components/artwork.css",
           "components/bottom-nav.css",
           "components/habit-widget.css",
+          "components/target-feedback.css",
+          "components/habit-card.css",
+          "components/streak-badge.css",
           "components/home-overview.css"
         ],
         "scripts": [
@@ -1327,6 +1331,9 @@
           "components/bottom-nav.js",
           "components/artwork.js",
           "components/widget-primitives.js",
+          "components/target-feedback.js",
+          "components/habit-card.js",
+          "components/streak-badge.js",
           "components/home-overview.js"
         ],
         "markup": "<today-home-overview></today-home-overview>",
@@ -1334,7 +1341,8 @@
           "daychange",
           "logrequest",
           "destination",
-          "add"
+          "add",
+          "target-reached"
         ],
         "usage": "Assign .model with selectedDate, days, eligible habits and confirmed amounts; host owns save/eligibility/timezone. See HOME.md.",
         "demoOnly": [
@@ -1382,6 +1390,131 @@
         "usage": "value is confirmed HH:mm. Wheel changes stay a draft. Use this time confirms; Cancel/Escape restores. Host owns presentation/persistence. See PICKERS.md.",
         "demoOnly": [
           "time-editor-study.js"
+        ]
+      }
+    },
+    {
+      "id": "habit-card",
+      "name": "Illustrated and compact habit cards",
+      "preview": "habit-cards.html",
+      "sourcePage": "source.html#habit-card",
+      "browserSource": [
+        "components/icons.js",
+        "components/controls.js",
+        "components/artwork.js",
+        "components/widget-primitives.js",
+        "components/target-feedback.js",
+        "components/habit-card.js",
+        "components/controls.css",
+        "components/artwork.css",
+        "components/habit-widget.css",
+        "components/target-feedback.css",
+        "components/habit-card.css",
+        "HABIT-CARDS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "icons",
+        "artwork",
+        "widgets",
+        "target-feedback"
+      ],
+      "status": "Reusable browser component. Gradient Rise selected; streak placement is a proposal.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-habit-card",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "components/habit-widget.css",
+          "components/target-feedback.css",
+          "components/habit-card.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/widget-primitives.js",
+          "components/target-feedback.js",
+          "components/habit-card.js"
+        ],
+        "assets": [],
+        "markup": "<today-habit-card layout=\"compact\"></today-habit-card>",
+        "events": [
+          "logrequest",
+          "target-reached"
+        ],
+        "usage": "Assign .model with confirmed amount and current/date flags; host owns saving. See HABIT-CARDS.md.",
+        "demoOnly": [
+          "habit-card-study.js",
+          "habit-card-study.css"
+        ]
+      }
+    },
+    {
+      "id": "target-feedback",
+      "name": "Gradient Rise target feedback",
+      "preview": "habit-cards.html#target-feedback",
+      "sourcePage": "source.html#target-feedback",
+      "browserSource": [
+        "components/target-feedback.js",
+        "components/target-feedback.css",
+        "HABIT-CARDS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser component. Gradient Rise selected; streak placement is a proposal.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-target-feedback",
+        "styles": [
+          "components/target-feedback.css"
+        ],
+        "scripts": [
+          "components/target-feedback.js"
+        ],
+        "assets": [],
+        "markup": "<today-target-feedback variant=\"wash\" met></today-target-feedback>",
+        "events": [],
+        "usage": "Selected Gradient Rise; position inside a card, set met, call celebrate only for a confirmed crossing. See HABIT-CARDS.md.",
+        "demoOnly": [
+          "habit-card-study.js",
+          "habit-card-study.css"
+        ]
+      }
+    },
+    {
+      "id": "streak-badge",
+      "name": "Overall logging streak badge",
+      "preview": "habit-cards.html",
+      "sourcePage": "source.html#streak-badge",
+      "browserSource": [
+        "components/streak-badge.js",
+        "components/streak-badge.css",
+        "HABIT-CARDS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser component. Gradient Rise selected; streak placement is a proposal.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-streak-badge",
+        "styles": [
+          "components/streak-badge.css"
+        ],
+        "scripts": [
+          "components/streak-badge.js"
+        ],
+        "assets": [
+          "assets/streaks/ember.svg"
+        ],
+        "markup": "<today-streak-badge days=\"6\"></today-streak-badge>",
+        "events": [],
+        "usage": "Host-supplied overall streak. Place beside Your day, outside individual cards. No credit calculation.",
+        "demoOnly": [
+          "habit-card-study.js",
+          "habit-card-study.css"
         ]
       }
     }

@@ -13,12 +13,8 @@
         const day = e.target.closest('[data-home-day]');
         if (day) this.emit('daychange', {date:day.dataset.homeDay});
       }, {signal});
-      this.addEventListener('today-activate', e => {
-        const action = e.target.closest('[data-home-log]');
-        if (action) this.emit('logrequest', {id:action.dataset.homeLog, date:this._model.selectedDate});
-      }, {signal});
       this.addEventListener('tabchange', e => this.emit('destination', {tab:e.detail.active}), {signal});
-      this.innerHTML = `<div class="ho-header"><div><strong>today.</strong><p>what will you do?</p></div><span class="ho-avatar" aria-label="Profile AT">AT</span></div><div class="ho-week" role="group" aria-label="Choose a day"></div><div class="ho-body"><div class="ho-day-heading"><h3></h3><p class="ho-report-count"></p></div><div class="ho-list" tabindex="0" role="region" aria-label="Habits for the selected day"></div></div><div class="ho-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div><p class="ho-announcement" role="status"></p>`;
+      this.innerHTML = `<div class="ho-header"><div><strong>today.</strong><p>what will you do?</p></div><span class="ho-avatar" aria-label="Profile AT">AT</span></div><div class="ho-week" role="group" aria-label="Choose a day"></div><div class="ho-body"><div class="ho-day-heading"><div><h3></h3><p class="ho-report-count"></p></div><today-streak-badge hidden></today-streak-badge></div><div class="ho-list" tabindex="0" role="region" aria-label="Habits for the selected day"></div></div><div class="ho-nav"><today-bottom-nav variant="cradle" active="home"></today-bottom-nav></div><p class="ho-announcement" role="status"></p>`;
       this.render();
     }
     disconnectedCallback() { this._connected = false; this._abort?.abort(); }
@@ -48,7 +44,7 @@
       });
       this.querySelector('.ho-day-heading h3').textContent = day.today ? 'Your day' : day.label;
       const reported = m.habits.filter(h => h.amount !== null).length;
-      this.querySelector('.ho-report-count').textContent = !m.habits.length ? 'Nothing scheduled' : day.future ? `${m.habits.length} scheduled` : `${reported} of ${m.habits.length} reported`;
+      this.querySelector('.ho-report-count').textContent = !m.habits.length ? 'Nothing scheduled' : day.future ? `${m.habits.length} scheduled` : `${reported}/${m.habits.length} logged`;
       this.toggleAttribute('single', m.habits.length === 1);
       const focused = document.activeElement?.closest('[data-home-log]')?.dataset.homeLog;
       if(focused)this._focusAfterSave=focused;
@@ -58,25 +54,13 @@
       for (const card of [...list.querySelectorAll('[data-habit]')]) if (!m.habits.some(h => h.id === card.dataset.habit)) card.remove();
       list.querySelector('.ho-empty')?.remove();
       if (!m.habits.length) list.innerHTML = `<div class="ho-empty"><today-artwork name="meditation"></today-artwork><h4>A little room to breathe.</h4><p>No habits are due on this day.<br>Your other days are still here.</p></div>`;
+      const badge=this.querySelector('.ho-day-heading today-streak-badge');
+      badge.hidden=!(m.streak?.days>0);badge.setAttribute('days',m.streak?.days||0);
       for (const h of m.habits) {
         let card = [...list.children].find(c => c.dataset.habit === h.id);
-        const fingerprint = JSON.stringify(h) + day.future;
-        if (card?.dataset.value === fingerprint) continue;
-        const updated = Boolean(card);
-        if (!card) { card = document.createElement('article'); card.className = 'ho-habit'; card.dataset.habit = h.id; list.append(card); }
-        const oldAmount = card.dataset.amount;
-        const water = card.querySelector('.tw-water');
-        card.dataset.value = fingerprint; card.dataset.amount = String(h.amount);
-        const hasReport = h.amount !== null;
-        const met = hasReport && (h.kind === 'check' ? h.amount > 0 : h.kind !== 'limit' && h.amount >= h.target);
-        const amount = hasReport ? h.kind === 'check' ? h.amount > 0 ? 'Logged' : 'None today' : `${Number(h.amount).toLocaleString('en-US')} ${h.unit}` : 'No log yet';
-        const target = h.kind === 'check' ? 'Check it off' : `${h.kind === 'limit' ? 'Limit' : 'Target'} · ${Number(h.target).toLocaleString('en-US')} ${h.unit}`;
-        const label = h.kind === 'check' ? h.amount > 0 ? 'Undo' : 'Log' : `+ ${h.increment} ${h.unit}`;
-        card.innerHTML = `<div class="ho-habit-top"><div><h4>${esc(h.name)}</h4><p>${esc(target)}</p></div>${h.artwork==='water-droplet'?`<span class="ho-water-art">${TodayWidgets.art('water')}</span>`:`<today-artwork name="${esc(h.artwork)}"></today-artwork>`}</div><div class="ho-habit-bottom"><div class="ho-habit-result"><strong>${esc(day.future ? 'Planned' : amount)}</strong><span>${day.future ? esc(h.cue || 'On your schedule') : met ? 'Target met' : hasReport ? h.kind === 'limit' ? 'Reported · keep logging' : 'Reported' : esc(h.cue || 'Whenever it fits')}</span></div>${day.future ? '' : `<today-button variant="secondary" label="${esc(h.pending ? 'Saving…' : label)}" accessible-label="${esc(h.pending ? `Saving ${h.name}` : h.kind === 'check' ? `${label} ${h.name}` : `Add ${h.increment} ${h.unit} to ${h.name}`)}" data-home-log="${esc(h.id)}" ${h.pending?'disabled':''}></today-button>`}</div>${h.error ? `<p class="ho-error" role="alert">${esc(h.error)}</p>` : ''}`;
-        if(h.artwork==='water-droplet'){if(water)card.querySelector('.ho-water-art').replaceChildren(water);TodayWidgets.setWaterFill(card.querySelector('.tw-water'),(h.amount||0)/h.target);}
-        if (updated && oldAmount !== String(h.amount) && !reduced()) {
-          card.querySelector('.ho-habit-result').animate([{opacity:.35,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:320,easing:'cubic-bezier(.22,.8,.24,1)'});
-        }
+        if (!card) { card = document.createElement('today-habit-card'); card.dataset.habit = h.id; list.append(card); }
+        card.setAttribute('layout',m.habits.length===1?'hero':'compact');
+        card.model={...h,date:m.selectedDate,future:!!day.future,current:!!day.today,feedback:m.feedback||'wash'};
       }
       list.scrollTop = scroll;
       if (this._focusAfterSave && !changedDay) {
