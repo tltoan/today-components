@@ -21,7 +21,7 @@ Agents without a shell can read https://tltoan.github.io/today-components/llms.t
 3. Use the target page's real data and event handlers. Keep sample data separate. Do not load `app.js`, `component-studies.js`, `welcome-study.js`, or `navigation-study.js` as generic component dependencies: they wire the gallery demonstrations to its markup.
 4. Verify the result at the target sizes, with keyboard input and reduced motion. Record the library commit used so later changes can be compared deliberately.
 
-The reading schedule, slide-to-log, and checklist currently share gallery code in `app.js` and `style.css`. They require extracting the relevant markup and state; they are not isolated imports. The agenda provides a reusable scrolling controller plus a gallery fixture. The manifest states this explicitly.
+The reading schedule and checklist currently share gallery code in `app.js` and `style.css`. They require extracting the relevant markup and state; they are not isolated imports. The agenda provides a reusable scrolling controller plus a gallery fixture. The manifest states this explicitly.
 
 ## Example: web page counter
 
@@ -128,3 +128,5 @@ Use `today-artwork` and the original files in assets/artwork, with dimensions/ha
 ## Profile and nudge proposals
 
 Use the `profile`, `settings-row`, and updated `party-nudge` manifest entries. See PROFILE.md and NUDGES.md for dependencies and host events. New party nudge loading requires `components/party-nudge.js` separately from `habit-party.js`. Do not copy gallery timers or mocked account confirmations into production.
+
+Profile defaults to the selected C expandable groups with B’s identity panel and no Haptics setting. Party nudges require the shared slide-to-log and target-feedback sources in addition to avatars; see the updated manifest. `mode="send"` emits a request rather than a log change. Confirmed sends alone play Gradient Rise.

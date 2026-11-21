@@ -7,3 +7,5 @@ today-slide-log *{box-sizing:border-box}.tsl-track{--tsl-travel:207px;--tsl-prog
 .tsl-alternative{min-height:44px;min-width:100px;margin:4px 0 0;padding:0 12px;font:400 12px/1.4 Future,sans-serif;color:#aaa0b7;background:transparent;border:0;border-radius:12px;cursor:pointer}.tsl-alternative:hover{color:#eee6f7}.tsl-handle:focus-visible,.tsl-alternative:focus-visible{outline:2px solid #bdadd9;outline-offset:2px}.tsl-handle:focus-visible{outline-offset:-4px;outline-color:#292433}
 today-slide-log[disabled]{opacity:.45}.tsl-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 html[data-reduced] today-slide-log *{transition:none!important}@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) today-slide-log *{transition:none!important}}
+
+today-slide-log[mode=send] .tsl-track.submitted .tsl-success{opacity:1}today-slide-log[mode=send] .tsl-track.pending .tsl-handle svg{opacity:.45}today-slide-log[mode=send] .tsl-handle[aria-disabled=true]{cursor:default}

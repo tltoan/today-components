@@ -139,9 +139,10 @@
         ],
         "markup": "<today-slide-log label=\"evening stretch\"></today-slide-log>",
         "events": [
-          "change: event.detail.logged"
+          "change: event.detail.logged (default log mode)",
+          "slide-request (mode=\"send\")"
         ],
-        "usage": "Drag/release or tap/keyboard to log; Undo, disabled and cancellation. Host owns save/rollback. See SLIDE-TO-LOG.md.",
+        "usage": "Drag/release or tap/keyboard to log; Undo, disabled and cancellation. Host owns save/rollback. See SLIDE-TO-LOG.md. Optional controlled mode=\"send\" for nudge requests; no log event or Undo in send mode.",
         "demoOnly": [
           "slide-study.js"
         ]
@@ -1673,7 +1674,9 @@
       ],
       "swiftSource": [],
       "dependencies": [
-        "profile-avatar"
+        "profile-avatar",
+        "slide-to-log",
+        "target-feedback"
       ],
       "status": "Controlled browser proposals. No notifications sent; host owns eligibility and confirmations.",
       "browserIntegration": {
@@ -1681,10 +1684,14 @@
         "tag": "today-party-nudge",
         "scripts": [
           "components/party-avatars.js",
+          "components/slide-to-log.js",
+          "components/target-feedback.js",
           "components/party-nudge.js"
         ],
         "styles": [
           "components/party-avatars.css",
+          "components/slide-to-log.css",
+          "components/target-feedback.css",
           "components/party-nudge.css"
         ],
         "markup": "<today-party-nudge variant=\"card\"></today-party-nudge>",
@@ -1692,7 +1699,7 @@
           "party-request",
           "nudge-confirmed"
         ],
-        "usage": "Set model {id,name,person,window,state}; variants card/pulse/compact. Host confirms sending/sent/error and availability. See NUDGES.md.",
+        "usage": "Set model {id,name,person,window,state}; variants card/pulse/compact use slide-to-send. Immediately latches sending before party-request. Host confirms sent/error and eligibility; confirmed success uses Gradient Rise. See NUDGES.md.",
         "demoOnly": [
           "nudge-study.js",
           "nudge-study.css"
@@ -2076,7 +2083,7 @@
     },
     {
       "id": "profile",
-      "name": "Profile \u2014 three layouts",
+      "name": "Profile \u2014 selected expandable groups + identity card",
       "preview": "profile.html",
       "sourcePage": "source.html#profile",
       "browserSource": [
@@ -2106,11 +2113,11 @@
           "components/party-avatars.css",
           "components/profile.css"
         ],
-        "markup": "<today-profile variant=\"a\"></today-profile>",
+        "markup": "<today-profile variant=\"c\"></today-profile>",
         "events": [
           "profile-request"
         ],
-        "usage": "See PROFILE.md for copied model, request events, scope boundaries and fixtures.",
+        "usage": "Selected C expandable groups + B identity panel. No Haptics setting. See PROFILE.md for copied model, request events, scope boundaries and fixtures.",
         "demoOnly": [
           "profile-study.js",
           "profile-study.css"

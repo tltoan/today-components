@@ -19,3 +19,7 @@ Slide to log is now an independent browser custom element. The original library 
 Drag to the full end and release to log. A partial drag returns. Pointer cancellation, lost capture, leaving the vertical tolerance, Escape, blur, backgrounding and resizing cancel the gesture. A native button provides Enter/Space activation and a separate 44 px tap alternative. After logging, Undo remains available and keyboard focus moves to it if the handle held focus.
 
 Motion retains a 340 ms return/reveal and 170 ms label transition; reduced motion settles immediately. The host owns real persistence and failures: listen for change, save, and restore `.logged` on failure. This demo stores nothing beyond the page. It is not a WidgetKit gesture implementation or a new SwiftUI port.
+
+## Controlled slide-to-send reuse
+
+Nudges reuse this control with `mode="send"`, `action-label="Send Reading tonight? to Maya"`, and host state `idle|pending|complete|error|unavailable`. Completing a full drag or using the tap/keyboard alternative immediately latches `pending` and emits `slide-request` once. It does not change `logged` or emit a log `change`. Set `complete` only after confirmation; `error` returns to the start for retry. `complete` has no Undo action. Labels are Slide to send / Sending… / Nudge sent / Slide to retry / Unavailable. The parent owns the live status announcement and any success paint. Default log mode and its existing Undo behavior are unchanged.

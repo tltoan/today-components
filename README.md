@@ -404,10 +404,12 @@ Checks for this addition: eight changed/new JavaScript files pass syntax checks;
 
 ## Profile and nudges · November 21
 
-Profile A/B/C proposals are in `profile.html`, with reusable `components/profile.js` / `.css`, shared gradient avatars, grouped settings rows, notification/quiet-hour drafts and separate account confirmations. No account or backend integration. See PROFILE.md.
+The selected C expandable groups with B’s identity card is in `profile.html`; earlier A/B layouts remain behind a comparison disclosure. The Haptics preference is removed. It comes with reusable `components/profile.js` / `.css`, shared gradient avatars, grouped settings rows, notification/quiet-hour drafts and separate account confirmations. No account or backend integration. See PROFILE.md.
 
-`nudges.html` compares Message card, Avatar pulse and Compact action. `components/party-nudge.*` now owns the nudge element; the host supplies available/sending/sent/error/blocked states. Confirmation motion is once-only and reduced-motion aware. No actual notification. See NUDGES.md.
+`nudges.html` compares Message card, Avatar pulse and Compact action. `components/party-nudge.*` now owns the nudge element; the host supplies available/sending/sent/error/blocked states. All three nudge actions reuse slide-to-send, with Gradient Rise only on confirmed success and a retreat on reset. Confirmation motion is once-only and reduced-motion aware. No actual notification. See NUDGES.md.
 
 One plan card and Weekly view are the primary selected previews; older layouts stay behind shared comparison disclosures. Plan schedule labels use “Schedule:”.
 
 Validation for this addition: changed JavaScript syntax, source/asset paths, desktop rendering, 390 px Profile and 375 px nudge previews without horizontal overflow, name-save propagation, notification denied state, quiet-hour disclosure/save, account confirmation routing, keyboard message selection, send failure/retry, blocked state, reduced motion, and main-library mounting. No native simulator or backend verification is implied.
+
+November 21 slider/profile refinement checks: changed JavaScript passes syntax checks and all 52 manifest entries resolve. Browser checks covered partial drag cancellation, full slide pending/sent, tap send failure and keyboard retry, blocked nudges, reduced-motion still confirmation, gradient retreat on reset, existing log/Undo behavior, selected profile identity editing, expandable groups, mobile Account navigation, and removal of Haptics from all three layouts. Profile at 390 × 844 and nudges at 375 × 844 had no horizontal overflow. Main library mounted five nudge sliders and the selected C profile without console errors. Native haptics, account operations and real notification delivery remain outside this browser prototype.
