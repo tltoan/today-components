@@ -1,0 +1,10 @@
+today-loader{display:block;width:240px;height:auto;aspect-ratio:1;flex:none;max-width:100%;background:transparent}
+today-loader canvas{display:block;width:100%;height:100%;aspect-ratio:1}
+.loader-stage{min-height:380px;gap:16px}
+.loader-stage today-loader{width:min(240px,80%)}
+.loader-examples{display:flex;align-items:center;gap:22px;margin-top:26px;padding-top:24px;border-top:1px solid #ffffff12}
+.loader-inline{display:flex;align-items:center;gap:12px;font-size:13px;color:#c8bfd1}
+.loader-inline today-loader{width:40px}
+.loader-controls .component-tools button{min-height:44px}
+.loader-controls .component-source{display:block;margin-top:14px}
+.loader-controls .component-feedback{max-width:none}

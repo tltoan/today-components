@@ -673,6 +673,48 @@
           "streak-flame-study.js"
         ]
       }
+    },
+    {
+      "id": "loader",
+      "name": "Today gradient loader",
+      "preview": "loader.html",
+      "browserSource": [
+        "components/loader-motion.js",
+        "components/loader.js",
+        "components/loader.css",
+        "loader-study.js"
+      ],
+      "swiftSource": [
+        "native/TodayLoader.swift"
+      ],
+      "referenceSource": [
+        "native/reference/CoilSphereLoader.swift"
+      ],
+      "dependencies": [],
+      "status": "Selected loader; supplied motion with Today gradient. Browser and standalone SwiftUI, not integrated into the app.",
+      "sourcePage": "source.html#loader",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-loader",
+        "styles": [
+          "components/loader.css"
+        ],
+        "scripts": [
+          "components/loader-motion.js",
+          "components/loader.js"
+        ],
+        "assets": [],
+        "markup": "<today-loader label=\"Loading\"></today-loader>",
+        "usage": "Mount while work is pending, then remove on completion. The transparent 4.84-second loop uses a blue/lavender/peach gradient. Methods: play(), pause(), replay(); speed attribute/property from 0.1\u20134 (default 1), paused attribute, label attribute. Offscreen/hidden work is suspended; reduced motion shows a still globe. Host owns actual progress and completion; never claim percentage progress from the loop.",
+        "demoOnly": [
+          "loader-study.js"
+        ]
+      },
+      "nativeIntegration": {
+        "file": "native/TodayLoader.swift",
+        "minimumOS": "iOS 17 / macOS 14",
+        "usage": "TodayLoader().frame(width: 240, height: 240). isAnimating, speed, replayToken, colors and lineWidth are configurable. Includes TodayLoaderArtwork for a deterministic still. Original source is reference only; no packages/assets required."
+      }
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."

@@ -33,3 +33,5 @@ This directory is the working Today component library and interactive showcase e
 - Preserve the corrected focused-page header alignment and make the Today wordmark link to the library.
 
 - Widget refinements use balanced small-card metric rows, optically centered original counter symbols, spaced quick-action labels, full-width portrait actions, and left-aligned streak dates. Calendar selection content is centered with equal vertical insets. Water uses the single TodayWidgets.setWaterFill spring controller; do not layer a CSS clip transition on top.
+
+- The user selected the supplied circle → twisting globe → circle as Today’s loader. Use `components/loader.*` with `components/loader-motion.js` or `native/TodayLoader.swift`. Keep the original 4.84 s geometry/spline motion and blue–lavender–peach gradient. `native/reference/CoilSphereLoader.swift` retains the supplied file unchanged. This is an indeterminate loader: loop only while work is pending, suspend offscreen/background work, and show the still globe under reduced motion. Do not wire a loading task into the demo or invent percentage completion.
