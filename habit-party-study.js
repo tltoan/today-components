@@ -69,7 +69,7 @@
       const initial=()=>({members:members.slice(1),state:'open',plan:'pages'});invite.model=initial();
       invite.addEventListener('party-request',e=>{const m=invite.model,a=e.detail.action;if(a==='plan')invite.model={...m,plan:e.detail.value};if(a==='decline')invite.model={...m,message:'Invite left open.'};if(a==='join'&&m.state==='open'){invite.model={...m,state:'joining'};setTimeout(()=>invite.model={...m,state:'joined',members,message:`Your plan: ${m.plan==='minutes'?'15 minutes':'10 pages'} · Sun, Tue, Thu.`},400);}});
       invite.parentElement.querySelector('[data-invite-reset]').addEventListener('click',()=>invite.model=initial());
-      invite.parentElement.querySelector('[data-invite-full]').addEventListener('click',()=>invite.model={members:fourMembers,state:'full'});
+      invite.parentElement.querySelector('[data-invite-full]').addEventListener('click',()=>invite.model={members:[...fourMembers.filter(m=>!m.self),{id:'Riley',name:'Riley',initials:'RK'}],state:'full'});
     }
     const standaloneEntry=root.querySelector('today-party-entry[data-standalone]');standaloneEntry.model=entry;standaloneEntry.addEventListener('party-request',()=>{feed.setOpen(true);detail.scrollIntoView({behavior:reduced()?'instant':'smooth',block:'center'});});
     const prefs=root.querySelector('today-party-settings[data-standalone]');prefs.model={allowed:true};const leave=new TodayUI.Disclosure(root.querySelector('.hp-leave-panel'));
