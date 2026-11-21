@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Approved decrease symbol" clip-path="url(#clip0_0_80)">
+<path id="Vector" d="M48 0H0V48H48V0Z" fill="black" fill-opacity="0.01"/>
+<path id="Vector_2" d="M12.85 23.175H31.375V29.475H12.85V23.175Z" fill="url(#paint0_linear_0_80)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_80" x1="29" y1="24.5" x2="13.5" y2="31" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#999999"/>
+</linearGradient>
+<clipPath id="clip0_0_80">
+<rect width="48" height="48" fill="white"/>
+</clipPath>
+</defs>
+</svg>

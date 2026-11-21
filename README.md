@@ -37,6 +37,8 @@ This is the working Today component library. This README and AGENTS.md contain t
 | Adaptive plan button | `components/plan-button.js`, `components/plan-button.css`, `components/plan-readiness.js` | Standalone browser component with a dedicated `plan-button.html` preview and manual state/replay controls. Staggered letter roll; no editor or parser required. |
 | Page counter | `components/page-counter.js`, `components/page-counter.css`, `native/AnimatedPageCounter.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `page-counter.html` preview; tap/hold, limits, rolling digits, sequential fill and labeled overflow. Native app integration pending. |
 | Staggered bar chart | `components/staggered-bar-chart.js`, `components/staggered-bar-chart.css`, `native/StaggeredBarChart.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `bar-chart.html` preview; replay, stagger pacing, recorded zero and missing-log examples. Native app integration pending. |
+| App icons | `components/icons.js`, `assets/icons/manifest.json` | Ten Figma icons plus two original counter SVGs, exact source hashes and native dimensions. Browser reusable. |
+| Buttons & small controls | `components/controls.js`, `components/controls.css`, `CONTROLS.md` | Twelve button variants, switches, isolated +/− and bounded hold stepper. Interactive browser collection and documented APIs. |
 | New habit entry (retained source) | `components/habit-editor.js`, `components/habit-editor.css` | Earlier Figma `121:12444` entry implementation retained. Latest user request disconnects it from +; no longer mounted in the library. Generation/setup integration pending. |
 
 ## Shared dropdown contract
@@ -307,3 +309,13 @@ Verification for this refit: checked all 20 widget specimens against compact, st
 ### Reading widget simplification · November 20, 2026
 
 Removed the small reading widget’s progress marks at user request. The page count and target carry progress, with an 8-point gap before the quick action. Other small-card content retains its positioning and fixed Apple-sized frame. Updated the gallery caption and reuse guidance. Verified desktop and 390 × 844 layouts, keyboard quick-add, reduced motion, no overflow, JavaScript syntax and whitespace.
+
+### Icons & controls · November 21, 2026
+
+Added the ten icons from Figma section 321:484, plus the app’s original CounterIncrease and CounterDecrease SVGs. Every supplied app icon matches the SHA-256 in its Figma component description. Original SVG colors, geometry and intrinsic dimensions are preserved in `assets/icons/manifest.json`; each has a direct SVG download in `controls.html`.
+
+Reusable `today-icon`, `today-button`, `today-switch` and `today-stepper` live in `components/icons.js`, `components/controls.js`, and `components/controls.css`. The new main-library collection covers primary, prominent, compact, secondary, quiet, quick, round, icon, profile, choice, weekday and row buttons, plus ready/disabled/busy/saved states, isolated +/− controls, switches and status marks. Existing specialized controls link to their dedicated previews. The stepper has the app’s 350 ms hold / 105 ms repeat and bounded values. The gallery’s save and navigation feedback is explicitly sample behavior. CONTROLS.md contains API, events, source provenance and dependency instructions; components.json, source.html, llms.txt and INTEGRATION.md include the new entries. No native app source was changed.
+
+Verified original SVG files and rendered native-size geometry, desktop/390-point responsive composition, 375-point portrait and 844-point landscape without horizontal overflow, all new button targets at least 44 points (fractional rounding), keyboard activation, save feedback, standalone counting, held stepping without a release increment, minimum/maximum disabled directions, switch state under reduced motion, choice exclusivity and preset/weekday synchronization. JavaScript syntax and HTML/manifest local paths pass. Native Dynamic Type and SwiftUI integration are not part of this browser change.
+
+Standalone reuse check: loaded only controls.css, icons.js and controls.js in a temporary minimal page. At 375 points, the 1,000,000 maximum and a long button label fit without overflow; the increase action disabled correctly. The temporary fixture was removed after verification.

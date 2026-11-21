@@ -100,3 +100,7 @@ SwiftUI: copy `native/TodayLoader.swift` and use `TodayLoader().frame(width: 240
 Habit widgets now use Apple iPhone family dimensions, not growing app cards. Use `size="compact"`, `size="standard"` (default), or `size="large"`. The geometry table and variant-to-family mappings are in `WIDGETS.md`; `TodayWidgets.sizes` is the code source. Changing the attribute resizes the reference frame without resetting data. Small cards use one quick-add action and open details for corrections. Errors replace the face rather than increase its height.
 
 Preserve the 16-point Home Screen insets and 44-point actions when translating the design. The browser layout is not a WidgetKit extension: native sizing, system margins, Dynamic Type, rendering modes and App Intent behavior still need validation in the host app.
+
+## Icons, buttons and small controls
+
+Read CONTROLS.md, then load components/controls.css, components/icons.js and components/controls.js. Use today-icon, today-button, today-switch or today-stepper directly. The asset manifest records every SVG path and source hash, and controls.html demonstrates their states. No gallery script is needed for reuse. The host handles today-activate/change events and owns navigation and persistence.

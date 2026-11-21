@@ -1,0 +1,64 @@
+@font-face{font-family:Future;src:url("../assets/TestTheFuture-Regular.otf");font-weight:400;font-display:swap}
+@font-face{font-family:Future;src:url("../assets/TestTheFuture-Medium.otf");font-weight:500 900;font-display:swap}
+/* Today controls. Fonts and palette fall back to the app's existing tokens. */
+:root{--today-control-text:#efedf3;--today-control-secondary:#babac4;--today-control-accent:#bdadd9;--today-control-graphite:linear-gradient(180deg,#333136 6%,#272629 50%,#121214 94%);--today-control-action:linear-gradient(100deg,#303030,#555 42%,#4d4d4d 74%,#303030);--today-press-ease:cubic-bezier(.22,.76,.28,1)}
+today-icon{display:inline-grid;place-items:center;vertical-align:middle;flex:none;line-height:0}
+today-icon>img{display:block;max-width:none;flex:none}
+today-button{display:inline-block;max-width:100%;vertical-align:middle}
+today-button[block]{display:block;width:100%}
+.tc-button{box-sizing:border-box;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;max-width:100%;min-height:56px;min-width:44px;padding:0 24px;border:0;border-radius:27px;background:var(--today-control-action);color:var(--today-control-text);font:500 18px/1.3 Future,-apple-system,BlinkMacSystemFont,sans-serif;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;outline-offset:4px}
+today-button[block] .tc-button{width:100%}
+.tc-button__face{display:flex;align-items:center;justify-content:inherit;gap:10px;width:100%;min-width:0;transition:transform 130ms var(--today-press-ease),opacity 130ms var(--today-press-ease)}
+.tc-button__label{overflow-wrap:anywhere}
+.tc-button:active{scale:1!important}
+.tc-button:active:not(:disabled):not([aria-disabled=true]) .tc-button__face{transform:scale(.96)}
+.tc-button:focus-visible,.tc-switch:focus-visible,.tc-stepper button:focus-visible{outline:2px solid var(--today-control-accent);outline-offset:4px}
+.tc-button:disabled{opacity:.42;cursor:default}
+.tc-button[aria-disabled=true]{cursor:progress}
+.tc-button[data-variant=prominent]{min-height:65px;border-radius:29px;font-size:20px}
+.tc-button[data-variant=compact]{min-height:50px;font-size:16px;background:linear-gradient(#4a4a4a,#292929,#121212)}
+.tc-button[data-variant=secondary]{min-height:44px;font-size:13px;background:#141414;padding:0 17px;border:1px solid #ffffff0a}
+.tc-button[data-variant=quiet]{min-height:44px;font-size:13px;background:transparent;color:var(--today-control-secondary);padding:0 12px}
+.tc-button[data-variant=quick]{min-height:44px;font-size:13px;padding:0 18px;gap:6px}
+.tc-button[data-variant=round]{width:50px;height:50px;min-height:50px;padding:0;border-radius:50%;background:var(--today-control-graphite);border:1px solid #a6a6a61a}
+.tc-button[data-variant=round] .tc-button__label{font:500 27px/1 -apple-system,BlinkMacSystemFont,sans-serif}
+.tc-button[data-variant=icon]{width:48px;height:48px;min-height:48px;padding:0;background:transparent;border-radius:12px}
+.tc-button[data-variant=profile]{width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;background:linear-gradient(#494949,#2a2a2a,#131313);font:500 13px/1 -apple-system,BlinkMacSystemFont,sans-serif}
+.tc-button:is([data-variant=round],[data-variant=icon],[data-variant=profile]):active:not(:disabled):not([aria-disabled=true]) .tc-button__face{transform:scale(.9)}
+.tc-button[data-variant=choice]{min-height:48px;font-size:14px;padding:0 20px;background:#151418;border:1px solid #ffffff10}
+.tc-button[data-variant=choice][aria-pressed=true]{background:var(--today-control-action);border-color:#bdaed944}
+.tc-button[data-variant=day]{width:44px;height:44px;min-height:44px;padding:0;border-radius:14px;background:transparent;font-size:13px;color:var(--today-control-secondary)}
+.tc-button[data-variant=day]{isolation:isolate}
+.tc-button[data-variant=day]:before{content:"";position:absolute;inset:3px;border-radius:12px;z-index:-1;background:transparent}
+.tc-button[data-variant=day][aria-pressed=true]{color:var(--today-control-text)}
+.tc-button[data-variant=day][aria-pressed=true]:before{background:var(--today-control-action)}
+.tc-button[data-variant=day]:active .tc-button__face{transform:none!important;opacity:.72}
+.tc-button[data-variant=row]{justify-content:flex-start;min-height:64px;width:100%;padding:14px 18px;background:var(--today-control-graphite);font-size:15px;border-radius:18px;text-align:left}
+.tc-button[data-variant=row] .tc-button__label{flex:1}
+.tc-button[data-variant=row]:active:not(:disabled) .tc-button__face{transform:scale(.98)}
+.tc-button[data-variant=row] .tc-button__trailing{margin-left:auto}
+.tc-button__status{min-width:16px;display:inline-block;line-height:1;color:var(--today-control-accent)}
+.tc-symbol{font:500 27px/1 -apple-system,BlinkMacSystemFont,sans-serif;background:linear-gradient(90deg,#fafafa,#949494);background-clip:text;-webkit-text-fill-color:transparent}
+.tc-button[data-variant=quick] .tc-symbol{font-size:19px}
+today-switch{display:inline-flex;vertical-align:middle}
+.tc-switch{box-sizing:border-box;position:relative;width:52px;height:44px;border:0;padding:0;background:transparent;cursor:pointer;touch-action:manipulation}
+.tc-switch:before{content:"";position:absolute;inset:8px 0;border-radius:28px;background:#4a444f;transition:background 380ms ease}
+.tc-switch span{position:absolute;left:3px;top:11px;width:22px;height:22px;border-radius:50%;background:linear-gradient(#f4edf9,#c5bcd0);box-shadow:0 1px 3px #0004;transition:transform 380ms cubic-bezier(.32,0,.2,1)}
+.tc-switch[aria-checked=true]:before{background:#aa94c9}.tc-switch[aria-checked=true] span{transform:translateX(24px)}
+.tc-switch:disabled{opacity:.42;cursor:default}
+today-stepper{display:block;max-width:100%}
+.tc-stepper{display:flex;align-items:center;justify-content:center;gap:24px;color:var(--today-control-text)}
+.tc-stepper button{display:grid;place-items:center;flex:none;width:56px;height:56px;border:0;border-radius:50%;background:transparent;cursor:pointer;touch-action:pan-y;padding:0}
+.tc-stepper button img{transition:transform 130ms var(--today-press-ease);pointer-events:none}
+.tc-stepper button[data-pressed] img{transform:scale(.91)}
+.tc-stepper button:active{scale:1!important}
+.tc-stepper button:disabled{opacity:.3;cursor:default}
+.tc-stepper-value{min-width:84px;text-align:center}
+.tc-stepper output{display:block;font:500 var(--tc-amount-size,38px)/1.3 Future,-apple-system,BlinkMacSystemFont,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.tc-stepper-unit{display:block;overflow-wrap:anywhere;font:400 12px/1.5 Future,sans-serif;color:var(--today-control-secondary)}
+.tc-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+html[data-reduced] :is(.tc-button__face,.tc-switch:before,.tc-switch span,.tc-stepper button img){transition:none!important;transform:none!important}
+html[data-reduced] .tc-button:active:not(:disabled) .tc-button__face{opacity:.72}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) :is(.tc-button__face,.tc-switch:before,.tc-switch span,.tc-stepper button img){transition:none!important}html:not([data-motion-override]) .tc-button:active .tc-button__face{transform:none!important;opacity:.72}html:not([data-motion-override]) .tc-stepper button[data-pressed] img{transform:none;opacity:.72}}
+/* A checked switch still keeps its checked position when motion is reduced. */
+html[data-reduced] .tc-switch[aria-checked=true] span{transform:translateX(24px)!important}

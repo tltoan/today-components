@@ -716,6 +716,105 @@
         "minimumOS": "iOS 17 / macOS 14",
         "usage": "TodayLoader().frame(width: 240, height: 240). isAnimating, speed, replayToken, colors and lineWidth are configurable. Includes TodayLoaderArtwork for a deterministic still. Original source is reference only; no packages/assets required."
       }
+    },
+    {
+      "id": "icons",
+      "name": "Today app icons",
+      "preview": "controls.html",
+      "sourcePage": "source.html#icons",
+      "browserSource": [
+        "components/icons.js",
+        "components/controls.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [],
+      "status": "Reusable browser components; app integration is separate.",
+      "figmaNodes": [
+        "321:484"
+      ],
+      "browserIntegration": {
+        "styles": [
+          "components/controls.css"
+        ],
+        "scripts": [
+          "components/icons.js"
+        ],
+        "assets": [
+          "assets/HomeIcon.svg",
+          "assets/HabitsIcon.svg",
+          "assets/icons/ActivityIcon.svg",
+          "assets/icons/ReadingIcon.svg",
+          "assets/icons/Chevron.svg",
+          "assets/icons/Close.svg",
+          "assets/icons/DoubleChevron.svg",
+          "assets/icons/Pencil.svg",
+          "assets/widgets/PlannedDay.svg",
+          "assets/widgets/DayOff.svg",
+          "assets/icons/CounterIncrease.svg",
+          "assets/icons/CounterDecrease.svg",
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-icon name=\"home\" label=\"Home\"></today-icon>",
+        "usage": "Twelve original SVGs: ten from Figma 321:484 plus the two app counter symbols. Original dimensions, colors and hashes are recorded in assets/icons/manifest.json. Meaningful icons take label; decorative icons omit it.",
+        "events": [],
+        "demoOnly": [
+          "controls-study.js",
+          "controls-study.css"
+        ]
+      }
+    },
+    {
+      "id": "controls",
+      "name": "Buttons & small controls",
+      "preview": "controls.html",
+      "sourcePage": "source.html#controls",
+      "browserSource": [
+        "components/icons.js",
+        "components/controls.js",
+        "components/controls.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "icons"
+      ],
+      "status": "Reusable browser components; app integration is separate.",
+      "figmaNodes": [],
+      "browserIntegration": {
+        "styles": [
+          "components/controls.css"
+        ],
+        "scripts": [
+          "components/icons.js",
+          "components/controls.js"
+        ],
+        "assets": [
+          "assets/HomeIcon.svg",
+          "assets/HabitsIcon.svg",
+          "assets/icons/ActivityIcon.svg",
+          "assets/icons/ReadingIcon.svg",
+          "assets/icons/Chevron.svg",
+          "assets/icons/Close.svg",
+          "assets/icons/DoubleChevron.svg",
+          "assets/icons/Pencil.svg",
+          "assets/widgets/PlannedDay.svg",
+          "assets/widgets/DayOff.svg",
+          "assets/icons/CounterIncrease.svg",
+          "assets/icons/CounterDecrease.svg",
+          "assets/TestTheFuture-Regular.otf",
+          "assets/TestTheFuture-Medium.otf"
+        ],
+        "markup": "<today-button label=\"Save log\" variant=\"primary\"></today-button>",
+        "usage": "Use today-button, today-switch and today-stepper. All APIs, button variants, states and events are in CONTROLS.md. Native buttons own keyboard activation. Hosts own persistence and navigation; demos only simulate them.",
+        "events": [
+          "today-activate",
+          "change"
+        ],
+        "demoOnly": [
+          "controls-study.js",
+          "controls-study.css"
+        ]
+      }
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."
