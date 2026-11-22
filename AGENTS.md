@@ -2,6 +2,8 @@
 
 This directory is the working Today component library and interactive showcase established in this chat on November 20, 2026.
 
+- **November 22 user direction: this library is the source of truth for the app UI and design system, including existing native screens.** Match its approved components, assets, geometry, typography, states and motion. Reuse supplied SwiftUI implementations or faithfully port browser-only pieces into shared native components. Preserve working app services and data; legacy native UI does not override current library designs. Workshop compositions retain their approval boundaries. Read the source-of-truth section in `CHAT-HANDOFF.md` and `IMPLEMENTATION-START.md` before native implementation; compare simulator screens with the live library previews before claiming visual parity.
+
 - Read `INTEGRATION.md` for reuse instructions, `README.md` for implementation status, `components.json` for source/dependency mappings, and `llms.txt` for the compact source entry point. All code needed to run the previews is in this repository; do not require a local path from the author’s machine.
 - The user approved the 600 ms dropdown/disclosure motion here and requested it for all dropdowns. Reuse `foundations/motion.css` and `TodayUI.Disclosure`; do not invent per-component opening/closing timings or restore `display:none` jumps. `native/TodayMotion.swift` contains matching SwiftUI tokens.
 - Use `<today-dropdown>` for new browser selection menus. Inline expansions use the same disclosure controller and CSS contract. Keep focus, selected values, and reduced motion working when transitions are interrupted.

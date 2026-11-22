@@ -2,6 +2,8 @@
 
 The live gallery is a preview. The public repository contains the actual readable code. There is no npm package or authenticated API to install.
 
+**For the Today app, this library is the authoritative UI and design-system source**, as explicitly directed by the user on November 22, 2026. Apply it to existing screens as well as new ones. Reuse supplied native implementations or port approved browser components faithfully into shared SwiftUI components, preserving their visual geometry, assets, states and motion. The existing app remains the starting point for functional code and persistence; its older visual implementation is not the UI standard. Selected components and Screens & flows guide implementation; Workshop compositions remain under review. Read [IMPLEMENTATION-START.md](IMPLEMENTATION-START.md) for migration order and simulator-to-library comparison requirements.
+
 ## Give an agent this instruction
 
 > Use the Today component library at https://github.com/tltoan/today-components. Read AGENTS.md, INTEGRATION.md, and components.json. Reuse the [component name] source and its dependencies when building this page. Preserve its appearance, motion, keyboard support, and reduced-motion behavior. Use the browser implementation for a web page, or the supplied SwiftUI implementation when available for a native screen.

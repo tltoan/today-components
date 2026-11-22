@@ -1,6 +1,19 @@
 # Continue the Today component library
 
-Updated November 21, 2026. This file carries the design direction across chats. It is not a transcript or a claim that every prototype is implemented in the native app.
+Updated November 22, 2026. This file carries the design direction across chats. It is not a transcript or a claim that every prototype is implemented in the native app.
+
+## App UI source of truth · November 22
+
+**The user explicitly designated this library as the source of truth for the Today app UI and design system, including existing native screens.** App implementation is a migration to these components and selected compositions, not merely inspiration from them.
+
+- Use the actual component source, assets, live previews and documented behavior to reproduce typography, colors, gradients, surfaces, borders, spacing, geometry, states and motion. Preserve interrupted-transition behavior and Reduce Motion.
+- Reuse supplied SwiftUI components where available. Port approved browser-only components faithfully into shared SwiftUI components; reuse those throughout the app. Keep original supplied source files intact. Gallery navigation, iframe infrastructure and fictional data are not product UI or dependencies.
+- The existing native app supplies working behavior, services and persistence to preserve and extend. Its legacy visual implementation does not override the library. Reuse native UI only where it matches the current library direction; reconcile older Figma/app design-spec references with the latest explicit decisions and selected library designs.
+- Approval remains specific: selected components and Screens & flows are implementation references. Workshop compositions remain proposals unless explicitly approved. A selected component inside a proposal can be reused without approving the entire screen.
+- Start with the shared native design-system/component layer, then migrate Home/Habits navigation, habit cards and individual detail/history, followed by selected onboarding/setup. Adapt models where those screens require it, preserving existing data. Compare each simulator screen with its library preview at matching reference dimensions and resolve visual and motion differences before declaring parity.
+- The user supplied a VS Code source audit reporting an already connected native prototype with generation, logging, editing and local JSON persistence. Build on that work; do not restart the app. This handoff update does not independently verify its native runtime behavior.
+
+Read [IMPLEMENTATION-START.md](IMPLEMENTATION-START.md) for the updated VS Code Codex instruction. This latest direction supersedes the earlier emphasis on implementing a functional core slice before establishing UI parity. The user authorized pushing this documentation update to GitHub; native app changes remain local until separately requested.
 
 ## Start here
 
@@ -103,4 +116,4 @@ Validation for this refinement: desktop library + 390 × 844 preview, keyboard v
 
 ## Implementation handoff
 
-The user considers the component foundation sufficient to begin app implementation and requested a prompt for their existing VS Code Codex session. Use `IMPLEMENTATION-START.md` to begin in the existing native app, preserving approved components and distinguishing Workshop proposals. First complete a connected, persistent creation → Home → log → habit history slice; do not rebuild the library as a separate web app. Public-release account/backend work and unfinished design selections remain separate. Publishing this library does not mark Workshop compositions approved.
+The user considers the component foundation sufficient to begin app implementation and requested a prompt for their existing VS Code Codex session. Use `IMPLEMENTATION-START.md` and the November 22 UI source-of-truth direction at the top of this file. Establish the shared native components from the library, then migrate connected screens while preserving and extending the existing app's working services and persistence. Verify the connected creation → Home → log → habit history loop as the migration progresses. Public-release account/backend work and unfinished design selections remain separate. Publishing this library does not mark Workshop compositions approved.
