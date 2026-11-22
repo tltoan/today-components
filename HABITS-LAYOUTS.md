@@ -41,4 +41,8 @@ The first three proposals were rejected and replaced with the directions above. 
 
 November 21 follow-up: Weekly view is the main example; Plan cards and Habit shelf remain behind “Compare previous Habits layouts”.
 
-The November 21 proposal adds an Invitations row above the active plan list, linking to the compact Book cover invite. This is a fixture with one invitation, not a real inbox or unread count.
+The November 21 proposal adds an Invitations row above the active plan list, opening the compact Book cover invite inside Habits. This is a fixture with one invitation, not a real inbox or unread count.
+
+## Invitation navigation
+
+The Invitations row replaces the list with the existing Book cover invitation in the same phone. It shows the shared schedule, proposed dates, everyone’s target, your target choice, sharing scope, Join and Not now. Back / Not now restores the list and keyboard focus; the target choice is retained. The former link to the full component-demo page is removed. `.invitation` supplies the controlled model. Handle bubbling `party-request` actions and call `.closeInvitation()` for dismissal. `habits-study.js` simulates joining locally; a joined upcoming party remains available from the row. No membership request is sent or saved.

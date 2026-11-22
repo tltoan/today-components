@@ -30,11 +30,6 @@ today-party-photo-carousel button:focus-visible,.pp-viewport:focus-visible{outli
 .pp-bottom .prx-row{gap:6px}
 .pp-bottom .prx-person{font-size:9px;min-width:44px}
 .pp-position{flex:none;color:#a99bb9;font-size:11px;font-variant-numeric:tabular-nums;padding-right:4px}
-.pp-thumbnails{display:flex;gap:8px;overflow-x:auto;padding:9px 3px 5px;scrollbar-width:thin;scrollbar-color:#61516f transparent}
-.pp-thumbnails button{position:relative;flex:0 0 58px;height:66px;padding:3px;border:1px solid transparent;background:transparent;border-radius:13px;transition:border-color 200ms,background 200ms}
-.pp-thumbnails button[aria-pressed=true]{border-color:#bcabd2;background:#bcabd221}
-.pp-thumbnails img{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px}
-.pp-thumbnails span{position:absolute;inset:3px;display:grid;place-items:center;font-size:12px;z-index:-1}
 .pp-empty{padding:46px 20px;border-radius:23px;background:#1c1923;border:1px solid #ffffff10;text-align:center}
 .pp-empty span,.pp-empty small{display:block}.pp-empty small{color:#afa3bd;font-size:11px;margin-top:6px}
 .pp-logs-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;min-height:48px;background:transparent;border:0;border-top:1px solid #ffffff10;text-align:left;padding:12px 2px;font-size:11px!important;color:#bcaaca!important}
@@ -47,9 +42,7 @@ today-party-photo-carousel[variant=overlay] .pp-person span{color:#d1c7dc}
 today-party-photo-carousel[variant=overlay] .pp-amount{max-width:140px;text-align:right;font-size:30px;line-height:1.1;margin:0 0 1px;letter-spacing:-.04em}
 today-party-photo-carousel[variant=overlay] .pp-position{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 today-party-photo-carousel[variant=overlay] .pp-unavailable .pp-image-fallback{align-items:start;padding-top:60px}
-today-party-photo-carousel[variant=filmstrip] .pp-slide{display:flex;flex-direction:column;background:transparent;border:0}
-today-party-photo-carousel[variant=filmstrip] .pp-caption{order:-1;padding:0 2px 16px;min-height:66px}
-today-party-photo-carousel[variant=filmstrip] .pp-picture{border-radius:20px;aspect-ratio:4/3;background:#17141d;border:1px solid #ffffff10}
-today-party-photo-carousel[variant=filmstrip] .pp-photo{object-fit:contain}
 html[data-reduced] today-party-photo-carousel button{transition:none!important}
 @media(prefers-reduced-motion:reduce){html:not([data-motion-override]) today-party-photo-carousel button{transition:none!important}}
+
+.pp-note,.pp-log-note{white-space:pre-wrap;overflow-wrap:anywhere;color:#c5bad2;font-size:13px;line-height:1.6;margin:16px 2px 0}.pp-log-note{margin:8px 0 0;font-size:12px}.pp-log:has(.pp-log-note){align-items:start}

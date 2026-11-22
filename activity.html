@@ -1,0 +1,95 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Today — Activity components</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="components/slide-to-log.css"><link rel="stylesheet" href="foundations/motion.css"><script src="foundations/disclosure.js" defer></script><script src="components/snap-scroller.js" defer></script><script src="components/slide-to-log.js" defer></script><link rel="stylesheet" href="components/dropdown.css"><script src="components/dropdown.js" defer></script><script src="today-logo.js" defer></script><script src="app.js" defer></script><link rel="stylesheet" href="library-embed.css?v=boards-6"><script src="library-catalog.js?v=boards-6" defer></script><script src="library-embed.js?v=boards-6"></script></head><body><svg class="symbols" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="arrows" viewBox="0 0 24 24"><path d="m5 6 6 6-6 6m8-12 6 6-6 6"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+  <symbol id="replay" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 .6 6M4 4v6h6"/></symbol>
+  <symbol id="moon" viewBox="0 0 24 24"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.6 8.6 0 1 0 20.5 14Z"/></symbol>
+</svg>
+<main><header class="page-header"><div class="identity"><h1><a href="index.html">today.</a></h1><p>Activity components</p></div></header>  <div class="component-board" data-ui>
+    <section class="tile schedule-tile" aria-labelledby="schedule-heading">
+      <div class="tile-heading"><h2 id="schedule-heading">Make it your rhythm</h2><a class="component-code" href="source.html#reading-schedule" aria-label="Code for reading schedule">Code ↗</a></div>
+      <div class="stage">
+        <div class="schedule-component">
+          <div class="habit-heading"><span class="moon-icon"><svg><use href="#moon"/></svg></span><div><h3>Read before bed</h3><p>10 pages · A 21-day trial</p></div></div>
+          <div class="schedule-card">
+            <div class="repeat-row"><span>Repeat weekly</span><button class="toggle" id="repeat" role="switch" aria-checked="true" aria-label="Repeat weekly"><span></span></button></div>
+            <div class="schedule-expansion" id="repeat-fields">
+              <div class="schedule-inner">
+                <button class="schedule-trigger" id="schedule-trigger" aria-expanded="false" aria-controls="schedule-options"><span>On these days</span><span class="schedule-value"><span id="preset-value">Custom</span><svg><use href="#chevron"/></svg></span></button>
+                <div class="preset-expansion" id="preset-expansion"><div class="preset-clip">
+                <div class="preset-menu" id="schedule-options" inert aria-hidden="true" role="group" aria-label="Schedule presets">
+                  <span class="preset-highlight" aria-hidden="true"></span>
+                  <button data-preset="daily" aria-pressed="false">Every day</button><button data-preset="weekdays" aria-pressed="false">Weekdays</button><button data-preset="custom" aria-pressed="true">Custom</button>
+                </div></div></div>
+                <div class="weekdays" role="group" aria-label="Reading days">
+                  <button aria-label="Sunday" aria-pressed="true" data-day="0">S</button><button aria-label="Monday" aria-pressed="false" data-day="1">M</button><button aria-label="Tuesday" aria-pressed="true" data-day="2">T</button><button aria-label="Wednesday" aria-pressed="false" data-day="3">W</button><button aria-label="Thursday" aria-pressed="true" data-day="4">T</button><button aria-label="Friday" aria-pressed="false" data-day="5">F</button><button aria-label="Saturday" aria-pressed="false" data-day="6">S</button>
+                </div>
+              </div>
+            </div>
+            <div class="one-time-expansion collapsed" id="one-time" aria-hidden="true"><div class="one-time-inner"><p class="one-time">Just once, tonight.</p></div></div>
+          </div>
+          <p class="schedule-summary" id="schedule-summary" aria-live="polite">Sun, Tue, Thu · Before bed</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile logging-tile" aria-labelledby="logging-heading">
+      <div class="tile-heading"><h2 id="logging-heading">A little action, logged</h2><a class="component-code" href="source.html#slide-to-log" aria-label="Code for slide to log">Code ↗</a></div>
+      <div class="stage">
+        <div class="logging-component">
+          <div class="artwork-wrap"><img src="assets/StretchMat.svg" alt="" class="stretch-art" width="120" height="100"></div>
+          <h3>Evening stretch</h3><p class="logging-caption" id="logging-caption">Make a little room for yourself.</p>
+          <today-slide-log id="stretch-log" label="evening stretch"></today-slide-log>
+          <a class="component-source" href="slide-to-log.html">Open component ↗</a>
+          <span class="sr-only" id="log-status" aria-live="polite"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile agenda-tile" aria-labelledby="agenda-heading">
+      <div class="tile-heading"><h2 id="agenda-heading">A space in your day</h2><a class="component-code" href="source.html#agenda" aria-label="Code for agenda">Code ↗</a></div>
+      <div class="stage">
+        <div class="agenda-component">
+          <div class="agenda-controls"><span>November 2026</span><div><button class="arrow-button" id="previous-day" aria-label="Previous day"><svg><use href="#chevron"/></svg></button><button class="arrow-button" id="next-day" aria-label="Next day"><svg><use href="#chevron"/></svg></button></div></div>
+          <div class="agenda-viewport" tabindex="0" role="region" aria-label="Upcoming habits" aria-describedby="agenda-instructions"><div id="agenda-content"></div></div>
+          <p class="sr-only" id="agenda-instructions">Scroll, swipe, or drag vertically to snap one day at a time. Use the up and down arrow keys when this list is focused.</p>
+          <span class="sr-only" id="agenda-status" aria-live="polite"></span>
+          <div class="agenda-dots" aria-label="Selected day"><button aria-label="Friday November 20" aria-pressed="true" data-agenda="0"></button><button aria-label="Saturday November 21" aria-pressed="false" data-agenda="1"></button><button aria-label="Sunday November 22" aria-pressed="false" data-agenda="2"></button><button aria-label="Monday November 23" aria-pressed="false" data-agenda="3"></button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile progress-tile" aria-labelledby="progress-heading">
+      <div class="tile-heading"><h2 id="progress-heading">Every little bit counts</h2><a class="component-code" href="source.html#checklist" aria-label="Code for daily checklist">Code ↗</a></div>
+      <div class="stage">
+        <div class="progress-component">
+          <div class="progress-header"><div class="progress-amount"><span id="reported-count">1</span><span class="denominator">/ 3</span></div><div class="progress-context"><span>habits logged</span><span>Friday, Nov 20</span></div></div>
+          <div class="progress-track" id="day-progress" role="progressbar" aria-label="Habits with a log today" aria-valuemin="0" aria-valuemax="3" aria-valuenow="1"><span></span></div>
+          <div class="activity-list" role="group" aria-label="Today's check-off habits">
+            <button class="activity-row" data-habit="plants" aria-pressed="true" aria-label="Water plants, logged. Undo log"><span class="activity-mark"><svg><use href="#check"/></svg></span><span>Water plants</span><span class="activity-status">Logged</span></button>
+            <button class="activity-row" data-habit="stretch" aria-pressed="false" aria-label="Evening stretch, no log. Log activity"><span class="activity-mark"><svg><use href="#check"/></svg></span><span>Evening stretch</span><span class="activity-status">Log</span></button>
+            <button class="activity-row" data-habit="meditate" aria-pressed="false" aria-label="Meditate, no log. Log activity"><span class="activity-mark"><svg><use href="#check"/></svg></span><span>Meditate</span><span class="activity-status">Log</span></button>
+          </div>
+          <p class="progress-note" id="progress-note" aria-live="polite">A little more room for you.</p>
+        </div>
+      </div>
+    </section>
+    <section class="tile logo-tile" aria-labelledby="logo-heading">
+      <div class="tile-heading"><h2 id="logo-heading">The Today signature</h2><a class="component-code" href="source.html#logo" aria-label="Code for logo animation">Code ↗</a></div>
+      <div class="logo-body">
+        <div class="logo-canvas"><today-logo-animation id="today-logo"></today-logo-animation></div>
+        <div class="logo-details">
+          <h3>Draw. Settle. Land.</h3>
+          <p>The original letter drawing and falling period.</p>
+          <div class="logo-playback">
+            <button class="replay-button" id="logo-replay"><svg><use href="#replay"/></svg>Replay logo</button>
+            <button class="logo-pause" id="logo-pause">Pause</button>
+            <div class="logo-speed"><span>Speed</span><today-dropdown id="logo-speed" label="Logo playback speed" value="1" placement="top"><option value="0.5">0.5×</option><option value="1">1×</option><option value="1.5">1.5×</option><option value="2">2×</option></today-dropdown></div>
+          </div>
+          <div class="logo-meta"><label class="logo-loop"><input id="logo-loop" type="checkbox">Loop</label><span id="logo-status" aria-live="polite">2.1 seconds · Plays once</span></div>
+          <a class="source-link" href="native/TodayLogoAnimation.swift" download>Download SwiftUI component <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main></body></html>

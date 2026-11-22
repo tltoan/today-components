@@ -9,10 +9,10 @@ These are interactive browser proposals, not native app integration or productio
 Source reviewed: Figma `Xf03CH47k7G0graqTZ4zis`, node `298:2078`, “Today review · Two-week recap.” Its seven-screen sequence contains totals, an activity timeline, reflection, an AI suggestion and a next-plan screen. The user explicitly called it outdated and authorized a redesign. Today PRD Draft 0.4 (November 19, 2026), §9, governs the new proposals: 21-day default, visual evidence followed by reflection, no AI advice, and explicit continuation.
 
 - **A — A little story:** opening total → activity and dated outcomes → reflection → next step → plan confirmation. No-log trials go directly to reflection.
-- **B — The whole picture:** summary and calendar together → reflection → next step → confirmation. Detailed activity is optional. Reflection uses a compact two-column choice surface; continuation choices use two cards.
+- **B — The whole picture:** summary and calendar together → reflection → next step → confirmation. Detailed activity is optional. Reflection uses a compact two-column choice surface; continuation uses the selected full-width cards.
 - Recommendation: B for repeated reviews. A offers more room for the first trial’s close.
 
-Ended trials remain ended, with history intact, until the user reflects, chooses a new trial or routine, and confirms its plan. Closing retains the unfinished draft in this preview. Other habits continue normally. Neither reflection nor continuation is preselected. “Not sure yet” is a valid reflection. Notes are optional and private, including for party habits.
+Ended trials remain ended, with history intact, until the user reflects, chooses a new trial or routine, and confirms its plan. Closing retains the unfinished draft in this preview. Other habits continue normally. Neither reflection nor continuation is preselected. “Not sure yet” is a valid reflection. Trial reflections are optional and private, including for party habits. Per-entry party notes are shared by default.
 
 A new trial starts at 21 days but allows another length. A routine preserves chosen weekdays and has no automatic trial review. Both let the user confirm target, days and start date. The prior trial remains unchanged. This prototype uses a fixed sample date; a production host must provide the actual date/timezone, policy limits, dated plan history, permission checks and persistence.
 
@@ -40,7 +40,7 @@ The gallery controller is `recap-study.js`; its layout styles are `recap-study.c
 
 ## November 21 choice and plan refinements
 
-The original continuation and plan form designs were rejected. `today-continuation-choice` now provides three independent layouts: `cards` (full-width radio choices), `split` (two cards), and `rail` (a sliding pill). `value` is empty initially; valid values are `trial` or `routine`. It emits `change {value}`, supports arrows/Home/End and never activates a plan. Copy is “Choose a length. Review at the end.” and “Keep your schedule, without trial reviews.” The extra confirmation warning was removed; the explicit confirmation requirement remains.
+The original continuation and plan form designs were rejected. `today-continuation-choice` uses selected `cards` (full-width radio choices). The split and rail alternatives have been removed. `value` is empty initially; valid values are `trial` or `routine`. It emits `change {value}`, supports arrows/Home/End and never activates a plan. Copy is “Choose a length. Review at the end.” and “Keep your schedule, without trial reviews.” The extra confirmation warning was removed; the explicit confirmation requirement remains.
 
 `today-recap` accepts `plan-layout="a|b|c"`: One plan card, Edit by section, Schedule first. A is the default for flow A and B for flow B. All use the shared amount stepper, weekday controls and date/length draft. B uses the approved 600 ms disclosure for each Edit section. C shows the calendar week containing the selected start date plus the next week; this is a schedule preview, not historical activity. The standalone plan comparison seeds an explicitly labeled example trial/reflection, with a gallery switch to compare routine plans. Normal recap traversal remains unselected and gated.
 
@@ -52,3 +52,8 @@ Source for the reusable selection control: `components/continuation-choice.js` a
 One plan card (A) is selected and now the default at the Plan stage in both recap flows. The two narrative flows remain available. Edit by section and Schedule first are retained in the comparison area only. No continuation choice is preselected in the actual recap flow.
 
 November 21 follow-up: One plan card is the main selected example. Previous B/C plan layouts are under a shared comparison disclosure. Use “Schedule:” as the plan field label. Narrative A/B flows stay available.
+
+
+## Current logging update
+
+Full-width continuation cards (A) is selected in both narrative flows; split and pill alternatives are removed. `recap.entries` accepts host-selected original entries for verbatim note excerpts in Activity and Reflection. Entry notes are distinct from the private trial reflection. See [LOG-NOTES.md](LOG-NOTES.md).

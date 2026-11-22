@@ -1,5 +1,7 @@
 # Today component library
 
+The library is organized into three spaces: [Components](index.html#library), [Approved screens & flows](screens.html), and [Workshop](workshop.html). Components and Workshop use masonry. Approved screens & flows has an ordered Onboarding flow and an aligned screen gallery. Browse live previews together, filter by category or search, and change states within a card. Existing focused previews remain available. Read [LIBRARY.md](LIBRARY.md) for categorization and maintenance. For the native app implementation handoff, read [IMPLEMENTATION-START.md](IMPLEMENTATION-START.md).
+
 [Live component library](https://tltoan.github.io/today-components/) · [Source repository](https://github.com/tltoan/today-components) · [Agent guide](AGENTS.md) · [Integration guide](INTEGRATION.md) · [Component manifest](components.json)
 
 ## For agents and developers
@@ -17,7 +19,7 @@ GitHub Pages publishes this repository's default branch from its root. `.nojekyl
 
 An interactive component showcase adapting the four-panel motion composition in [Monotree — features sections by Oleksandr Plyuto](https://www.cosmos.so/e/1503723395) to Today, with the supplied Today logo animation, the selected Center cradle navigation, an independent adaptive action button, and the supplied page counter, staggered bar chart, and full welcome landing screen.
 
-Open `index.html` directly, or serve this directory with a local HTTP server. No build, package install, or network dependency is needed.
+Serve this directory with a local HTTP server to use the three library boards and their embedded previews. No build, package install, or network dependency is needed.
 
 This is the working Today component library. This README and AGENTS.md contain the component contracts needed to work in this repository. The separate native app specification is not required to run these previews; native app integration is not implied.
 
@@ -33,7 +35,7 @@ This is the working Today component library. This README and AGENTS.md contain t
 | Slide to log | `components/slide-to-log.js`, `components/slide-to-log.css`, `SLIDE-TO-LOG.md` | Independent browser component and focused preview; drag, tap, keyboard, Undo, disabled and cancellation. Original library card uses the same element. |
 | Daily checklist | `app.js`, `style.css` | Browser specimen; shares sample state with slide-to-log. |
 | Today logo | `today-logo.js`, `native/TodayLogoAnimation.swift` | Reusable browser component plus unchanged user-supplied SwiftUI source. |
-| Welcome landing | `components/welcome-intro.js`, `components/welcome-intro.css`, `native/TodayWelcomeIntro.swift`, `native/TodayIntro.swift` | Motion-only opening on `index.html`, with the library immediately below; `landing.html` redirects there. A library specimen provides replay controls. Original wrapper and matching local dependency preserved unchanged; native app integration pending. |
+| Welcome landing | `components/welcome-intro.js`, `components/welcome-intro.css`, `native/TodayWelcomeIntro.swift`, `native/TodayIntro.swift` | Motion-only opening on `index.html`, with the library immediately below; `landing.html` redirects there. The focused Welcome screen is in `welcome.html`. Original wrapper and matching local dependency preserved unchanged; native app integration pending. |
 | Bottom navigation | `components/bottom-nav.js`, `components/bottom-nav.css`, `components/cradle-fluid.js` | Center cradle (B) selected November 20. Animated Home/Habits highlight and central +. Browser implemented; Figma/native migration pending. |
 | Adaptive plan button | `components/plan-button.js`, `components/plan-button.css`, `components/plan-readiness.js` | Standalone browser component with a dedicated `plan-button.html` preview and manual state/replay controls. Staggered letter roll; no editor or parser required. |
 | Page counter | `components/page-counter.js`, `components/page-counter.css`, `native/AnimatedPageCounter.swift` | Supplied SwiftUI source preserved unchanged. Browser custom element and `page-counter.html` preview; tap/hold, limits, rolling digits, sequential fill and labeled overflow. Native app integration pending. |
@@ -394,7 +396,7 @@ Checks for the review refinements: changed JavaScript parsed; all 46 manifest en
 
 | Component | Source | Status / states |
 | --- | --- | --- |
-| [Liquid orbit loader](liquid-orbit-loader.html) | `components/liquid-orbit-motion.js`, `components/liquid-orbit-loader.js/css`; `native/reference/LiquidOrbitLoader.swift` + `native/TodayLiquidOrbitLoader.swift` | Additional proposal: supplied eight-bead one-second motion, Today gradient, play/pause/replay/speed, reduced still, background/offscreen suspension. Existing loader remains selected. |
+| [Liquid orbit loader](liquid-orbit-loader.html) | `components/liquid-orbit-motion.js`, `components/liquid-orbit-loader.js/css`; `native/reference/LiquidOrbitLoader.swift` + `native/TodayLiquidOrbitLoader.swift` | Approved additional component: supplied eight-bead one-second motion, Today gradient, play/pause/replay/speed, reduced still, background/offscreen suspension. Existing loader remains selected. |
 | [Profile, overlapping stack and lead avatar](habit-parties.html#party-avatar-components) | `components/party-avatars.js/css`, `native/TodayPartyAvatars.swift` | Selected stack; independent compact lead. Up to four people, stable varied gradients, photo loading/failure fallback. |
 | Book cover invite | `components/habit-party.js/css` | Selected Book cover plus new Shared cover and Reading circle comparisons; open/joining/joined/full. |
 | Recap plan A | `components/recap.js/css` | Selected One plan card default in both recap flows. |
@@ -438,7 +440,7 @@ Current detail/onboarding checks: desktop and phone widths, keyboard tracking se
 | Component | Source | Status and supported states |
 | --- | --- | --- |
 | Party room | `components/party-room.*`, `party-progress.js` | Controlled browser prototype. All four members, personal plans, shared schedule, dated shared streak, recipient-specific nudges. |
-| Compact activity | `components/party-activity.js`, `party-room.css` | Date-first snap cards with compact member rows; expandable original entries, photos and avatar-heart reactions. |
+| Shared check-ins | `components/party-photo-carousel.*` | Selected photo carousel, original entry notes/amounts, no-photo logs and stacked avatar-heart reactions. Supersedes the date-first activity. |
 | Avatar reactions | `components/party-reactions.js`, `party-room.css` | Controlled reaction add/remove; profiles show who left a heart; reduced-motion support. |
 | Party setup | `components/party-setup.js`, `party-room.css` | Planning proposal only: personal plan, shared schedule scope, create/invite preview. Independent trial review policy is proposed. |
 | Week bar | `components/week-bar.*` | Shared Home/onboarding control. Controlled date, separate today mark, keyboard focus and selection, reduced motion. |
@@ -463,13 +465,13 @@ Checks for this revision: JavaScript syntax and source paths; desktop and observ
 | --- | --- | --- |
 | Onboarding portrait | `components/onboarding.*`, `components/face-picker.*` | Portrait & color after Features. Save profile advances to Describe after confirmation. |
 | Shared identity | `profile-identity-demo.js`, `native/TodayProfileIdentity.swift`, [PROFILE-IDENTITY.md](PROFILE-IDENTITY.md) | Browser-local persistence, Profile editing, current-user Home/party avatar propagation. Native store requires host persistence. |
-| Reading attachments | `assets/party-samples/`, `components/party-room.*`, `components/party-activity.js` | Four user-supplied photos; date-card thumbnails open original check-ins. Fictional people/logs remain fixtures. |
+| Reading attachments | `assets/party-samples/`, `components/party-room.*`, `components/party-photo-carousel.*` | Four user-supplied photos; the selected carousel shows original check-ins. Fictional people/logs remain fixtures. |
 
 The party-creation switch keeps its thumb centered. The selected Book cover invite retains the shared moving target pill across taps; other live invitation variants were removed.
 
 ## Curved signature variation
 
-[Preview](logo-variations.html) · [Browser/SwiftUI integration](LOGOS.md). The rounded-t, curved-y signature is an additional variation, with replay, pause, half speed, looping and diagonal-y comparison. The approved opening is unchanged. Supplied reference is retained byte for byte; the namespaced native file can coexist with the original.
+[Preview](logo-variations.html) · [Browser/SwiftUI integration](LOGOS.md). The rounded-t, curved-y signature is an approved additional component, with replay, pause, half speed, looping and diagonal-y comparison. The approved opening is unchanged. Supplied reference is retained byte for byte; the namespaced native file can coexist with the original.
 
 For continuing work in a new chat, start with [CHAT-HANDOFF.md](CHAT-HANDOFF.md).
 
@@ -478,7 +480,7 @@ Latest verification (November 21): changed/new JavaScript syntax and local HTML 
 
 ## Selected photo check-ins · November 21
 
-[Open the component](party-photos.html) · [API and dependencies](PARTY-PHOTOS.md). **On the photo (B)** is selected and now supplies Shared check-ins in browser party rooms, including habit detail’s dialog. Person/time sit bottom-left and the original logged amount sits bottom-right. The visible position count is removed. A Photo journal and C Filmstrip remain under Compare earlier layouts.
+[Open the component](party-photos.html) · [API and dependencies](PARTY-PHOTOS.md). **On the photo (B)** is selected and now supplies Shared check-ins in browser party rooms, including habit detail’s Party view. Person/time sit bottom-left and the original logged amount sits bottom-right. The visible position count is removed. Earlier Photo journal and Filmstrip comparisons have been removed.
 
 | Piece | Source | Status and supported states |
 | --- | --- | --- |
@@ -488,3 +490,35 @@ Latest verification (November 21): changed/new JavaScript syntax and local HTML 
 | Comparison host | `party-photo-study.*`, `party-room-demo.js` | Local fixtures and reactions only; no server, upload or native app changes. |
 
 Verification for this revision: eight changed/new JavaScript files pass syntax checks; 1,228 local HTML source/asset links and manifest file references resolve; eight existing party-streak tests pass. Browser checks covered desktop and an actual 390 × 844 iframe viewport with no horizontal overflow, bottom-right quantity, hidden visual count, avatar-heart stacks, keyboard and thumbnail navigation, rapid arrow reversal, reduced-motion settling, inactive-slide accessibility, comparison disclosure, member filtering, saved zero, no-photo logs and failed-image fallback. Like/unlike preserves the selected original entry; the host-bound reaction works in habit detail’s party dialog. The library mounts without console errors and the original vertical agenda still advances one day. These are browser/source checks, not native runtime or real-device touch verification.
+
+
+## Log notes and current selections · local only
+
+- `log-notes.html` / `components/log-editor.*`: reusable amount + optional note editor, dialog shell and verbatim recap excerpts. Integrated with browser habit detail and party carousel. Home quick logging remains one tap. Per-entry history editing, explicit zero, pending, failure and no-note states. See LOG-NOTES.md.
+- `photo-actions.html` / `components/log-photo-action.*`: selected circular photo action beside logging, revealed for a confirmed party entry. File cancellation and attachment are independent of amount/note saving. Same card width as Home. Older pill/row directions removed.
+- Full-width continuation cards (A) selected in both recap flows. Old standalone party check-in and carousel comparisons removed. Native sources remain unchanged; gallery data and attachments are local only.
+
+
+## Latest placement decision
+
+Latest user correction: notes are confined to individual habit history. Quick-log buttons remain one tap; the interim Home log editor was removed. History Add a note chooses an existing entry. The selected circular photo action stays on the logging row.
+
+
+### Local library reorganization · November 21
+
+Initial organization introduced three masonry boards with 35 component cards, 6 selected screen/flow previews and 9 Workshop studies. `library-catalog.js` owns classification; `library-board.*` and `library-embed.*` reuse existing focused pages and event handlers. Per-card state menus use the existing dropdown motion. Search/category filters preserve mounted examples. Legacy page hashes route to their new space. All previews remain browser fixtures; nothing has been published.
+
+Validation in this pass: all 35 component cards, 6 screen cards and 9 Workshop cards loaded their selected preview targets. Checked compact/illustrated switching, note/history switching, widget state keyboard selection, category/search filtering, a 390 × 844 board with no horizontal overflow, and reduced-motion dropdown duration (0 s). 20 changed/new JavaScript files passed syntax checks; 1,861 local HTML references and all 68 manifest entries resolved; 8 existing party-progress tests passed. Notes/photo checks earlier in this pass covered original entry IDs, preserved drafts on failure, explicit zero, local image attachment, one-tap logging and same-row photo placement. Native app/runtime integration has not been performed.
+
+
+### Library refinement review
+
+The shared page navigation now reuses the existing segmented control’s sliding highlight, retaining the original animated logo and gradient across all three URLs. Onboarding has a wide numbered flow outline with a live preview; other approved screens use an aligned grid. Liquid orbit and Curved signature were explicitly approved and moved into Components (37 components, 6 screen/flow previews, 7 Workshop studies). Gallery fixes add 24 px above target-feedback controls, clear the cradle’s inherited horizontal offset, center step controls, animate avatar-stack faces and expose the large animated Warm Ember with Replay.
+
+Current browser checks: page switching and Back/Forward preserve the selected onboarding step; clicking Continue updates the outline; mobile page width is 390 px without overflow; keyboard page switching and reduced-motion highlight work. The cradle is fully within its frame (18–372 px of 390 px), the target-control gap is 24 px, and step-control/preview centers match. Avatar face reports playing when visible and still under reduced motion. The flame reports playing on Replay at 168 × 193 px, then settles. All changes remain local browser-library work.
+
+## Local party navigation refinement
+
+The Habits invitation now opens the selected Book cover component within the same phone. Individual habit keeps one logging area with Your activity / Party views; avatar entry selects Party and the redundant entry row/dialog are removed. The existing shared room uses a 28 px proportional progress ring instead of the pie wedge. Browser fixtures only; native app integration remains separate.
+
+Checked this revision: five changed JavaScript files pass syntax checks; 1,889 local HTML references and all 68 manifest entries resolve. Desktop library and 390 × 844 component viewports cover invitation choice/return/local join, view switching by keyboard, reduced motion, retained member selection, personal-history note entry, quick logging, non-party mode and ring values 0/3, 1/3, 2/3, 3/3 and day off. Existing party-progress checks pass.

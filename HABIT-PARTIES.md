@@ -21,7 +21,7 @@ Design proposal from the November 21 discussion. Browser mockups are now availab
 - **Log success:** joining authorizes automatic sharing of new logs for that habit. State this before Join. Photos remain an optional attachment. A failed share stays pending for retry; it must not masquerade as a private-only choice.
 - **Saved/logged states:** separate “Logged”, “Shared with your party” and “Photo upload failed”. They represent different operations.
 - **Notifications:** add controls for party nudges separately from personal reminders. Proposed cap is one incoming nudge per habit per recipient per day across the party, not one per sender. The host must enforce this and use the recipient's window/timezone.
-- **Privacy:** share new logs of the selected party habit automatically; attach photos only when chosen. Do not expose other habits, private notes, overall streak, or past logs automatically. No photo is required for a valid log.
+- **Privacy:** share new logs of the selected party habit automatically; attach photos only when chosen. Entry notes are shared with the party by default; do not expose other habits, private trial reflections, overall streak, or past logs automatically. No photo is required for a valid log.
 
 ## Motion
 
@@ -48,7 +48,6 @@ Load the ordered dependencies from `components.json`. The core invite, entry, ch
 | Element | Model fields | Requests / demonstrated states |
 | --- | --- | --- |
 | `today-party-entry` | `id`, `members:[{id,name,initials,self,photoURL,gradientIndex}]`, `title`, `summary`, `placement: inline|stack|capsule|lead`; optional `compact` attribute | `open`; recent check-in and empty copy |
-| `today-party-checkin` | `memberID`, `name`, `initials`, optional `profilePhotoURL`, `time`, `amount`, `note`, `viewer`, `reactors:[{id,name,initials}]`, `reacted`, optional `photoURL`, `photoAlt` | `react`; text, sample attachment, avatar-heart on/off with a single 540 ms settle; optional `compact` presentation |
 | `today-party-composer` | `members`, `amount`, `state`, `message`, optional photo | `photo` (includes File), `remove-photo`, `share` (photo only), `retry-sync`; shared, photo-draft, uploading, photo-saved, photo-error and sync-error |
 | `today-party-nudge` | `name`, `window`, `state` | `nudge-reading`, `nudge-encourage`; available, muted, window, limit, sending, sent, error |
 The live invitation is selected Book cover B only. Earlier render variants remain historical source, outside the gallery.
@@ -60,7 +59,7 @@ All requests include `{action,id}`. Models are copied when assigned. Names, text
 
 `habit-party-study.js` supplies fictional people, save/share acknowledgements and invite transitions. Group reading logs appear in the feed automatically after the simulated save. The photo composer starts from “Shared with Maya & Sam”; it never offers Keep it private. Undo removes that log from both the personal total and the shared feed, and removes its attached image from the rendered feed. This is a local proposal for correction propagation, not a claim of server delivery. Joining with 15 minutes keeps the other members’ plans unchanged.
 
-The November 21 follow-up explicitly supersedes the earlier optional sharing proposal. Do not restore a per-log private choice for a party habit. Existing history is not retroactively shared by these mockups. Other habits, personal notes and Today’s overall streak remain private.
+The November 21 follow-up explicitly supersedes the earlier optional sharing proposal. Do not restore a per-log private choice for a party habit. Existing history is not retroactively shared by these mockups. Notes on new party entries are shared by default. Other habits, trial reflections and Today’s overall streak remain private.
 Photo selection is local only, limited to images below 8 MB by the demo controller; no upload occurs. The failure example retains the draft and confirmed shared log. The caller can retry. Photos remain optional. The gallery demonstrates local recipient availability and a one-nudge sent state; production must enforce the per-recipient cap across the party and timezone/window checks on the server.
 
 The state map above includes unimplemented future states such as invite expiry, revoked access and post-removal policy. Do not infer those features from the specimens. Membership authorization, photo deletion/retention, moderation, invite management, delivery and persistence still require product decisions and implementation.
@@ -79,7 +78,7 @@ Nudges now live in components/party-nudge.js and components/party-nudge.css; loa
 
 ## Current compact party composition
 
-See [PARTY-ROOM.md](PARTY-ROOM.md) for `today-party-room`, `today-party-activity`, `today-party-reactions` and the separate planning proposal `today-party-setup`. The room replaces the old single-Maya feed and nudge panel in both Home/detail contexts and the selected habit-detail dialog. Tap any member to inspect their target and activity or nudge that recipient. The feed shows one person/day total, expanded into original entries and their own avatar reactions.
+See [PARTY-ROOM.md](PARTY-ROOM.md) for `today-party-room`, `today-party-photo-carousel`, `today-party-reactions` and the separate planning proposal `today-party-setup`. The room replaces the old single-Maya feed and nudge panel in both Home/detail contexts and the selected habit-detail dialog. Tap any member to inspect their target and activity or nudge that recipient. The selected carousel preserves original entry amounts, notes, photos and avatar reactions; no-photo logs remain accessible.
 
 The shared streak is now explicitly approved: shared scheduled days only, every eligible member has a saved log, days off unchanged. This supersedes the earlier no-shared-streak proposal. The overall Today streak remains private on Home. Trial reviews staying individual and party creation from plan review are mock proposals, not settled lifecycle policy.
 
@@ -95,3 +94,5 @@ Proposed location: an Invitations row above the Habits plan list. Notification/d
 The four user-supplied reading photos in `assets/party-samples/` are gallery fixtures. The party room shows a compact photo strip; tapping a photo reveals its original check-in. Member assignment is fictional. Local photo assets use that allowlisted path; uploaded previews still use blob/data URLs. No photo is uploaded.
 
 The selected invitation uses the shared `today-segmented-control`; plan changes retain the control so its highlight slides and focus stays put. The live gallery contains Book cover B only. The party setup switch uses the shared thumb geometry without text margins leaking into it.
+
+The shared check-in surface is now `today-party-photo-carousel`; the superseded standalone card was removed. See PARTY-PHOTOS.md and LOG-NOTES.md.

@@ -14,8 +14,8 @@ today-party-setup{display:block;min-width:0}.ps-card{padding:24px;background:rad
 /* One date and one progress mark beside the shared streak. */
 .p-streak{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 16px}
 .p-streak-top{gap:10px;margin:0}.p-streak-top img{width:35px;height:44px}.p-streak-top strong{font-size:29px}.p-streak-top span{font-size:11px}
-.p-current{display:flex;align-items:center;gap:9px;flex-shrink:0}.p-current i{display:block;width:24px;height:24px;border:1px solid #bca9d655;border-radius:50%;background:conic-gradient(#bca9d6 var(--portion),#bca9d610 0)}
-.p-current strong,.p-current span{display:block;font-weight:400;font-size:12px}.p-current span{font-size:11px;color:#c2b6ce;margin-top:3px}.p-current.is-off i{background:transparent}
+.p-current{display:flex;align-items:center;gap:9px;flex-shrink:0}.p-current-ring{display:block;width:28px;height:28px;flex:0 0 28px;fill:none;stroke-width:3}.p-current-track{stroke:#bca9d629}.p-current-fill{stroke:#bca9d6;stroke-linecap:butt}
+.p-current strong,.p-current span{display:block;font-weight:400;font-size:12px}.p-current span{font-size:11px;color:#c2b6ce;margin-top:3px}.p-current.is-off .p-current-track{stroke:#bca9d61c}
 /* The same date rail and snap motion as A space in your day. */
 today-party-activity{border:0;border-radius:0;background:none;overflow:visible}
 .pa-agenda-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}.pa-month{font-size:12px;color:#bdb4c9}.pa-agenda-head>div{display:flex;gap:6px}

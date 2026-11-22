@@ -1,6 +1,6 @@
 # Today signatures
 
-The approved opening and original logo remain unchanged. The curved signature is an additional variation from the user-supplied November 21 SwiftUI file.
+The approved opening and original logo remain unchanged. The curved signature is an approved additional component from the user-supplied November 21 SwiftUI file. It now lives in Components alongside the original.
 
 | Piece | Browser | SwiftUI |
 | --- | --- | --- |

@@ -10,7 +10,7 @@
     set model(v){this._model=structuredClone(v||{});if(this._ready)this.update();}
     get model(){return structuredClone(this._model||{});}
     build(){
-      this.innerHTML=`<div class="p-room"><header class="p-room-head"><span class="p-eyebrow">PRIVATE PARTY</span><h3></h3><p></p></header><section class="p-streak" aria-label="Shared party streak"><div class="p-streak-top"><img src="assets/streaks/ember.svg" alt=""><div><strong></strong><span></span></div></div><div class="p-current"><i aria-hidden="true"></i><div><strong></strong><span></span></div></div></section><section class="p-members"><div class="p-section-title"><h4>People</h4></div><div class="p-member-tabs" role="group" aria-label="Choose a party member"></div></section><div class="p-person-panel"></div><section class="p-feed"><div class="p-section-title"><h4>Shared check-ins</h4><button class="p-all" type="button">Everyone</button></div><today-party-photo-carousel variant="overlay"></today-party-photo-carousel></section></div>`;
+      this.innerHTML=`<div class="p-room"><header class="p-room-head"><span class="p-eyebrow">PRIVATE PARTY</span><h3></h3><p></p></header><section class="p-streak" aria-label="Shared party streak"><div class="p-streak-top"><img src="assets/streaks/ember.svg" alt=""><div><strong></strong><span></span></div></div><div class="p-current"><svg class="p-current-ring" viewBox="0 0 28 28" aria-hidden="true"><circle class="p-current-track" cx="14" cy="14" r="11"></circle><circle class="p-current-fill" cx="14" cy="14" r="11" pathLength="100" transform="rotate(-90 14 14)"></circle></svg><div><strong></strong><span></span></div></div></section><section class="p-members"><div class="p-section-title"><h4>People</h4></div><div class="p-member-tabs" role="group" aria-label="Choose a party member"></div></section><div class="p-person-panel"></div><section class="p-feed"><div class="p-section-title"><h4>Shared check-ins</h4><button class="p-all" type="button">Everyone</button></div><today-party-photo-carousel variant="overlay"></today-party-photo-carousel></section></div>`;
       this.querySelector('.p-all').onclick=()=>this.select('all');
     }
     select(id){this._selected=id;this.update();this.dispatchEvent(new CustomEvent('party-member-change',{bubbles:true,detail:{id}}));}
@@ -26,7 +26,8 @@
       const current=this.querySelector('.p-current'),day=stats.current;
       current.querySelector('strong').textContent=dateLabel(m.today);
       current.querySelector('span').textContent=day.scheduled===false?'Day off':`${day.logged}/${day.total} logged`;
-      current.querySelector('i').style.setProperty('--portion',`${day.total?day.logged/day.total*100:0}%`);
+      const portion=day.scheduled===false||!day.total?0:Math.min(100,Math.max(0,day.logged/day.total*100));
+      const fill=current.querySelector('.p-current-fill');fill.setAttribute('stroke-dasharray',`${portion} 100`);fill.style.opacity=portion?1:0;
       current.classList.toggle('is-off',day.scheduled===false);
       current.setAttribute('aria-label',`${dateLabel(m.today)}: ${day.scheduled===false?'Day off, streak unchanged':day.logged+' of '+day.total+' members logged'}`);
       this.querySelector('.p-member-tabs').innerHTML=m.members.map(p=>`<button type="button" data-member="${esc(p.id)}" aria-pressed="${this._selected===p.id}" aria-label="${esc(p.name)}, ${stats.current.loggedIDs.includes(p.id)?'logged today':'no log today'}. View plan and activity"><today-profile-avatar size="42" person="${esc(JSON.stringify(p))}" aria-hidden="true"></today-profile-avatar><strong>${esc(p.name)}</strong><small>${stats.current.loggedIDs.includes(p.id)?'Logged':'No log yet'}</small></button>`).join('');

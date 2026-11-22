@@ -1,18 +1,12 @@
 # Shared check-ins: selected photo carousel
 
-[Open the component](party-photos.html). **B / On the photo is selected** for the Shared check-ins surface and now used by browser party rooms. The amount sits at the image’s bottom-right, opposite the person and time. The visible photo count is removed; assistive technology retains position announcements. A / Photo journal and C / Filmstrip remain under Compare earlier layouts. The original date-first `today-party-activity` is retained as reusable source. Native app integration and backend capabilities remain separate.
+[Open the component](party-photos.html). **B / On the photo is selected** for the Shared check-ins surface and now used by browser party rooms. The amount sits at the image’s bottom-right, opposite the person and time. The visible photo count is removed; assistive technology retains position announcements. Earlier Photo journal and Filmstrip variants have been removed. The superseded date-first feed has also been removed. Native app integration and backend capabilities remain separate.
 
-| Variant | Composition |
-| --- | --- |
-| `caption` · A / Photo journal | Landscape photo with avatar, name, time and logged amount in a graphite caption below. |
-| `overlay` · B / On the photo · **Selected** | Taller photo with person/time at bottom-left and exact quantity at bottom-right over a dark lower gradient. |
-| `filmstrip` · C / Filmstrip | Person and amount above an uncropped photo; thumbnails below offer direct navigation. |
-
-All three reuse the same Today avatars, confirmed identity resolver, avatar-heart reactions, 600 ms disclosures and SnapScroller. The shared controller now accepts `axis:'x'` and `fade:false`; its existing vertical defaults remain the same. Swipes, horizontal trackpad gestures, buttons and keyboard navigate the photo entries with the existing 680 ms settling curve. Vertical gestures remain available for scrolling the containing page. There is no autoplay or additional CSS snap controller. Reversal starts from the current scroll position, and reduced motion settles immediately.
+The selected carousel reuses Today avatars, confirmed identity, avatar-heart reactions and shared disclosures. The shared controller now accepts `axis:'x'` and `fade:false`; its existing vertical defaults remain the same. Swipes, horizontal trackpad gestures, buttons and keyboard navigate the photo entries with the existing 680 ms settling curve. Vertical gestures remain available for scrolling the containing page. There is no autoplay or additional CSS snap controller. Reversal starts from the current scroll position, and reduced motion settles immediately.
 
 ## Model and integration
 
-Load the ordered scripts and styles in the `party-photo-carousel` entry of `components.json`. Set the variant before mounting, then assign the same controlled party model described in [PARTY-ROOM.md](PARTY-ROOM.md):
+Load the ordered scripts and styles in the `party-photo-carousel` entry of `components.json`. Assign the same controlled party model described in [PARTY-ROOM.md](PARTY-ROOM.md):
 
 ```html
 <today-party-photo-carousel variant="overlay"></today-party-photo-carousel>
@@ -35,10 +29,15 @@ Entries without a photo remain available under **Check-ins without photos**, usi
 
 Photo likes use `today-party-reactions variant="stack"`, which reuses `today-avatar-stack badges="heart"`. Each confirmed reacting person appears in the overlapping stack with a heart badge; the separate Like/Liked button toggles the viewer. No unconfirmed person appears in the stack. The same 540 ms confirmation feedback is retained and does not replay merely when changing photos.
 
-Reactions emit the existing bubbling `party-request {action:'react', id:entryID}`. They change only after the host supplies updated `reactorIDs`. Reactions never change the carousel position or aggregate logs. Offscreen slides are inert and hidden from assistive technology. Left/Right, Home/End and Page Up/Down work when the carousel viewport is focused; all arrows/thumbnails are at least 44 px targets. No photo click opens an additional modal.
+Reactions emit the existing bubbling `party-request {action:'react', id:entryID}`. They change only after the host supplies updated `reactorIDs`. Reactions never change the carousel position or aggregate logs. Offscreen slides are inert and hidden from assistive technology. Left/Right, Home/End and Page Up/Down work when the carousel viewport is focused; all arrows are at least 44 px targets. No photo click opens an additional modal.
 
 ## Fixture boundary
 
 `party-photo-study.js` and `party-room-demo.js` are gallery-only. The four supplied images in `assets/party-samples/` are reused without editing. Assignment to You, Maya and Sam is fictional and does not identify the people pictured. Everyone/individual filters, no-photo/broken-photo/zero examples and reactions are local preview state. The host owns production writes, photo access, timezone policy, eligibility and persistence.
 
 Browser verification is recorded in README.md after this revision's checks. Native app integration remains separate.
+
+
+## Current logging update
+
+Latest: only the selected overlay remains; earlier carousel variants and the old standalone check-in card have been removed. A saved entry may include `note`, shown verbatim below its selected image (or in the no-photo entry). Party notes are shared by default. The photo action selected afterward is the circular icon on the same row as logging; see [LOG-NOTES.md](LOG-NOTES.md).

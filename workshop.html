@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" class="library-page">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000">
+<title>Today — Workshop</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="components/welcome-intro.css">
+<link rel="stylesheet" href="components/controls.css">
+<link rel="stylesheet" href="components/dropdown.css">
+<link rel="stylesheet" href="foundations/motion.css">
+<link rel="stylesheet" href="library-board.css?v=boards-6">
+<script src="foundations/disclosure.js" defer>
+</script>
+<script src="components/icons.js" defer>
+</script>
+<script src="components/controls.js" defer>
+</script>
+<script src="components/dropdown.js" defer>
+</script>
+<script src="today-logo.js" defer>
+</script>
+<script src="components/welcome-intro.js" defer>
+</script>
+<script src="library-catalog.js?v=boards-7" defer>
+</script>
+<script src="library-board.js?v=boards-6" defer>
+</script>
+</head>
+<body data-library-page="workshop">
+<a class="skip-intro" href="#library">Skip animation to library</a>
+<today-welcome-intro id="intro" class="library-opening" role="img" aria-label="Today. What will you do?"></today-welcome-intro>
+<main id="library" class="library-board" tabindex="-1">
+<header class="library-navigation">
+<nav aria-label="Library spaces"><today-segmented-control class="library-space-switch" label="Library space" value="workshop"><option value="components">Components</option><option value="screens">Screens &amp; flows</option><option value="workshop">Workshop</option></today-segmented-control><noscript><a href="index.html">Components</a><a href="screens.html">Screens &amp; flows</a><a href="workshop.html">Workshop</a></noscript></nav>
+<a class="library-source-link" href="source.html">Source & guides ↗</a>
+</header>
+<section class="library-content" id="library-content-workshop">
+<div class="library-intro">
+<div>
+<h1>Workshop</h1>
+<p>Current studies and open directions. Nothing here is marked approved until you choose it.</p>
+</div>
+<label class="library-search">
+<span aria-hidden="true">⌕</span>
+<input id="library-search" type="search" aria-label="Search Workshop" placeholder="Search this space">
+</label>
+</div>
+<div class="library-filter-row">
+<div class="library-filters" role="group" aria-label="Filter by category">
+</div>
+<p class="library-result-count" role="status">
+</p>
+</div>
+<div class="library-masonry">
+</div>
+<p class="library-empty" hidden>No matches. Try another name or category.</p>
+</section>
+<p class="sr-only library-announcement" role="status"></p>
+<footer>
+<span>Today library · Live browser previews · Local example data</span>
+<a href="source.html">Sources & integration guides ↗</a>
+</footer>
+</main>
+</body>
+</html>

@@ -19,7 +19,7 @@ document.querySelector('today-lead-avatar').members = members;
 
 Use stable user IDs from the host, not names or array positions. Name fallback exists only for older gallery fixtures. FNV-1a32 over UTF-8 ID, modulo six palettes, is identical in JS and SwiftUI. Swift uses overflow multiplication `&*`, never `hashValue`. Optional `faceStyle` selects one of the seven faces and `gradientIndex` (0–11) preserves the chosen picker color. The six-color hash remains the fallback for identities without a chosen portrait. Reordering does not change colors. Different IDs can share one of six palettes; they never receive a new random palette on render.
 
-A real photo covers the gradient once loaded. Missing/loading/failed photos show the saved still face, or initials when no face is selected, on the chosen gradient. No idle animation. Profiles are decorative inside an accessible, labelled host button, with at least 44-point hit area. Noninteractive standalone pieces expose member names.
+A real photo covers the gradient once loaded. Missing/loading/failed photos show the saved face, or initials when no face is selected, on the chosen gradient. Browser profile avatars and stacks now reuse the existing animated face renderer; add `still` to opt out. Lead avatars remain still. Reduced motion holds the face, and hidden/offscreen work suspends. The native source has not been changed by this gallery refinement. Profiles are decorative inside an accessible, labelled host button, with at least 44-point hit area. Noninteractive standalone pieces expose member names.
 
 ## Browser
 

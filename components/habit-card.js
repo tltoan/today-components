@@ -8,10 +8,10 @@
       this._connected=true;
       this.setAttribute('role','article');
       this.classList.add('ho-habit');
-      this.innerHTML='<today-target-feedback></today-target-feedback><div class="ho-habit-top"><div class="ho-habit-title"><h4></h4><p></p></div><span class="ho-card-art"></span></div><div class="ho-habit-bottom"><div class="ho-habit-result"><strong></strong><span></span></div><today-button variant="secondary"></today-button></div><div class="ho-party-slot" hidden></div><p class="ho-error" role="alert" hidden></p>';
+      this.innerHTML='<today-target-feedback></today-target-feedback><div class="ho-habit-top"><div class="ho-habit-title"><h4></h4><p></p></div><span class="ho-card-art"></span></div><div class="ho-habit-bottom"><div class="ho-habit-result"><strong></strong><span></span></div><div class="ho-habit-actions"><today-log-photo-action></today-log-photo-action><today-button variant="secondary"></today-button></div></div><div class="ho-party-slot" hidden></div><p class="ho-error" role="alert" hidden></p>';
       this._abort=new AbortController();
       this.addEventListener('today-activate', e=>{
-        if(!e.target.matches('.ho-habit-bottom > today-button') || this._model?.pending || this._model?.future)return;
+        if(!e.target.matches('.ho-habit-actions > today-button') || this._model?.pending || this._model?.future)return;
         this.dispatchEvent(new CustomEvent('logrequest',{bubbles:true,detail:{id:this._model.id,date:this._model.date}}));
       },{signal:this._abort.signal});
       this.render(null);
@@ -36,7 +36,7 @@
       const amount=hasLog?(h.kind==='check'?(h.amount>0?'Logged':'None today'):`${Number(h.amount).toLocaleString('en-US')} ${h.unit}`):'No log yet';
       this.querySelector('.ho-habit-result strong').textContent=h.future?'Planned':amount;
       this.querySelector('.ho-habit-result span').textContent=h.future?(h.cue||'On your schedule'):reached?'Target met':hasLog?(h.kind==='limit'?'Logged · keep logging':'Logged'):(h.cue||'Whenever it fits');
-      const label=h.kind==='check'?(h.amount>0?'Undo':'Log'):`+ ${h.increment} ${h.unit}`;
+      const label=h.kind==='check'?(h.amount>0?(h.editCheck?'Edit log':'Undo'):'Log'):`+ ${h.increment} ${h.unit}`;
       const action=this.querySelector('today-button');
       if(h.pending&&action.contains(document.activeElement))this._restoreFocus=true;
       action.hidden=!!h.future;action.dataset.homeLog=h.id;
@@ -46,6 +46,7 @@
       if(!h.pending&&this._restoreFocus){if(!h.future&&(document.activeElement===document.body||action.contains(document.activeElement)))action.querySelector('button')?.focus({preventScroll:true});this._restoreFocus=false;}
       const party=this.querySelector('.ho-party-slot');party.hidden=!h.party;this.dataset.partyPlacement=h.party?.placement||'inline';
       if(h.party){let entry=party.querySelector('today-party-entry');if(!entry){entry=document.createElement('today-party-entry');entry.setAttribute('compact','');party.append(entry);}entry.model=h.party;}else party.replaceChildren();
+      const photoAction=this.querySelector('today-log-photo-action');photoAction.setAttribute('variant','icon');photoAction.model={entryID:h.party?h.photoEntry?.id:null,photoURL:h.photoEntry?.photoURL};
       const error=this.querySelector('.ho-error');error.textContent=h.error||'';error.hidden=!h.error;
       const feedback=this.querySelector('today-target-feedback');
       const variant=['bloom','wash','halo'].includes(h.feedback)?h.feedback:'wash';

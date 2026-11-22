@@ -99,7 +99,7 @@ Habit detail selection: Grouped cards (B). Independent history (day summaries / 
 
 
 
-Party room / compact feed / identity reactions / planning proposal: PARTY-ROOM.md; components/party-room.js, components/party-activity.js, components/party-progress.js, components/party-reactions.js, components/party-setup.js, components/party-room.css. Shared schedule; personal targets/reminders; shared scheduled-day streak. party-room-demo.js is demo only.
+Party room / compact feed / identity reactions / planning proposal: PARTY-ROOM.md; components/party-room.js, components/party-photo-carousel.js, components/party-progress.js, components/party-reactions.js, components/party-setup.js, components/party-room.css. Shared schedule; personal targets/reminders; shared scheduled-day streak. party-room-demo.js is demo only.
 Shared Home/onboarding date strip: components/week-bar.js and components/week-bar.css. Entry journal is the selected history default.
 
 - Selected profile picker and seven supplied faces: [Preview](https://tltoan.github.io/today-components/faces.html), [API](https://tltoan.github.io/today-components/FACES.md), [original SwiftUI](https://tltoan.github.io/today-components/native/PlayfulFaces.swift), [SwiftUI layouts](https://tltoan.github.io/today-components/native/TodayFacePicker.swift). Portrait & color selected; arrows cycle all seven faces, swatches change one of twelve gradients, with local photo selection. Onboarding now includes the selected picker; confirmed choices propagate to Profile and party avatars. Dependencies and APIs are in components.json and FACES.md.
@@ -110,3 +110,11 @@ Shared profile identity: https://tltoan.github.io/today-components/PROFILE-IDENT
 - Curved signature variation: [LOGOS.md](https://tltoan.github.io/today-components/LOGOS.md), [browser source](https://tltoan.github.io/today-components/components/logo-curved.js), [SwiftUI](https://tltoan.github.io/today-components/native/TodayLogoCurvedAnimation.swift). Rounded t, optional curved y, original opening unchanged.
 
 - Selected shared check-in photo carousel: [Selected component](https://tltoan.github.io/today-components/party-photos.html), [contract](https://tltoan.github.io/today-components/PARTY-PHOTOS.md). today-party-photo-carousel variants caption / overlay / filmstrip. One photo per original log, with author, exact quantity and date; existing reactions, snapping and no-photo disclosure. Overlay (B) selected: person/time bottom-left, quantity bottom-right, no visible photo count, stacked avatar-heart likes. A/C remain behind comparison disclosure. Used in browser party rooms; native app separate.
+
+- Log notes: log-notes.html, LOG-NOTES.md, components/log-editor.js/css. Optional per-entry note saved atomically with amount, history preview/edit, verbatim recap excerpts. Party notes shared by default alongside optional photos.
+- Selected photo action: photo-actions.html, components/log-photo-action.js/css. Circular icon on logging row; confirmed entry ID required. Same card width as Home.
+- Latest: Full-width continuation choice (A) selected. Superseded live UI/variants are removed unless the user explicitly requests retention. Keep current work local; do not push or publish.
+
+Library organization: LIBRARY.md. Components index.html; approved screens/screens.html; current proposals/workshop.html. Live masonry cards with per-card state controls; never a single-item viewer. library-catalog.js owns placement; gallery adapters are not app dependencies. Local-only work, not yet published.
+
+Latest library review: shared sliding segmented navigation and original logo/gradient across all spaces; Onboarding flow outline + aligned approved screen gallery. Liquid orbit and Curved signature are now explicitly approved Components. Browser avatar stacks animate saved faces unless still; reduced motion remains.

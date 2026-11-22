@@ -1,6 +1,6 @@
 # Today loaders
 
-The circle → globe loader is selected. Liquid orbit is a second potential direction, added from the user's supplied SwiftUI; it does not replace the existing loader.
+The circle → globe loader is selected. Liquid orbit is also approved as a component, added from the user's supplied SwiftUI. Both loaders remain available in Components.
 
 ## Liquid orbit
 

@@ -7,17 +7,14 @@
   const dateLabel=date=>new Date(date+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});
   const quantity=e=>e.unit==='check'?(e.amount===0?'Recorded zero':'Logged'):`${e.amount.toLocaleString('en-US')} ${e.unit||''}`.trim();
   class PartyPhotoCarousel extends HTMLElement {
-    static observedAttributes=['variant'];
-    get variant(){return ['caption','overlay','filmstrip'].includes(this.getAttribute('variant'))?this.getAttribute('variant'):'overlay';}
     set model(value){this._model=structuredClone(value||{});if(this.isConnected)this.update();}
     get model(){return structuredClone(this._model||{});}
-    connectedCallback(){if(!this.hasAttribute('variant'))this.setAttribute('variant','overlay');this.build();this.update();}
+    connectedCallback(){this.setAttribute('variant','overlay');this.build();this.update();}
     disconnectedCallback(){this._snap?.destroy();this._resize?.disconnect();this._observer?.disconnect();this._media?.removeEventListener('change',this._motionChanged);this._ready=false;}
-    attributeChangedCallback(){if(this.isConnected&&this._ready)this.update();}
     build(){
       if(this._ready)return;this._ready=true;
       this._signature=this._thumbnailSignature=this._reactionSignature=this._logSignature=null;
-      this.innerHTML=`<div class="pp-toolbar"><span class="pp-date"></span><div class="pp-arrows"><button type="button" data-previous aria-label="Previous photo">←</button><button type="button" data-next aria-label="Next photo">→</button></div></div><div class="pp-viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Photo check-ins. Swipe or use left and right arrow keys."><div class="pp-track"></div></div><div class="pp-empty" hidden><span>No photos shared yet.</span><small>Check-ins still count without a photo.</small></div><div class="pp-thumbnails" role="group" aria-label="Choose a check-in photo"></div><div class="pp-bottom"><today-party-reactions variant="stack"></today-party-reactions><span class="pp-position" role="status" aria-live="polite" aria-atomic="true"></span></div><button class="pp-logs-toggle" type="button" aria-expanded="false"><span></span><span class="today-disclosure__chevron" aria-hidden="true">⌄</span></button><div class="pp-logs"><div><div class="pp-log-list"></div></div></div>`;
+      this.innerHTML=`<div class="pp-toolbar"><span class="pp-date"></span><div class="pp-arrows"><button type="button" data-previous aria-label="Previous photo">←</button><button type="button" data-next aria-label="Next photo">→</button></div></div><div class="pp-viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Photo check-ins. Swipe or use left and right arrow keys."><div class="pp-track"></div></div><div class="pp-empty" hidden><span>No photos shared yet.</span><small>Check-ins still count without a photo.</small></div><p class="pp-note" hidden></p><div class="pp-bottom"><today-party-reactions variant="stack"></today-party-reactions><span class="pp-position" role="status" aria-live="polite" aria-atomic="true"></span></div><button class="pp-logs-toggle" type="button" aria-expanded="false"><span></span><span class="today-disclosure__chevron" aria-hidden="true">⌄</span></button><div class="pp-logs"><div><div class="pp-log-list"></div></div></div>`;
       this._viewport=this.querySelector('.pp-viewport');this._track=this.querySelector('.pp-track');
       this._disclosure=new TodayUI.Disclosure(this.querySelector('.pp-logs'),{trigger:this.querySelector('.pp-logs-toggle')});
       this.querySelector('.pp-logs-toggle').onclick=()=>this._disclosure.toggle();
@@ -70,16 +67,6 @@
       this._viewport.hidden=!this._photos.length;this.querySelector('.pp-empty').hidden=!!this._photos.length;
       this.querySelector('.pp-arrows').hidden=this._photos.length<2;
       this.querySelector('.pp-bottom').hidden=!this._photos.length;
-      const thumbs=this.querySelector('.pp-thumbnails');thumbs.hidden=this.variant!=='filmstrip'||this._photos.length<2;
-      const thumbnailSignature=JSON.stringify(this._photos.map(e=>[e.id,e.photoURL,this.person(e).name,quantity(e),e.date]));
-      if(thumbnailSignature!==this._thumbnailSignature){
-        this._thumbnailSignature=thumbnailSignature;
-        const focused=thumbs.contains(document.activeElement)?document.activeElement.dataset.entry:null;
-        thumbs.innerHTML=this._photos.map((e,i)=>`<button type="button" data-entry="${esc(e.id)}" aria-label="${esc(`Show ${this.person(e).name}, ${quantity(e)}, ${dateLabel(e.date)}`)}"><img src="${esc(photoURL(e.photoURL))}" alt="" draggable="false"><span>${i+1}</span></button>`).join('');
-        thumbs.querySelectorAll('button').forEach((b,i)=>b.onclick=()=>this._snap.goTo(i));
-        thumbs.querySelectorAll('img').forEach(img=>img.onerror=()=>img.hidden=true);
-        if(focused)thumbs.querySelector(`[data-entry="${CSS.escape(focused)}"]`)?.focus({preventScroll:true});
-      }
       this.paintLogs();
       if(changed)this._snap.refresh(index);else this.select(this._snap.index);
       if(!this._photos.length)this.select(0);
@@ -91,7 +78,7 @@
       this.querySelector('[data-next]').disabled=!entry||index===this._photos.length-1;
       this.querySelector('.pp-position').textContent=entry?`${index+1} / ${this._photos.length}`:'';
       [...this._track.children].forEach((slide,i)=>{slide.inert=i!==index;slide.setAttribute('aria-hidden',String(i!==index));});
-      this.querySelectorAll('.pp-thumbnails button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===index)));
+      const note=this.querySelector('.pp-note');note.hidden=!(typeof entry?.note==='string'&&entry.note.trim());note.textContent=entry?.note||'';
       if(!entry)return;
       const m=this._model,reactions=this.querySelector('today-party-reactions');
       const value={id:entry.id,viewer:m.members.find(p=>p.id===m.viewerID),reactors:m.members.filter(p=>(entry.reactorIDs||[]).includes(p.id)),reacted:(entry.reactorIDs||[]).includes(m.viewerID)},signature=JSON.stringify(value);
@@ -101,9 +88,9 @@
       const entries=this._entries.filter(e=>!photoURL(e.photoURL)),toggle=this.querySelector('.pp-logs-toggle');
       toggle.hidden=!entries.length;toggle.querySelector('span').textContent=`Check-ins without photos · ${entries.length}`;
       if(!entries.length)this._disclosure.setOpen(false);
-      const signature=JSON.stringify(entries.map(e=>[e.id,e.amount,e.unit,e.date,e.time,this.person(e)]));
+      const signature=JSON.stringify(entries.map(e=>[e.id,e.amount,e.unit,e.date,e.time,e.note,this.person(e)]));
       if(signature===this._logSignature)return;this._logSignature=signature;
-      this.querySelector('.pp-log-list').innerHTML=entries.map(e=>`<article class="pp-log"><today-profile-avatar size="28" still person="${esc(JSON.stringify(this.person(e)))}" aria-hidden="true"></today-profile-avatar><div><strong>${esc(this.person(e).name)}</strong><span>${esc(this.stamp(e))}</span></div><strong>${esc(quantity(e))}</strong></article>`).join('');
+      this.querySelector('.pp-log-list').innerHTML=entries.map(e=>`<article class="pp-log"><today-profile-avatar size="28" still person="${esc(JSON.stringify(this.person(e)))}" aria-hidden="true"></today-profile-avatar><div><strong>${esc(this.person(e).name)}</strong><span>${esc(this.stamp(e))}</span>${typeof e.note==='string'&&e.note.trim()?`<p class="pp-log-note">${esc(e.note)}</p>`:''}</div><strong>${esc(quantity(e))}</strong></article>`).join('');
     }
   }
   customElements.define('today-party-photo-carousel',PartyPhotoCarousel);

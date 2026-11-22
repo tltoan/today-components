@@ -2,3 +2,6 @@ today-habits-layout{display:block;width:390px;max-width:100%;height:844px;border
 
 .hl-invitation{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;margin-bottom:16px;min-height:64px;border:1px solid #bda9d222;border-radius:18px;background:#b49bd509;color:#eeeaf3;text-decoration:none}
 .hl-invitation strong{display:block;font-size:14px;font-weight:500}.hl-invitation small{display:block;margin-top:4px;font-size:11px;color:#bfb6cd}.hl-invitation:focus-visible{outline:2px solid #bdafd5;outline-offset:3px}
+
+/* Review the selected invitation without leaving the Habits screen. */
+today-habits-layout [hidden]{display:none!important}.hl-invitation{width:100%;font:inherit;text-align:left;cursor:pointer}.hl-invite-scroll{padding:8px 2px 32px;scroll-padding-bottom:24px}.hl-invite-scroll .hp-invite{padding:0}.hl-invite-scroll .hp-invite-cover{margin:0}.hl-invite-scroll .hp-status{font-size:12px}.hl-detail-header button:focus-visible,.hl-invitation:focus-visible{outline:2px solid #bbaed8;outline-offset:2px}

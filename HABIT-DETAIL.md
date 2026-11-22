@@ -69,4 +69,18 @@ Load `habit-detail-pieces.js` before `habit-detail.js`; load the shared controls
 Desktop and 390 px detail / 375 px onboarding pages show no horizontal overflow. Tested keyboard tracking choices, three-day history expansion, immediate reduced-motion collapse, confirmed logging, correction below target, tracking changes, timer completion, schedule saves, reminder Cancel/Use behavior and a save failure retaining confirmed entries. Onboarding ruler selection carries forward and reminders require confirmation before review. Changed JavaScript passes `node --check`; no browser console errors were observed in the focused detail preview. Native integration is not part of this check.
 
 
-Entry journal (B) is the selected history default; the past three calendar days show first, with earlier history expandable. The party dialog now mounts `today-party-room`: host handles the `habit-detail-request` action `party-room` and supplies the controlled model to `detail.room`. See PARTY-ROOM.md for shared-schedule streaks, member selection and compact activity.
+Entry journal (B) is the selected history default; the past three calendar days show first, with earlier history expandable. The inline Party view mounts `today-party-room`: the host handles the `habit-detail-request` action `party-room` and binds the controlled room from `event.detail.room`. The room stays mounted across view switches, retaining its selected member and carousel position. See PARTY-ROOM.md for shared-schedule streaks, member selection and compact activity.
+
+
+## Current logging update
+
+Notes use the shared editor from habit history. `save-entry` includes amount, unit and note; failed saves retain the draft. Quick-log and timer actions retain their original behavior. See [LOG-NOTES.md](LOG-NOTES.md).
+
+
+## Latest placement decision
+
+Latest correction: quick logging and timer completion keep their original one-tap behavior. History has Add a note, which selects an existing entry; entry details use the shared editor. No log is created by a note. `save-entry` updates amount + note together.
+
+## Consolidated party view
+
+Party habits keep one habit heading and logging area. The existing sliding segmented control switches between Your activity (progress, history, plan/reminders) and Party (shared streak, people and shared photo/note check-ins). The avatar stack selects Party; the duplicate entry row and party dialog have been removed. Non-party habits retain their personal content with no selector. `.party()` now switches locally; `.showView("activity" | "party")` is also available. The first visit to Party emits `habit-detail-request` with `{action:"party-room", room}` so the host can bind the existing controlled component. The room stays mounted on subsequent switches; updates preserve its chosen member and photo.

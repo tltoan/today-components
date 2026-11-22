@@ -74,9 +74,9 @@
     {
       "id": "reading-schedule",
       "name": "Reading schedule",
-      "preview": "index.html",
+      "preview": "activity.html",
       "browserSource": [
-        "index.html",
+        "activity.html",
         "app.js",
         "style.css"
       ],
@@ -96,7 +96,7 @@
     {
       "id": "agenda",
       "name": "A space in your day",
-      "preview": "index.html",
+      "preview": "activity.html",
       "browserSource": [
         "components/snap-scroller.js",
         "app.js",
@@ -154,7 +154,7 @@
     {
       "id": "checklist",
       "name": "Daily checklist",
-      "preview": "index.html",
+      "preview": "activity.html",
       "browserSource": [
         "app.js",
         "style.css"
@@ -173,7 +173,7 @@
     {
       "id": "logo",
       "name": "Today logo",
-      "preview": "index.html",
+      "preview": "activity.html",
       "browserSource": [
         "today-logo.js"
       ],
@@ -197,7 +197,7 @@
     {
       "id": "landing",
       "name": "Welcome landing",
-      "preview": "index.html#intro",
+      "preview": "welcome.html",
       "browserSource": [
         "components/welcome-intro.js",
         "components/welcome-intro.css",
@@ -1336,7 +1336,9 @@
         "widgets",
         "habit-card",
         "streak-badge",
-        "week-bar"
+        "week-bar",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Browser proposal extending the selected Home. One, three, six and day-off fixtures; no real persistence.",
       "browserIntegration": {
@@ -1351,9 +1353,13 @@
           "components/habit-card.css",
           "components/streak-badge.css",
           "components/home-overview.css",
-          "components/week-bar.css"
+          "components/week-bar.css",
+          "components/log-photo-action.css",
+          "foundations/motion.css",
+          "components/log-editor.css"
         ],
         "scripts": [
+          "foundations/disclosure.js",
           "components/icons.js",
           "components/controls.js",
           "components/cradle-fluid.js",
@@ -1361,9 +1367,11 @@
           "components/artwork.js",
           "components/widget-primitives.js",
           "components/target-feedback.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/streak-badge.js",
           "components/week-bar.js",
+          "components/log-editor.js",
           "components/home-overview.js"
         ],
         "markup": "<today-home-overview></today-home-overview>",
@@ -1448,7 +1456,8 @@
         "icons",
         "artwork",
         "widgets",
-        "target-feedback"
+        "target-feedback",
+        "log-photo-action"
       ],
       "status": "Reusable browser component. Gradient Rise selected; streak placement is a proposal.",
       "browserIntegration": {
@@ -1459,14 +1468,18 @@
           "components/artwork.css",
           "components/habit-widget.css",
           "components/target-feedback.css",
-          "components/habit-card.css"
+          "components/habit-card.css",
+          "components/log-photo-action.css",
+          "foundations/motion.css"
         ],
         "scripts": [
+          "foundations/disclosure.js",
           "components/icons.js",
           "components/controls.js",
           "components/artwork.js",
           "components/widget-primitives.js",
           "components/target-feedback.js",
+          "components/log-photo-action.js",
           "components/habit-card.js"
         ],
         "assets": [],
@@ -1606,59 +1619,6 @@
       }
     },
     {
-      "id": "party-checkin",
-      "name": "Shared party check-in",
-      "preview": "habit-parties.html",
-      "sourcePage": "source.html#party-checkin",
-      "browserSource": [
-        "components/habit-party.js",
-        "components/habit-party.css",
-        "HABIT-PARTIES.md"
-      ],
-      "swiftSource": [],
-      "dependencies": [
-        "controls",
-        "artwork",
-        "avatar-stack",
-        "lead-avatar",
-        "profile-avatar",
-        "party-reactions"
-      ],
-      "status": "Controlled browser proposal. No sending, uploads, membership enforcement or persistence.",
-      "browserIntegration": {
-        "kind": "custom-element",
-        "tag": "today-party-checkin",
-        "styles": [
-          "components/controls.css",
-          "components/artwork.css",
-          "components/habit-party.css",
-          "components/party-avatars.css",
-          "components/party-room.css",
-          "components/face-picker.css"
-        ],
-        "scripts": [
-          "components/icons.js",
-          "components/controls.js",
-          "components/artwork.js",
-          "components/party-avatars.js",
-          "components/face-palettes.js",
-          "components/minimal-face-motion.js",
-          "components/minimal-face.js",
-          "components/party-reactions.js",
-          "components/habit-party.js"
-        ],
-        "markup": "<today-party-checkin></today-party-checkin>",
-        "events": [
-          "party-request"
-        ],
-        "usage": "Set .model with viewer, reactors and reacted. Avatar-heart reactions; optional compact attribute. Host confirms requests. See PARTY-ROOM.md.",
-        "demoOnly": [
-          "habit-party-study.js",
-          "habit-party-study.css"
-        ]
-      }
-    },
-    {
       "id": "party-composer",
       "name": "Photo attachment after a shared log",
       "preview": "habit-parties.html",
@@ -1777,7 +1737,7 @@
         "profile-avatar",
         "segmented-control"
       ],
-      "status": "Controlled browser invitation. Compact Book cover selected; proposed Habits entry. No real membership change.",
+      "status": "Controlled browser invitation. Compact Book cover selected and reused inside the Habits preview. No real membership change.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-party-invite",
@@ -1881,7 +1841,8 @@
         "bar-chart",
         "onboarding-gradient",
         "disclosure",
-        "continuation-choice"
+        "continuation-choice",
+        "log-editor"
       ],
       "status": "Interactive layout/flow proposal with fixed fixtures; not production data or native integration.",
       "browserIntegration": {
@@ -1895,7 +1856,8 @@
           "components/step-progress.css",
           "components/staggered-bar-chart.css",
           "components/onboarding-gradient.css",
-          "components/recap.css"
+          "components/recap.css",
+          "components/log-editor.css"
         ],
         "scripts": [
           "foundations/disclosure.js",
@@ -1906,6 +1868,7 @@
           "components/step-progress.js",
           "components/staggered-bar-chart.js",
           "components/onboarding-gradient.js",
+          "components/log-editor.js",
           "components/recap.js"
         ],
         "markup": "<today-recap variant=\"a\"></today-recap>",
@@ -1933,7 +1896,8 @@
       "dependencies": [
         "controls",
         "artwork",
-        "navigation"
+        "navigation",
+        "party-invite"
       ],
       "status": "Weekly view (C) selected/default; Plan cards and Habit shelf retained for comparison. Fixed PRD fixtures; browser draft only.",
       "browserIntegration": {
@@ -1944,6 +1908,9 @@
           "components/controls.css",
           "components/artwork.css",
           "components/bottom-nav.css",
+          "components/party-avatars.css",
+          "components/face-picker.css",
+          "components/habit-party.css",
           "components/habits-layout.css"
         ],
         "scripts": [
@@ -1952,11 +1919,19 @@
           "components/artwork.js",
           "components/cradle-fluid.js",
           "components/bottom-nav.js",
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
+          "components/habit-party.js",
           "components/habits-layout.js"
         ],
         "markup": "<today-habits-layout variant=\"c\"></today-habits-layout>",
-        "events": [],
-        "usage": "Weekly view is default. Transparent floating cradle and bottom scroll clearance. See HABITS-LAYOUTS.md for PRD context, scope and fixtures.",
+        "events": [
+          "habits-invitation-open",
+          "party-request"
+        ],
+        "usage": "Weekly view is default. Set .invitation to a controlled Book cover invitation model. The invitation opens inside Habits; handle party-request plan/join/decline and confirm the model. closeInvitation() returns focus to the row. Other plans remain fixed PRD fixtures. See HABITS-LAYOUTS.md.",
         "demoOnly": [
           "habits-study.js",
           "habits-study.css"
@@ -1975,7 +1950,7 @@
       ],
       "swiftSource": [],
       "dependencies": [],
-      "status": "Reusable browser control; explicit unselected initial state, keyboard radio semantics and reduced motion. No persistence.",
+      "status": "Selected full-width cards (A); initially unselected. Split and pill alternatives removed.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-continuation-choice",
@@ -1998,7 +1973,7 @@
     },
     {
       "id": "liquid-orbit-loader",
-      "name": "Liquid orbit loader \u2014 alternative",
+      "name": "Liquid orbit loader \u2014 approved",
       "preview": "liquid-orbit-loader.html",
       "sourcePage": "source.html#liquid-orbit-loader",
       "browserSource": [
@@ -2015,7 +1990,7 @@
         "native/reference/LiquidOrbitLoader.swift"
       ],
       "dependencies": [],
-      "status": "Alternative proposal. Supplied one-second eight-bead motion with Today gradient. Existing circle/globe remains selected. Standalone source, not native app integration.",
+      "status": "Approved additional loader. Browser and reusable native source available; app integration separate.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-liquid-orbit-loader",
@@ -2282,7 +2257,9 @@
         "time-pickers",
         "controls",
         "onboarding-gradient",
-        "party-room"
+        "party-room",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Grouped cards selected. Earlier layouts retained behind disclosure; three history variations and independent editors. Browser prototype only.",
       "browserIntegration": {
@@ -2306,14 +2283,15 @@
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
-          "components/party-activity.js",
           "components/party-progress.js",
           "components/party-photo-carousel.js",
           "components/party-room.js",
+          "components/log-editor.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2335,13 +2313,15 @@
           "components/habit-detail.css",
           "components/party-room.css",
           "components/face-picker.css",
-          "components/party-photo-carousel.css"
+          "components/party-photo-carousel.css",
+          "components/log-photo-action.css",
+          "components/log-editor.css"
         ],
         "markup": "<today-habit-detail></today-habit-detail>",
         "events": [
           "habit-detail-request"
         ],
-        "usage": "Set .model with confirmed data. Read HABIT-DETAIL.md. Host owns persistence, permissions, lifecycle, routing and timer recovery.",
+        "usage": "Set .model with confirmed data. Read HABIT-DETAIL.md. Host owns persistence, permissions, lifecycle, routing and timer recovery. Party habits use Your activity / Party views in one screen. Handle party-room once for each mounted shared room via event.detail.room; avatar entry calls party() to switch views.",
         "demoOnly": [
           "habit-detail-study.js",
           "habit-detail-study.css",
@@ -2369,7 +2349,9 @@
         "time-pickers",
         "controls",
         "onboarding-gradient",
-        "party-room"
+        "party-room",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Interactive browser proposal. Three layouts; controlled requests and sample host. Not native app integration.",
       "browserIntegration": {
@@ -2393,14 +2375,15 @@
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
-          "components/party-activity.js",
           "components/party-progress.js",
           "components/party-photo-carousel.js",
           "components/party-room.js",
+          "components/log-editor.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2422,7 +2405,9 @@
           "components/habit-detail.css",
           "components/party-room.css",
           "components/face-picker.css",
-          "components/party-photo-carousel.css"
+          "components/party-photo-carousel.css",
+          "components/log-photo-action.css",
+          "components/log-editor.css"
         ],
         "markup": "<today-habit-entry></today-habit-entry>",
         "events": [
@@ -2456,7 +2441,9 @@
         "time-pickers",
         "controls",
         "onboarding-gradient",
-        "party-room"
+        "party-room",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Interactive browser proposal. Three layouts; controlled requests and sample host. Not native app integration.",
       "browserIntegration": {
@@ -2480,14 +2467,15 @@
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
-          "components/party-activity.js",
           "components/party-progress.js",
           "components/party-photo-carousel.js",
           "components/party-room.js",
+          "components/log-editor.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2509,7 +2497,9 @@
           "components/habit-detail.css",
           "components/party-room.css",
           "components/face-picker.css",
-          "components/party-photo-carousel.css"
+          "components/party-photo-carousel.css",
+          "components/log-photo-action.css",
+          "components/log-editor.css"
         ],
         "markup": "<today-habit-plan-editor></today-habit-plan-editor>",
         "events": [
@@ -2543,7 +2533,9 @@
         "time-pickers",
         "controls",
         "onboarding-gradient",
-        "party-room"
+        "party-room",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Reusable browser component. Native implementation not yet supplied.",
       "browserIntegration": {
@@ -2567,14 +2559,15 @@
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
-          "components/party-activity.js",
           "components/party-progress.js",
           "components/party-photo-carousel.js",
           "components/party-room.js",
+          "components/log-editor.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2596,7 +2589,9 @@
           "components/habit-detail.css",
           "components/party-room.css",
           "components/face-picker.css",
-          "components/party-photo-carousel.css"
+          "components/party-photo-carousel.css",
+          "components/log-photo-action.css",
+          "components/log-editor.css"
         ],
         "markup": "<today-habit-history></today-habit-history>",
         "events": [
@@ -2630,7 +2625,9 @@
         "time-pickers",
         "controls",
         "onboarding-gradient",
-        "party-room"
+        "party-room",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Reusable browser component. Native implementation not yet supplied.",
       "browserIntegration": {
@@ -2654,14 +2651,15 @@
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
-          "components/party-activity.js",
           "components/party-progress.js",
           "components/party-photo-carousel.js",
           "components/party-room.js",
+          "components/log-editor.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2683,7 +2681,9 @@
           "components/habit-detail.css",
           "components/party-room.css",
           "components/face-picker.css",
-          "components/party-photo-carousel.css"
+          "components/party-photo-carousel.css",
+          "components/log-photo-action.css",
+          "components/log-editor.css"
         ],
         "markup": "<today-habit-reminder></today-habit-reminder>",
         "events": [
@@ -2717,7 +2717,9 @@
         "time-pickers",
         "controls",
         "onboarding-gradient",
-        "party-room"
+        "party-room",
+        "log-photo-action",
+        "log-editor"
       ],
       "status": "Reusable browser component. Native implementation not yet supplied.",
       "browserIntegration": {
@@ -2741,14 +2743,15 @@
           "components/habit-party.js",
           "components/slide-to-log.js",
           "components/party-nudge.js",
+          "components/log-photo-action.js",
           "components/habit-card.js",
           "components/pickers.js",
           "components/onboarding-gradient.js",
           "components/habit-detail-pieces.js",
-          "components/party-activity.js",
           "components/party-progress.js",
           "components/party-photo-carousel.js",
           "components/party-room.js",
+          "components/log-editor.js",
           "components/habit-detail.js"
         ],
         "styles": [
@@ -2770,7 +2773,9 @@
           "components/habit-detail.css",
           "components/party-room.css",
           "components/face-picker.css",
-          "components/party-photo-carousel.css"
+          "components/party-photo-carousel.css",
+          "components/log-photo-action.css",
+          "components/log-editor.css"
         ],
         "markup": "<today-habit-schedule></today-habit-schedule>",
         "events": [
@@ -2830,68 +2835,6 @@
       }
     },
     {
-      "id": "party-activity",
-      "name": "Compact party activity",
-      "preview": "habit-parties.html#party-room",
-      "sourcePage": "source.html#party-activity",
-      "browserSource": [
-        "foundations/disclosure.js",
-        "components/artwork.js",
-        "components/party-avatars.js",
-        "components/party-reactions.js",
-        "components/habit-party.js",
-        "components/party-activity.js",
-        "foundations/motion.css",
-        "components/artwork.css",
-        "components/habit-party.css",
-        "components/party-avatars.css",
-        "components/party-room.css",
-        "PARTY-ROOM.md",
-        "components/snap-scroller.js"
-      ],
-      "swiftSource": [],
-      "dependencies": [
-        "disclosure",
-        "party-checkin",
-        "party-reactions"
-      ],
-      "status": "Controlled browser component and local preview. Native app integration is separate.",
-      "browserIntegration": {
-        "kind": "custom-element",
-        "tag": "today-party-activity",
-        "scripts": [
-          "foundations/disclosure.js",
-          "components/artwork.js",
-          "components/party-avatars.js",
-          "components/face-palettes.js",
-          "components/minimal-face-motion.js",
-          "components/minimal-face.js",
-          "components/party-reactions.js",
-          "components/habit-party.js",
-          "components/snap-scroller.js",
-          "components/party-activity.js"
-        ],
-        "styles": [
-          "foundations/motion.css",
-          "components/artwork.css",
-          "components/habit-party.css",
-          "components/party-avatars.css",
-          "components/party-room.css",
-          "components/face-picker.css"
-        ],
-        "markup": "<today-party-activity></today-party-activity>",
-        "events": [
-          "party-request"
-        ],
-        "usage": "Set party model and optional memberID filter. One date at a time via shared SnapScroller; compact member totals expand original entries/photos/reactions. See PARTY-ROOM.md.",
-        "demoOnly": [
-          "party-room-demo.js",
-          "habit-party-study.js",
-          "habit-party-study.css"
-        ]
-      }
-    },
-    {
       "id": "party-room",
       "name": "Shared habit party room",
       "preview": "habit-parties.html#party-room",
@@ -2902,7 +2845,6 @@
         "components/party-avatars.js",
         "components/party-reactions.js",
         "components/habit-party.js",
-        "components/party-activity.js",
         "components/slide-to-log.js",
         "components/target-feedback.js",
         "components/party-nudge.js",
@@ -2942,7 +2884,6 @@
           "components/party-reactions.js",
           "components/habit-party.js",
           "components/snap-scroller.js",
-          "components/party-activity.js",
           "components/slide-to-log.js",
           "components/target-feedback.js",
           "components/party-nudge.js",
@@ -3207,7 +3148,7 @@
     },
     {
       "id": "logo-curved",
-      "name": "Today signature \u2014 curved variation",
+      "name": "Today signature \u2014 curved, approved",
       "preview": "logo-variations.html",
       "sourcePage": "source.html#logo-curved",
       "browserSource": [
@@ -3221,7 +3162,7 @@
       "dependencies": [
         "logo"
       ],
-      "status": "Additional supplied variation. Original opening unchanged; byte-identical reference retained.",
+      "status": "Approved additional signature. Original opening retained; browser and reusable native source available.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-logo-curved",
@@ -3273,7 +3214,7 @@
         "party-reactions",
         "disclosure"
       ],
-      "status": "Overlay selected; used by browser party rooms. Caption and filmstrip remain historical comparisons. Native app integration is separate.",
+      "status": "Selected overlay carousel with exact amount bottom-right, author bottom-left, per-entry notes and stacked heart avatars. Superseded variants removed.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-party-photo-carousel",
@@ -3298,7 +3239,7 @@
         "events": [
           "party-request"
         ],
-        "usage": "Overlay is selected, with bottom-right quantity, no visible position count and overlapping avatar-heart likes. Historical variants caption / filmstrip remain available. Set controlled original logs and optional memberID; host confirms reactions. Read PARTY-PHOTOS.md.",
+        "usage": "Set the controlled party model; see PARTY-PHOTOS.md and LOG-NOTES.md.",
         "demoOnly": [
           "party-photo-study.js",
           "party-photo-study.css",
@@ -3307,7 +3248,81 @@
           "party-photos.html"
         ]
       }
+    },
+    {
+      "id": "log-editor",
+      "name": "Per-entry log notes",
+      "preview": "log-notes.html",
+      "browserSource": [
+        "components/log-editor.js",
+        "components/log-editor.css",
+        "LOG-NOTES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure",
+        "controls"
+      ],
+      "status": "Implemented browser component with local gallery fixtures; native app and backend separate.",
+      "sourcePage": "source.html#log-editor",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-log-editor",
+        "styles": [
+          "components/controls.css",
+          "components/log-editor.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/log-editor.js"
+        ],
+        "markup": "<today-log-editor></today-log-editor>",
+        "model": "See LOG-NOTES.md."
+      }
+    },
+    {
+      "id": "log-photo-action",
+      "name": "Photo action beside logging",
+      "preview": "photo-actions.html",
+      "browserSource": [
+        "components/log-photo-action.js",
+        "components/log-photo-action.css",
+        "LOG-NOTES.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "disclosure"
+      ],
+      "status": "Implemented browser component with local gallery fixtures; native app and backend separate.",
+      "sourcePage": "source.html#log-photo-action",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-log-photo-action",
+        "styles": [
+          "components/controls.css",
+          "components/log-photo-action.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/log-photo-action.js"
+        ],
+        "markup": "<today-log-photo-action></today-log-photo-action>",
+        "model": "See LOG-NOTES.md."
+      }
     }
   ],
-  "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."
+  "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component.",
+  "libraryPages": {
+    "components": "index.html#library",
+    "approvedScreens": "screens.html",
+    "workshop": "workshop.html",
+    "guide": "LIBRARY.md",
+    "catalog": "library-catalog.js"
+  }
 }

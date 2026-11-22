@@ -10,3 +10,8 @@ today-habit-card[layout=hero]{padding:24px}today-habit-card[layout=hero] .ho-hab
 .ho-party-slot{margin-top:16px;border-top:1px solid #ffffff12;padding-top:8px}
 /* Optional party entry overlaps the upper rim, away from the log action. */
 today-habit-card:is([data-party-placement=stack],[data-party-placement=capsule],[data-party-placement=lead]){margin-top:24px;padding-top:30px}today-habit-card:is([data-party-placement=stack],[data-party-placement=capsule],[data-party-placement=lead])>.ho-party-slot{position:absolute;top:-24px;right:16px;z-index:3;border:0;margin:0;padding:0}.ho-party-slot today-party-entry{display:block}
+
+.ho-habit>today-log-photo-action{position:relative;z-index:1}
+
+.ho-habit-actions{display:flex;align-items:center;flex:none;position:relative;z-index:1}.ho-habit-actions today-log-photo-action{width:0;transition:width var(--today-disclosure-duration,600ms) var(--today-disclosure-easing,cubic-bezier(.37,0,.18,1));overflow:hidden}.ho-habit-actions today-log-photo-action[data-available]{width:52px}.ho-habit-actions .lpa-content{width:44px}.ho-habit-actions .lpa-button{flex:none}.ho-habit-bottom{gap:8px}
+html[data-reduced] .ho-habit-actions today-log-photo-action{transition:none}@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) .ho-habit-actions today-log-photo-action{transition:none}}

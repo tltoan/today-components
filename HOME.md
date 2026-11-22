@@ -56,3 +56,13 @@ November 21 refinement: only selected Gradient Rise remains in the live gallery.
 
 
 `today-week-bar` is the shared Home/onboarding date strip. Assign `.model={days:[{date,weekday,number,label,today}],selectedDate}`. Listen for `daychange {date}` and confirm the selected model. Today is independent from selected date. Arrow/Home/End keys move focus; Enter/Space activates. Load components/week-bar.js and components/week-bar.css.
+
+
+## Current logging update
+
+Home retains quick `logrequest` saves. Notes are edited within habit history. Cards still update only after confirmation. Per-entry storage belongs to the host. Party cards may receive `photoEntry` for the selected circular action beside logging. See [LOG-NOTES.md](LOG-NOTES.md).
+
+
+## Latest placement decision
+
+Latest correction: Home quick logging again emits the original `logrequest` with id/date and saves immediately in its host. The interim `home-log-save` / `resolveLog` integration was removed. Notes are added from individual habit history, not Home’s logging action.

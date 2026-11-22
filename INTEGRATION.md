@@ -140,8 +140,20 @@ Use `today-habit-detail`, `today-habit-entry` and `today-habit-plan-editor` from
 Habit detail selection: Grouped cards (B). Independent history (day summaries / journal / chart), weekly schedule and reminder card sources are in `components/habit-detail-pieces.js`, with shared `components/habit-detail.css`; see `HABIT-DETAIL.md` and `components.json`. Browser prototypes only. History initially shows the past three days, with expansion. Onboarding now includes Day Ruler trial length and optional Soft Wheels reminders within seven creation positions.
 
 
-For shared party days, compact activity and avatar-heart reactions, start at [PARTY-ROOM.md](PARTY-ROOM.md). New browser elements: today-party-room, today-party-activity, today-party-reactions and proposed today-party-setup. Their fixtures in party-room-demo.js are demo-only. Home and onboarding now share today-week-bar. Ordered scripts/styles are in components.json; these compositions are browser code, not native app integration.
+For shared party days, compact activity and avatar-heart reactions, start at [PARTY-ROOM.md](PARTY-ROOM.md). New browser elements: today-party-room, today-party-photo-carousel, today-party-reactions and proposed today-party-setup. Their fixtures in party-room-demo.js are demo-only. Home and onboarding now share today-week-bar. Ordered scripts/styles are in components.json; these compositions are browser code, not native app integration.
 
 ## Selected photo check-in carousel
 
-See [PARTY-PHOTOS.md](PARTY-PHOTOS.md) and the `party-photo-carousel` manifest entry. `today-party-photo-carousel` provides caption, overlay and filmstrip variants over the same original log model. Reuse the ordered sources, existing avatars/reactions and shared horizontal SnapScroller. Overlay (B) is selected and used in browser party rooms: quantity bottom-right, no visible position count, overlapping avatar-heart likes. Caption/filmstrip are historical comparisons; the date-first feed remains reusable source. Gallery state and images are examples, not production services.
+See [PARTY-PHOTOS.md](PARTY-PHOTOS.md) and the `party-photo-carousel` manifest entry. `today-party-photo-carousel` uses the selected overlay layout over the original log model. Reuse the ordered sources, existing avatars/reactions and shared horizontal SnapScroller. Overlay (B) is selected and used in browser party rooms: quantity bottom-right, no visible position count, overlapping avatar-heart likes. The earlier carousel variants and date-first feed have been removed. Gallery state and images are examples, not production services.
+
+
+## Current logging update
+
+Notes and selected post-save photo action: see [LOG-NOTES.md](LOG-NOTES.md), `log-editor` and `log-photo-action` in components.json. These require shared disclosure JS/CSS even on focused Home/card pages. Existing notes and pictures remain tied to one saved entry ID. Browser implementation and local host fixtures do not establish native/backend integration.
+
+
+The gallery is organized into Components (`index.html`), Approved screens & flows (`screens.html`) and Workshop (`workshop.html`). See LIBRARY.md. `library-catalog.js`, `library-board.*` and `library-embed.*` are browsing infrastructure only; do not import these into product components. Focused pages and component dependencies remain the integration sources.
+
+## Habit and party navigation
+
+`today-habit-detail` now contains Your activity / Party views. The public `.party()` entry switches to the embedded room instead of opening a dialog; handle `habit-detail-request` action `party-room` once per mounted room. The existing room, carousel, avatar and disclosure components are reused. The Habits invitation model is set through `.invitation`; `party-request` events still require a host response. `habits-study.js` provides only local example joining.
