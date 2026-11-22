@@ -10,7 +10,7 @@
     set model(v){this._model=structuredClone(v||{});if(this._ready)this.update();}
     get model(){return structuredClone(this._model||{});}
     build(){
-      this.innerHTML=`<div class="p-room"><header class="p-room-head"><span class="p-eyebrow">PRIVATE PARTY</span><h3></h3><p></p></header><section class="p-streak" aria-label="Shared party streak"><div class="p-streak-top"><img src="assets/streaks/ember.svg" alt=""><div><strong></strong><span></span></div></div><div class="p-current"><i aria-hidden="true"></i><div><strong></strong><span></span></div></div></section><section class="p-members"><div class="p-section-title"><h4>People</h4></div><div class="p-member-tabs" role="group" aria-label="Choose a party member"></div></section><div class="p-person-panel"></div><section class="p-feed"><div class="p-section-title"><h4>Shared check-ins</h4><button class="p-all" type="button">Everyone</button></div><today-party-activity></today-party-activity></section></div>`;
+      this.innerHTML=`<div class="p-room"><header class="p-room-head"><span class="p-eyebrow">PRIVATE PARTY</span><h3></h3><p></p></header><section class="p-streak" aria-label="Shared party streak"><div class="p-streak-top"><img src="assets/streaks/ember.svg" alt=""><div><strong></strong><span></span></div></div><div class="p-current"><i aria-hidden="true"></i><div><strong></strong><span></span></div></div></section><section class="p-members"><div class="p-section-title"><h4>People</h4></div><div class="p-member-tabs" role="group" aria-label="Choose a party member"></div></section><div class="p-person-panel"></div><section class="p-feed"><div class="p-section-title"><h4>Shared check-ins</h4><button class="p-all" type="button">Everyone</button></div><today-party-photo-carousel variant="overlay"></today-party-photo-carousel></section></div>`;
       this.querySelector('.p-all').onclick=()=>this.select('all');
     }
     select(id){this._selected=id;this.update();this.dispatchEvent(new CustomEvent('party-member-change',{bubbles:true,detail:{id}}));}
@@ -36,7 +36,7 @@
       const all=this._selected==='all',person=m.members.find(p=>p.id===this._selected);
       this.querySelector('.p-feed h4').textContent=all?'Shared check-ins':`${person.name==='You'?'Your':person.name+'’s'} check-ins`;
       this.querySelector('.p-all').hidden=all;
-      this.querySelector('today-party-activity').model={...m,memberID:all?null:this._selected};
+      this.querySelector('today-party-photo-carousel').model={...m,memberID:all?null:this._selected};
 
     }
     updatePerson(m){

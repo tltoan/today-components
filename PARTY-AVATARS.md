@@ -44,3 +44,7 @@ For navigation, wrap in `Button` and provide the party label. These are standalo
 Profile cards use a softer 1 px lavender rim at 14% opacity: `--pa-rim:#dac8ee24; --pa-rim-width:1px`. Stacks retain the darker separating rim. Native counterpart: `TodayProfileAvatar(member: member, size: 56, rim: Color(red: 218/255, green: 200/255, blue: 238/255).opacity(0.14), rimWidth: 1)`.
 
 Use one confirmed identity store for the current user. The gallery resolver replaces only canonical self IDs; a friend with the same display name is unaffected. [PROFILE-IDENTITY.md](PROFILE-IDENTITY.md) covers browser/native persistence and cancellation.
+
+## Photo-like badges
+
+The selected photo check-in carousel reuses `<today-avatar-stack badges="heart" size="34">`. Assign only confirmed reacting members to `.members`; the existing stable identity, palette, photo and overlap rules remain unchanged. Each portrait gets a small heart badge below it. `today-party-reactions variant="stack"` provides this stack plus the separate Like/Liked request button. Badges are a browser addition; native avatar source is unchanged.

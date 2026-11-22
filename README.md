@@ -475,3 +475,16 @@ For continuing work in a new chat, start with [CHAT-HANDOFF.md](CHAT-HANDOFF.md)
 
 
 Latest verification (November 21): changed/new JavaScript syntax and local HTML source/asset paths pass. Portrait identity and the curved signature were reviewed at desktop and 390 × 844, with keyboard/reduced-motion checks. Date-first party activity supports older/newer and keyboard navigation, expands original photos, and keeps offscreen dates inert. Shared streak logging/undo, a fourth member, avatar reactions, and per-recipient nudge failure/retry were checked; eight streak unit checks pass. Main-library mounting was checked after fixing the missing snap-scroller dependency on focused party/detail pages. The original + curved logo sources and portrait/identity SwiftUI sources type-check together against the iOS 17 simulator SDK with warnings as errors. Native runtime and production persistence/delivery remain unverified.
+
+## Selected photo check-ins · November 21
+
+[Open the component](party-photos.html) · [API and dependencies](PARTY-PHOTOS.md). **On the photo (B)** is selected and now supplies Shared check-ins in browser party rooms, including habit detail’s dialog. Person/time sit bottom-left and the original logged amount sits bottom-right. The visible position count is removed. A Photo journal and C Filmstrip remain under Compare earlier layouts.
+
+| Piece | Source | Status and supported states |
+| --- | --- | --- |
+| Photo carousel | `components/party-photo-carousel.js` / `.css` | Controlled browser component: original entry IDs/amounts, member filter, four supplied photos, zero, no photos, image failure and no-photo log disclosure. |
+| Photo likes | `components/party-reactions.js`, `components/party-avatars.*`, `components/party-room.css` | Reuses overlapping avatar stack with per-person heart badges. Separate Like/Liked action; host-confirmed reactors only; keyboard and reduced motion. |
+| Shared movement | `components/snap-scroller.js` | Optional horizontal axis uses the same single 680 ms settling controller. Existing vertical agenda behavior retained. |
+| Comparison host | `party-photo-study.*`, `party-room-demo.js` | Local fixtures and reactions only; no server, upload or native app changes. |
+
+Verification for this revision: eight changed/new JavaScript files pass syntax checks; 1,228 local HTML source/asset links and manifest file references resolve; eight existing party-streak tests pass. Browser checks covered desktop and an actual 390 × 844 iframe viewport with no horizontal overflow, bottom-right quantity, hidden visual count, avatar-heart stacks, keyboard and thumbnail navigation, rapid arrow reversal, reduced-motion settling, inactive-slide accessibility, comparison disclosure, member filtering, saved zero, no-photo logs and failed-image fallback. Like/unlike preserves the selected original entry; the host-bound reaction works in habit detail’s party dialog. The library mounts without console errors and the original vertical agenda still advances one day. These are browser/source checks, not native runtime or real-device touch verification.

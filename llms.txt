@@ -108,3 +108,5 @@ Shared profile identity: https://tltoan.github.io/today-components/PROFILE-IDENT
 
 - Cross-chat handoff: [CHAT-HANDOFF.md](https://tltoan.github.io/today-components/CHAT-HANDOFF.md). Selected directions, product rules, workflow and source map.
 - Curved signature variation: [LOGOS.md](https://tltoan.github.io/today-components/LOGOS.md), [browser source](https://tltoan.github.io/today-components/components/logo-curved.js), [SwiftUI](https://tltoan.github.io/today-components/native/TodayLogoCurvedAnimation.swift). Rounded t, optional curved y, original opening unchanged.
+
+- Selected shared check-in photo carousel: [Selected component](https://tltoan.github.io/today-components/party-photos.html), [contract](https://tltoan.github.io/today-components/PARTY-PHOTOS.md). today-party-photo-carousel variants caption / overlay / filmstrip. One photo per original log, with author, exact quantity and date; existing reactions, snapping and no-photo disclosure. Overlay (B) selected: person/time bottom-left, quantity bottom-right, no visible photo count, stacked avatar-heart likes. A/C remain behind comparison disclosure. Used in browser party rooms; native app separate.

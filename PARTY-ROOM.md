@@ -40,7 +40,7 @@ The host supplies the party-local date, schedule coverage, timezone boundaries a
 
 | Element | Contract |
 | --- | --- |
-| `today-party-room` | `.model` above. `party-member-change {id}` is local navigation. Member plans show the shared schedule; the selected recipient’s nudge uses that person’s ID/window/state. |
+| `today-party-room` | Selected overlay photo carousel for check-ins. `.model` above. `party-member-change {id}` is local navigation. Member plans show the shared schedule; the selected recipient’s nudge uses that person’s ID/window/state. |
 | `today-party-activity` | Same model, optional `memberID` filter. Shows one date card at a time using the shared agenda SnapScroller; compact member summaries expand original entries behind the shared 600 ms disclosure. Swiping, arrows and keyboard navigate dates. Sums compatible units only. |
 | `today-party-reactions` | `.model={id,viewer,reactors,reacted}`. Profiles plus heart badges. Own profile toggles a bubbling `party-request {action:'react',id}`. No numeric reaction count is used to invent identities. |
 | `today-party-setup` | `.model={name,target,schedule,trial,reminder,party,state}`. `party-setup-change {party}`, `party-request {action:'create',party}`, and `party-request {action:'preview-invite'}`. The host confirms `state:'created'` to show invitation slots. |
@@ -60,3 +60,7 @@ The proposed lifecycle keeps trial length/review personal: one member’s review
 The gallery includes four user-supplied reading photos (`assets/party-samples/`). Compact member rows show a thumbnail on that date; tapping a row expands original entries, full photos and avatar-heart reactions. The fixtures do not identify the people photographed. `revealEntry(id)` selects the entry's date and expands its member group.
 
 The streak card displays the shared streak, current date, a proportional dot and logged/eligible count. The old weekly strip and timezone footer are removed. The host still supplies the party-local day and dated eligibility. People remain selectable; each recipient retains their independent nudge state. Compact nudges omit redundant message/window/success copy, while unavailable and error reasons remain visible.
+
+## Selected photo carousel
+
+**On the photo (B)** now supplies Shared check-ins in browser party rooms: the original image, person/time at bottom-left, amount at bottom-right, and no visible photo count. Likes use overlapping avatars with a heart on each confirmed reactor and a separate Like/Liked action. A/C are behind Compare earlier layouts on [the focused component page](party-photos.html). Read [PARTY-PHOTOS.md](PARTY-PHOTOS.md). The date-first activity remains reusable historical source; native app unchanged.

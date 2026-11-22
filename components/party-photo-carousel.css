@@ -1,0 +1,55 @@
+/* Three photo treatments; the same entries, avatars and motion in each. */
+today-party-photo-carousel{display:block;min-width:0;color:#eeeaf3;font:400 14px/1.5 Future,sans-serif}
+today-party-photo-carousel *{box-sizing:border-box}
+today-party-photo-carousel [hidden]{display:none!important}
+today-party-photo-carousel button{font:inherit;color:inherit;cursor:pointer}
+today-party-photo-carousel button:focus-visible,.pp-viewport:focus-visible{outline:2px solid #c5b2e2;outline-offset:3px}
+.pp-toolbar{display:flex;align-items:center;justify-content:space-between;min-height:48px;margin-bottom:12px;gap:12px}
+.pp-date{font-size:13px;color:#c5bbd0}
+.pp-arrows{display:flex;gap:8px}
+.pp-arrows button{height:44px;width:44px;border-radius:50%;border:1px solid #ffffff12;background:#ffffff04;font-size:20px;transition:background 130ms,transform 130ms}
+.pp-arrows button:hover:not(:disabled){background:#ffffff0d}
+.pp-arrows button:active:not(:disabled){transform:scale(.94)}
+.pp-arrows button:disabled{opacity:.25;cursor:default}
+.pp-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:none;scroll-behavior:auto;scrollbar-width:none;overscroll-behavior-x:contain;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;border-radius:23px;outline-offset:4px}
+.pp-viewport::-webkit-scrollbar{display:none}
+.pp-viewport.dragging{cursor:grabbing}
+.pp-track{display:flex;gap:12px;position:relative;width:100%;align-items:stretch}
+.pp-slide{flex:0 0 100%;min-width:0;margin:0;position:relative;overflow:hidden;border-radius:23px;background:#1c1923;border:1px solid #ffffff10;isolation:isolate}
+.pp-picture{position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,#302a3a,#16131c);overflow:hidden}
+.pp-photo{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.pp-image-fallback{position:absolute;inset:0;display:grid;place-items:center;color:#beb2cc;font-size:13px}
+.pp-caption{display:flex;align-items:center;gap:10px;padding:18px 14px;min-height:82px}
+.pp-caption today-profile-avatar{flex:none}
+.pp-person{min-width:0;flex:1}
+.pp-person strong{display:block;font-weight:500;font-size:14px;overflow-wrap:anywhere}
+.pp-person span{display:block;font-size:11px;color:#b0a6bd;margin-top:3px}
+.pp-amount{flex:0 1 auto;font-size:19px;line-height:1.25;letter-spacing:-.025em;font-weight:500;text-align:right;max-width:43%;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.pp-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:84px;padding:7px 2px 0}
+.pp-bottom today-party-reactions{margin:0;min-width:0}
+.pp-bottom .prx-row{gap:6px}
+.pp-bottom .prx-person{font-size:9px;min-width:44px}
+.pp-position{flex:none;color:#a99bb9;font-size:11px;font-variant-numeric:tabular-nums;padding-right:4px}
+.pp-thumbnails{display:flex;gap:8px;overflow-x:auto;padding:9px 3px 5px;scrollbar-width:thin;scrollbar-color:#61516f transparent}
+.pp-thumbnails button{position:relative;flex:0 0 58px;height:66px;padding:3px;border:1px solid transparent;background:transparent;border-radius:13px;transition:border-color 200ms,background 200ms}
+.pp-thumbnails button[aria-pressed=true]{border-color:#bcabd2;background:#bcabd221}
+.pp-thumbnails img{display:block;width:100%;height:100%;object-fit:cover;border-radius:9px}
+.pp-thumbnails span{position:absolute;inset:3px;display:grid;place-items:center;font-size:12px;z-index:-1}
+.pp-empty{padding:46px 20px;border-radius:23px;background:#1c1923;border:1px solid #ffffff10;text-align:center}
+.pp-empty span,.pp-empty small{display:block}.pp-empty small{color:#afa3bd;font-size:11px;margin-top:6px}
+.pp-logs-toggle{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;min-height:48px;background:transparent;border:0;border-top:1px solid #ffffff10;text-align:left;padding:12px 2px;font-size:11px!important;color:#bcaaca!important}
+.pp-logs-toggle[aria-expanded=true] .today-disclosure__chevron{transform:rotate(180deg)}
+.pp-log{display:flex;align-items:center;gap:10px;min-height:72px;border-top:1px solid #ffffff09;padding:12px 0}
+.pp-log>div{flex:1;min-width:0}.pp-log strong{font-size:12px;font-weight:500}.pp-log span{display:block;color:#a99db7;font-size:10px;margin-top:3px}.pp-log>strong{max-width:35%;text-align:right}
+today-party-photo-carousel[variant=overlay] .pp-picture{aspect-ratio:4/5}
+today-party-photo-carousel[variant=overlay] .pp-caption{position:absolute;inset:auto 0 0;display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:end;padding:80px 16px 20px;background:linear-gradient(transparent,rgba(8,6,13,.82) 56%,rgba(8,6,13,.94))}
+today-party-photo-carousel[variant=overlay] .pp-person span{color:#d1c7dc}
+today-party-photo-carousel[variant=overlay] .pp-amount{max-width:140px;text-align:right;font-size:30px;line-height:1.1;margin:0 0 1px;letter-spacing:-.04em}
+today-party-photo-carousel[variant=overlay] .pp-position{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+today-party-photo-carousel[variant=overlay] .pp-unavailable .pp-image-fallback{align-items:start;padding-top:60px}
+today-party-photo-carousel[variant=filmstrip] .pp-slide{display:flex;flex-direction:column;background:transparent;border:0}
+today-party-photo-carousel[variant=filmstrip] .pp-caption{order:-1;padding:0 2px 16px;min-height:66px}
+today-party-photo-carousel[variant=filmstrip] .pp-picture{border-radius:20px;aspect-ratio:4/3;background:#17141d;border:1px solid #ffffff10}
+today-party-photo-carousel[variant=filmstrip] .pp-photo{object-fit:contain}
+html[data-reduced] today-party-photo-carousel button{transition:none!important}
+@media(prefers-reduced-motion:reduce){html:not([data-motion-override]) today-party-photo-carousel button{transition:none!important}}

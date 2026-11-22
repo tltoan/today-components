@@ -2111,7 +2111,7 @@
         ],
         "assets": [],
         "markup": "<today-avatar-stack></today-avatar-stack>",
-        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins. Saved portraits accept faceStyle and explicit gradientIndex 0\u201311; photo overrides the face. The host resolves confirmed identities with TodayPartyAvatars.setIdentityResolver. See PROFILE-IDENTITY.md.",
+        "usage": "Assign .person for a single profile, .members for stack/lead; stable id, name, initials, photoURL, optional gradientIndex and self. JSON person/members attributes also accepted. size 24\u201396, default36. lead-id optional. Photo falls back to deterministic varied gradient. FNV-1a over UTF-8 id; same palettes/algorithm as SwiftUI. Stack/lead render max4; host enforces membership. Wrap decorative piece in a labelled 44-point button when interactive. Lead stays inside compact/widget margins. Saved portraits accept faceStyle and explicit gradientIndex 0\u201311; photo overrides the face. The host resolves confirmed identities with TodayPartyAvatars.setIdentityResolver. See PROFILE-IDENTITY.md. Optional badges=\"heart\" adds a small heart to each overlapping portrait for confirmed photo likes.",
         "demoOnly": [
           "habit-party-study.js",
           "habit-party-study.css"
@@ -2271,7 +2271,9 @@
         "components/habit-detail-pieces.js",
         "components/habit-detail.js",
         "components/habit-detail.css",
-        "HABIT-DETAIL.md"
+        "HABIT-DETAIL.md",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2310,6 +2312,7 @@
           "components/habit-detail-pieces.js",
           "components/party-activity.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js",
           "components/habit-detail.js"
         ],
@@ -2331,7 +2334,8 @@
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
           "components/party-room.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-habit-detail></today-habit-detail>",
         "events": [
@@ -2354,7 +2358,9 @@
         "components/habit-detail-pieces.js",
         "components/habit-detail.js",
         "components/habit-detail.css",
-        "HABIT-DETAIL.md"
+        "HABIT-DETAIL.md",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2393,6 +2399,7 @@
           "components/habit-detail-pieces.js",
           "components/party-activity.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js",
           "components/habit-detail.js"
         ],
@@ -2414,7 +2421,8 @@
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
           "components/party-room.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-habit-entry></today-habit-entry>",
         "events": [
@@ -2437,7 +2445,9 @@
         "components/habit-detail-pieces.js",
         "components/habit-detail.js",
         "components/habit-detail.css",
-        "HABIT-DETAIL.md"
+        "HABIT-DETAIL.md",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2476,6 +2486,7 @@
           "components/habit-detail-pieces.js",
           "components/party-activity.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js",
           "components/habit-detail.js"
         ],
@@ -2497,7 +2508,8 @@
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
           "components/party-room.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-habit-plan-editor></today-habit-plan-editor>",
         "events": [
@@ -2520,7 +2532,9 @@
         "components/habit-detail-pieces.js",
         "components/habit-detail.js",
         "components/habit-detail.css",
-        "HABIT-DETAIL.md"
+        "HABIT-DETAIL.md",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2559,6 +2573,7 @@
           "components/habit-detail-pieces.js",
           "components/party-activity.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js",
           "components/habit-detail.js"
         ],
@@ -2580,7 +2595,8 @@
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
           "components/party-room.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-habit-history></today-habit-history>",
         "events": [
@@ -2603,7 +2619,9 @@
         "components/habit-detail-pieces.js",
         "components/habit-detail.js",
         "components/habit-detail.css",
-        "HABIT-DETAIL.md"
+        "HABIT-DETAIL.md",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2642,6 +2660,7 @@
           "components/habit-detail-pieces.js",
           "components/party-activity.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js",
           "components/habit-detail.js"
         ],
@@ -2663,7 +2682,8 @@
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
           "components/party-room.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-habit-reminder></today-habit-reminder>",
         "events": [
@@ -2686,7 +2706,9 @@
         "components/habit-detail-pieces.js",
         "components/habit-detail.js",
         "components/habit-detail.css",
-        "HABIT-DETAIL.md"
+        "HABIT-DETAIL.md",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
@@ -2725,6 +2747,7 @@
           "components/habit-detail-pieces.js",
           "components/party-activity.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js",
           "components/habit-detail.js"
         ],
@@ -2746,7 +2769,8 @@
           "components/onboarding-gradient.css",
           "components/habit-detail.css",
           "components/party-room.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-habit-schedule></today-habit-schedule>",
         "events": [
@@ -2797,7 +2821,7 @@
         "events": [
           "party-request"
         ],
-        "usage": "Set .model={id,viewer,reactors,reacted}; host confirms entry-specific reactions. See PARTY-ROOM.md.",
+        "usage": "Set .model={id,viewer,reactors,reacted}; host confirms entry-specific reactions. See PARTY-ROOM.md. variant=\"stack\" uses today-avatar-stack with badges=\"heart\" and a separate Like/Liked button. Only confirmed reactors appear.",
         "demoOnly": [
           "party-room-demo.js",
           "habit-party-study.js",
@@ -2893,14 +2917,16 @@
         "components/target-feedback.css",
         "components/party-nudge.css",
         "PARTY-ROOM.md",
-        "components/snap-scroller.js"
+        "components/snap-scroller.js",
+        "components/party-photo-carousel.js",
+        "components/party-photo-carousel.css"
       ],
       "swiftSource": [],
       "dependencies": [
-        "party-activity",
         "party-reactions",
         "party-nudge",
-        "profile-avatar"
+        "profile-avatar",
+        "party-photo-carousel"
       ],
       "status": "Controlled browser component and local preview. Native app integration is separate.",
       "browserIntegration": {
@@ -2921,6 +2947,7 @@
           "components/target-feedback.js",
           "components/party-nudge.js",
           "components/party-progress.js",
+          "components/party-photo-carousel.js",
           "components/party-room.js"
         ],
         "styles": [
@@ -2932,14 +2959,15 @@
           "components/slide-to-log.css",
           "components/target-feedback.css",
           "components/party-nudge.css",
-          "components/face-picker.css"
+          "components/face-picker.css",
+          "components/party-photo-carousel.css"
         ],
         "markup": "<today-party-room></today-party-room>",
         "events": [
           "party-request",
           "party-member-change"
         ],
-        "usage": "Controlled roster, dated eligibility and entries. Shared scheduled-day streak; each member has a personal target/reminder. See PARTY-ROOM.md. Confirmed photoURL/photoAlt entries appear in a compact four-photo strip; select a thumbnail to reveal its original check-in.",
+        "usage": "Controlled roster, dated eligibility and entries. Shared scheduled-day streak and personal targets/reminders. Selected overlay photo carousel shows each original photo log, with bottom-right quantity and stacked avatar-heart likes. Read PARTY-ROOM.md and PARTY-PHOTOS.md.",
         "demoOnly": [
           "party-room-demo.js",
           "habit-party-study.js",
@@ -3216,6 +3244,69 @@
       "referenceSource": [
         "native/reference/TodayLogoCurvedVariation.swift"
       ]
+    },
+    {
+      "id": "party-photo-carousel",
+      "name": "Shared check-ins \u00b7 Selected photo carousel",
+      "preview": "party-photos.html",
+      "sourcePage": "source.html#party-photo-carousel",
+      "browserSource": [
+        "foundations/disclosure.js",
+        "components/party-avatars.js",
+        "components/face-palettes.js",
+        "components/minimal-face-motion.js",
+        "components/minimal-face.js",
+        "components/party-reactions.js",
+        "components/snap-scroller.js",
+        "components/party-photo-carousel.js",
+        "components/party-avatars.css",
+        "components/face-picker.css",
+        "components/party-room.css",
+        "components/party-photo-carousel.css",
+        "foundations/motion.css",
+        "PARTY-PHOTOS.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "agenda",
+        "profile-avatar",
+        "party-reactions",
+        "disclosure"
+      ],
+      "status": "Overlay selected; used by browser party rooms. Caption and filmstrip remain historical comparisons. Native app integration is separate.",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-party-photo-carousel",
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/party-avatars.js",
+          "components/face-palettes.js",
+          "components/minimal-face-motion.js",
+          "components/minimal-face.js",
+          "components/party-reactions.js",
+          "components/snap-scroller.js",
+          "components/party-photo-carousel.js"
+        ],
+        "styles": [
+          "components/party-avatars.css",
+          "components/face-picker.css",
+          "components/party-room.css",
+          "components/party-photo-carousel.css",
+          "foundations/motion.css"
+        ],
+        "markup": "<today-party-photo-carousel variant=\"overlay\"></today-party-photo-carousel>",
+        "events": [
+          "party-request"
+        ],
+        "usage": "Overlay is selected, with bottom-right quantity, no visible position count and overlapping avatar-heart likes. Historical variants caption / filmstrip remain available. Set controlled original logs and optional memberID; host confirms reactions. Read PARTY-PHOTOS.md.",
+        "demoOnly": [
+          "party-photo-study.js",
+          "party-photo-study.css",
+          "party-room-demo.js",
+          "profile-identity-demo.js",
+          "party-photos.html"
+        ]
+      }
     }
   ],
   "usage": "browserSource includes demonstration files. Use browserIntegration for reusable files, ordered scripts, examples, and assets. Read INTEGRATION.md before copying a component."

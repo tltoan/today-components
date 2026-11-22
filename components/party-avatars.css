@@ -4,6 +4,9 @@
 .pa-portrait img.pa-photo-ready{opacity:1}
 .pa-stack{display:flex;isolation:isolate;padding:0}
 .pa-stack .pa-portrait+.pa-portrait{margin-left:calc(var(--pa-size,36px)*-.27)}
+.pa-stack-hearts{padding-bottom:6px}.pa-stack-item{position:relative;display:block;flex:none}.pa-stack-item+.pa-stack-item{margin-left:calc(var(--pa-size,36px)*-.27)}
+.pa-stack-heart{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);display:grid;place-items:center;width:17px;height:17px;background:#30233f;color:#d2b4ed;border:2px solid var(--pa-rim,#17151e);border-radius:50%}
+.pa-stack-heart svg{width:10px;height:10px;fill:currentColor}
 .pa-lead{display:inline-flex;position:relative;padding-right:12px;padding-bottom:2px}
 .pa-count{position:absolute;right:0;bottom:0;display:grid;place-items:center;min-width:24px;height:24px;padding:0 4px;box-sizing:border-box;border:2px solid var(--pa-rim,#17151e);background:#373143;color:#eeeaf3;border-radius:50%;font-size:10px}
 @media(prefers-reduced-motion:reduce){.pa-portrait img{transition:none}}

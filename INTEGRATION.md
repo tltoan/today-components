@@ -141,3 +141,7 @@ Habit detail selection: Grouped cards (B). Independent history (day summaries / 
 
 
 For shared party days, compact activity and avatar-heart reactions, start at [PARTY-ROOM.md](PARTY-ROOM.md). New browser elements: today-party-room, today-party-activity, today-party-reactions and proposed today-party-setup. Their fixtures in party-room-demo.js are demo-only. Home and onboarding now share today-week-bar. Ordered scripts/styles are in components.json; these compositions are browser code, not native app integration.
+
+## Selected photo check-in carousel
+
+See [PARTY-PHOTOS.md](PARTY-PHOTOS.md) and the `party-photo-carousel` manifest entry. `today-party-photo-carousel` provides caption, overlay and filmstrip variants over the same original log model. Reuse the ordered sources, existing avatars/reactions and shared horizontal SnapScroller. Overlay (B) is selected and used in browser party rooms: quantity bottom-right, no visible position count, overlapping avatar-heart likes. Caption/filmstrip are historical comparisons; the date-first feed remains reusable source. Gallery state and images are examples, not production services.

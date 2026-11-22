@@ -1,0 +1,20 @@
+.pps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:32px 24px;align-items:start}
+.pps-selected{width:min(100%,390px);margin-inline:auto}.pps-selected .pps-label{min-height:0}
+.pps-compare{display:flex;align-items:center;gap:14px;margin:30px auto 0;min-height:48px;padding:12px 18px;border:1px solid #ffffff12;border-radius:25px;color:#bdadcd;background:#ffffff03;font:13px Future,sans-serif;cursor:pointer}
+.pps-compare:focus-visible{outline:2px solid #c5b2e2;outline-offset:3px}.pps-compare[aria-expanded=true] .today-disclosure__chevron{transform:rotate(180deg)}
+.pps-alternatives .pps-grid{padding-top:34px;max-width:830px;margin-inline:auto}
+.pps-variation{min-width:0}.pps-label{display:flex;gap:12px;margin-bottom:24px;min-height:90px;align-items:flex-start}
+.pps-label>span{font-size:12px;color:#b9a6cf;padding-top:5px;width:16px;flex:none}
+.pps-label h3{font-size:22px;font-weight:500;line-height:1.3;letter-spacing:-.035em;margin:0 0 8px}
+.pps-label p{font-size:12px;color:#a99eb5;line-height:1.65;margin:0;max-width:270px}
+.pps-composition{padding:22px 16px 10px;border:1px solid #ffffff0e;border-radius:28px;background:radial-gradient(ellipse at 20% 0,#25202f99,transparent 60%),#0a090d}
+.pps-composition>h4{font-size:17px;font-weight:500;letter-spacing:-.02em;margin:0 0 14px}
+.pps-tools{border-top:1px solid #ffffff10;margin-top:48px;padding-top:26px;display:flex;gap:24px;align-items:start;flex-wrap:wrap}
+.pps-tools>div{flex:1 1 310px}.pps-tools-label{font-size:11px;color:#a89cb6;display:block;margin-bottom:12px}
+.pps-tools today-segmented-control{max-width:400px}.pps-states>div{display:flex;flex-wrap:wrap;gap:8px}
+.pps-states button{min-height:44px;padding:8px 14px;font:12px Future,sans-serif;color:#c2b2d3;border:1px solid #ffffff14;background:#ffffff03;border-radius:24px;cursor:pointer}
+.pps-states button[aria-pressed=true]{background:#ba9dd91a;border-color:#bca4d34f;color:#eee4f6}
+.pps-states button:focus-visible{outline:2px solid #c5b2e2;outline-offset:3px}.pps-note{flex:0 0 100%;font-size:12px;color:#a99bb7;line-height:1.7;margin:0}
+.party-photos-page main{max-width:1160px}.party-photos-page .library-component-heading{margin-bottom:36px}
+.pps-comparison-link{display:inline-flex;align-items:center;min-height:44px;color:#c7b2df;font-size:12px;text-underline-offset:4px}
+@media(max-width:640px){.pps-grid{grid-template-columns:minmax(0,1fr);gap:44px}.pps-label{min-height:0;margin-bottom:18px}.pps-composition{padding:22px 16px 10px}.pps-tools{margin-top:32px}.party-photos-page .library-component-heading{align-items:start}}
