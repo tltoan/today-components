@@ -15,6 +15,10 @@ Updated November 22, 2026. This file carries the design direction across chats. 
 
 Read [IMPLEMENTATION-START.md](IMPLEMENTATION-START.md) for the updated VS Code Codex instruction. This latest direction supersedes the earlier emphasis on implementing a functional core slice before establishing UI parity. The user authorized pushing this documentation update to GitHub; native app changes remain local until separately requested.
 
+## Motion standard reaffirmed — November 22
+
+The user explicitly made the corrected trial-length dropdown the standard and requires exact motion/animation fidelity whenever library UI is implemented. Reuse the common disclosure foundation for all Today-owned dropdowns and inline expansions; preserve other components’ own source-specific choreography. [INTEGRATION.md](INTEGRATION.md#required-motion-fidelity--november-22) defines the acceptance process: inspect live source, compare recordings/intermediate frames, verify interrupted transitions and Reduce Motion, and report unresolved differences rather than declaring parity. This is a guidance update, not a new native runtime verification or approval of Workshop compositions.
+
 ## Start here
 
 - Local repository: `/Users/antony/Documents/ChatGPT/Apps/today-component-study`

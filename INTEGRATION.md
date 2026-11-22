@@ -4,6 +4,22 @@ The live gallery is a preview. The public repository contains the actual readabl
 
 **For the Today app, this library is the authoritative UI and design-system source**, as explicitly directed by the user on November 22, 2026. Apply it to existing screens as well as new ones. Reuse supplied native implementations or port approved browser components faithfully into shared SwiftUI components, preserving their visual geometry, assets, states and motion. The existing app remains the starting point for functional code and persistence; its older visual implementation is not the UI standard. Selected components and Screens & flows guide implementation; Workshop compositions remain under review. Read [IMPLEMENTATION-START.md](IMPLEMENTATION-START.md) for migration order and simulator-to-library comparison requirements.
 
+## Required motion fidelity — November 22
+
+**Motion and animation are part of the component specification. Reproduce the selected source exactly; a similar feel or matching final screenshot is not sufficient.** Inspect the live preview and actual component source before every implementation/change, and reuse the supplied native implementation or shared native port where available.
+
+The corrected trial-length dropdown is the accepted standard for all Today-owned dropdowns and inline expansions. Browser components reuse `foundations/disclosure.js` and `foundations/motion.css`; the app uses its shared `LibraryDisclosure` and supplied `TodayMotion.Disclosure` tokens. Preserve the 600 ms layout curve, delayed incoming fade, immediate outgoing fade, anchored trigger, clipping and movement of surrounding content. No per-screen timing overrides or clip-only approximations. Platform-owned menus retain their system behavior. This standard does not replace the distinct motion of counters, carousels, navigation, charts or other components.
+
+For implementation acceptance:
+
+1. Record the source commit/variant and exact durations, delays, easing, sequencing/stagger, translation, opacity, scale, blur, clipping and layout effects used by that component. Keep host layout and component motion coordinated; do not layer a second competing animation over the source behavior.
+2. Run matching source/native states and inputs at the same logical viewport (390 × 844 for reference phone screens). Record both, scrub corresponding frames, and compare the transition as well as its endpoints.
+3. Verify open/close and forward/reverse paths; rapid repeated input; interrupted retargeting from the current presentation; preserved selection and focus; keyboard behavior where relevant; loop pause/resume offscreen/inactive; and actual Reduce Motion behavior.
+4. Fix differences in the shared implementation and check affected consumers. Keep evidence in the host handoff/source map. Any visible motion difference, untested transition or platform limitation stays an explicit open parity gap; do not declare an exact match until resolved.
+
+This is a required acceptance standard, not a claim that every native component has already passed it. Latest explicit user decisions still take precedence over older source behavior.
+
+
 ## Give an agent this instruction
 
 > Use the Today component library at https://github.com/tltoan/today-components. Read AGENTS.md, INTEGRATION.md, and components.json. Reuse the [component name] source and its dependencies when building this page. Preserve its appearance, motion, keyboard support, and reduced-motion behavior. Use the browser implementation for a web page, or the supplied SwiftUI implementation when available for a native screen.
