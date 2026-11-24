@@ -1,8 +1,8 @@
-/* Website proposals only. No account, submission, persistence, analytics or production policies. */
+/* Approved website and library preview. Example activity; legal text remains draft. */
 (() => {
   const body = document.body;
   const direction = body.dataset.direction;
-  const file = `today-site-${direction}.html`;
+  const file = body.dataset.siteHome || `today-site-${direction}.html`;
   const reduced = () => document.documentElement.hasAttribute('data-reduced') || matchMedia('(prefers-reduced-motion: reduce)').matches;
   const home = document.querySelector('[data-home]');
   const documentView = document.querySelector('[data-document]');
@@ -28,17 +28,17 @@
   card.addEventListener('logrequest', () => {
     amount += 5; dayAmounts[selectedDate]=amount; updateCard();
   });
-  document.querySelector('[data-replay]').addEventListener('click', () => opening ? opening.replay() : document.querySelector('today-welcome-intro').replay());
+  document.querySelector('[data-replay]')?.addEventListener('click', () => opening ? opening.replay() : document.querySelector('today-welcome-intro').replay());
   const reduceInput = document.querySelector('[data-reduce]');
   const media = matchMedia('(prefers-reduced-motion: reduce)');
-  reduceInput.checked = media.matches;
+  if (reduceInput) reduceInput.checked = media.matches;
   const applyMotion = () => {
-    document.documentElement.toggleAttribute('data-reduced', reduceInput.checked || media.matches);
+    document.documentElement.toggleAttribute('data-reduced', Boolean(reduceInput?.checked) || media.matches);
     if (reduced()) opening?.settle();
     if (reduced()) document.getAnimations().forEach(animation => animation.finish());
   };
-  reduceInput.addEventListener('change', applyMotion);
-  media.addEventListener('change', () => {reduceInput.checked = media.matches; applyMotion();});
+  reduceInput?.addEventListener('change', applyMotion);
+  media.addEventListener('change', () => {if (reduceInput) reduceInput.checked = media.matches; applyMotion();});
   applyMotion();
   const getApp = document.querySelector('.site-get-app');
   if (getApp) {
@@ -95,7 +95,9 @@
       if (link.dataset.page===page) link.setAttribute('aria-current','page');
       else link.removeAttribute('aria-current');
     });
-    document.title = `Today — ${page==='home'?(direction==='a'?'A quiet opening':'Your day, in view'):page[0].toUpperCase()+page.slice(1)} · Website ${direction.toUpperCase()}`;
+    document.title = body.dataset.siteHome
+      ? `Today — ${page==='home'?'what will you do?':page[0].toUpperCase()+page.slice(1)}`
+      : `Today — ${page==='home'?(direction==='a'?'A quiet opening':'Your day, in view'):page[0].toUpperCase()+page.slice(1)} · Website ${direction.toUpperCase()}`;
     if (focus) {
       const heading = (page==='home'?home:documentView).querySelector('h1');
       heading.tabIndex = -1; heading.focus({preventScroll:true});
