@@ -2,6 +2,17 @@
 
 Updated November 24, 2026. This file carries the design direction across chats. It is not a transcript or a claim that every prototype is implemented in the native app.
 
+## Website deployed · whatwillyoudotoday.xyz · November 24
+
+The approved website is live at **https://whatwillyoudotoday.xyz/** in Vercel team **tltoans-projects**, project **today-website**. The user authorized the domain connection and completed Vercel identity verification. Dashboard shows the apex as **Valid Configuration / Production**. No www redirect was added. [WEBSITE-DEPLOYMENT.md](WEBSITE-DEPLOYMENT.md) records the source, deployment and update procedure.
+
+The production site is a manual **Drop to Deploy** export: 57 files / 199,110 bytes, with only the approved website and shared dependencies. `scripts/build-website.mjs` derives it from `today-site-b.html`, removes gallery controls/imports and uses root-relative website navigation. Existing logo/Welcome/opening/CSS bytes are unchanged. Get app remains preview-only, legal text stays explicitly draft, and noindex remains until launch content is finalized. The component library stays at its existing GitHub Pages address.
+
+Website code is committed/pushed on **codex/today-website**, implementation **effd965**, with deployment documentation following on that branch. Main remains **8793692**: automatic approval review rejected a direct main push and it was not retried or bypassed. Vercel is **not Git-connected**; pushing a branch does not update the live site. Future site changes must be rebuilt and deployed deliberately. The original checkout retains its unrelated pending native-audit docs.
+
+Fresh verification: unauthenticated HTTPS returns 200; all 57 deployed files match the local export byte-for-byte; Privacy/Terms/Support URL states return 200; library Markdown returns 404. Live browser checks confirm Get app disclosure, 5 → 10 logging/Target met, Privacy/return navigation and a measured 390 × 844 layout without horizontal overflow. No browser warnings/errors in the inspected log. No native/Supabase changes or app availability claims.
+
+
 ## Library sharing snapshot · November 24
 
 The user explicitly requested pushing the current library to GitHub to share it. This supersedes the earlier local-only hold for this snapshot. Destination: `tltoan/today-components` main, with the existing Pages site at **https://tltoan.github.io/today-components/**. Preserve the Components / Screens & flows / Workshop classifications and the distinction between browser fixtures, reusable SwiftUI source and actual native implementation. Native app/services and the separate launch-film project are outside this publication.
