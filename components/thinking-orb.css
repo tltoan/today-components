@@ -1,0 +1,3 @@
+today-thinking-orb{display:inline-block;width:var(--orb-diameter,64px);height:var(--orb-diameter,64px);flex:none;vertical-align:middle;contain:layout paint}
+today-thinking-orb[size=small]{--orb-diameter:20px}
+today-thinking-orb canvas{display:block;width:100%;height:100%}

@@ -108,3 +108,9 @@ Home now uses `today-week-bar`, the same interactive date strip as the Home over
 The shared `today-face-picker` is shown after Features. Save profile emits `portrait-save-request` with `{selection, resolve, reject}`. The host must await persistence, then call `resolve(confirmedSelection)` to advance to Describe, or `reject(message)` to retain the draft and show an inline error. `draft.portrait` preserves edits during navigation. Returning to Features or editing colors does not save. Reset examples restores habit fixtures while retaining the confirmed identity.
 
 The gallery uses [profile-identity-demo.js](profile-identity-demo.js), browser-local storage only. No account or server upload exists here. The saved face/gradient or photo is reused in Profile, Home and current-user party avatars; friends are unchanged. See [PROFILE-IDENTITY.md](PROFILE-IDENTITY.md) for SwiftUI integration.
+
+## Post-description waiting workshop · November 22
+
+The user requested exploring the planning wait after describing a habit. `habit-thinking.html` compares three unapproved layouts using existing Describe / Tracking and interchangeable loaders. Read HABIT-THINKING.md; the approved sequence above remains unchanged. The real first-run privacy/consent and introduction must not be bypassed by this proposed loading surface. No network request or native flow change is implemented here.
+
+Latest selection: centered Preparing a habit with Breathing and the retained subtle visible Today wash. Describe → preparation now transitions the same mounted background; Replay transition demonstrates the handoff. First-run Privacy/Introduction remain required before a real request. See HABIT-THINKING.md for the selected source and IMPLEMENTATION-PREPARING-HABIT.md for the next native slice. The browser reading fixture is not a real planner.

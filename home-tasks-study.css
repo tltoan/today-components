@@ -1,0 +1,30 @@
+.ht-page{width:100%;max-width:1020px;margin:0 auto;padding:42px 32px 56px}
+.ht-page a{color:#c9b8da;text-decoration:none}.ht-page a:hover{text-decoration:underline}
+.ht-page-header{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:24px}
+.ht-page-header h1{font-size:32px;line-height:1.15;letter-spacing:-.045em;font-weight:500;margin:16px 0 10px}
+.ht-page-header p{font-size:15px;color:#b8a9c7;max-width:600px;line-height:1.6;margin:0}
+.ht-breadcrumb{font-size:12px}.ht-source{font-size:12px;margin-top:8px;white-space:nowrap}
+.ht-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0 28px;border-bottom:1px solid #ffffff0d;margin-bottom:32px}
+.ht-toolbar>div{display:flex;align-items:center;gap:16px;font-size:12px;color:#a99bb9}.ht-toolbar today-segmented-control{width:400px}.ht-tool-right{gap:20px!important}
+.ht-reduced{display:flex;align-items:center;gap:8px;cursor:pointer;min-height:44px;font-size:12px}.ht-reduced input{accent-color:#bca5d5}
+.ht-reset{font:400 12px/1.4 Future,sans-serif;color:#cdbdde;padding:10px 16px;min-height:44px;border:1px solid #ffffff12;border-radius:999px;background:none;cursor:pointer}.ht-reset:focus-visible{outline:2px solid #cdb9e1;outline-offset:2px}
+.ht-selected-layout{display:grid;grid-template-columns:repeat(2,minmax(0,390px));gap:56px;justify-content:center;align-items:start}
+.ht-home,.ht-widgets{min-width:0}.ht-home>header,.ht-widgets>header{min-height:120px}
+.ht-selected-label{font-size:11px;color:#bba4d0}
+.ht-selected-layout h2{font-size:23px;line-height:1.2;letter-spacing:-.035em;font-weight:500;margin:10px 0}
+.ht-selected-layout header p{font-size:13px;line-height:1.6;color:#b5a9c2;margin:0}
+.ht-pair{max-width:390px;margin:auto}.ht-pair today-home-overview{height:844px}.ht-pair .ho-body{display:flex;flex-direction:column;min-height:0}
+.ht-scroll{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;scrollbar-width:thin;scrollbar-color:#34303c transparent;scroll-padding:16px;border-radius:4px}.ht-scroll:focus-visible{outline:1px solid #bca5d5;outline-offset:2px}
+.ht-habits,.ht-tasks{position:relative}.ht-pair .ho-list{overflow:visible;padding-bottom:2px}.ht-pair .ho-day-heading{margin-bottom:14px}.ht-tasks{margin:0;padding:0 2px 6px}.ht-view-selector{flex:none;margin-bottom:22px}.ht-pair [hidden]{display:none!important}
+.ht-widget-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 4px 14px}.ht-widget-heading h3{font-size:16px;font-weight:500;letter-spacing:-.02em;margin:0}.ht-widget-heading span{font-size:11px;color:#9e8fab}
+.ht-widgets>article+article{margin-top:34px}
+.ht-widget-stage{display:flex;justify-content:center;align-items:flex-start;min-height:200px;padding:22px 0;background:radial-gradient(ellipse 90% 100% at 30% 0%,#2c27404f,transparent),#0e0c12;border:1px solid #ffffff08;border-radius:30px;overflow-x:auto;scrollbar-width:thin}
+.ht-sync-note{font-size:12px;color:#ab9cba;line-height:1.7;margin:26px 4px 0;max-width:340px}
+.ht-pair-status{font-size:11px;color:#ab9cba;line-height:1.6;min-height:18px;margin:24px 0 0;text-align:center}
+.ht-footer{border-top:1px solid #ffffff0d;margin-top:32px;padding-top:22px;display:flex;justify-content:space-between;gap:24px;font-size:12px;line-height:1.7;color:#ab9cba}.ht-footer p{max-width:680px;margin:0}
+.library-embedded[data-embed-id=home-tasks] body,.library-embedded[data-embed-id^=task-widget-] body{padding:0}
+.library-embedded .ht-pair{max-width:390px;margin:auto!important}.library-embedded .ht-pair .ho-day-heading today-streak-badge{margin:0!important}.library-embedded .ht-pair .ho-nav today-bottom-nav{height:100px}
+.library-embedded .ht-widget-stage{border:0;background:none;padding:22px 0}
+@media(max-width:900px){.ht-toolbar{flex-wrap:wrap}.ht-toolbar>div:first-child{flex:1;min-width:0;flex-wrap:wrap}.ht-toolbar today-segmented-control{width:100%;max-width:400px}.ht-selected-layout{gap:28px}}
+@media(max-width:800px){.ht-page{padding:28px 20px 44px}.ht-selected-layout{grid-template-columns:minmax(0,390px);gap:44px}.ht-home>header,.ht-widgets>header{min-height:110px}.ht-footer{flex-direction:column}.ht-page-header h1{font-size:28px}}
+@media(max-width:430px){.ht-page{padding-inline:0}.ht-page-header,.ht-toolbar,.ht-home>header,.ht-widgets>header,.ht-footer{margin-inline:20px}.ht-source{display:none}.ht-pair{width:100%}.ht-widget-stage{margin-inline:10px}.ht-widget-heading,.ht-sync-note{margin-inline:20px}.ht-pair-status{margin-inline:20px}}

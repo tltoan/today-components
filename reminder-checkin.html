@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000"><title>Today — Remind me later</title>
+  <link rel="stylesheet" href="components/controls.css">
+  <link rel="stylesheet" href="components/artwork.css">
+  <link rel="stylesheet" href="reminder-checkin-study.css">
+  <link rel="stylesheet" href="foundations/motion.css">
+  <script src="foundations/disclosure.js" defer></script>
+  <script src="components/icons.js" defer></script>
+  <script src="components/controls.js" defer></script>
+  <script src="components/artwork.js" defer></script>
+  <script src="reminder-checkin-study.js" defer></script>
+  <link rel="stylesheet" href="library-embed.css">
+  <script src="library-catalog.js?v=reminder-checkin-2" defer></script><script src="library-embed.js"></script>
+</head>
+<body>
+  <main class="mr-study">
+    <header class="mr-study-header"><a href="index.html#reminder-checkin">← Components</a><a href="source.html#reminder-checkin">Source &amp; behavior ↗</a></header>
+    <div class="mr-intro"><p class="mr-eyebrow">SELECTED · REMINDERS</p><h1>A little later works, too.</h1><p>A quiet check-in, with room to come back to it.</p></div>
+    <div class="mr-layout">
+      <section class="mr-preview" aria-label="Missed-day check-in preview">
+        <div class="mr-card">
+          <div class="mr-habit"><today-artwork name="open-book"></today-artwork><div><p>Read before bed</p><span>10 pages · Sun, Tue, Thu</span></div><today-button variant="quiet" icon="close" accessible-label="Dismiss check-in" data-dismiss></today-button></div>
+          <div id="mr-question"><div>
+            <h2>Would a smaller plan<br>fit your week better?</h2>
+            <p class="mr-copy">You can pick up where you left off, or adjust what you planned.</p>
+            <div class="mr-actions"><today-button variant="compact" label="View habit" block data-view></today-button><today-button variant="quiet" label="Remind me later" block data-later></today-button></div>
+            <div id="mr-times"><div><div class="mr-time-content">
+              <h3>When would suit you?</h3>
+              <div class="mr-time-list">
+                <today-button variant="row" label="In 15 minutes" trailing-icon="chevron" value="15" block></today-button>
+                <today-button variant="row" label="In 1 hour" trailing-icon="chevron" value="60" block></today-button>
+                <today-button variant="row" label="This evening · 7 PM" trailing-icon="chevron" value="evening" block></today-button>
+              </div>
+              <p class="mr-small">Just this check-in. Your usual reminders stay the same.</p>
+              <today-button variant="quiet" label="Cancel" data-cancel></today-button>
+            </div></div></div>
+          </div></div>
+          <div id="mr-confirmation"><div><div class="mr-confirm-content"><p role="status" aria-live="polite" tabindex="-1" id="mr-status"></p><today-button variant="quiet" label="Undo" data-undo></today-button></div></div></div>
+        </div>
+      </section>
+      <aside class="mr-explanation">
+        <p class="mr-eyebrow">ONE CHECK-IN, THREE MOMENTS</p>
+        <h2>It can wait. <br>Your plan stays yours.</h2>
+        <ol>
+          <li><strong>A gentle invitation</strong><p>View the habit to log or adjust it. Closing the check-in simply dismisses it.</p></li>
+          <li><strong>Choose a little later</strong><p>The time choices open in place, using Today’s existing disclosure motion.</p></li>
+          <li><strong>A small confirmation</strong><p>The chosen time replaces the question. Undo brings the check-in back.</p></li>
+        </ol>
+        <div class="mr-demo-tools"><today-button variant="secondary" label="Reset preview" data-reset></today-button><label><input type="checkbox" id="mr-reduced"> Less motion</label></div>
+        <p class="mr-prototype-note">Selected direction · Home above the habit cards, after three missed scheduled days. Sample time: 10 AM. This browser preview sends no notifications and saves nothing.</p>
+      </aside>
+    </div>
+    <footer>Missed-day check-in · Browser prototype · <a href="REMINDER-CHECKIN.md">Behavior &amp; boundaries ↗</a></footer>
+  </main>
+</body>
+</html>

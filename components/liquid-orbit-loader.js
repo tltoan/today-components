@@ -1,4 +1,4 @@
-/* Transparent gradient loader. Requires liquid-orbit-motion.js. Alternative proposal; one-second cycle.
+/* Transparent gradient loader. Requires liquid-orbit-motion.js. Approved one-second cycle.
  * Mount only while work is pending; the host owns the loading state.
  */
 (() => {
@@ -12,12 +12,12 @@
       const vs=shader(gl.VERTEX_SHADER,'attribute vec2 a; varying vec2 uv; void main(){uv=vec2((a.x+1.0)/2.0,(1.0-a.y)/2.0);gl_Position=vec4(a,0.,1.);}');
       const fs=shader(gl.FRAGMENT_SHADER,`precision highp float;
         varying vec2 uv; uniform vec4 beads[8]; uniform vec3 shapes[8]; uniform float aa;
+        uniform vec3 blue; uniform vec3 lavender; uniform vec3 peach;
         void main(){vec2 p=uv*vec2(740.,700.);float field=0.;
           for(int i=0;i<8;i++){vec2 d=p-beads[i].xy;vec2 axes=vec2(d.x*shapes[i].x+d.y*shapes[i].y,-d.x*shapes[i].y+d.y*shapes[i].x)/beads[i].zw;
             float q=dot(axes,axes);if(q*shapes[i].z<=12.)field+=exp(shapes[i].z*(1.-q));}
           float alpha=smoothstep(1.-aa,1.+aa,field);
           float t=clamp((uv.x+1.-uv.y)*.5,0.,1.);
-          vec3 blue=vec3(94.,145.,246.)/255.,lavender=vec3(167.,129.,240.)/255.,peach=vec3(255.,178.,118.)/255.;
           vec3 color=t<.5?mix(blue,lavender,t*2.):mix(lavender,peach,(t-.5)*2.);
           gl_FragColor=vec4(color,alpha);}`);
       const p=gl.createProgram();gl.attachShader(p,vs);gl.attachShader(p,fs);gl.linkProgram(p);
@@ -25,20 +25,21 @@
       this.program=p;this.shaders=[vs,fs];gl.useProgram(p);
       this.buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,this.buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
       const a=gl.getAttribLocation(p,'a');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
-      this.locations=['beads[0]','shapes[0]','aa'].map(n=>gl.getUniformLocation(p,n));
+      this.locations=['beads[0]','shapes[0]','aa','blue','lavender','peach'].map(n=>gl.getUniformLocation(p,n));
     }
     resize(w,h){
       const scale=this.gl?Math.min(devicePixelRatio||1,2):Math.min(1,180/w);
       this.canvas.width=Math.max(1,Math.round(w*scale));this.canvas.height=Math.max(1,Math.round(h*scale));
       if(this.gl)this.gl.viewport(0,0,this.canvas.width,this.canvas.height);
     }
-    draw(time){
+    draw(time,colors){
       if(!this.canvas.width)return;
       const beads=TodayLiquidOrbitMotion.beads(time);
       if(this.gl){const gl=this.gl;gl.useProgram(this.program);
         gl.uniform4fv(this.locations[0],new Float32Array(beads.flatMap(b=>[b.x,b.y,b.rx,b.ry])));
         gl.uniform3fv(this.locations[1],new Float32Array(beads.flatMap(b=>[Math.cos(b.angle),Math.sin(b.angle),b.sharpness])));
         gl.uniform1f(this.locations[2],Math.min(.25,8/this.canvas.width));
+        colors.forEach((color,index)=>gl.uniform3fv(this.locations[3+index],new Float32Array(color.map(channel=>channel/255))));
         gl.drawArrays(gl.TRIANGLE_STRIP,0,4);return;
       }
       // CPU contour fallback when WebGL is unavailable. Same field and palette.
@@ -46,7 +47,7 @@
       const bs=beads.map(b=>({...b,c:Math.cos(b.angle),s:Math.sin(b.angle)}));
       for(let y=0;y<h;y++)for(let x=0;x<w;x++){
         let field=0;for(const b of bs){const dx=(x+.5)/w*740-b.x,dy=(y+.5)/h*700-b.y,q=((dx*b.c+dy*b.s)/b.rx)**2+((-dx*b.s+dy*b.c)/b.ry)**2;if(q*b.sharpness<=12)field+=Math.exp(b.sharpness*(1-q));}
-        const t=((x+.5)/w+1-(y+.5)/h)/2,a=t<.5?[94,145,246]:[167,129,240],b=t<.5?[167,129,240]:[255,178,118],u=t<.5?t*2:(t-.5)*2,i=(y*w+x)*4,z=Math.max(0,Math.min(1,(field-(1-aa))/(2*aa)));
+        const t=((x+.5)/w+1-(y+.5)/h)/2,a=t<.5?colors[0]:colors[1],b=t<.5?colors[1]:colors[2],u=t<.5?t*2:(t-.5)*2,i=(y*w+x)*4,z=Math.max(0,Math.min(1,(field-(1-aa))/(2*aa)));
         for(let c=0;c<3;c++)data.data[i+c]=a[c]+(b[c]-a[c])*u;data.data[i+3]=255*z*z*(3-2*z);
       }ctx.putImageData(data,0,0);
     }
@@ -54,7 +55,7 @@
   }
   const rate=value=>Number.isFinite(Number(value))?Math.min(4,Math.max(.1,Number(value))):1;
   class TodayLiquidOrbitLoader extends HTMLElement {
-    static observedAttributes=['paused','speed','label'];
+    static observedAttributes=['paused','speed','label','palette'];
     constructor(){super();this._elapsed=0;this._started=null;this._rate=1;this._frame=0;this._visible=false;}
     get speed(){return this.hasAttribute('speed')?rate(this.getAttribute('speed')):1;}
     set speed(value){this.setAttribute('speed',value);}
@@ -89,7 +90,8 @@
       this._renderer.resize(width,height);this.draw(this.reduced()?0:this.currentTime);
     }
     draw(time){
-      this._renderer?.draw(time);
+      const colors=this.getAttribute('palette')==='soft'?[[169,181,211],[191,178,210],[221,199,189]]:[[94,145,246],[167,129,240],[255,178,118]];
+      this._renderer?.draw(time,colors);
       this.dataset.time=(time%1).toFixed(3);
     }
     play(){this.removeAttribute('paused');}

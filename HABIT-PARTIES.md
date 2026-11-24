@@ -39,7 +39,7 @@ Mock up three connected situations before polishing every empty state:
 2. Log a partial amount, optionally attach a photo, and receive one reaction. Include a failed photo upload while the log remains saved.
 3. Send a gentle nudge; show what the sender sees when nudges are muted, outside the window or already used for that day.
 
-Open product decisions: who can invite/remove members; invite expiry; previous-post visibility after leaving; delete/export behavior; whether outside-window nudges queue or stay unavailable (recommend unavailable with a clear next window, avoiding surprise delivery). These are proposals, not silently assumed rules.
+November 24: invite/removal authority, seven-day expiry, previous-post visibility after leaving and account-deletion consequences are now approved in [PARTY-POLICY.md](PARTY-POLICY.md). Remaining nudge decisions, shared-media handling and their operational consequences are still proposals; do not silently select them.
 
 ## Implemented browser pieces
 
@@ -80,7 +80,7 @@ Nudges now live in components/party-nudge.js and components/party-nudge.css; loa
 
 See [PARTY-ROOM.md](PARTY-ROOM.md) for `today-party-room`, `today-party-photo-carousel`, `today-party-reactions` and the separate planning proposal `today-party-setup`. The room replaces the old single-Maya feed and nudge panel in both Home/detail contexts and the selected habit-detail dialog. Tap any member to inspect their target and activity or nudge that recipient. The selected carousel preserves original entry amounts, notes, photos and avatar reactions; no-photo logs remain accessible.
 
-The shared streak is now explicitly approved: shared scheduled days only, every eligible member has a saved log, days off unchanged. This supersedes the earlier no-shared-streak proposal. The overall Today streak remains private on Home. Trial reviews staying individual and party creation from plan review are mock proposals, not settled lifecycle policy.
+The shared streak is explicitly approved: shared scheduled days only, every eligible member has a saved log, days off unchanged. This supersedes the earlier no-shared-streak proposal. The overall Today streak remains private on Home. November 24 selects personal trial reviews and creation from an existing habit detail, superseding the plan-review creation proposal; see [PARTY-POLICY.md](PARTY-POLICY.md).
 
 
 ### Compact invitation and proposed entry

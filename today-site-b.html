@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex"><title>Today — Your day, in view · Website B</title>
+  <script>history.scrollRestoration='manual'; if (!new URLSearchParams(location.search).has('page') && !new URLSearchParams(location.search).has('embed') && !matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('site-opening');</script>
+  <link rel="stylesheet" href="foundations/motion.css"><link rel="stylesheet" href="components/controls.css">
+  <link rel="stylesheet" href="components/welcome-intro.css"><link rel="stylesheet" href="components/artwork.css">
+  <link rel="stylesheet" href="components/habit-card.css"><link rel="stylesheet" href="components/target-feedback.css">
+  <link rel="stylesheet" href="components/log-photo-action.css"><link rel="stylesheet" href="components/week-bar.css"><link rel="stylesheet" href="today-site.css?v=header-3">
+  <link rel="stylesheet" href="library-embed.css">
+  <script src="today-logo.js" defer></script><script src="components/welcome-intro.js" defer></script>
+  <script src="foundations/disclosure.js" defer></script><script src="components/icons.js" defer></script>
+  <script src="components/controls.js" defer></script><script src="components/artwork.js" defer></script>
+  <script src="components/target-feedback.js" defer></script><script src="components/log-photo-action.js" defer></script>
+  <script src="components/habit-card.js" defer></script><script src="components/week-bar.js" defer></script><script src="today-site-opening.js" defer></script><script src="today-site.js?v=header-3" defer></script>
+  <script src="library-catalog.js?v=website-approved-1" defer></script><script src="library-embed.js" defer></script>
+</head>
+<body class="site-b" data-direction="b">
+  <a class="site-skip" href="#site-content">Skip to content</a>
+  <div class="site-study-bar" aria-label="Website prototype controls">
+    <a href="screens.html#website-b">← Library</a><span>Your day, in view · Approved design</span>
+    <div><button data-replay>Replay intro ↻</button><label><input type="checkbox" data-reduce> Less motion</label></div>
+  </div>
+  <button class="site-intro-skip" hidden>Skip intro</button>
+  <div class="site-shell">
+    <header class="site-header">
+      <today-welcome-intro aria-hidden="true"></today-welcome-intro>
+      <a class="site-logo-home" href="today-site-b.html" data-page="home" aria-label="Today home"></a>
+      <div class="site-topline"><nav aria-label="Website"><a href="today-site-b.html?page=privacy" data-page="privacy">Privacy</a><a href="today-site-b.html?page=terms" data-page="terms">Terms</a><a href="today-site-b.html?page=support" data-page="support">Support</a></nav></div>
+    </header>
+    <main id="site-content" class="site-content" tabindex="-1">
+      <div data-home>
+        <section class="site-product-hero">
+          <div class="site-product-copy"><h1>what will<br>you do?</h1><today-button class="site-get-app" variant="primary" label="Get app"></today-button><div class="site-download-note" id="site-download-note"><div><p>Preview only. The App Store download link hasn’t been connected yet.</p></div></div></div>
+          <div class="site-day-preview">
+            <div class="site-day-title"><h2>Your day</h2><span>Tuesday, November 17</span></div>
+            <today-week-bar></today-week-bar>
+            <today-habit-card data-demo-card layout="hero"></today-habit-card>
+          </div>
+        </section>
+        <section class="site-process" id="how-today-works" data-reveal><div><h2>Make a start.<br>Make it yours.</h2></div><ol><li><span>1</span><div><h3>Describe your habit.</h3><p>Start with what you want to do. Shape the amount, the days and the rhythm around you.</p></div></li><li><span>2</span><div><h3>Give it a little time.</h3><p>Try a 21-day plan, or choose your own length. Log small steps and remember what worked.</p></div></li><li><span>3</span><div><h3>Choose what comes next.</h3><p>Look back at your trial. Adjust your plan, try again, or make it a routine.</p></div></li></ol></section>
+        <footer class="site-footer"><div><h2>A little clarity, too.</h2><p>Privacy, terms and a place to find help.</p></div><div class="site-resource-links"><a href="today-site-b.html?page=privacy" data-page="privacy">Privacy <span>↗</span></a><a href="today-site-b.html?page=terms" data-page="terms">Terms <span>↗</span></a><a href="today-site-b.html?page=support" data-page="support">Support <span>↗</span></a></div></footer>
+      </div>
+      <article class="site-document" data-document hidden></article>
+    </main>
+  </div>
+  <div class="site-prototype-note">Your day, in view · Approved website design · Interactive example data · Legal content is a draft preview.</div>
+</body>
+</html>

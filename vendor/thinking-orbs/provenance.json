@@ -1,0 +1,130 @@
+{
+  "swiftRevision": "7b09b5fec09b8471ee591793ca5fb71cf7bf364d",
+  "webRevision": "de85557ca220332586d070d8788c0e1d6e877a0d",
+  "files": [
+    {
+      "path": "native/vendor/ThinkingOrbs/Package.swift",
+      "sha": "ca1caa8841ea5cafc2ce4c5ee09be45244ceaabd"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/LICENSE",
+      "sha": "3877e80eb739baee75346d87adde8c14d20947b1"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/README.md",
+      "sha": "37b657f94711ad634bbd6dfa44a1ca4c750475a7"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/OrbDesign.swift",
+      "sha": "f55fda6a546a711935bd145bdff494571202e843"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/OrbFrame.swift",
+      "sha": "efd3e27449e39e95a301d46e7dde00d57270852e"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/ThinkingOrb.swift",
+      "sha": "766e6acd70f591cd876c5c9a359336a71d87f8be"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/ThinkingOrbLabel.swift",
+      "sha": "0a96a09d335fc67380e720d8a9911c01fa67855b"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/Engine/OrbEngine.swift",
+      "sha": "153fbb9e5080cc9178f44dd877760cf9479c2e11"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/Engine/OrbPresets.swift",
+      "sha": "75151af1245275956918736cd6cc59cd57b496e1"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/AccessibilityTests.swift",
+      "sha": "fb375622d44c1a4f741ce1ea990fb175a9758f96"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/GoldenTests.swift",
+      "sha": "3ceb223326c3d9e035205e093cd58b91cff89e7b"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/MediaTests.swift",
+      "sha": "b1f8583486a26881f67ebe6922ba697477955a35"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/PublicAPITests.swift",
+      "sha": "b2e7ed67a87b424e18922bcf8ecab88a21b6a49d"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/ReadmeSnippetTests.swift",
+      "sha": "8ac82b5f1c51fa520c90b65dfc0f647e27271ca9"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/RenderingTests.swift",
+      "sha": "f5cfdd53c2e90d034bc22c7f58343997b8d481f9"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/SweepTests.swift",
+      "sha": "892e2643cbd8d22d9e985fc8e890d71ac982f9f2"
+    },
+    {
+      "path": "native/vendor/ThinkingOrbs/Tests/ThinkingOrbsTests/Resources/orbs-golden.json",
+      "sha": "838dbf60daa1fb230482a867142131114076c88b"
+    },
+    {
+      "path": "vendor/thinking-orbs/LICENSE",
+      "sha": "0e9405a2ee75ce720c665c04568fedda3c07906a"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/presets.ts",
+      "sha": "b2b44ae8a781341e68d1185c4639a4577ac723d6"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/types.ts",
+      "sha": "4f60d7ad6ed842496e1326aa9081d65963ba8cbc"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/braid.ts",
+      "sha": "dd670a694bb40105016024e53d0d980134c3acf0"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/core.ts",
+      "sha": "6e0b1eb6f3ef9f088e991f0f68db6ddcfa77ebc8"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/index.ts",
+      "sha": "6f8139586cca86a229d1c9bbd29b0e781e43613a"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/lattice.ts",
+      "sha": "f4f9126cb6205b6097835d5ba1107597f5d8a11c"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/morph.ts",
+      "sha": "cebec9768926b9d6c99c41d3c124201b11ebc369"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/orbits.ts",
+      "sha": "78861970ca4596d24af35f509d51745bf991336c"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/profiles.ts",
+      "sha": "386986ea70c144aa5da7a6214c000180f8601de4"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/registry.ts",
+      "sha": "d62524b35720cbc4830a92ac7aa8126ac0ee0857"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/ribbon.ts",
+      "sha": "0b0734cab7dc43e37501ce4cabea19e4cb492c4c"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/types.ts",
+      "sha": "e7b5dc53510f0e14ac3b0276ff45082fece737e3"
+    },
+    {
+      "path": "vendor/thinking-orbs/src/engine/web.ts",
+      "sha": "7ffa137ac923ae504202567f2b3391da5ba66859"
+    }
+  ]
+}

@@ -1990,7 +1990,7 @@
         "native/reference/LiquidOrbitLoader.swift"
       ],
       "dependencies": [],
-      "status": "Approved additional loader. Browser and reusable native source available; app integration separate.",
+      "status": "Approved component; centered habit preparation selects the soft palette. Native source available; app integration separate.",
       "browserIntegration": {
         "kind": "custom-element",
         "tag": "today-liquid-orbit-loader",
@@ -2003,14 +2003,14 @@
         ],
         "assets": [],
         "markup": "<today-liquid-orbit-loader label=\"Loading\"></today-liquid-orbit-loader>",
-        "usage": "Mount during pending work; remove at completion. Transparent 740:700 aspect. Methods play(), pause(), replay(); speed 0.1\u20134 (default 1); paused and label attributes. Pauses preserve elapsed time; offscreen/background suspends. Reduced motion shows supplied time-zero pose. No percentage progress. WebGL contour with Canvas fallback.",
+        "usage": "Mount during pending work; remove at completion. Transparent 740:700 aspect. Methods play(), pause(), replay(); speed 0.1\u20134 (default 1); paused and label attributes. Pauses preserve elapsed time; offscreen/background suspends. Reduced motion shows supplied time-zero pose. No percentage progress. WebGL contour with Canvas fallback. palette=\"soft\" uses #A9B5D3 / #BFB2D2 / #DDC7BD. Omit for original gradient. Color changes preserve the current phase.",
         "demoOnly": [
           "liquid-orbit-study.js"
         ]
       },
       "nativeIntegration": {
         "minimumOS": "iOS 17 / macOS 14",
-        "usage": "Include both swiftSource files. TodayLiquidOrbitLoader().frame(width:180,height:170). isAnimating, speed, replayToken, label. The original LiquidOrbitLoader remains byte-identical. Reduced motion and app lifecycle handled by supplied implementation."
+        "usage": "Include both swiftSource files. TodayLiquidOrbitLoader().frame(width:180,height:170). isAnimating, speed, replayToken, label. The original LiquidOrbitLoader remains byte-identical. Reduced motion and app lifecycle handled by supplied implementation. Use palette: .soft for habit preparation; .original remains the component default."
       }
     },
     {
@@ -3314,6 +3314,296 @@
         ],
         "markup": "<today-log-photo-action></today-log-photo-action>",
         "model": "See LOG-NOTES.md."
+      }
+    },
+    {
+      "id": "thinking-orbs",
+      "name": "Thinking orbs \u00b7 Nine SwiftUI loaders",
+      "preview": "thinking-orbs.html",
+      "browserSource": [
+        "components/thinking-orb.js",
+        "components/thinking-orb.css",
+        "vendor/thinking-orbs/browser/presets.mjs",
+        "vendor/thinking-orbs/browser/types.mjs",
+        "vendor/thinking-orbs/browser/engine/braid.mjs",
+        "vendor/thinking-orbs/browser/engine/ribbon.mjs",
+        "vendor/thinking-orbs/browser/engine/web.mjs",
+        "vendor/thinking-orbs/browser/engine/types.mjs",
+        "vendor/thinking-orbs/browser/engine/morph.mjs",
+        "vendor/thinking-orbs/browser/engine/core.mjs",
+        "vendor/thinking-orbs/browser/engine/profiles.mjs",
+        "vendor/thinking-orbs/browser/engine/orbits.mjs",
+        "vendor/thinking-orbs/browser/engine/index.mjs",
+        "vendor/thinking-orbs/browser/engine/registry.mjs",
+        "vendor/thinking-orbs/browser/engine/lattice.mjs"
+      ],
+      "swiftSource": [
+        "native/TodayThinkingOrb.swift",
+        "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/ThinkingOrbLabel.swift",
+        "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/OrbFrame.swift",
+        "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/OrbDesign.swift",
+        "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/ThinkingOrb.swift",
+        "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/Engine/OrbEngine.swift",
+        "native/vendor/ThinkingOrbs/Sources/ThinkingOrbs/Engine/OrbPresets.swift"
+      ],
+      "dependencies": [],
+      "status": "Added at user request; nine reusable components. No creation loader selection. Native sources compiled, not integrated into the app.",
+      "sourcePage": "source.html#thinking-orbs",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "styles": [
+          "components/thinking-orb.css"
+        ],
+        "scripts": [],
+        "moduleScripts": [
+          "components/thinking-orb.js"
+        ],
+        "assets": [],
+        "usage": "<today-thinking-orb design=\"working\" size=\"regular\" label=\"Preparing your plan\"></today-thinking-orb>",
+        "demoOnly": [
+          "thinking-orbs-study.js",
+          "thinking-study.css"
+        ]
+      },
+      "nativeIntegration": {
+        "package": "native/vendor/ThinkingOrbs/Package.swift",
+        "product": "ThinkingOrbs",
+        "wrapper": "native/TodayThinkingOrb.swift",
+        "minimum": "Swift 6, iOS 17 / macOS 14",
+        "guide": "THINKING-ORBS.md",
+        "licenses": [
+          "native/vendor/ThinkingOrbs/LICENSE",
+          "vendor/thinking-orbs/LICENSE"
+        ]
+      }
+    },
+    {
+      "id": "habit-thinking",
+      "name": "Preparing a habit \u00b7 Selected centered layout",
+      "preview": "habit-thinking.html",
+      "browserSource": [
+        "components/habit-thinking.js",
+        "components/habit-thinking.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "thinking-orbs",
+        "onboarding",
+        "dropdown"
+      ],
+      "status": "User-selected centered composition with Breathing and a continuous onboarding-to-preparation wash. Browser fixture; latest native parity unverified.",
+      "sourcePage": "source.html#habit-thinking",
+      "browserIntegration": {
+        "kind": "composition",
+        "styles": [
+          "components/thinking-orb.css",
+          "components/habit-thinking.css"
+        ],
+        "scripts": [],
+        "moduleScripts": [
+          "components/habit-thinking.js"
+        ],
+        "usage": "Load onboarding and thinking-orbs dependencies first, then the module. <today-habit-thinking></today-habit-thinking>. Host-controlled state; one mounted wash transitions Describe to preparation and back. See HABIT-THINKING.md.",
+        "demoOnly": [
+          "habit-thinking-study.js",
+          "thinking-study.css"
+        ]
+      }
+    },
+    {
+      "id": "home-tasks",
+      "name": "Home \u00b7 Selected Habits / To-dos spaces",
+      "preview": "home-tasks.html",
+      "browserSource": [
+        "components/task-list.js",
+        "components/task-list.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "home-overview",
+        "checklist",
+        "controls",
+        "widgets"
+      ],
+      "status": "User-selected separate-space Home composition. Browser fixture; native task persistence and app integration remain separate.",
+      "sourcePage": "source.html#home-tasks",
+      "browserIntegration": {
+        "kind": "composition",
+        "styles": [
+          "components/task-list.css"
+        ],
+        "scripts": [
+          "components/task-list.js"
+        ],
+        "usage": "Load Home, checklist styles, shared controls/disclosure and TodayWidgets primitives first. Selected Habits / To-dos Home with controlled today-task-list and both small/medium today-task-widget views. See HOME-TASKS.md.",
+        "demoOnly": [
+          "home-tasks-study.js",
+          "home-tasks-study.css"
+        ]
+      }
+    },
+    {
+      "id": "task-widget",
+      "name": "To-do widgets \u00b7 Selected small and medium",
+      "preview": "home-tasks.html#task-widget-medium",
+      "browserSource": [
+        "components/task-list.js",
+        "components/task-list.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "checklist",
+        "controls",
+        "widgets"
+      ],
+      "status": "Both small and medium designs selected. Controlled browser examples; no native WidgetKit extension or task store.",
+      "sourcePage": "source.html#task-widget",
+      "browserIntegration": {
+        "kind": "component",
+        "styles": [
+          "components/task-list.css"
+        ],
+        "scripts": [
+          "components/task-list.js"
+        ],
+        "usage": "Load checklist styles and TodayWidgets primitives. <today-task-widget family=\"small|medium\"> uses the host task model and emits task-toggle, task-next and task-open. See HOME-TASKS.md.",
+        "demoOnly": [
+          "home-tasks-study.js",
+          "home-tasks-study.css"
+        ]
+      }
+    },
+    {
+      "id": "reminder-checkin",
+      "name": "Missed-day check-in \u00b7 Selected",
+      "preview": "reminder-checkin.html",
+      "browserSource": [
+        "reminder-checkin.html",
+        "reminder-checkin-study.js",
+        "reminder-checkin-study.css",
+        "REMINDER-CHECKIN.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "artwork",
+        "disclosure"
+      ],
+      "status": "Selected compact Home check-in and Remind me later interaction. Browser fixture; native scheduling/persistence pending.",
+      "sourcePage": "source.html#reminder-checkin",
+      "browserIntegration": {
+        "kind": "gallery-composition",
+        "styles": [
+          "components/controls.css",
+          "components/artwork.css",
+          "reminder-checkin-study.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "reminder-checkin-study.js"
+        ],
+        "usage": "Open reminder-checkin.html. Reuses approved controls and disclosure; gallery host sends no notifications and persists nothing."
+      }
+    },
+    {
+      "id": "website",
+      "name": "Today website \u00b7 Your day, in view",
+      "preview": "today-site-b.html",
+      "browserSource": [
+        "today-site-a.html",
+        "today-site-b.html",
+        "today-site.css",
+        "today-site-opening.js",
+        "today-site.js",
+        "WEBSITE.md"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "landing",
+        "habit-card",
+        "target-feedback",
+        "controls",
+        "artwork",
+        "log-photo-action",
+        "week-bar",
+        "disclosure"
+      ],
+      "status": "Approved website design and motion. Centered Welcome, period/wash and move to top center; aligned header and gray primary CTA. Get app destination and legal copy remain drafts. Not deployed.",
+      "sourcePage": "source.html#website",
+      "browserIntegration": {
+        "kind": "gallery-composition",
+        "styles": [
+          "foundations/motion.css",
+          "components/controls.css",
+          "components/welcome-intro.css",
+          "components/artwork.css",
+          "components/habit-card.css",
+          "components/target-feedback.css",
+          "components/log-photo-action.css",
+          "components/week-bar.css",
+          "today-site.css"
+        ],
+        "scripts": [
+          "today-logo.js",
+          "components/welcome-intro.js",
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/artwork.js",
+          "components/target-feedback.js",
+          "components/log-photo-action.js",
+          "components/habit-card.js",
+          "components/week-bar.js",
+          "today-site-opening.js",
+          "today-site.js"
+        ],
+        "usage": "Open today-site-b.html. The selected website reuses the original four-second Welcome clock for a centered opening, then the logo moves to the header. A redirects to B. Get app shows explicit preview feedback until an actual App Store URL is supplied. Privacy, Terms and Support use ?page= URL states. No data submission or live account."
+      }
+    },
+    {
+      "id": "account-access",
+      "name": "Your account \u00b7 Apple and phone",
+      "preview": "account-access.html",
+      "browserSource": [
+        "components/account-access.js",
+        "components/account-access.css",
+        "account-access-study.js",
+        "account-access-study.css"
+      ],
+      "swiftSource": [],
+      "dependencies": [
+        "controls",
+        "dropdown",
+        "artwork",
+        "onboarding-gradient"
+      ],
+      "status": "Approved account UI and motion, with text-only confirmation. State-driven browser presentation with in-memory fixtures; native Apple/onboarding integration remains pending.",
+      "sourcePage": "source.html#account-access",
+      "browserIntegration": {
+        "kind": "custom-element",
+        "tag": "today-account-access",
+        "styles": [
+          "components/controls.css",
+          "components/dropdown.css",
+          "components/artwork.css",
+          "components/onboarding-gradient.css",
+          "components/account-access.css",
+          "foundations/motion.css"
+        ],
+        "scripts": [
+          "foundations/disclosure.js",
+          "components/icons.js",
+          "components/controls.js",
+          "components/dropdown.js",
+          "components/artwork.js",
+          "components/onboarding-gradient.js",
+          "components/account-access.js"
+        ],
+        "usage": "configure({context, step, phone, code, dial, error, busy, seconds, method, backup, linked, restored}, focus). Host handles account-request and account-input. Never use the study adapter for authentication or persistence."
       }
     }
   ],

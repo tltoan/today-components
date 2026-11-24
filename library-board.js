@@ -5,7 +5,7 @@
     screens: {file:'screens.html', title:'Approved screens & flows', description:'Selected flows in order, and screens together. Browser previews with example data.', noun:'screens & flows'},
     workshop: {file:'workshop.html', title:'Workshop', description:'Current studies and open directions. Nothing here is marked approved until you choose it.', noun:'studies'}
   };
-  const aliases = {landing:'welcome','habit-parties':'party-room','minimal-faces':'face-pickers','streak-flame':'streak-badge','picker-pieces':'habit-schedule'};
+  const aliases = {'home-overview':'home-tasks','home-tasks-a':'home-tasks','home-tasks-b':'home-tasks','home-tasks-c':'home-tasks',landing:'welcome','habit-parties':'party-room','minimal-faces':'face-pickers','streak-flame':'streak-badge','picker-pieces':'habit-schedule'};
   const escape = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const main = document.querySelector('.library-board');
   const switcher = document.querySelector('.library-space-switch');

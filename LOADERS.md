@@ -6,7 +6,7 @@ The circle → globe loader is selected. Liquid orbit is also approved as a comp
 
 [Preview](liquid-orbit-loader.html) · [Source index](source.html#liquid-orbit-loader)
 
-Eight liquid beads follow the supplied Fourier profiles. Each bead takes its neighbor's pose every second, preserving the loop. The browser sums the same soft elliptical fields and takes the same contour; WebGL provides antialiased rendering, with a lower-resolution Canvas fallback when unavailable. The fixed blue/lavender/peach gradient is decoration, not progress.
+Eight liquid beads follow the supplied Fourier profiles. Each bead takes its neighbor's pose every second, preserving the loop. The browser sums the same soft elliptical fields and takes the same contour; WebGL provides antialiased rendering, with a lower-resolution Canvas fallback when unavailable. The blue/lavender/peach gradient is decoration, not progress. `palette="soft"` uses the lighter, less saturated #A9B5D3 / #BFB2D2 / #DDC7BD stops selected for habit preparation; omitting the attribute keeps the original palette. Only paint changes; the motion and elapsed phase are shared.
 
 ```html
 <link rel="stylesheet" href="components/liquid-orbit-loader.css">
@@ -20,8 +20,12 @@ Eight liquid beads follow the supplied Fourier profiles. Each bead takes its nei
 Native: include unchanged `native/reference/LiquidOrbitLoader.swift` and `native/TodayLiquidOrbitLoader.swift` together:
 
 ```swift
-TodayLiquidOrbitLoader(isAnimating: loading, speed: 1, replayToken: 0)
+TodayLiquidOrbitLoader(isAnimating: loading, speed: 1, replayToken: 0, palette: .soft)
     .frame(width: 180, height: 170)
 ```
 
 The native wrapper masks Today’s gradient with the supplied motion. Native reduced motion, paused clock, scene lifecycle and replay are handled by the original. This is standalone source, not app integration or native runtime verification.
+
+## Thinking orbs · November 22 addition
+
+[All nine](thinking-orbs.html) now appear in Components, with original SwiftUI and matching browser geometry. See THINKING-ORBS.md. Working, Searching, Solving, Listening, Connecting, Weaving, Composing, Breathing and Shaping each have separately tuned 64 pt and 20 pt variants. The user’s latest correction selects Breathing for the [centered preparation screen](habit-thinking.html), keeping its subtle background and adding the transition from Describe. The earlier soft Liquid orbit remains available as a standalone component. All nine orbs remain reusable Components.

@@ -1,0 +1,72 @@
+/* Selected task views, built on the existing checklist and Today controls. */
+today-task-list{display:block;color:#eeeaf3;font:400 14px/1.45 Future,sans-serif;text-align:left}
+today-task-list *,today-task-widget *{box-sizing:border-box}
+today-task-list [hidden],today-task-widget [hidden]{display:none!important}
+.td-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.td-heading h4{font-size:21px;font-weight:500;letter-spacing:-.035em;margin:0}
+.td-heading p{font-size:12px;color:#bcb8c7;margin:3px 0 0}
+.td-quiet{background:none;color:#cbbddb;border:0;font:inherit;font-size:12px;min-height:44px;cursor:pointer;padding:8px 0;touch-action:manipulation}
+.td-add{display:flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #ffffff12;border-radius:999px}
+.td-add>span{font-size:20px;line-height:1}
+.td-primary{background:#15131b;border:1px solid #ffffff0b;border-radius:22px;padding:4px 14px}
+.td-primary:empty{display:none}
+.td-row.activity-row{height:auto;min-height:58px;gap:11px;padding:10px 0;border:0;background:none;font:400 14px/1.35 Future,sans-serif;color:#eeeaf3;cursor:pointer;touch-action:manipulation}
+.td-row+.td-row{border-top:1px solid #ffffff09}
+.td-row .activity-mark{width:20px;height:20px}
+.td-row-copy{min-width:0;flex:1}
+.td-title{display:block;overflow-wrap:anywhere}
+.td-row small{display:block;font:400 11px/1.4 Future,sans-serif;color:#a89bb8;margin-top:4px}
+.td-row-tail{color:#bba8cf;font-size:11px;flex:none}
+.td-row[aria-pressed=true] .td-title{text-decoration:line-through;text-decoration-color:#8e829f;color:#b8adca}
+.td-row:focus-visible,.td-quiet:focus-visible,today-task-widget button:focus-visible{outline:2px solid #cdb9e1;outline-offset:3px;border-radius:10px}
+.td-quiet:active,.td-row:active{scale:.98}
+.td-quiet,.td-row{transition:scale 130ms}
+.td-disclosure{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.td-chevron{transition:transform 440ms cubic-bezier(.37,0,.18,1)}
+.td-disclosure[aria-expanded=true] .td-chevron{transform:rotate(180deg)}
+.td-completed-wrap{margin-top:8px}
+.td-completed-rows,.td-later-rows{padding:0 4px 8px}
+.td-completed-rows{opacity:.8}
+.td-empty{margin:0;padding:22px 16px;border:1px dashed #ffffff1c;border-radius:22px;font-size:16px;line-height:1.5}
+.td-empty span{font-size:12px;color:#bcb8c7}
+.td-editor form{padding:16px;background:#19161f;border:1px solid #ffffff10;border-radius:20px;margin-bottom:16px}
+.td-editor label{display:block;font-size:13px;margin:0 0 8px}
+.td-editor input{box-sizing:border-box;width:100%;min-width:0;min-height:46px;border:1px solid #ffffff16;border-radius:12px;background:#0d0b11;color:#eeeaf3;padding:10px 12px;font:400 16px/1.4 Future,sans-serif;color-scheme:dark}
+.td-editor input:focus-visible{outline:2px solid #bca5d5;outline-offset:2px}
+.td-date-label{margin-top:14px!important;display:flex!important;justify-content:space-between}
+.td-date-label span{color:#9e90af;font-size:11px}
+.td-form-actions{display:flex;align-items:center;justify-content:flex-end;gap:20px;margin-top:12px}
+.td-form-actions today-button{width:138px}
+.td-error{font-size:12px;color:#e5baba;margin:8px 0 0}
+.td-error:empty{display:none}
+today-task-widget{display:flex;flex-direction:column;flex:none;position:relative;width:var(--task-widget-width,338px);height:var(--task-widget-height,158px);padding:16px;box-sizing:border-box;border-radius:24px;background:linear-gradient(180deg,#333136 6%,#272629 50%,#121214 94%);color:#f5f3f7;font:400 13px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;text-align:left}
+today-task-widget button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;background:none;border:0}
+.tdw-top{display:flex;align-items:center;justify-content:space-between;gap:8px;height:20px;flex:none;position:relative;margin-bottom:10px}
+.tdw-open{padding:12px 0;min-height:44px;font-weight:500!important;text-align:left}
+.tdw-open>span{font-size:11px;color:#c7b3da;margin-left:4px}
+.tdw-count{color:#c9c6cf;font-size:11px;white-space:nowrap}
+.tdw-rows{min-height:0}
+today-task-widget .td-row.activity-row{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;line-height:1.25;min-height:48px;padding:7px 0}
+today-task-widget[family=medium] .td-row{height:48px}
+today-task-widget .td-title{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+today-task-widget .td-row small{display:none}
+today-task-widget .td-row-tail{font-size:10px}
+.tdw-bottom{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:8px;font-size:12px}
+.tdw-bottom button{min-height:44px;min-width:44px;padding:8px 0;color:#d2c3e2}
+.tdw-next{margin-left:auto}
+.tdw-empty{flex:1;display:flex;flex-direction:column;justify-content:center;gap:6px;font-size:12px;color:#c4becd}
+.tdw-empty strong{font:500 19px/1.1 Future,sans-serif;letter-spacing:-.035em;color:#f5f3f7}
+today-task-widget[family=small] .tdw-top{margin-bottom:8px}
+today-task-widget[family=small] .tdw-count{display:none}
+today-task-widget[family=small] .td-row{position:relative;display:flex;flex-direction:column-reverse;align-items:flex-start;gap:8px;min-height:98px;padding:0;border:0}
+today-task-widget[family=small] .td-row .td-row-copy{flex:none;min-height:42px}
+today-task-widget[family=small] .td-title{font:500 19px/1.1 Future,sans-serif;letter-spacing:-.035em;-webkit-line-clamp:2}
+today-task-widget[family=small] .td-row .activity-mark{margin-top:auto;width:44px;height:44px;border-radius:50%;background:#ffffff08}
+today-task-widget[family=small] .td-row[aria-pressed=true] .activity-mark{background:#bca5d5}
+today-task-widget[family=small] .activity-mark svg{width:18px;height:18px}
+today-task-widget[family=small] .td-row-tail{position:absolute;left:52px;bottom:14px}
+today-task-widget[family=small] .tdw-bottom{position:absolute;right:16px;bottom:16px;padding:0}
+today-task-widget[family=small] .tdw-next{font-size:11px}
+today-task-widget[family=small] .td-row-tail{display:none}
+@media(prefers-reduced-motion:reduce){.td-row,.td-quiet,.td-chevron,.td-row .activity-mark,.td-row .activity-mark svg{transition:none!important}}
+[data-reduced] .td-row,[data-reduced] .td-quiet,[data-reduced] .td-chevron,[data-reduced] .td-row .activity-mark,[data-reduced] .td-row .activity-mark svg{transition:none!important}

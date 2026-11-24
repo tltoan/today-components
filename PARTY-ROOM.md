@@ -32,7 +32,7 @@ room.model = {
 };
 ```
 
-The host supplies the party-local date, schedule coverage, timezone boundaries and dated eligible roster. Missing calendar coverage breaks the calculated run; do not imply a complete all-time streak from a truncated query. A new member does not change earlier rosters. Membership changes, pauses, late joins and retrospective correction policy still need production rules. Never infer eligibility from a UI avatar list.
+The host supplies the party-local date, schedule coverage, timezone boundaries and dated eligible roster. Missing calendar coverage breaks the calculated run; do not imply a complete all-time streak from a truncated query. A new member does not change earlier rosters. Membership, pause, join and correction rules are now selected in [PARTY-POLICY.md](PARTY-POLICY.md), implemented natively against local Supabase. Never infer eligibility from a UI avatar list.
 
 `TodayPartyProgress.progress(model)` is a pure helper returning `{streak,current,through,days}`. Duplicate logs/member IDs give no extra day credit; `null`, invalid and unsaved amounts do not count. Undo removing the last eligible log recomputes the visible streak. A saved zero counts.
 
@@ -53,7 +53,7 @@ Reactions animate once (540 ms) after a confirmed state change; streak amounts s
 
 The standalone Plan review mock introduces a **Make this a habit party** switch, followed by an invitation preview after creation. It does not insert a new step into the approved onboarding sequence yet. Friends adopt the party schedule and choose a personal target/reminder.
 
-The proposed lifecycle keeps trial length/review personal: one member’s review would not stop everyone’s party. Shared schedule editing authority, what happens when someone pauses/ends a trial, timezone selection and eligibility changes remain open decisions. The mock does not implement these policies.
+The November 24 approved lifecycle keeps trial length/review personal; a member's review does not stop everyone else's party. Creator schedule authority, fixed timezone and dated eligibility are selected in [PARTY-POLICY.md](PARTY-POLICY.md). Creation is from an existing habit, superseding the earlier plan-review proposal. This browser mock does not implement backend policies; local native implementation and hosted deployment are separate statuses.
 
 ## Photo preview and simplified summary
 

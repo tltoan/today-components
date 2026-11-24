@@ -66,3 +66,7 @@ Home retains quick `logrequest` saves. Notes are edited within habit history. Ca
 ## Latest placement decision
 
 Latest correction: Home quick logging again emits the original `logrequest` with id/date and saves immediately in its host. The interim `home-log-save` / `resolveLog` integration was removed. Notes are added from individual habit history, not Home’s logging action.
+
+## Selected Home composition · November 22
+
+The user selected the Habits / To-dos sliding control in `home-tasks.html` as the Home direction. It composes this existing `today-home-overview` with `today-task-list`, preserving the week bar, habit cards, streak and cradle. The small and medium task widgets are also selected. See `HOME-TASKS.md` for the current UI, boundaries and fixture host. `home.html` remains the underlying component specimen; it is no longer a separate competing Workshop screen. Native task functionality is not implemented by this browser selection.

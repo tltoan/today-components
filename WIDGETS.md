@@ -92,6 +92,8 @@ Streak hero: `model = {count, label, through}`. Use “scheduled-day streak” f
 
 ## Native status
 
+**Latest November 23 next-step decision:** implement **all widgets already approved**, superseding infrastructure-only. The approved families are the small next-task and medium short-list task widgets in [HOME-TASKS.md](HOME-TASKS.md); implement both with their selected Home To-dos space and shared task storage using [IMPLEMENTATION-HOME-TODOS.md](IMPLEMENTATION-HOME-TODOS.md). The habit/Lock Screen layouts documented here remain Workshop proposals. Warm Ember selects the streak artwork/motion, not every containing widget layout. Native task-widget implementation `fd67a06`, checkpoint `46b8027`, now includes both selected families and Home To-dos. Review found two task retry defects; [IMPLEMENTATION-TASK-RETRY-FIX.md](IMPLEMENTATION-TASK-RETRY-FIX.md) is next. Saved installed-widget verification and remaining platform/parity gaps are summarized in `CHAT-HANDOFF.md`. This does not implement the habit-widget proposals documented here.
+
 No SwiftUI or WidgetKit port was added in this change. Native persistence, App Intents, shared-store coordination, authentication, timeline refresh, midnight validation and actual OS rendering remain host-app integration work. The supplied SwiftUI files already in this library remain unchanged.
 
 
